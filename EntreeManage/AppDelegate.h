@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "global.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
+  
+}
+
+@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
 
 @property (strong, nonatomic) UIWindow *window;
 
