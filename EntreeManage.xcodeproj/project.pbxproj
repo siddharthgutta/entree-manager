@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A71B72077B009CFEF8 /* Login.storyboard */; };
+		9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A91B7207C5009CFEF8 /* Summary.storyboard */; };
+		9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */; };
+		9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AD1B72080F009CFEF8 /* Settings.storyboard */; };
 		9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342D1B6914BE005E112A /* BusinessViewController.m */; };
 		928734301B69BC81005E112A /* PFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342F1B69BC80005E112A /* PFUtils.m */; };
 		928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734321B69BD2D005E112A /* PFObject+copyShallow.m */; };
@@ -16,13 +20,19 @@
 		928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734421B6AA1E5005E112A /* BusinessMenuAddController.m */; };
 		928734461B6BC75A005E112A /* BusinessMenuItemAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734451B6BC75A005E112A /* BusinessMenuItemAddController.m */; };
 		928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */; };
+		9287346A1B6E6CB2005E112A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734691B6E6CB2005E112A /* MGSwipeTableCell.m */; };
+		9287346D1B6E6CCB005E112A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287346C1B6E6CCB005E112A /* MGSwipeButton.m */; };
+		928734711B6F682F005E112A /* BusinessMenuModifierAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */; };
+		928734741B6FA55C005E112A /* checkbox_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 928734731B6FA55C005E112A /* checkbox_unchecked.png */; };
+		928734761B6FA567005E112A /* checkbox_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 928734751B6FA566005E112A /* checkbox_checked.png */; };
+		928734791B6FAA65005E112A /* BusinessModifierItemSelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734781B6FAA65005E112A /* BusinessModifierItemSelController.m */; };
 		92C8F10C1B60958A00ADF1D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F10B1B60958A00ADF1D8 /* main.m */; };
 		92C8F10F1B60958A00ADF1D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F10E1B60958A00ADF1D8 /* AppDelegate.m */; };
-		92C8F1181B60958B00ADF1D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8F1161B60958B00ADF1D8 /* Main.storyboard */; };
+		92C8F1181B60958B00ADF1D8 /* Business.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92C8F1161B60958B00ADF1D8 /* Business.storyboard */; };
 		92C8F11A1B60958B00ADF1D8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92C8F1191B60958B00ADF1D8 /* Images.xcassets */; };
 		92C8F11D1B60958B00ADF1D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92C8F11B1B60958B00ADF1D8 /* LaunchScreen.xib */; };
 		92C8F1291B60958B00ADF1D8 /* EntreeManageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1281B60958B00ADF1D8 /* EntreeManageTests.m */; };
-		92C8F1421B61210800ADF1D8 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1411B61210800ADF1D8 /* LeftMenuViewController.m */; };
+		92C8F1421B61210800ADF1D8 /* BusinessLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1411B61210800ADF1D8 /* BusinessLeftMenuViewController.m */; };
 		92C8F1451B61213800ADF1D8 /* IntelligentSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1441B61213800ADF1D8 /* IntelligentSplitViewController.m */; };
 		92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1471B61219000ADF1D8 /* DetailContentViewController.m */; };
 		92C8F14B1B62881400ADF1D8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F14A1B62881400ADF1D8 /* Parse.framework */; };
@@ -60,6 +70,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9211F9A71B72077B009CFEF8 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		9211F9A91B7207C5009CFEF8 /* Summary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Summary.storyboard; sourceTree = "<group>"; };
+		9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Analytics.storyboard; sourceTree = "<group>"; };
+		9211F9AD1B72080F009CFEF8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9287342C1B6914BE005E112A /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
 		9287342D1B6914BE005E112A /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessViewController.m; sourceTree = "<group>"; };
 		9287342F1B69BC80005E112A /* PFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFUtils.m; sourceTree = "<group>"; };
@@ -78,19 +92,29 @@
 		928734451B6BC75A005E112A /* BusinessMenuItemAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuItemAddController.m; sourceTree = "<group>"; };
 		928734471B6BD1F4005E112A /* BusinessEmployeeAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessEmployeeAddController.h; sourceTree = "<group>"; };
 		928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessEmployeeAddController.m; sourceTree = "<group>"; };
+		928734691B6E6CB2005E112A /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
+		9287346B1B6E6CC4005E112A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		9287346C1B6E6CCB005E112A /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
+		9287346E1B6E6CD0005E112A /* MGSwipeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
+		9287346F1B6F682F005E112A /* BusinessMenuModifierAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuModifierAddController.h; sourceTree = "<group>"; };
+		928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuModifierAddController.m; sourceTree = "<group>"; };
+		928734731B6FA55C005E112A /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
+		928734751B6FA566005E112A /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
+		928734771B6FAA65005E112A /* BusinessModifierItemSelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessModifierItemSelController.h; sourceTree = "<group>"; };
+		928734781B6FAA65005E112A /* BusinessModifierItemSelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessModifierItemSelController.m; sourceTree = "<group>"; };
 		92C8F1061B60958A00ADF1D8 /* EntreeManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntreeManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C8F10A1B60958A00ADF1D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C8F10B1B60958A00ADF1D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92C8F10D1B60958A00ADF1D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		92C8F10E1B60958A00ADF1D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		92C8F1171B60958B00ADF1D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		92C8F1171B60958B00ADF1D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Business.storyboard; sourceTree = "<group>"; };
 		92C8F1191B60958B00ADF1D8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92C8F11C1B60958B00ADF1D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		92C8F1221B60958B00ADF1D8 /* EntreeManageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntreeManageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C8F1271B60958B00ADF1D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C8F1281B60958B00ADF1D8 /* EntreeManageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntreeManageTests.m; sourceTree = "<group>"; };
-		92C8F1401B61210800ADF1D8 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
-		92C8F1411B61210800ADF1D8 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		92C8F1401B61210800ADF1D8 /* BusinessLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLeftMenuViewController.h; sourceTree = "<group>"; };
+		92C8F1411B61210800ADF1D8 /* BusinessLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessLeftMenuViewController.m; sourceTree = "<group>"; };
 		92C8F1431B61213800ADF1D8 /* IntelligentSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntelligentSplitViewController.h; sourceTree = "<group>"; };
 		92C8F1441B61213800ADF1D8 /* IntelligentSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntelligentSplitViewController.m; sourceTree = "<group>"; };
 		92C8F1461B61219000ADF1D8 /* DetailContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailContentViewController.h; sourceTree = "<group>"; };
@@ -158,6 +182,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		928734681B6E6BE8005E112A /* SwapTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				9287346E1B6E6CD0005E112A /* MGSwipeButton.h */,
+				9287346C1B6E6CCB005E112A /* MGSwipeButton.m */,
+				9287346B1B6E6CC4005E112A /* MGSwipeTableCell.h */,
+				928734691B6E6CB2005E112A /* MGSwipeTableCell.m */,
+			);
+			name = SwapTableCell;
+			sourceTree = "<group>";
+		};
+		928734721B6FA54A005E112A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				928734751B6FA566005E112A /* checkbox_checked.png */,
+				928734731B6FA55C005E112A /* checkbox_unchecked.png */,
+				92C8F14E1B62930900ADF1D8 /* login.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		92C8F0FD1B60958A00ADF1D8 = {
 			isa = PBXGroup;
 			children = (
@@ -218,10 +263,14 @@
 		92C8F1321B60DFA400ADF1D8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				92C8F14E1B62930900ADF1D8 /* login.png */,
-				92C8F1161B60958B00ADF1D8 /* Main.storyboard */,
+				928734721B6FA54A005E112A /* Images */,
 				92C8F11B1B60958B00ADF1D8 /* LaunchScreen.xib */,
 				92C8F1191B60958B00ADF1D8 /* Images.xcassets */,
+				9211F9A71B72077B009CFEF8 /* Login.storyboard */,
+				9211F9A91B7207C5009CFEF8 /* Summary.storyboard */,
+				92C8F1161B60958B00ADF1D8 /* Business.storyboard */,
+				9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */,
+				9211F9AD1B72080F009CFEF8 /* Settings.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -270,6 +319,7 @@
 		92C8F1671B6401FE00ADF1D8 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				928734681B6E6BE8005E112A /* SwapTableCell */,
 				92C8F16C1B64023D00ADF1D8 /* ProgressHUD.h */,
 				92C8F16A1B64023400ADF1D8 /* ProgressHUD.m */,
 				928734341B69BD36005E112A /* PFObject+copyShallow.h */,
@@ -282,6 +332,8 @@
 		92F4FB0A1B6523BD00AFFE0E /* BusinessController */ = {
 			isa = PBXGroup;
 			children = (
+				92C8F1411B61210800ADF1D8 /* BusinessLeftMenuViewController.m */,
+				92C8F1401B61210800ADF1D8 /* BusinessLeftMenuViewController.h */,
 				9287342C1B6914BE005E112A /* BusinessViewController.h */,
 				9287342D1B6914BE005E112A /* BusinessViewController.m */,
 				928734381B6A54FA005E112A /* BusinessMenuCategoryController.h */,
@@ -296,6 +348,10 @@
 				928734451B6BC75A005E112A /* BusinessMenuItemAddController.m */,
 				928734471B6BD1F4005E112A /* BusinessEmployeeAddController.h */,
 				928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */,
+				9287346F1B6F682F005E112A /* BusinessMenuModifierAddController.h */,
+				928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */,
+				928734771B6FAA65005E112A /* BusinessModifierItemSelController.h */,
+				928734781B6FAA65005E112A /* BusinessModifierItemSelController.m */,
 			);
 			name = BusinessController;
 			sourceTree = "<group>";
@@ -312,8 +368,6 @@
 		92F4FB0C1B65241D00AFFE0E /* CommonController */ = {
 			isa = PBXGroup;
 			children = (
-				92C8F1401B61210800ADF1D8 /* LeftMenuViewController.h */,
-				92C8F1411B61210800ADF1D8 /* LeftMenuViewController.m */,
 				92C8F1431B61213800ADF1D8 /* IntelligentSplitViewController.h */,
 				92C8F1441B61213800ADF1D8 /* IntelligentSplitViewController.m */,
 				92C8F1461B61219000ADF1D8 /* DetailContentViewController.h */,
@@ -411,11 +465,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C8F1181B60958B00ADF1D8 /* Main.storyboard in Resources */,
+				9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */,
+				92C8F1181B60958B00ADF1D8 /* Business.storyboard in Resources */,
+				9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */,
 				92C8F14F1B62930900ADF1D8 /* login.png in Resources */,
 				92C8F11D1B60958B00ADF1D8 /* LaunchScreen.xib in Resources */,
+				928734761B6FA567005E112A /* checkbox_checked.png in Resources */,
 				92C8F1691B64022700ADF1D8 /* ProgressHUD.bundle in Resources */,
 				92C8F11A1B60958B00ADF1D8 /* Images.xcassets in Resources */,
+				9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */,
+				9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */,
+				928734741B6FA55C005E112A /* checkbox_unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,18 +495,22 @@
 			files = (
 				9287343D1B6A552E005E112A /* BusinessMenuItemController.m in Sources */,
 				92C8F1451B61213800ADF1D8 /* IntelligentSplitViewController.m in Sources */,
+				9287346D1B6E6CCB005E112A /* MGSwipeButton.m in Sources */,
 				92C8F10F1B60958A00ADF1D8 /* AppDelegate.m in Sources */,
 				92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */,
-				92C8F1421B61210800ADF1D8 /* LeftMenuViewController.m in Sources */,
+				92C8F1421B61210800ADF1D8 /* BusinessLeftMenuViewController.m in Sources */,
 				928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */,
 				92C8F10C1B60958A00ADF1D8 /* main.m in Sources */,
 				928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */,
 				92C8F1661B63880B00ADF1D8 /* CommParse.m in Sources */,
+				9287346A1B6E6CB2005E112A /* MGSwipeTableCell.m in Sources */,
 				928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */,
+				928734791B6FAA65005E112A /* BusinessModifierItemSelController.m in Sources */,
 				928734461B6BC75A005E112A /* BusinessMenuItemAddController.m in Sources */,
 				928734301B69BC81005E112A /* PFUtils.m in Sources */,
 				9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */,
 				92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */,
+				928734711B6F682F005E112A /* BusinessMenuModifierAddController.m in Sources */,
 				92C8F16B1B64023400ADF1D8 /* ProgressHUD.m in Sources */,
 				9287343A1B6A54FA005E112A /* BusinessMenuCategoryController.m in Sources */,
 				928734401B6A55CE005E112A /* BusinessMenuModifierController.m in Sources */,
@@ -473,12 +537,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		92C8F1161B60958B00ADF1D8 /* Main.storyboard */ = {
+		92C8F1161B60958B00ADF1D8 /* Business.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				92C8F1171B60958B00ADF1D8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Business.storyboard;
 			sourceTree = "<group>";
 		};
 		92C8F11B1B60958B00ADF1D8 /* LaunchScreen.xib */ = {

@@ -42,6 +42,9 @@
     }];
 }
 
+//***** Response number *******
+// 1: get, 2: add update, 3: delete
+
 // Get Business Menus
 + (void)getBusinessMenus:(id<CommsDelegate>) delegate MenuType:(NSString*) menu_type TopKey:(NSString*)topKey TopObject:(PFObject*)topObject
 {
@@ -49,6 +52,62 @@
     if(![topKey isEqualToString:@""]){
         [query whereKey:topKey equalTo:topObject];
     }
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        [response setObject:menu_type forKey:@"menu_type"];
+        if ( !error ) {
+            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+            [response setObject:objects forKey:@"objects"];
+        } else {
+            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
+        }
+        if ([delegate respondsToSelector:@selector(commsDidAction:)])
+            [delegate commsDidAction:response];
+    }];
+}
+
+
++ (void)updateQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote
+{
+    NSLog(@"Comms update:");
+    [quote saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+        [response setObject:[NSNumber numberWithInt:2] forKey:@"action"];
+        if (!error && succeeded) {
+            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+        } else {
+            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
+        }
+        if ([delegate respondsToSelector:@selector(commsDidAction:)])
+            [delegate commsDidAction:response];
+    }];
+}
+
++ (void)deleteQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote
+{
+    NSLog(@"Comms delete:");
+    [quote deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+        [response setObject:[NSNumber numberWithInt:3] forKey:@"action"];
+        if (!error && succeeded) {
+            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+        } else {
+            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
+        }
+        if ([delegate respondsToSelector:@selector(commsDidAction:)])
+            [delegate commsDidAction:response];
+    }];
+}
+
++ (void)getMenuItemsOfModifier:(id<CommsDelegate>) delegate ModifierObject:(PFObject*)modifierObject
+{
+    PFRelation *relation = [modifierObject relationForKey:@"menuItems"];
+    PFQuery *query = [relation query];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
@@ -74,34 +133,5 @@
     
 }
 
-// Add Business Menus
-+ (void)addBusinessMenu:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuInfo:(NSDictionary *)menuInfo
-{
-    
-}
-
-// Update Business Menus
-+ (void)updateBusinessMenu:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuInfo:(NSDictionary *)menuInfo{
-    
-}
-
-// Get Business Employee
-+ (void)getBusinessEmployees:(id<CommsDelegate>)delegate{
-    
-}
-
-+ (void)getBusinessEmployeeInfo:(id<CommsDelegate>)delegate EmployeeId:(NSString*) employee_id{
-    
-}
-
-// Add Business Employee
-+ (void)addBusinessEmployee:(id<CommsDelegate>)delegate EmployeeInfo:(NSDictionary *)employeeInfo{
-    
-}
-
-// Update Business Employee
-+ (void)updateBusinessEmployee:(id<CommsDelegate>)delegate EmployeeInfo:(NSDictionary *)employeeInfo{
-    
-}
 
 @end

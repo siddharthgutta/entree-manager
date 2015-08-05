@@ -6,34 +6,34 @@
 //  Copyright (c) 2015 Faraz. All rights reserved.
 //
 
-#import "LeftMenuViewController.h"
+#import "BusinessLeftMenuViewController.h"
 #import "AppDelegate.h"
 #import "DetailContentViewController.h"
 #import "BusinessMenuModifierController.h"
 #import "BusinessViewController.h"
 
-@interface LeftMenuViewController (){
+@interface BusinessLeftMenuViewController (){
     NSMutableArray * menuItemsArray;
 }
 
 @end
 
-@implementation LeftMenuViewController
+@implementation BusinessLeftMenuViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
   
     // Left menu show for each tab
     menuItemsArray = [[NSMutableArray alloc]init];
-    NSMutableArray * menuAnalyticsArr = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"By Payment Type", @"Modifier Sales", nil];
+    //NSMutableArray * menuAnalyticsArr = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"By Payment Type", @"Modifier Sales", nil];
     NSMutableArray * menuBusinessArr = [[NSMutableArray alloc] initWithObjects:@"Menu Builder", @"Menu Modifiers", @"Employees", nil];
     
-    if(self.tabBarController.tabBar.selectedItem.tag==1){
+    //if(self.tabBarController.tabBar.selectedItem.tag==1){
         menuItemsArray =  menuBusinessArr;
-    }
-    else if(self.tabBarController.tabBar.selectedItem.tag==2) {
-        menuItemsArray = menuAnalyticsArr;
-    }
+    //}
+    //else if(self.tabBarController.tabBar.selectedItem.tag==2) {
+    //    menuItemsArray = menuAnalyticsArr;
+    //}
     
     [self.tableView reloadData];
     
@@ -75,8 +75,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
-    
+    //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
+    [self changeLeftMenuSel:1 LeftMenuID:(NSInteger)indexPath.row];
 }
 
 
@@ -86,10 +86,10 @@
 */
 -(void)changeLeftMenuSel:(NSInteger)tabId LeftMenuID:(NSInteger)leftMenuID{
     //Summary
-    if(tabId==0){
+    //if(tabId==0){
         
-    }
-    else if(tabId==1){
+    //}
+    //else if(tabId==1){
         NSString * menuType;
         UINavigationController *nc = (UINavigationController *)self.parentViewController;
         UISplitViewController *splitVC = (UISplitViewController *)nc.parentViewController;
@@ -116,7 +116,7 @@
             [viewInstance showBusinessMenus:menuType];
         }
         
-    }
+    //}
 }
 
 

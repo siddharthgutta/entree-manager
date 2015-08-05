@@ -15,7 +15,8 @@
     
     __weak IBOutlet UITextField *emailField;
     __weak IBOutlet UITextField *passField;    
-   
+
+    //UITabBarController * tabBarController;
 }
 
 @end
@@ -72,8 +73,19 @@
         
         if ([[response objectForKey:@"responseCode"] boolValue]) {
             [ProgressHUD dismiss];
+            
+            UITabBarController *tab = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];
+            UISplitViewController * summary   = [[UIStoryboard storyboardWithName:@"Summary" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitSummaryController"];
+            UISplitViewController * business   = [[UIStoryboard storyboardWithName:@"Business" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitBusinessController"];
+            UISplitViewController * analytics   = [[UIStoryboard storyboardWithName:@"Analytics" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitAnalyticsController"];
+            UIViewController * settings = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil]  instantiateViewControllerWithIdentifier:@"SettingsController"];
+            
+            NSArray * controllers = [NSArray arrayWithObjects:summary, business, analytics, settings, nil]; //navController,
+            tab.viewControllers = controllers;
+            
             AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            del.window.rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TabStorybardId"];
+            del.window.rootViewController = tab;
+
         } else {
             [ProgressHUD showError:@"Login Error"];
         }

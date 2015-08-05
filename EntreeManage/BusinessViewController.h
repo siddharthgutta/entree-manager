@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommParse.h"
+#import "MGSwipeTableCell.h"
 
-@interface BusinessViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>{
+@interface BusinessViewController : UIViewController<CommsDelegate, UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>{
+   
 
 }
 @property (strong, nonatomic) IBOutlet UITableView *menuView;

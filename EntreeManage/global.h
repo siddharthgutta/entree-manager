@@ -16,4 +16,8 @@
 #define ParseSetApplicationID  @"siTMH1dC5Qk84JvfZ3U5xfRfKwqb5jQv4CnCQGZn"
 #define ParseClientKey         @"rKr1TeMyRNFNhx4zI4guhzk39Uap7MoHYfxdHvQo"
 
+#define COLOR_ARRAY [NSArray arrayWithObjects:@"Amber", @"Blue", @"Blue Gray", @"Brown", @"Cyan", @"Deep Orange", @"Deep Purple", @"Entrée Blue", @"Green", @"Indigo", @"Light Blue", @"Light Green", @"Lime", @"Orange", @"Pink", @"Purple", @"Red", @"Teal",nil]
+
+
 #endif
+

@@ -21,22 +21,13 @@
 // Get Business Menus
 + (void)getBusinessMenus:(id<CommsDelegate>) delegate MenuType:(NSString*) menu_type TopKey:(NSString*)topKey TopObject:(PFObject*)topObject;
 + (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuId:(NSString*) menu_id;
++ (void)getMenuItemsOfModifier:(id<CommsDelegate>) delegate ModifierObject:(PFObject*)modifierObject;
 
+// Add, Update Business Menus
++ (void)updateQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
 
-// Add Business Menus
-+ (void)addBusinessMenu:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuInfo:(NSDictionary *)menuInfo ;
-
-// Update Business Menus
-+ (void)updateBusinessMenu:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuInfo:(NSDictionary *)menuInfo;
-
-
-// Get Business Employee
-+ (void)getBusinessEmployees:(id<CommsDelegate>)delegate;
-+ (void)getBusinessEmployeeInfo:(id<CommsDelegate>)delegate EmployeeId:(NSString*) employee_id;
-// Add, Update Business Employee
-+ (void)addBusinessEmployee:(id<CommsDelegate>)delegate EmployeeInfo:(NSDictionary *)employeeInfo;
-+ (void)updateBusinessEmployee:(id<CommsDelegate>)delegate EmployeeInfo:(NSDictionary *)employeeInfo;
-
+// delete business menus
++ (void)deleteQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
 
 // Get Analytics
 //+ (void)getAnalyticsSales:(id<CommsDelegate>)delegate;

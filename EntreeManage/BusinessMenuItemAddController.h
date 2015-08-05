@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "global.h"
 #import "CommParse.h"
 
 @interface BusinessMenuItemAddController : UIViewController
     @property (nonatomic, weak) PFObject *menuObj;
     @property (nonatomic, weak) NSString *menuType;
-
+    @property (nonatomic, assign) id parent_delegate;
 @end

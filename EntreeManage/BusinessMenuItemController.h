@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CommParse.h"
+#import "MGSwipeTableCell.h"
 
 @interface BusinessMenuItemController : UITableViewController
     @property (nonatomic, weak) PFObject *topMenuObj;
+    -(void)showBusinessMenus:(NSString*)MenuType;
 @end
+

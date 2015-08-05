@@ -1,17 +1,19 @@
 //
-//  BusinessMenuAddController.h
+//  BusinessMenuModifierAddController.h
 //  EntreeManage
 //
-//  Created by Faraz on 7/31/15.
+//  Created by Faraz on 8/3/15.
 //  Copyright (c) 2015 Faraz. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "global.h"
 #import "CommParse.h"
 
-@interface BusinessMenuAddController : UIViewController
+@interface BusinessMenuModifierAddController : UIViewController
     @property (nonatomic, weak) PFObject *menuObj;
     @property (nonatomic, weak) NSString *menuType;
-
     @property (nonatomic, assign) id parent_delegate;
+
+-(void)returnSelectedItems:(NSMutableArray*)returnArray;
 @end
