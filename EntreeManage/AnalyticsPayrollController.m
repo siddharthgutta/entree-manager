@@ -99,6 +99,22 @@
     static NSString * CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+    UILabel *label;
+    label = (UILabel*) [cell viewWithTag:1];
+    label.text = @"Employee";
+    
+    label = (UILabel*) [cell viewWithTag:2];
+    label.text = @"Hours Worked";
+    
+    label = (UILabel*) [cell viewWithTag:3];
+    label.text = @"Tips";
+    
+    label = (UILabel*) [cell viewWithTag:4];
+    label.text = @"Hourly Wage";
+    
+    label = (UILabel*) [cell viewWithTag:5];
+    label.text = @"$ Owed";
     
     [cell setBackgroundColor:[UIColor lightGrayColor]];
     
@@ -185,6 +201,8 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     NSString *dateText = [dateFormat stringFromDate: selDate];
     if(startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
@@ -192,7 +210,9 @@
     _pickDateView.hidden = true;
     NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
     NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
-    
+    //from start day 00:00 to end day 24:00
+    endDate = [endDate dateByAddingTimeInterval:24*3600];
+
     if(startDate && endDate) {
         [CommParse getAnalyticsPayroll:self StartDate:startDate EndDate:endDate];
     }
@@ -202,6 +222,8 @@
     startDate_Flag = true;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     NSDate *date = [dateFormat dateFromString: _startDateText.text];
     [_datePicker setDate:date];
     
@@ -212,6 +234,8 @@
     startDate_Flag = false;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     NSDate *date = [dateFormat dateFromString: _endDateText.text];
     [_datePicker setDate:date];
     

@@ -36,10 +36,6 @@
 
     _pickDateView.hidden = true;
     
-    sumVal = [[NSMutableArray alloc]init];
-    for(int i = 0;i <16;i++){
-        [sumVal addObject:[NSNumber numberWithFloat:0]];
-    }
     
     rowNameArray = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"", @"Payments", @"Cash", @"Card", nil];
     
@@ -149,7 +145,11 @@
 {
     [ProgressHUD dismiss];
     
-    
+    sumVal = [[NSMutableArray alloc]init];
+    for(int i = 0;i <16;i++){
+        [sumVal addObject:[NSNumber numberWithFloat:0]];
+    }
+
     if ([[response objectForKey:@"responseCode"] boolValue]) {
         
         //export csv and send email
@@ -171,7 +171,7 @@
                 [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"tip"] floatValue] + [[sumVal objectAtIndex:4] floatValue]]];
                 
                 //Cash
-                if([[item_obj objectForKey:@"type"] isEqualToString:@"card"]) {
+                if([[item_obj objectForKey:@"type"] isEqualToString:@"Cash"]) {
                     [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"subtotal"] floatValue] + [[sumVal objectAtIndex:9] floatValue]]];
                 }
                 //Card
@@ -208,15 +208,18 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
     NSString *dateText = [dateFormat stringFromDate: selDate];
     if(startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
-   
     
     NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
     NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
+    //from start day 00:00 to end day 24:00
+    endDate = [endDate dateByAddingTimeInterval:24*3600];
     
     if(startDate && endDate) {
         [CommParse getAnalyticsSalesView:self StartDate:startDate EndDate:endDate];
@@ -228,6 +231,8 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
     NSDate *date = [dateFormat dateFromString: _startDateText.text];
     [_datePicker setDate:date];
     
@@ -243,6 +248,8 @@
     startDate_Flag = false;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
     NSDate *date = [dateFormat dateFromString: _endDateText.text];
     [_datePicker setDate:date];
     

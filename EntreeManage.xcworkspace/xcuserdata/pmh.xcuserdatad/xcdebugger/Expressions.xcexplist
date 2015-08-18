@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[AnalyticsSalesSummaryController commsDidAction:]:AnalyticsSalesSummaryController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__53+[CommParse getAnalyticsSalesView:StartDate:EndDate:]_block_invoke123:CommParse.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "startDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

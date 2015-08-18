@@ -31,12 +31,14 @@
     NSString *password = [userInfo valueForKey:@"pswd"];
     
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
+        NSString *user_email = [user objectForKey:@"email"];
+        
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
         [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
         if ( !error ) {
             //save current user email address
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:email forKey:@"curUserEmail"];
+            [defaults setObject:user_email forKey:@"curUserEmail"];
             
             
             [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
@@ -153,43 +155,45 @@
     [order_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [order_query includeKey:@"menuItem"];
     
-    [order_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [order_query findObjectsInBackgroundWithBlock:^(NSArray *order_objects, NSError *error) {
         
         if(!error){
             PFObject *item_obj;
-            for(PFObject *object in objects){
+            for(PFObject *object in order_objects){
                 item_obj =[object objectForKey:@"menuItem"];
                 
                 discount_val += [[item_obj objectForKey:@"price"] floatValue];
             }
             NSLog(@"%f", discount_val);
-        }
-        
-    }];
-    
-    
-    // Get Payments
-    PFQuery *query = [PFQuery queryWithClassName:@"Payment"];
-    [query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
-        if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:objects forKey:@"objects"];
-            [response setObject:[NSNumber numberWithFloat:discount_val] forKey:@"discount"];
+            
+            // Get Payments
+            PFQuery *query = [PFQuery queryWithClassName:@"Payment"];
+            [query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+            [query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
+                [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+                if ( !error ) {
+                    [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+                    [response setObject:objects forKey:@"objects"];
+                    [response setObject:[NSNumber numberWithFloat:discount_val] forKey:@"discount"];
+                    
+                } else {
+                    [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+                    [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
+                }
+                
+                
+                if ([delegate respondsToSelector:@selector(commsDidAction:)])
+                    [delegate commsDidAction:response];
+            }];
+            
 
-        } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
-            [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         
-        
-        if ([delegate respondsToSelector:@selector(commsDidAction:)])
-            [delegate commsDidAction:response];
     }];
+    
     
 }
 
@@ -463,7 +467,8 @@
     __block PFQuery *category_query = [PFQuery queryWithClassName:@"MenuCategory"];
     __block PFQuery *menu_query = [PFQuery queryWithClassName:@"Menu"];
     __block NSString *item_id;
-
+    __block int timesOrdered;
+    
     [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *item_obj;
         
@@ -482,9 +487,6 @@
             item_obj =[menu_query getObjectWithId:item_obj.objectId];
             NSString *menu_name =[item_obj objectForKey:@"name"];
             
-            //Times Ordered
-            float timesOrdered =[[orditem_obj objectForKey:@"timesPrinted"] floatValue];
-            
             //Sales
             item_obj =[orditem_obj objectForKey:@"order"];
             pay_obj =[item_obj objectForKey:@"payment"];
@@ -497,11 +499,11 @@
                 orderArray = [resultArray objectForKey:item_id];
                 
                 //times
-                timesOrdered = timesOrdered + [[orderArray objectAtIndex:3] floatValue];
-                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:timesOrdered]];
+                timesOrdered = [[orderArray objectAtIndex:3] intValue] + 1;
+                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithInt:timesOrdered]];
                 //sales
                 total_sales = total_sales + [[orderArray objectAtIndex:4] floatValue];
-                [orderArray replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:timesOrdered]];
+                [orderArray replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:total_sales]];
                 
             }
             else{
@@ -511,7 +513,7 @@
                 [orderArray addObject:item_name];
                 [orderArray addObject:menu_name];
                 [orderArray addObject:cat_name];
-                [orderArray addObject:[NSNumber numberWithFloat:timesOrdered]];
+                [orderArray addObject:[NSNumber numberWithInt:1]];
                 [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
             }
             [resultArray  setObject:orderArray forKey:item_id];
@@ -555,6 +557,7 @@
     __block PFQuery *category_query = [PFQuery queryWithClassName:@"MenuCategory"];
     __block PFQuery *modifier_query = [PFQuery queryWithClassName:@"MenuItemModifier"];
     __block NSString *item_id;
+    __block int timesOrdered;
     
     [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *item_obj;
@@ -583,8 +586,7 @@
                     modifier_names = [NSString stringWithFormat:@"%@, %@", modifier_names, modi_name ];
             }
             
-            //Times Ordered
-            float timesOrdered =[[orditem_obj objectForKey:@"timesPrinted"] floatValue];
+            
             
             //Sales
             item_obj =[orditem_obj objectForKey:@"order"];
@@ -599,8 +601,8 @@
                 orderArray = [resultArray objectForKey:item_id];
                 
                 //times
-                timesOrdered = timesOrdered + [[orderArray objectAtIndex:3] floatValue];
-                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:timesOrdered]];
+                timesOrdered = [[orderArray objectAtIndex:3] intValue] + 1;
+                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithInt:timesOrdered]];
                 //sales
                 total_sales = total_sales + [[orderArray objectAtIndex:4] floatValue];
                 [orderArray replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:timesOrdered]];
@@ -613,7 +615,7 @@
                 [orderArray addObject:modifier_names];
                 [orderArray addObject:item_name];
                 [orderArray addObject:cat_name];
-                [orderArray addObject:[NSNumber numberWithFloat:timesOrdered]];
+                [orderArray addObject:[NSNumber numberWithInt:1]];
                 [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
             }
             [resultArray  setObject:orderArray forKey:item_id];
