@@ -11,6 +11,7 @@
 @interface AnalyticsModifierSalesController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
     NSMutableDictionary *resultArray;
+    NSMutableDictionary *timesArray;
     NSArray *keyArray;
     //if selected text is start date then true
     BOOL startDate_Flag;
@@ -156,7 +157,7 @@
     label.text = itemArray[2];
     
     label = (UILabel*) [cell viewWithTag:4];
-    label.text = [NSString stringWithFormat:@"%d", [itemArray[3] intValue]];
+    label.text = [NSString stringWithFormat:@"%d", [[timesArray objectForKey:itemArray[3]] intValue] ];
     
     label = (UILabel*) [cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", [itemArray[4] floatValue]];
@@ -175,6 +176,7 @@
     if ([[response objectForKey:@"responseCode"] boolValue]) {
         
         resultArray = [response objectForKey:@"objects"];
+        timesArray = [response objectForKey:@"time_objects"];
         keyArray = [resultArray allKeys];
         
         [_analTableView reloadData];

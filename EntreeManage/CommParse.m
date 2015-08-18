@@ -551,13 +551,16 @@
     NSMutableDictionary *resultArray;
     resultArray = [[NSMutableDictionary alloc] init];
     
+    NSMutableDictionary *timesArray;
+    timesArray = [[NSMutableDictionary alloc] init];
+    
     __block NSMutableArray *orderArray;
     __block PFObject *pay_obj;
     __block PFQuery *pay_query = [PFQuery queryWithClassName:@"Payment"];
     __block PFQuery *category_query = [PFQuery queryWithClassName:@"MenuCategory"];
     __block PFQuery *modifier_query = [PFQuery queryWithClassName:@"MenuItemModifier"];
     __block NSString *item_id;
-    __block int timesOrdered;
+    
     
     [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *item_obj;
@@ -575,58 +578,49 @@
             NSString *cat_name =[item_obj objectForKey:@"name"];
             
             //get modifier
-            NSString *modifier_names = @"";
+            
             NSArray *modifierArray =[orditem_obj objectForKey:@"menuItemModifiers"];
             for(PFObject *modifier_obj in modifierArray){
                 item_obj =[modifier_query getObjectWithId:modifier_obj.objectId];
                 NSString *modi_name = [item_obj objectForKey:@"name"];
-                if([modifier_names isEqualToString:@""])
-                    modifier_names = modi_name;
-                else
-                    modifier_names = [NSString stringWithFormat:@"%@, %@", modifier_names, modi_name ];
-            }
-            
-            
-            
-            //Sales
-            item_obj =[orditem_obj objectForKey:@"order"];
-            
-            pay_obj =[item_obj objectForKey:@"payment"];
-            pay_obj =[pay_query getObjectWithId:pay_obj.objectId];
-            float total_sales =[[pay_obj objectForKey:@"total"] floatValue];
-            
-            //if exist same menu item
-            if([resultArray objectForKey:item_id]){
-                //get that info
-                orderArray = [resultArray objectForKey:item_id];
                 
-                //times
-                timesOrdered = [[orderArray objectAtIndex:3] intValue] + 1;
-                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithInt:timesOrdered]];
-                //sales
-                total_sales = total_sales + [[orderArray objectAtIndex:4] floatValue];
-                [orderArray replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:timesOrdered]];
+                //Sales
+                item_obj =[orditem_obj objectForKey:@"order"];
                 
-            }
-            else{
+                pay_obj =[item_obj objectForKey:@"payment"];
+                pay_obj =[pay_query getObjectWithId:pay_obj.objectId];
+                float total_sales =[[pay_obj objectForKey:@"total"] floatValue];
+                
                 //if not exist then init
+                int times = 1;
+                if([timesArray objectForKey:item_id]){
+                    //get that info
+                    times = [[timesArray objectForKey:item_id] intValue]+1;
+                }
+                else times=1;
+                
+                [timesArray  setObject:[ NSNumber numberWithInt:times ] forKey:item_id];
+                
                 orderArray = [[NSMutableArray alloc] init];
-
-                [orderArray addObject:modifier_names];
+                
+                [orderArray addObject:modi_name];
                 [orderArray addObject:item_name];
                 [orderArray addObject:cat_name];
-                [orderArray addObject:[NSNumber numberWithInt:1]];
+                [orderArray addObject:item_id];
                 [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
+                
+                NSString *key_str = [NSString stringWithFormat:@"%@_%@", modifier_obj.objectId, item_id];
+                [resultArray  setObject:orderArray forKey:key_str];
             }
-            [resultArray  setObject:orderArray forKey:item_id];
+            
         }
-
         
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
         [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
         if ( !error ) {
             [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
             [response setObject:resultArray forKey:@"objects"];
+            [response setObject:timesArray forKey:@"time_objects"];
             
         } else {
             [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
