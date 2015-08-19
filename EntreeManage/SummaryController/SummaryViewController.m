@@ -57,7 +57,7 @@ NSString * StringFromSummaryView(SummaryView sv) {
     [super viewDidLoad];
     
     self.title = @"Summary";
-    self.collectionView.backgroundColor = [UIColor greenColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     flowLayout.sectionInset       = UIEdgeInsetsMake(kSectionInset, kSectionInset, kSectionInset, kSectionInset);
