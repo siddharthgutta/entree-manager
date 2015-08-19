@@ -42,7 +42,6 @@
         
         destController.parent_delegate = self;
     }
-    
 }
 -(void)returnSelectedItems:(NSMutableArray*)returnArray{
     selected_items = returnArray;

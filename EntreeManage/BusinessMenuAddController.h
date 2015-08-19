@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommParse.h"
 
 @interface BusinessMenuAddController : UIViewController
     @property (nonatomic, weak) PFObject *menuObj;

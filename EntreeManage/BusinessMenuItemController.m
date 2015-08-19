@@ -92,7 +92,6 @@
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;
     
-    
     cell.leftSwipeSettings.transition = MGSwipeTransition3D;
     cell.rightSwipeSettings.transition = MGSwipeTransition3D;
     cell.leftExpansion.buttonIndex = -1;
@@ -111,7 +110,6 @@
 {
     
     swipeSettings.transition = MGSwipeTransition3D;
-    
     
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;

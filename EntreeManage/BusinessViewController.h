@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommParse.h"
 #import "MGSwipeTableCell.h"
 
 @interface BusinessViewController : UIViewController<CommsDelegate, UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>{

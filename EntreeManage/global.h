@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "PFUtils.h"
 #import "PFObject+copyShallow.h"
+#import "CommParse.h"
 
 #define ParseSetApplicationID  @"siTMH1dC5Qk84JvfZ3U5xfRfKwqb5jQv4CnCQGZn"
 #define ParseClientKey         @"rKr1TeMyRNFNhx4zI4guhzk39Uap7MoHYfxdHvQo"

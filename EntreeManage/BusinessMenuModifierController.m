@@ -48,7 +48,6 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modifierMenuCell"];
     
-    
     PFObject *menu_obj = [quotes objectAtIndex:indexPath.row];
     
     NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];

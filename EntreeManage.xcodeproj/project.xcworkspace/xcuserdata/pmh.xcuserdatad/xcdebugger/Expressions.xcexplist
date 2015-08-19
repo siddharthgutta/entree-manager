@@ -3,10 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[BusinessModifierItemSelController tableView:cellForRowAtIndexPath:]:BusinessModifierItemSelController.m">
+         contextName = "__51+[CommParse getAnalyticsPayroll:StartDate:EndDate:]_block_invoke:CommParse.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.selected_items">
+               value = "prev_obj.objectId">
+            </PersistentString>
+            <PersistentString
+               value = "emp_obj.objectId">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -17,6 +20,31 @@
                value = "self.selected_items">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AnalyticsEmployeeShiftsController tableView:cellForRowAtIndexPath:]:AnalyticsEmployeeShiftsController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[BusinessModifierItemSelController tableView:cellForRowAtIndexPath:]:BusinessModifierItemSelController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selected_items">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AnalyticsEmployeeShiftsController onTouchTextStartDate:]:AnalyticsEmployeeShiftsController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__55+[CommParse getAnalyticsOrderReport:StartDate:EndDate:]_block_invoke:CommParse.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "orditem_obj">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AnalyticsPayrollController tableView:cellForRowAtIndexPath:]:AnalyticsPayrollController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

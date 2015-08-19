@@ -6,15 +6,19 @@
 //  Copyright (c) 2015 Faraz. All rights reserved.
 //
 
-#import "global.h"
 #import "ProgressHUD.h"
+#import "Mailgun.h"
+
 
 @protocol CommsDelegate <NSObject>
 @optional
 - (void)commsDidAction:(NSDictionary *)response;
+
 @end
 
+
 @interface CommParse : NSObject
+
 
 + (void)emailLogin:(id<CommsDelegate>)delegate UserInfo:(NSDictionary *)userInfo;
 
@@ -30,10 +34,19 @@
 + (void)deleteQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
 
 // Get Analytics
-//+ (void)getAnalyticsSales:(id<CommsDelegate>)delegate;
-//+ (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate;
-//+ (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate;
 
++ (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
 
++ (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
+
++ (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
+
++ (void)getAnalyticsPayroll:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
+
++ (void)getAnalyticsOrderReport:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
+
++ (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
+
++ (void)sendEmailwithMailGun:(id<CommsDelegate>)delegate userEmail:(NSString*) userEmail EmailSubject:(NSString*) emailSubject EmailContent:(NSString*) emailContent;
 
 @end

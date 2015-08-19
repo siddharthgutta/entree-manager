@@ -7,9 +7,8 @@
 //
 
 #import "LoginViewController.h"
-#import "CommParse.h"
 #import "AppDelegate.h"
-#import <UIKit/UIKit.h>
+#import "SummaryViewController.h"
 
 @interface LoginViewController () <UITextFieldDelegate, CommsDelegate>{
     
@@ -26,14 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    emailField.text = @"email@email.com";
-    passField.text = @"pass1";
+    emailField.text = @"siddharthgutta@gmail.com";
+    passField.text  = @"pass1";
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -63,29 +57,27 @@
     
 }
 
-
-
 - (void)commsDidAction:(NSDictionary *)response
 {
-
-    
     if ([[response objectForKey:@"action"] intValue] == 1) {
         
         if ([[response objectForKey:@"responseCode"] boolValue]) {
             [ProgressHUD dismiss];
             
-            UITabBarController *tab = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];
-            UISplitViewController * summary   = [[UIStoryboard storyboardWithName:@"Summary" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitSummaryController"];
-            UISplitViewController * business   = [[UIStoryboard storyboardWithName:@"Business" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitBusinessController"];
-            UISplitViewController * analytics   = [[UIStoryboard storyboardWithName:@"Analytics" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitAnalyticsController"];
-            UIViewController * settings = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil]  instantiateViewControllerWithIdentifier:@"SettingsController"];
+            UITabBarController    *tab       = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];
+            UINavigationController *summary  = [[UIStoryboard storyboardWithName:@"Summary" bundle:nil]  instantiateViewControllerWithIdentifier:@"NavigationController"];
+            UISplitViewController *business  = [[UIStoryboard storyboardWithName:@"Business" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitBusinessController"];
+            UISplitViewController *analytics = [[UIStoryboard storyboardWithName:@"Analytics" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitAnalyticsController"];
+            UIViewController      *settings  = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil]  instantiateViewControllerWithIdentifier:@"SettingsController"];
+            
+            [summary pushViewController:[[SummaryViewController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]] animated:NO];
             
             NSArray * controllers = [NSArray arrayWithObjects:summary, business, analytics, settings, nil]; //navController,
             tab.viewControllers = controllers;
             
             AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;
             del.window.rootViewController = tab;
-
+            
         } else {
             [ProgressHUD showError:@"Login Error"];
         }

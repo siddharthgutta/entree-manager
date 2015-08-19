@@ -10,4 +10,6 @@
 
 @interface AnalyticsViewController : UIViewController
 
+-(void)showAnalyticsPage:(NSString*)segueId;
+
 @end

@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8148EFEBC7821D083D1714F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7C2B71A79E7E36C8894553 /* libPods.a */; };
 		9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A71B72077B009CFEF8 /* Login.storyboard */; };
 		9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A91B7207C5009CFEF8 /* Summary.storyboard */; };
 		9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */; };
 		9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AD1B72080F009CFEF8 /* Settings.storyboard */; };
+		9211F9B21B72983E009CFEF8 /* AnalyticsLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */; };
+		9211F9B51B735F73009CFEF8 /* AnalyticsSalesSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9B41B735F73009CFEF8 /* AnalyticsSalesSummaryController.m */; };
+		9211F9B81B735FE4009CFEF8 /* AnalyticsCategorySalesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9B71B735FE4009CFEF8 /* AnalyticsCategorySalesController.m */; };
+		9211F9BB1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9BA1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m */; };
+		9211F9BE1B736022009CFEF8 /* AnalyticsPayrollController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9BD1B736022009CFEF8 /* AnalyticsPayrollController.m */; };
+		9211F9C11B736046009CFEF8 /* AnalyticsOrderReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9C01B736046009CFEF8 /* AnalyticsOrderReportController.m */; };
+		9211F9C41B736061009CFEF8 /* AnalyticsModifierSalesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */; };
+		9253C5EF1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */; };
 		9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342D1B6914BE005E112A /* BusinessViewController.m */; };
 		928734301B69BC81005E112A /* PFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342F1B69BC80005E112A /* PFUtils.m */; };
 		928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734321B69BD2D005E112A /* PFObject+copyShallow.m */; };
@@ -57,7 +66,48 @@
 		92C8F1781B64068700ADF1D8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F1771B64068700ADF1D8 /* CoreFoundation.framework */; };
 		92F4FB001B64082700AFFE0E /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92F4FAFF1B64082700AFFE0E /* Bolts.framework */; };
 		92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB021B6522CC00AFFE0E /* AnalyticsViewController.m */; };
-		AEA08F247EE3D5CB579B9900 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0B6D1406101FD7E278343F /* libPods.a */; };
+		92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFDA7E1B7D75C500B2D3A0 /* Mailgun.m */; };
+		92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFDA801B7D75C500B2D3A0 /* MGMessage.m */; };
+		92FFDA841B7E22D400B2D3A0 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */; };
+		92FFDA861B7E26BA00B2D3A0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA851B7E26BA00B2D3A0 /* CoreMedia.framework */; };
+		92FFDA881B7E26C600B2D3A0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA871B7E26C600B2D3A0 /* Accounts.framework */; };
+		92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */; };
+		92FFDA8C1B7E26DF00B2D3A0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */; };
+		92FFDA8E1B7E26E900B2D3A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8D1B7E26E900B2D3A0 /* Social.framework */; };
+		B4F582FB1B84413200DCF20C /* ARCircleGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BA1B84413200DCF20C /* ARCircleGraph.m */; };
+		B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */; };
+		B4F582FD1B84413200DCF20C /* ARLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BE1B84413200DCF20C /* ARLineGraph.m */; };
+		B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582C01B84413200DCF20C /* ARPieChart.m */; };
+		B4F582FF1B84413200DCF20C /* ARCircleRingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582C31B84413200DCF20C /* ARCircleRingLayer.m */; };
+		B4F583001B84413200DCF20C /* ARCircleTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582C51B84413200DCF20C /* ARCircleTitleLabel.m */; };
+		B4F583011B84413200DCF20C /* ARCircleValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582C71B84413200DCF20C /* ARCircleValueLabel.m */; };
+		B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582C91B84413200DCF20C /* ARGraphBackground.m */; };
+		B4F583031B84413200DCF20C /* ARGraphTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582CB1B84413200DCF20C /* ARGraphTitleView.m */; };
+		B4F583041B84413200DCF20C /* ARHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582CD1B84413200DCF20C /* ARHelpers.m */; };
+		B4F583051B84413200DCF20C /* ARLineGraphDataPointUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582CF1B84413200DCF20C /* ARLineGraphDataPointUtility.m */; };
+		B4F583061B84413200DCF20C /* ARLineGraphMean.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582D11B84413200DCF20C /* ARLineGraphMean.m */; };
+		B4F583071B84413200DCF20C /* ARLineGraphPointsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582D31B84413200DCF20C /* ARLineGraphPointsLayer.m */; };
+		B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582D51B84413200DCF20C /* ARLineGraphXLegendView.m */; };
+		B4F583091B84413200DCF20C /* ARLineGraphYLegendView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582D71B84413200DCF20C /* ARLineGraphYLegendView.m */; };
+		B4F5830A1B84413200DCF20C /* ARPieChartDataPointUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582DA1B84413200DCF20C /* ARPieChartDataPointUtility.m */; };
+		B4F5830B1B84413200DCF20C /* ARPieChartLabelsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582DC1B84413200DCF20C /* ARPieChartLabelsLayer.m */; };
+		B4F5830C1B84413200DCF20C /* ARPieChartLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582DE1B84413200DCF20C /* ARPieChartLayer.m */; };
+		B4F5830D1B84413200DCF20C /* ARYMinMaxLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582E01B84413200DCF20C /* ARYMinMaxLayer.m */; };
+		B4F5830E1B84413200DCF20C /* GuestsTransactionLaborCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582E41B84413200DCF20C /* GuestsTransactionLaborCell.m */; };
+		B4F5830F1B84413200DCF20C /* MostPopularPieChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582E61B84413200DCF20C /* MostPopularPieChartCell.m */; };
+		B4F583101B84413200DCF20C /* MostPopularTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582E81B84413200DCF20C /* MostPopularTableCell.m */; };
+		B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582EA1B84413200DCF20C /* NetSalesGraphCell.m */; };
+		B4F583121B84413200DCF20C /* NetSalesMeanPaymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582EC1B84413200DCF20C /* NetSalesMeanPaymentCell.m */; };
+		B4F583131B84413200DCF20C /* PopularItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582EE1B84413200DCF20C /* PopularItemCell.m */; };
+		B4F583141B84413200DCF20C /* GuestsTransactionLaborCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F01B84413200DCF20C /* GuestsTransactionLaborCell.xib */; };
+		B4F583161B84413200DCF20C /* MostPopularPieChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F21B84413200DCF20C /* MostPopularPieChartCell.xib */; };
+		B4F583171B84413200DCF20C /* MostPopularTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F31B84413200DCF20C /* MostPopularTableCell.xib */; };
+		B4F583181B84413200DCF20C /* NetSalesGraphCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F41B84413200DCF20C /* NetSalesGraphCell.xib */; };
+		B4F583191B84413200DCF20C /* NetSalesMeanPaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F51B84413200DCF20C /* NetSalesMeanPaymentCell.xib */; };
+		B4F5831A1B84413200DCF20C /* PopularItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F582F61B84413200DCF20C /* PopularItemCell.xib */; };
+		B4F5831B1B84413200DCF20C /* NSNumberFormatter+Dollars.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582F81B84413200DCF20C /* NSNumberFormatter+Dollars.m */; };
+		B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582FA1B84413200DCF20C /* SummaryViewController.m */; };
+		B4F5831F1B84420400DCF20C /* Entree-Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5831E1B84420400DCF20C /* Entree-Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,13 +121,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B0B6D1406101FD7E278343F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7775058472F8300DC6CB3A9E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		78180E3D3C433600EFAAC939 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9211F9A71B72077B009CFEF8 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		9211F9A91B7207C5009CFEF8 /* Summary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Summary.storyboard; sourceTree = "<group>"; };
 		9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Analytics.storyboard; sourceTree = "<group>"; };
 		9211F9AD1B72080F009CFEF8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		9211F9B01B72983E009CFEF8 /* AnalyticsLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsLeftMenuController.h; sourceTree = "<group>"; };
+		9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsLeftMenuController.m; sourceTree = "<group>"; };
+		9211F9B31B735F73009CFEF8 /* AnalyticsSalesSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsSalesSummaryController.h; sourceTree = "<group>"; };
+		9211F9B41B735F73009CFEF8 /* AnalyticsSalesSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsSalesSummaryController.m; sourceTree = "<group>"; };
+		9211F9B61B735FE4009CFEF8 /* AnalyticsCategorySalesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsCategorySalesController.h; sourceTree = "<group>"; };
+		9211F9B71B735FE4009CFEF8 /* AnalyticsCategorySalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsCategorySalesController.m; sourceTree = "<group>"; };
+		9211F9B91B736007009CFEF8 /* AnalyticsEmployeeShiftsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsEmployeeShiftsController.h; sourceTree = "<group>"; };
+		9211F9BA1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsEmployeeShiftsController.m; sourceTree = "<group>"; };
+		9211F9BC1B736022009CFEF8 /* AnalyticsPayrollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsPayrollController.h; sourceTree = "<group>"; };
+		9211F9BD1B736022009CFEF8 /* AnalyticsPayrollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsPayrollController.m; sourceTree = "<group>"; };
+		9211F9BF1B736046009CFEF8 /* AnalyticsOrderReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsOrderReportController.h; sourceTree = "<group>"; };
+		9211F9C01B736046009CFEF8 /* AnalyticsOrderReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsOrderReportController.m; sourceTree = "<group>"; };
+		9211F9C21B736061009CFEF8 /* AnalyticsModifierSalesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsModifierSalesController.h; sourceTree = "<group>"; };
+		9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsModifierSalesController.m; sourceTree = "<group>"; };
+		9253C5ED1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsByPaymentTypeController.h; sourceTree = "<group>"; };
+		9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsByPaymentTypeController.m; sourceTree = "<group>"; };
 		9287342C1B6914BE005E112A /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
 		9287342D1B6914BE005E112A /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessViewController.m; sourceTree = "<group>"; };
 		9287342F1B69BC80005E112A /* PFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFUtils.m; sourceTree = "<group>"; };
@@ -147,9 +210,86 @@
 		92C8F1731B64063000ADF1D8 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		92C8F1751B64064A00ADF1D8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		92C8F1771B64068700ADF1D8 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		92D219541B8018FB00F395E6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		92F4FAFF1B64082700AFFE0E /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		92F4FB011B6522CC00AFFE0E /* AnalyticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsViewController.h; sourceTree = "<group>"; };
 		92F4FB021B6522CC00AFFE0E /* AnalyticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsViewController.m; sourceTree = "<group>"; };
+		92FFDA7D1B7D75C500B2D3A0 /* Mailgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mailgun.h; sourceTree = "<group>"; };
+		92FFDA7E1B7D75C500B2D3A0 /* Mailgun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mailgun.m; sourceTree = "<group>"; };
+		92FFDA7F1B7D75C500B2D3A0 /* MGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMessage.h; sourceTree = "<group>"; };
+		92FFDA801B7D75C500B2D3A0 /* MGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMessage.m; sourceTree = "<group>"; };
+		92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/libAFNetworking.a"; sourceTree = SOURCE_ROOT; };
+		92FFDA851B7E26BA00B2D3A0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		92FFDA871B7E26C600B2D3A0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		92FFDA8D1B7E26E900B2D3A0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9B7C2B71A79E7E36C8894553 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4F582B91B84413200DCF20C /* ARCircleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleGraph.h; sourceTree = "<group>"; };
+		B4F582BA1B84413200DCF20C /* ARCircleGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleGraph.m; sourceTree = "<group>"; };
+		B4F582BB1B84413200DCF20C /* ARGraphDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphDataPoint.h; sourceTree = "<group>"; };
+		B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGraphDataPoint.m; sourceTree = "<group>"; };
+		B4F582BD1B84413200DCF20C /* ARLineGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraph.h; sourceTree = "<group>"; };
+		B4F582BE1B84413200DCF20C /* ARLineGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraph.m; sourceTree = "<group>"; };
+		B4F582BF1B84413200DCF20C /* ARPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPieChart.h; sourceTree = "<group>"; };
+		B4F582C01B84413200DCF20C /* ARPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPieChart.m; sourceTree = "<group>"; };
+		B4F582C21B84413200DCF20C /* ARCircleRingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleRingLayer.h; sourceTree = "<group>"; };
+		B4F582C31B84413200DCF20C /* ARCircleRingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleRingLayer.m; sourceTree = "<group>"; };
+		B4F582C41B84413200DCF20C /* ARCircleTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleTitleLabel.h; sourceTree = "<group>"; };
+		B4F582C51B84413200DCF20C /* ARCircleTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleTitleLabel.m; sourceTree = "<group>"; };
+		B4F582C61B84413200DCF20C /* ARCircleValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleValueLabel.h; sourceTree = "<group>"; };
+		B4F582C71B84413200DCF20C /* ARCircleValueLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleValueLabel.m; sourceTree = "<group>"; };
+		B4F582C81B84413200DCF20C /* ARGraphBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphBackground.h; sourceTree = "<group>"; };
+		B4F582C91B84413200DCF20C /* ARGraphBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGraphBackground.m; sourceTree = "<group>"; };
+		B4F582CA1B84413200DCF20C /* ARGraphTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphTitleView.h; sourceTree = "<group>"; };
+		B4F582CB1B84413200DCF20C /* ARGraphTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGraphTitleView.m; sourceTree = "<group>"; };
+		B4F582CC1B84413200DCF20C /* ARHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARHelpers.h; sourceTree = "<group>"; };
+		B4F582CD1B84413200DCF20C /* ARHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARHelpers.m; sourceTree = "<group>"; };
+		B4F582CE1B84413200DCF20C /* ARLineGraphDataPointUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraphDataPointUtility.h; sourceTree = "<group>"; };
+		B4F582CF1B84413200DCF20C /* ARLineGraphDataPointUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraphDataPointUtility.m; sourceTree = "<group>"; };
+		B4F582D01B84413200DCF20C /* ARLineGraphMean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraphMean.h; sourceTree = "<group>"; };
+		B4F582D11B84413200DCF20C /* ARLineGraphMean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraphMean.m; sourceTree = "<group>"; };
+		B4F582D21B84413200DCF20C /* ARLineGraphPointsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraphPointsLayer.h; sourceTree = "<group>"; };
+		B4F582D31B84413200DCF20C /* ARLineGraphPointsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraphPointsLayer.m; sourceTree = "<group>"; };
+		B4F582D41B84413200DCF20C /* ARLineGraphXLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraphXLegendView.h; sourceTree = "<group>"; };
+		B4F582D51B84413200DCF20C /* ARLineGraphXLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraphXLegendView.m; sourceTree = "<group>"; };
+		B4F582D61B84413200DCF20C /* ARLineGraphYLegendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARLineGraphYLegendView.h; sourceTree = "<group>"; };
+		B4F582D71B84413200DCF20C /* ARLineGraphYLegendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARLineGraphYLegendView.m; sourceTree = "<group>"; };
+		B4F582D81B84413200DCF20C /* ARPieChartAnimationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPieChartAnimationTypes.h; sourceTree = "<group>"; };
+		B4F582D91B84413200DCF20C /* ARPieChartDataPointUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPieChartDataPointUtility.h; sourceTree = "<group>"; };
+		B4F582DA1B84413200DCF20C /* ARPieChartDataPointUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPieChartDataPointUtility.m; sourceTree = "<group>"; };
+		B4F582DB1B84413200DCF20C /* ARPieChartLabelsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPieChartLabelsLayer.h; sourceTree = "<group>"; };
+		B4F582DC1B84413200DCF20C /* ARPieChartLabelsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPieChartLabelsLayer.m; sourceTree = "<group>"; };
+		B4F582DD1B84413200DCF20C /* ARPieChartLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARPieChartLayer.h; sourceTree = "<group>"; };
+		B4F582DE1B84413200DCF20C /* ARPieChartLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARPieChartLayer.m; sourceTree = "<group>"; };
+		B4F582DF1B84413200DCF20C /* ARYMinMaxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARYMinMaxLayer.h; sourceTree = "<group>"; };
+		B4F582E01B84413200DCF20C /* ARYMinMaxLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARYMinMaxLayer.m; sourceTree = "<group>"; };
+		B4F582E31B84413200DCF20C /* GuestsTransactionLaborCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuestsTransactionLaborCell.h; sourceTree = "<group>"; };
+		B4F582E41B84413200DCF20C /* GuestsTransactionLaborCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuestsTransactionLaborCell.m; sourceTree = "<group>"; };
+		B4F582E51B84413200DCF20C /* MostPopularPieChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostPopularPieChartCell.h; sourceTree = "<group>"; };
+		B4F582E61B84413200DCF20C /* MostPopularPieChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostPopularPieChartCell.m; sourceTree = "<group>"; };
+		B4F582E71B84413200DCF20C /* MostPopularTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostPopularTableCell.h; sourceTree = "<group>"; };
+		B4F582E81B84413200DCF20C /* MostPopularTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostPopularTableCell.m; sourceTree = "<group>"; };
+		B4F582E91B84413200DCF20C /* NetSalesGraphCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetSalesGraphCell.h; sourceTree = "<group>"; };
+		B4F582EA1B84413200DCF20C /* NetSalesGraphCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetSalesGraphCell.m; sourceTree = "<group>"; };
+		B4F582EB1B84413200DCF20C /* NetSalesMeanPaymentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetSalesMeanPaymentCell.h; sourceTree = "<group>"; };
+		B4F582EC1B84413200DCF20C /* NetSalesMeanPaymentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetSalesMeanPaymentCell.m; sourceTree = "<group>"; };
+		B4F582ED1B84413200DCF20C /* PopularItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularItemCell.h; sourceTree = "<group>"; };
+		B4F582EE1B84413200DCF20C /* PopularItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularItemCell.m; sourceTree = "<group>"; };
+		B4F582F01B84413200DCF20C /* GuestsTransactionLaborCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuestsTransactionLaborCell.xib; sourceTree = "<group>"; };
+		B4F582F21B84413200DCF20C /* MostPopularPieChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularPieChartCell.xib; sourceTree = "<group>"; };
+		B4F582F31B84413200DCF20C /* MostPopularTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularTableCell.xib; sourceTree = "<group>"; };
+		B4F582F41B84413200DCF20C /* NetSalesGraphCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSalesGraphCell.xib; sourceTree = "<group>"; };
+		B4F582F51B84413200DCF20C /* NetSalesMeanPaymentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetSalesMeanPaymentCell.xib; sourceTree = "<group>"; };
+		B4F582F61B84413200DCF20C /* PopularItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopularItemCell.xib; sourceTree = "<group>"; };
+		B4F582F71B84413200DCF20C /* NSNumberFormatter+Dollars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumberFormatter+Dollars.h"; sourceTree = "<group>"; };
+		B4F582F81B84413200DCF20C /* NSNumberFormatter+Dollars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumberFormatter+Dollars.m"; sourceTree = "<group>"; };
+		B4F582F91B84413200DCF20C /* SummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryViewController.h; sourceTree = "<group>"; };
+		B4F582FA1B84413200DCF20C /* SummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryViewController.m; sourceTree = "<group>"; };
+		B4F5831D1B84420400DCF20C /* Entree-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entree-Constants.h"; sourceTree = "<group>"; };
+		B4F5831E1B84420400DCF20C /* Entree-Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Entree-Constants.m"; sourceTree = "<group>"; };
+		B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FD055906CB18997372EE4470 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +297,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92FFDA8E1B7E26E900B2D3A0 /* Social.framework in Frameworks */,
+				92FFDA8C1B7E26DF00B2D3A0 /* StoreKit.framework in Frameworks */,
+				92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */,
+				92FFDA881B7E26C600B2D3A0 /* Accounts.framework in Frameworks */,
+				92FFDA861B7E26BA00B2D3A0 /* CoreMedia.framework in Frameworks */,
+				92FFDA841B7E22D400B2D3A0 /* libAFNetworking.a in Frameworks */,
 				92C8F1781B64068700ADF1D8 /* CoreFoundation.framework in Frameworks */,
 				92C8F1761B64064A00ADF1D8 /* AVFoundation.framework in Frameworks */,
 				92C8F1741B64063000ADF1D8 /* libxml2.dylib in Frameworks */,
@@ -173,7 +319,7 @@
 				92C8F1541B6323DA00ADF1D8 /* QuartzCore.framework in Frameworks */,
 				92C8F14B1B62881400ADF1D8 /* Parse.framework in Frameworks */,
 				92F4FB001B64082700AFFE0E /* Bolts.framework in Frameworks */,
-				AEA08F247EE3D5CB579B9900 /* libPods.a in Frameworks */,
+				8148EFEBC7821D083D1714F9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,11 +333,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07A943395F2C9E4562ADB72A /* Pods */ = {
+		78305C313DA9CBC8B4409F8D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				78180E3D3C433600EFAAC939 /* Pods.debug.xcconfig */,
-				7775058472F8300DC6CB3A9E /* Pods.release.xcconfig */,
+				B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */,
+				FD055906CB18997372EE4470 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -224,7 +370,7 @@
 				92C8F1251B60958B00ADF1D8 /* EntreeManageTests */,
 				92C8F1491B6287E700ADF1D8 /* Frameworks */,
 				92C8F1071B60958A00ADF1D8 /* Products */,
-				07A943395F2C9E4562ADB72A /* Pods */,
+				78305C313DA9CBC8B4409F8D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,6 +391,9 @@
 				92C8F1321B60DFA400ADF1D8 /* Resources */,
 				92C8F1091B60958A00ADF1D8 /* Supporting Files */,
 				92C8F1631B637F8600ADF1D8 /* global.h */,
+				92D219541B8018FB00F395E6 /* PrefixHeader.pch */,
+				B4F5831D1B84420400DCF20C /* Entree-Constants.h */,
+				B4F5831E1B84420400DCF20C /* Entree-Constants.m */,
 			);
 			path = EntreeManage;
 			sourceTree = "<group>";
@@ -293,6 +442,7 @@
 		92C8F1331B60DFC000ADF1D8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B4F582B71B84413200DCF20C /* SummaryController */,
 				9287342F1B69BC80005E112A /* PFUtils.m */,
 				928734311B69BC8D005E112A /* PFUtils.h */,
 				92C8F10E1B60958A00ADF1D8 /* AppDelegate.m */,
@@ -310,6 +460,12 @@
 		92C8F1491B6287E700ADF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92FFDA8D1B7E26E900B2D3A0 /* Social.framework */,
+				92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */,
+				92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */,
+				92FFDA871B7E26C600B2D3A0 /* Accounts.framework */,
+				92FFDA851B7E26BA00B2D3A0 /* CoreMedia.framework */,
+				92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */,
 				92F4FAFF1B64082700AFFE0E /* Bolts.framework */,
 				92C8F1771B64068700ADF1D8 /* CoreFoundation.framework */,
 				92C8F1751B64064A00ADF1D8 /* AVFoundation.framework */,
@@ -326,7 +482,7 @@
 				92C8F1551B6325CC00ADF1D8 /* CFNetwork.framework */,
 				92C8F1531B6323DA00ADF1D8 /* QuartzCore.framework */,
 				92C8F14A1B62881400ADF1D8 /* Parse.framework */,
-				0B0B6D1406101FD7E278343F /* libPods.a */,
+				9B7C2B71A79E7E36C8894553 /* libPods.a */,
 			);
 			name = Frameworks;
 			path = EntreeManage;
@@ -335,6 +491,10 @@
 		92C8F1671B6401FE00ADF1D8 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				92FFDA7D1B7D75C500B2D3A0 /* Mailgun.h */,
+				92FFDA7E1B7D75C500B2D3A0 /* Mailgun.m */,
+				92FFDA7F1B7D75C500B2D3A0 /* MGMessage.h */,
+				92FFDA801B7D75C500B2D3A0 /* MGMessage.m */,
 				928734681B6E6BE8005E112A /* SwapTableCell */,
 				92C8F16C1B64023D00ADF1D8 /* ProgressHUD.h */,
 				92C8F16A1B64023400ADF1D8 /* ProgressHUD.m */,
@@ -377,6 +537,22 @@
 			children = (
 				92F4FB011B6522CC00AFFE0E /* AnalyticsViewController.h */,
 				92F4FB021B6522CC00AFFE0E /* AnalyticsViewController.m */,
+				9211F9B01B72983E009CFEF8 /* AnalyticsLeftMenuController.h */,
+				9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */,
+				9211F9B31B735F73009CFEF8 /* AnalyticsSalesSummaryController.h */,
+				9211F9B41B735F73009CFEF8 /* AnalyticsSalesSummaryController.m */,
+				9211F9B61B735FE4009CFEF8 /* AnalyticsCategorySalesController.h */,
+				9211F9B71B735FE4009CFEF8 /* AnalyticsCategorySalesController.m */,
+				9211F9B91B736007009CFEF8 /* AnalyticsEmployeeShiftsController.h */,
+				9211F9BA1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m */,
+				9211F9BC1B736022009CFEF8 /* AnalyticsPayrollController.h */,
+				9211F9BD1B736022009CFEF8 /* AnalyticsPayrollController.m */,
+				9211F9BF1B736046009CFEF8 /* AnalyticsOrderReportController.h */,
+				9211F9C01B736046009CFEF8 /* AnalyticsOrderReportController.m */,
+				9211F9C21B736061009CFEF8 /* AnalyticsModifierSalesController.h */,
+				9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */,
+				9253C5ED1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.h */,
+				9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */,
 			);
 			name = AnalyticsController;
 			sourceTree = "<group>";
@@ -401,6 +577,114 @@
 			name = UserController;
 			sourceTree = "<group>";
 		};
+		B4F582B71B84413200DCF20C /* SummaryController */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582B81B84413200DCF20C /* ARGraphs */,
+				B4F582E11B84413200DCF20C /* Cells */,
+				B4F582F71B84413200DCF20C /* NSNumberFormatter+Dollars.h */,
+				B4F582F81B84413200DCF20C /* NSNumberFormatter+Dollars.m */,
+				B4F582F91B84413200DCF20C /* SummaryViewController.h */,
+				B4F582FA1B84413200DCF20C /* SummaryViewController.m */,
+			);
+			path = SummaryController;
+			sourceTree = "<group>";
+		};
+		B4F582B81B84413200DCF20C /* ARGraphs */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582B91B84413200DCF20C /* ARCircleGraph.h */,
+				B4F582BA1B84413200DCF20C /* ARCircleGraph.m */,
+				B4F582BB1B84413200DCF20C /* ARGraphDataPoint.h */,
+				B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */,
+				B4F582BD1B84413200DCF20C /* ARLineGraph.h */,
+				B4F582BE1B84413200DCF20C /* ARLineGraph.m */,
+				B4F582BF1B84413200DCF20C /* ARPieChart.h */,
+				B4F582C01B84413200DCF20C /* ARPieChart.m */,
+				B4F582C11B84413200DCF20C /* Private */,
+			);
+			path = ARGraphs;
+			sourceTree = "<group>";
+		};
+		B4F582C11B84413200DCF20C /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582C21B84413200DCF20C /* ARCircleRingLayer.h */,
+				B4F582C31B84413200DCF20C /* ARCircleRingLayer.m */,
+				B4F582C41B84413200DCF20C /* ARCircleTitleLabel.h */,
+				B4F582C51B84413200DCF20C /* ARCircleTitleLabel.m */,
+				B4F582C61B84413200DCF20C /* ARCircleValueLabel.h */,
+				B4F582C71B84413200DCF20C /* ARCircleValueLabel.m */,
+				B4F582C81B84413200DCF20C /* ARGraphBackground.h */,
+				B4F582C91B84413200DCF20C /* ARGraphBackground.m */,
+				B4F582CA1B84413200DCF20C /* ARGraphTitleView.h */,
+				B4F582CB1B84413200DCF20C /* ARGraphTitleView.m */,
+				B4F582CC1B84413200DCF20C /* ARHelpers.h */,
+				B4F582CD1B84413200DCF20C /* ARHelpers.m */,
+				B4F582CE1B84413200DCF20C /* ARLineGraphDataPointUtility.h */,
+				B4F582CF1B84413200DCF20C /* ARLineGraphDataPointUtility.m */,
+				B4F582D01B84413200DCF20C /* ARLineGraphMean.h */,
+				B4F582D11B84413200DCF20C /* ARLineGraphMean.m */,
+				B4F582D21B84413200DCF20C /* ARLineGraphPointsLayer.h */,
+				B4F582D31B84413200DCF20C /* ARLineGraphPointsLayer.m */,
+				B4F582D41B84413200DCF20C /* ARLineGraphXLegendView.h */,
+				B4F582D51B84413200DCF20C /* ARLineGraphXLegendView.m */,
+				B4F582D61B84413200DCF20C /* ARLineGraphYLegendView.h */,
+				B4F582D71B84413200DCF20C /* ARLineGraphYLegendView.m */,
+				B4F582D81B84413200DCF20C /* ARPieChartAnimationTypes.h */,
+				B4F582D91B84413200DCF20C /* ARPieChartDataPointUtility.h */,
+				B4F582DA1B84413200DCF20C /* ARPieChartDataPointUtility.m */,
+				B4F582DB1B84413200DCF20C /* ARPieChartLabelsLayer.h */,
+				B4F582DC1B84413200DCF20C /* ARPieChartLabelsLayer.m */,
+				B4F582DD1B84413200DCF20C /* ARPieChartLayer.h */,
+				B4F582DE1B84413200DCF20C /* ARPieChartLayer.m */,
+				B4F582DF1B84413200DCF20C /* ARYMinMaxLayer.h */,
+				B4F582E01B84413200DCF20C /* ARYMinMaxLayer.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		B4F582E11B84413200DCF20C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582E21B84413200DCF20C /* Classes */,
+				B4F582EF1B84413200DCF20C /* XIB */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B4F582E21B84413200DCF20C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582E91B84413200DCF20C /* NetSalesGraphCell.h */,
+				B4F582EA1B84413200DCF20C /* NetSalesGraphCell.m */,
+				B4F582EB1B84413200DCF20C /* NetSalesMeanPaymentCell.h */,
+				B4F582EC1B84413200DCF20C /* NetSalesMeanPaymentCell.m */,
+				B4F582E31B84413200DCF20C /* GuestsTransactionLaborCell.h */,
+				B4F582E41B84413200DCF20C /* GuestsTransactionLaborCell.m */,
+				B4F582E51B84413200DCF20C /* MostPopularPieChartCell.h */,
+				B4F582E61B84413200DCF20C /* MostPopularPieChartCell.m */,
+				B4F582E71B84413200DCF20C /* MostPopularTableCell.h */,
+				B4F582E81B84413200DCF20C /* MostPopularTableCell.m */,
+				B4F582ED1B84413200DCF20C /* PopularItemCell.h */,
+				B4F582EE1B84413200DCF20C /* PopularItemCell.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B4F582EF1B84413200DCF20C /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				B4F582F41B84413200DCF20C /* NetSalesGraphCell.xib */,
+				B4F582F51B84413200DCF20C /* NetSalesMeanPaymentCell.xib */,
+				B4F582F21B84413200DCF20C /* MostPopularPieChartCell.xib */,
+				B4F582F31B84413200DCF20C /* MostPopularTableCell.xib */,
+				B4F582F01B84413200DCF20C /* GuestsTransactionLaborCell.xib */,
+				B4F582F61B84413200DCF20C /* PopularItemCell.xib */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,11 +692,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92C8F12C1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "EntreeManage" */;
 			buildPhases = (
-				163B41EA980D2AE9CC60B451 /* Check Pods Manifest.lock */,
+				D6141AF55A3D51E4E6922EFF /* Check Pods Manifest.lock */,
 				92C8F1021B60958A00ADF1D8 /* Sources */,
 				92C8F1031B60958A00ADF1D8 /* Frameworks */,
 				92C8F1041B60958A00ADF1D8 /* Resources */,
-				0D5E6500ABC7C3649800A26D /* Copy Pods Resources */,
+				88CF13A391A792ECC07FF96B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -483,14 +767,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4F5831A1B84413200DCF20C /* PopularItemCell.xib in Resources */,
 				9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */,
 				92C8F1181B60958B00ADF1D8 /* Business.storyboard in Resources */,
+				B4F583161B84413200DCF20C /* MostPopularPieChartCell.xib in Resources */,
 				9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */,
+				B4F583191B84413200DCF20C /* NetSalesMeanPaymentCell.xib in Resources */,
 				92C8F14F1B62930900ADF1D8 /* login.png in Resources */,
 				92C8F11D1B60958B00ADF1D8 /* LaunchScreen.xib in Resources */,
 				928734761B6FA567005E112A /* checkbox_checked.png in Resources */,
+				B4F583181B84413200DCF20C /* NetSalesGraphCell.xib in Resources */,
 				92C8F1691B64022700ADF1D8 /* ProgressHUD.bundle in Resources */,
 				92C8F11A1B60958B00ADF1D8 /* Images.xcassets in Resources */,
+				B4F583141B84413200DCF20C /* GuestsTransactionLaborCell.xib in Resources */,
+				B4F583171B84413200DCF20C /* MostPopularTableCell.xib in Resources */,
 				9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */,
 				9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */,
 				928734741B6FA55C005E112A /* checkbox_unchecked.png in Resources */,
@@ -507,7 +797,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0D5E6500ABC7C3649800A26D /* Copy Pods Resources */ = {
+		88CF13A391A792ECC07FF96B /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -522,7 +812,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		163B41EA980D2AE9CC60B451 /* Check Pods Manifest.lock */ = {
+		D6141AF55A3D51E4E6922EFF /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -546,26 +836,64 @@
 			files = (
 				9287343D1B6A552E005E112A /* BusinessMenuItemController.m in Sources */,
 				92C8F1451B61213800ADF1D8 /* IntelligentSplitViewController.m in Sources */,
+				B4F583121B84413200DCF20C /* NetSalesMeanPaymentCell.m in Sources */,
+				B4F582FD1B84413200DCF20C /* ARLineGraph.m in Sources */,
 				9287346D1B6E6CCB005E112A /* MGSwipeButton.m in Sources */,
+				B4F582FF1B84413200DCF20C /* ARCircleRingLayer.m in Sources */,
+				B4F5831F1B84420400DCF20C /* Entree-Constants.m in Sources */,
 				92C8F10F1B60958A00ADF1D8 /* AppDelegate.m in Sources */,
+				B4F583061B84413200DCF20C /* ARLineGraphMean.m in Sources */,
+				B4F583031B84413200DCF20C /* ARGraphTitleView.m in Sources */,
+				B4F5830C1B84413200DCF20C /* ARPieChartLayer.m in Sources */,
+				B4F583091B84413200DCF20C /* ARLineGraphYLegendView.m in Sources */,
 				92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */,
+				B4F583051B84413200DCF20C /* ARLineGraphDataPointUtility.m in Sources */,
 				92C8F1421B61210800ADF1D8 /* BusinessLeftMenuViewController.m in Sources */,
+				B4F583001B84413200DCF20C /* ARCircleTitleLabel.m in Sources */,
+				9211F9B81B735FE4009CFEF8 /* AnalyticsCategorySalesController.m in Sources */,
 				928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */,
+				B4F5830D1B84413200DCF20C /* ARYMinMaxLayer.m in Sources */,
 				92C8F10C1B60958A00ADF1D8 /* main.m in Sources */,
 				928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */,
+				B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */,
+				B4F5830E1B84413200DCF20C /* GuestsTransactionLaborCell.m in Sources */,
 				92C8F1661B63880B00ADF1D8 /* CommParse.m in Sources */,
+				B4F582FB1B84413200DCF20C /* ARCircleGraph.m in Sources */,
+				B4F583101B84413200DCF20C /* MostPopularTableCell.m in Sources */,
+				9211F9B51B735F73009CFEF8 /* AnalyticsSalesSummaryController.m in Sources */,
+				B4F5830B1B84413200DCF20C /* ARPieChartLabelsLayer.m in Sources */,
 				9287346A1B6E6CB2005E112A /* MGSwipeTableCell.m in Sources */,
 				928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */,
+				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
+				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
+				92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */,
+				B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */,
+				B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */,
 				928734791B6FAA65005E112A /* BusinessModifierItemSelController.m in Sources */,
+				9211F9C41B736061009CFEF8 /* AnalyticsModifierSalesController.m in Sources */,
 				928734461B6BC75A005E112A /* BusinessMenuItemAddController.m in Sources */,
+				9211F9BE1B736022009CFEF8 /* AnalyticsPayrollController.m in Sources */,
+				9253C5EF1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m in Sources */,
 				928734301B69BC81005E112A /* PFUtils.m in Sources */,
+				B4F583131B84413200DCF20C /* PopularItemCell.m in Sources */,
 				9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */,
+				B4F5830A1B84413200DCF20C /* ARPieChartDataPointUtility.m in Sources */,
 				92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */,
+				9211F9B21B72983E009CFEF8 /* AnalyticsLeftMenuController.m in Sources */,
+				B4F5831B1B84413200DCF20C /* NSNumberFormatter+Dollars.m in Sources */,
 				928734711B6F682F005E112A /* BusinessMenuModifierAddController.m in Sources */,
+				B4F583071B84413200DCF20C /* ARLineGraphPointsLayer.m in Sources */,
+				B4F5830F1B84413200DCF20C /* MostPopularPieChartCell.m in Sources */,
+				B4F583011B84413200DCF20C /* ARCircleValueLabel.m in Sources */,
+				9211F9C11B736046009CFEF8 /* AnalyticsOrderReportController.m in Sources */,
+				9211F9BB1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m in Sources */,
 				92C8F16B1B64023400ADF1D8 /* ProgressHUD.m in Sources */,
 				9287343A1B6A54FA005E112A /* BusinessMenuCategoryController.m in Sources */,
 				928734401B6A55CE005E112A /* BusinessMenuModifierController.m in Sources */,
 				92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */,
+				B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */,
+				92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */,
+				B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,30 +1019,36 @@
 		};
 		92C8F12D1B60958B00ADF1D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78180E3D3C433600EFAAC939 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		92C8F12E1B60958B00ADF1D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7775058472F8300DC6CB3A9E /* Pods.release.xcconfig */;
+			baseConfigurationReference = FD055906CB18997372EE4470 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

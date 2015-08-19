@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommParse.h"
 
 @interface BusinessModifierItemSelController : UIViewController
     @property (nonatomic, assign) id parent_delegate;

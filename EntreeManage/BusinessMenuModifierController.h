@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommParse.h"
 
 @interface BusinessMenuModifierController : UITableViewController
     @property (nonatomic, weak) PFObject *topMenuObj;

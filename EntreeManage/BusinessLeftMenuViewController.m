@@ -24,16 +24,7 @@
     [super viewDidLoad];
   
     // Left menu show for each tab
-    menuItemsArray = [[NSMutableArray alloc]init];
-    //NSMutableArray * menuAnalyticsArr = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"By Payment Type", @"Modifier Sales", nil];
-    NSMutableArray * menuBusinessArr = [[NSMutableArray alloc] initWithObjects:@"Menu Builder", @"Menu Modifiers", @"Employees", nil];
-    
-    //if(self.tabBarController.tabBar.selectedItem.tag==1){
-        menuItemsArray =  menuBusinessArr;
-    //}
-    //else if(self.tabBarController.tabBar.selectedItem.tag==2) {
-    //    menuItemsArray = menuAnalyticsArr;
-    //}
+    menuItemsArray =  [[NSMutableArray alloc] initWithObjects:@"Menu Builder", @"Menu Modifiers", @"Employees", nil];
     
     [self.tableView reloadData];
     
@@ -69,14 +60,13 @@
     }
     // Configure the cell...
     cell.textLabel.text = menuItemsArray[indexPath.row];
- 
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
-    [self changeLeftMenuSel:1 LeftMenuID:(NSInteger)indexPath.row];
+    [self changeLeftMenuSel:(NSInteger)indexPath.row];
 }
 
 
@@ -84,12 +74,9 @@
     descript:   change view content for tab, left menu
     param:      tab ID, left menu ID
 */
--(void)changeLeftMenuSel:(NSInteger)tabId LeftMenuID:(NSInteger)leftMenuID{
+-(void)changeLeftMenuSel:(NSInteger)leftMenuID{
     //Summary
-    //if(tabId==0){
-        
-    //}
-    //else if(tabId==1){
+    
         NSString * menuType;
         UINavigationController *nc = (UINavigationController *)self.parentViewController;
         UISplitViewController *splitVC = (UISplitViewController *)nc.parentViewController;
@@ -116,7 +103,7 @@
             [viewInstance showBusinessMenus:menuType];
         }
         
-    //}
+   
 }
 
 

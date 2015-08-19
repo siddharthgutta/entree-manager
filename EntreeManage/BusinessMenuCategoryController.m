@@ -90,7 +90,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
     
     MGSwipeTableCell * cell = [tableView dequeueReusableCellWithIdentifier:@"categoryMenuCell"];
     
