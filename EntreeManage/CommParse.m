@@ -187,10 +187,7 @@
                 if ([delegate respondsToSelector:@selector(commsDidAction:)])
                     [delegate commsDidAction:response];
             }];
-            
-
         }
-        
     }];
     
     
@@ -249,10 +246,10 @@
                 
                 //sales
                 total_sales = total_sales + [orderArray[1] floatValue];
-                [orderArray replaceObjectAtIndex:1 withObject: @(total_sales)];
+                orderArray[1] = @(total_sales);
                 //discounts
                 discount_val = discount_val + [orderArray[2] floatValue];
-                [orderArray replaceObjectAtIndex:2 withObject: @(discount_val)];
+                orderArray[2] = @(discount_val);
                 
             }
             else {
@@ -365,7 +362,7 @@
                 
                 hoursDiff = hoursDiff + [empArray[1] floatValue];
                 //hours
-                [empArray replaceObjectAtIndex:1 withObject: @(hoursDiff)];
+                empArray[1] = @(hoursDiff);
             }
             else {
                 //if not exist then init
@@ -404,7 +401,7 @@
                         
                         tips = tips + [empArray[2] floatValue];
                         //tips
-                        [empArray replaceObjectAtIndex:2 withObject: @(tips)];
+                        empArray[2] = @(tips);
                     }
                     else {
                         emp_obj = [emp_query getObjectWithId:emp_id];
@@ -434,14 +431,9 @@
                 [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
             }
             
-            
             if ([delegate respondsToSelector:@selector(commsDidAction:)])
                 [delegate commsDidAction:response];
-        
         }];
-        
-        
-        
     }];
     
 }
@@ -498,10 +490,10 @@
                 
                 //times
                 timesOrdered = [orderArray[3] intValue] + 1;
-                [orderArray replaceObjectAtIndex:3 withObject: @(timesOrdered)];
+                orderArray[3] = @(timesOrdered);
                 //sales
                 total_sales = total_sales + [orderArray[4] floatValue];
-                [orderArray replaceObjectAtIndex:4 withObject: @(total_sales)];
+                orderArray[4] = @(total_sales);
                 
             }
             else {
