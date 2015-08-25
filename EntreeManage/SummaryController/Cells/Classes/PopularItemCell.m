@@ -27,12 +27,11 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
-
 #pragma mark Setters
 
 - (void)setIndex:(NSUInteger)index {
     _index = index;
-    self.indexLabel.text = @(index).stringValue;
+    self.indexLabel.text = [NSString stringWithFormat:@"%lu.", (unsigned long)index];
 }
 
 - (void)setSaleCount:(NSInteger)saleCount {

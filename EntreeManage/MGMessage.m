@@ -97,7 +97,7 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
     if (!_headers) {
         _headers = [@{header: value} mutableCopy];
     } else {
-        [_headers setObject:value forKey:header];
+        _headers[header] = value;
     }
 }
 
@@ -108,7 +108,7 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
     if (!_variables) {
         _variables = [@{var: value} mutableCopy];
     } else {
-        [_variables setObject:value forKey:var];
+        _variables[var] = value;
     }
 }
 

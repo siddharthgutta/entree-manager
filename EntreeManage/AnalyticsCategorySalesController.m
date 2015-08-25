@@ -77,10 +77,10 @@
     
     NSMutableArray *itemArray;
     for(NSString *key in keyArray){
-        itemArray =[catArray objectForKey:key];
+        itemArray =catArray[key];
         
         NSString *text1 = [NSString stringWithFormat:@"%.02f", [itemArray[1] floatValue]];
-        float net_pro = ([itemArray[1] floatValue]-[itemArray[2] floatValue])/[itemArray[1] floatValue]*100;
+        CGFloat net_pro = ([itemArray[1] floatValue]-[itemArray[2] floatValue])/[itemArray[1] floatValue]*100;
         
         NSString *text2 = [NSString stringWithFormat:@"%.02f", net_pro];
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@", content, itemArray[0], text1, text2 ];
@@ -117,7 +117,7 @@
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
@@ -146,14 +146,16 @@
     NSString *key = [keyArray objectAtIndex:indexPath.row];
     NSMutableArray * itemArray;
     
-    itemArray =[catArray objectForKey:key];
+    itemArray =catArray[key];
     
     UILabel *label;
     label = (UILabel*) [cell viewWithTag:1];
     label.text = itemArray[0];
     
     //Net Sales =  Total - discount
-    float net_pro = ([itemArray[1] floatValue]-[itemArray[2] floatValue])/[itemArray[1] floatValue]*100;
+    CGFloat net_pro = ([itemArray[1] floatValue] - [itemArray[2] floatValue])/[itemArray[1] floatValue]*100;
+    if (net_pro != net_pro) // nan
+        net_pro = 0;
     
     //Total
     label = (UILabel*) [cell viewWithTag:2];
@@ -175,14 +177,14 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
-        catArray = [response objectForKey:@"objects"];
+    if ([response[@"responseCode"] boolValue]) {
+        catArray = response[@"objects"];
         keyArray = [catArray allKeys];
         
-        float sum_net = 0;
+        CGFloat sum_net = 0;
         NSMutableArray *itemArray;
         for(NSString *key in keyArray){
-            itemArray =[catArray objectForKey:key];
+            itemArray =catArray[key];
             sum_net += [itemArray[1] floatValue]-[itemArray[2] floatValue];
         }
         

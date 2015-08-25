@@ -68,7 +68,6 @@
 		92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92F4FB021B6522CC00AFFE0E /* AnalyticsViewController.m */; };
 		92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFDA7E1B7D75C500B2D3A0 /* Mailgun.m */; };
 		92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 92FFDA801B7D75C500B2D3A0 /* MGMessage.m */; };
-		92FFDA841B7E22D400B2D3A0 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */; };
 		92FFDA861B7E26BA00B2D3A0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA851B7E26BA00B2D3A0 /* CoreMedia.framework */; };
 		92FFDA881B7E26C600B2D3A0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA871B7E26C600B2D3A0 /* Accounts.framework */; };
 		92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */; };
@@ -128,17 +127,17 @@
 		9211F9B01B72983E009CFEF8 /* AnalyticsLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsLeftMenuController.h; sourceTree = "<group>"; };
 		9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsLeftMenuController.m; sourceTree = "<group>"; };
 		9211F9B31B735F73009CFEF8 /* AnalyticsSalesSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsSalesSummaryController.h; sourceTree = "<group>"; };
-		9211F9B41B735F73009CFEF8 /* AnalyticsSalesSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsSalesSummaryController.m; sourceTree = "<group>"; };
+		9211F9B41B735F73009CFEF8 /* AnalyticsSalesSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnalyticsSalesSummaryController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9211F9B61B735FE4009CFEF8 /* AnalyticsCategorySalesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsCategorySalesController.h; sourceTree = "<group>"; };
-		9211F9B71B735FE4009CFEF8 /* AnalyticsCategorySalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsCategorySalesController.m; sourceTree = "<group>"; };
+		9211F9B71B735FE4009CFEF8 /* AnalyticsCategorySalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnalyticsCategorySalesController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9211F9B91B736007009CFEF8 /* AnalyticsEmployeeShiftsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsEmployeeShiftsController.h; sourceTree = "<group>"; };
-		9211F9BA1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsEmployeeShiftsController.m; sourceTree = "<group>"; };
+		9211F9BA1B736007009CFEF8 /* AnalyticsEmployeeShiftsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnalyticsEmployeeShiftsController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9211F9BC1B736022009CFEF8 /* AnalyticsPayrollController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsPayrollController.h; sourceTree = "<group>"; };
 		9211F9BD1B736022009CFEF8 /* AnalyticsPayrollController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsPayrollController.m; sourceTree = "<group>"; };
 		9211F9BF1B736046009CFEF8 /* AnalyticsOrderReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsOrderReportController.h; sourceTree = "<group>"; };
 		9211F9C01B736046009CFEF8 /* AnalyticsOrderReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsOrderReportController.m; sourceTree = "<group>"; };
 		9211F9C21B736061009CFEF8 /* AnalyticsModifierSalesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsModifierSalesController.h; sourceTree = "<group>"; };
-		9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsModifierSalesController.m; sourceTree = "<group>"; };
+		9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AnalyticsModifierSalesController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9253C5ED1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsByPaymentTypeController.h; sourceTree = "<group>"; };
 		9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsByPaymentTypeController.m; sourceTree = "<group>"; };
 		9287342C1B6914BE005E112A /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
@@ -156,15 +155,15 @@
 		928734411B6AA1E5005E112A /* BusinessMenuAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuAddController.h; sourceTree = "<group>"; };
 		928734421B6AA1E5005E112A /* BusinessMenuAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuAddController.m; sourceTree = "<group>"; };
 		928734441B6BC759005E112A /* BusinessMenuItemAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuItemAddController.h; sourceTree = "<group>"; };
-		928734451B6BC75A005E112A /* BusinessMenuItemAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuItemAddController.m; sourceTree = "<group>"; };
+		928734451B6BC75A005E112A /* BusinessMenuItemAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuItemAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734471B6BD1F4005E112A /* BusinessEmployeeAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessEmployeeAddController.h; sourceTree = "<group>"; };
-		928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessEmployeeAddController.m; sourceTree = "<group>"; };
+		928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessEmployeeAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734691B6E6CB2005E112A /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		9287346B1B6E6CC4005E112A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
 		9287346C1B6E6CCB005E112A /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
 		9287346E1B6E6CD0005E112A /* MGSwipeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		9287346F1B6F682F005E112A /* BusinessMenuModifierAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuModifierAddController.h; sourceTree = "<group>"; };
-		928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuModifierAddController.m; sourceTree = "<group>"; };
+		928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuModifierAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734731B6FA55C005E112A /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
 		928734751B6FA566005E112A /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		928734771B6FAA65005E112A /* BusinessModifierItemSelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessModifierItemSelController.h; sourceTree = "<group>"; };
@@ -200,9 +199,9 @@
 		92C8F1611B63267900ADF1D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		92C8F1631B637F8600ADF1D8 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		92C8F1641B63880B00ADF1D8 /* CommParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommParse.h; sourceTree = "<group>"; };
-		92C8F1651B63880B00ADF1D8 /* CommParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommParse.m; sourceTree = "<group>"; };
+		92C8F1651B63880B00ADF1D8 /* CommParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CommParse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		92C8F1681B64022700ADF1D8 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
-		92C8F16A1B64023400ADF1D8 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		92C8F16A1B64023400ADF1D8 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProgressHUD.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		92C8F16C1B64023D00ADF1D8 /* ProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
 		92C8F16D1B64057500ADF1D8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		92C8F16F1B64059100ADF1D8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -302,7 +301,6 @@
 				92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */,
 				92FFDA881B7E26C600B2D3A0 /* Accounts.framework in Frameworks */,
 				92FFDA861B7E26BA00B2D3A0 /* CoreMedia.framework in Frameworks */,
-				92FFDA841B7E22D400B2D3A0 /* libAFNetworking.a in Frameworks */,
 				92C8F1781B64068700ADF1D8 /* CoreFoundation.framework in Frameworks */,
 				92C8F1761B64064A00ADF1D8 /* AVFoundation.framework in Frameworks */,
 				92C8F1741B64063000ADF1D8 /* libxml2.dylib in Frameworks */,

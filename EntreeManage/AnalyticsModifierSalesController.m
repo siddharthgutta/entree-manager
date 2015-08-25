@@ -72,7 +72,7 @@
     
     NSMutableArray *itemArray;
     for(NSString *key in keyArray){
-        itemArray =[resultArray objectForKey:key];
+        itemArray =resultArray[key];
         
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, itemArray[0], itemArray[1], itemArray[2], [itemArray[3] floatValue], [itemArray[4] floatValue] ];
         
@@ -144,7 +144,7 @@
     
     NSString *key = [keyArray objectAtIndex:indexPath.row];
     
-    itemArray =[resultArray objectForKey:key];
+    itemArray =resultArray[key];
     
     UILabel *label;
     label = (UILabel*) [cell viewWithTag:1];
@@ -173,10 +173,10 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = [response objectForKey:@"objects"];
-        timesArray = [response objectForKey:@"time_objects"];
+        resultArray = response[@"objects"];
+        timesArray = response[@"time_objects"];
         keyArray = [resultArray allKeys];
         
         [_analTableView reloadData];

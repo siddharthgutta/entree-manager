@@ -17,6 +17,7 @@ extern NSString * const krSummaryNetSalesMeanPaymentCell;
 extern NSString * const krSummaryMostPopularPieChartCell;
 extern NSString * const krSummaryMostPopularTableCell;
 extern NSString * const krSummaryGuestsTransactionLaborCell;
+extern NSString * const krSummaryPopularItemCell;
 
 #pragma mark - Parse -
 extern NSString * const kParseSetApplicationID;

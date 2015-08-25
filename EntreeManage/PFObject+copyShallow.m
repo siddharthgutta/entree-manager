@@ -16,9 +16,9 @@
     NSArray *keys = [self allKeys];
     for (NSString *key in keys) {
         if ([[key lowercaseString] rangeOfString:@"_ptr"].location == NSNotFound)
-            [clone setObject:[[self objectForKey:key] copy] forKey:key];
+            [clone setObject:[self[key] copy] forKey:key];
         else
-            [clone setObject:[self objectForKey:key] forKey:key];
+            [clone setObject:self[key] forKey:key];
     }
     return clone;
 }

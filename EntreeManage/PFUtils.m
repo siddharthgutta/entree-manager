@@ -20,7 +20,7 @@
 {
     id value = nil;
     if ([PFUtils exists:propertyName InObject:object]) {
-        value = [object objectForKey:propertyName];
+        value = object[propertyName];
     }
     
     return value;
@@ -33,7 +33,7 @@
     for (NSDictionary *elementDict in array) {
         NSString *firstKey = [[elementDict allKeys] firstObject];
         if ([firstKey isEqualToString:key]) {
-            data = [elementDict objectForKey:key];
+            data = elementDict[key];
             break;
         }
     }

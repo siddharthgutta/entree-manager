@@ -119,7 +119,7 @@
         [relation addObject:item_obj];
     }
     
-    [_menuObj setObject:price forKey:@"price"];
+    _menuObj[@"price"] = price;
     
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];
@@ -128,11 +128,11 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         selected_items = [[NSMutableArray alloc] init];
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            selected_items = [response objectForKey:@"objects"];
+            selected_items = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
             
@@ -141,8 +141,8 @@
         [_menuView reloadData];
         
     }
-    else if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    else if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
             //Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];

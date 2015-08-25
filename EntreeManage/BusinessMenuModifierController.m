@@ -71,12 +71,12 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         
         quotes = [[NSArray alloc] init];
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            quotes = [response objectForKey:@"objects"];
+            quotes = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
             

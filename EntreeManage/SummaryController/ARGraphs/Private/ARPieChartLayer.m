@@ -305,7 +305,7 @@
     
     if(self.innerRadiusPercent > 0.0){
         CGPathAddArc(path, NULL, center.x, center.y, radius * self.innerRadiusPercent, DEGREES_TO_RADIANS(startAngle + degrees), DEGREES_TO_RADIANS(startAngle), YES);
-    }else{
+    } else {
         CGPathMoveToPoint(path, NULL, center.x, center.y);
     }
     

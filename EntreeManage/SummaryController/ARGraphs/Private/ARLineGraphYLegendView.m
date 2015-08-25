@@ -96,7 +96,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 
     if(_title != nil && _title.length){
         width = [ARHelpers heightOfCaptionText:self.title inWidth:self.bounds.size.width] + widthOfTestString + 6;
-    }else{
+    } else {
         width = widthOfTestString;
     }
     return CGSizeMake(width, self.bounds.size.height);
@@ -126,7 +126,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
         if(_totalNumberOfLabels != canFit){
             _totalNumberOfLabels = MIN(canFit,_range.length + 1);
             [self createMissingLabelsOrDeleteExtras];
-        }else{
+        } else {
             [self updateAllLabelValues];
         }
     }else {

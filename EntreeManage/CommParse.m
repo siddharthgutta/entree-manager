@@ -31,19 +31,18 @@
     NSString *password = [userInfo valueForKey:@"pswd"];
     
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
-        NSString *user_email = [user objectForKey:@"email"];
+        NSString *user_email = user[@"email"];
         
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        response[@"action"] = @1;
         if ( !error ) {
             //save current user email address
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:user_email forKey:@"curUserEmail"];
+            [[NSUserDefaults standardUserDefaults] setObject:user_email forKey:@"curUserEmail"];
             
             
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+            response[@"responseCode"] = @YES;
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -64,13 +63,13 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
-        [response setObject:menu_type forKey:@"menu_type"];
+        response[@"action"] = @1;
+        response[@"menu_type"] = menu_type;
         if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:objects forKey:@"objects"];
+            response[@"responseCode"] = @YES;
+            response[@"objects"] = objects;
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -84,11 +83,11 @@
     NSLog(@"Comms update:");
     [quote saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:2] forKey:@"action"];
+        response[@"action"] = @2;
         if (!error && succeeded) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+            response[@"responseCode"] = @YES;
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -101,11 +100,11 @@
     NSLog(@"Comms delete:");
     [quote deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:3] forKey:@"action"];
+        response[@"action"] = @3;
         if (!error && succeeded) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+            response[@"responseCode"] = @YES;
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -120,12 +119,12 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        response[@"action"] = @1;
         if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:objects forKey:@"objects"];
+            response[@"responseCode"] = @YES;
+            response[@"objects"] = objects;
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -146,11 +145,11 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    __block float discount_val;
+    __block CGFloat discount_val;
     discount_val = 0;
     
     PFQuery *order_query = [PFQuery queryWithClassName:@"OrderItem"];
-    [order_query whereKey:@"onTheHouse" equalTo:[NSNumber numberWithBool:YES]];
+    [order_query whereKey:@"onTheHouse" equalTo:@YES];
     [order_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [order_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [order_query includeKey:@"menuItem"];
@@ -160,9 +159,9 @@
         if(!error){
             PFObject *item_obj;
             for(PFObject *object in order_objects){
-                item_obj =[object objectForKey:@"menuItem"];
+                item_obj = object[@"menuItem"];
                 
-                discount_val += [[item_obj objectForKey:@"price"] floatValue];
+                discount_val += [item_obj[@"price"] floatValue];
             }
             NSLog(@"%f", discount_val);
             
@@ -173,14 +172,14 @@
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-                [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+                response[@"action"] = @1;
                 if ( !error ) {
-                    [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-                    [response setObject:objects forKey:@"objects"];
-                    [response setObject:[NSNumber numberWithFloat:discount_val] forKey:@"discount"];
+                    response[@"responseCode"] = @YES;
+                    response[@"objects"] = objects;
+                    [response setObject:@(discount_val) forKey:@"discount"];
                     
                 } else {
-                    [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+                    response[@"responseCode"] = @NO;
                     [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
                 }
                 
@@ -208,8 +207,7 @@
     [orditem_query includeKey:@"menuItem"];
     [orditem_query includeKey:@"order"];
     
-    NSMutableDictionary *resultArray;
-    resultArray = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *resultArray = [[NSMutableDictionary alloc] init];
     
     __block NSMutableArray *orderArray;
     __block PFObject *pay_obj;
@@ -223,60 +221,60 @@
         
         for(PFObject *orditem_obj in objects){
             //get item
-            item_obj =[orditem_obj objectForKey:@"menuItem"];
+            item_obj = orditem_obj[@"menuItem"];
             
             //get discount value
-            float discount_val = 0;
-            if([orditem_obj objectForKey:@"onTheHouse"]){
-                discount_val = [[item_obj objectForKey:@"price"] floatValue];
+            CGFloat discount_val = 0;
+            if(orditem_obj[@"onTheHouse"]) {
+                discount_val = [item_obj[@"price"] floatValue];
             }
             
             //get category name
-            item_obj =[item_obj objectForKey:@"menuCategory"];
-            cat_id = item_obj.objectId;
-            item_obj =[category_query getObjectWithId:item_obj.objectId];
-            NSString *cat_name =[item_obj objectForKey:@"name"];
+            item_obj = item_obj[@"menuCategory"];
+            cat_id   = item_obj.objectId;
+            item_obj = [category_query getObjectWithId:item_obj.objectId];
+            NSString *cat_name = item_obj[@"name"];
             
             //Sales
-            item_obj =[orditem_obj objectForKey:@"order"];
+            item_obj = orditem_obj[@"order"];
             
-            pay_obj =[item_obj objectForKey:@"payment"];
-            pay_obj =[pay_query getObjectWithId:pay_obj.objectId];
-            float total_sales =[[pay_obj objectForKey:@"total"] floatValue];
+            pay_obj = item_obj[@"payment"];
+            pay_obj = [pay_query getObjectWithId:pay_obj.objectId];
+            CGFloat total_sales = [pay_obj[@"total"] floatValue];
             
             //if exist same menu item
-            if([resultArray objectForKey:cat_id]){
+            if(resultArray[cat_id]){
                 //get that info
-                orderArray = [resultArray objectForKey:cat_id];
+                orderArray = resultArray[cat_id];
                 
                 //sales
-                total_sales = total_sales + [[orderArray objectAtIndex:1] floatValue];
-                [orderArray replaceObjectAtIndex:1 withObject: [NSNumber numberWithFloat:total_sales]];
+                total_sales = total_sales + [orderArray[1] floatValue];
+                [orderArray replaceObjectAtIndex:1 withObject: @(total_sales)];
                 //discounts
-                discount_val = discount_val + [[orderArray objectAtIndex:2] floatValue];
-                [orderArray replaceObjectAtIndex:2 withObject: [NSNumber numberWithFloat:discount_val]];
+                discount_val = discount_val + [orderArray[2] floatValue];
+                [orderArray replaceObjectAtIndex:2 withObject: @(discount_val)];
                 
             }
-            else{
+            else {
                 //if not exist then init
                 orderArray = [[NSMutableArray alloc] init];
                 
                 [orderArray addObject:cat_name];
-                [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
-                [orderArray addObject:[NSNumber numberWithFloat:discount_val]];
+                [orderArray addObject:@(total_sales)];
+                [orderArray addObject:@(discount_val)];
             }
             [resultArray  setObject:orderArray forKey:cat_id];
         }
         
         
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        response[@"action"] = @1;
         if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:resultArray forKey:@"objects"];
+            response[@"responseCode"] = @YES;
+            response[@"objects"] = resultArray;
             
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         
@@ -307,14 +305,14 @@
         [pay_query findObjectsInBackgroundWithBlock:^(NSArray *pay_objects, NSError *error) {
             
             NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-            [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+            response[@"action"] = @1;
             if ( !error ) {
-                [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-                [response setObject:objects forKey:@"objects"];
-                [response setObject:pay_objects forKey:@"pay_objects"];
+                response[@"responseCode"] = @YES;
+                response[@"objects"] = objects;
+                response[@"pay_objects"] = pay_objects;
                 
             } else {
-                [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+                response[@"responseCode"] = @NO;
                 [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
             }
             
@@ -353,30 +351,30 @@
         
         
         for(PFObject *shift_obj in objects){
-            emp_obj =[shift_obj objectForKey:@"employee"];
+            emp_obj = shift_obj[@"employee"];
             emp_id = emp_obj.objectId;
             
             //calculate Time
-            NSTimeInterval timeDifference = [[shift_obj objectForKey:@"endedAt"] timeIntervalSinceDate:[shift_obj objectForKey:@"startedAt"]];
-            float hoursDiff =  timeDifference/3600;
+            NSTimeInterval timeDifference = [shift_obj[@"endedAt"] timeIntervalSinceDate:shift_obj[@"startedAt"]];
+            CGFloat hoursDiff =  timeDifference/3600;
             
             //if exist same emp
-            if([resultArray objectForKey:emp_id]){
+            if(resultArray[emp_id]){
                 //get that info
-                empArray = [resultArray objectForKey:emp_id];
+                empArray = resultArray[emp_id];
                 
-                hoursDiff = hoursDiff + [[empArray objectAtIndex:1] floatValue];
+                hoursDiff = hoursDiff + [empArray[1] floatValue];
                 //hours
-                [empArray replaceObjectAtIndex:1 withObject: [NSNumber numberWithFloat:hoursDiff]];
+                [empArray replaceObjectAtIndex:1 withObject: @(hoursDiff)];
             }
-            else{
+            else {
                 //if not exist then init
                 empArray = [[NSMutableArray alloc] init];
                 
-                [empArray addObject:[emp_obj objectForKey:@"name"]];
-                [empArray addObject:[NSNumber numberWithFloat:hoursDiff]];
+                [empArray addObject:emp_obj[@"name"]];
+                [empArray addObject:@(hoursDiff)];
                 [empArray addObject:@0.0];
-                [empArray addObject:[emp_obj objectForKey:@"hourlyWage"]];
+                [empArray addObject:emp_obj[@"hourlyWage"]];
                 
             }
             [resultArray  setObject:empArray forKey:emp_id];
@@ -391,33 +389,33 @@
             if(!error){
                 
                 for(PFObject *pay_obj in objects){
-                    PFObject *party_obj =[pay_obj objectForKey:@"party"];
-                    party_obj =[party_query getObjectWithId:party_obj.objectId];
-                    emp_obj = [party_obj objectForKey:@"server"];
+                    PFObject *party_obj = pay_obj[@"party"];
+                    party_obj = [party_query getObjectWithId:party_obj.objectId];
+                    emp_obj = party_obj[@"server"];
                     emp_id = emp_obj.objectId;
                     
                     
-                    float tips = [[pay_obj objectForKey:@"tip"] floatValue];
+                    CGFloat tips = [pay_obj[@"tip"] floatValue];
                     
                     //if exist same emp
-                    if([resultArray objectForKey:emp_id]){
+                    if(resultArray[emp_id]){
                         //get that info
-                        empArray = [resultArray objectForKey:emp_id];
+                        empArray = resultArray[emp_id];
                         
-                        tips = tips + [[empArray objectAtIndex:2] floatValue];
+                        tips = tips + [empArray[2] floatValue];
                         //tips
-                        [empArray replaceObjectAtIndex:2 withObject: [NSNumber numberWithFloat:tips]];
+                        [empArray replaceObjectAtIndex:2 withObject: @(tips)];
                     }
-                    else{
-                        emp_obj =[emp_query getObjectWithId:emp_id];
+                    else {
+                        emp_obj = [emp_query getObjectWithId:emp_id];
                         
                         //if not exist then init
                         empArray = [[NSMutableArray alloc] init];
                         
-                        [empArray addObject:[emp_obj objectForKey:@"name"]];
+                        [empArray addObject:emp_obj[@"name"]];
                         [empArray addObject:@0.0];
-                        [empArray addObject:[NSNumber numberWithFloat:tips]];
-                        [empArray addObject:[emp_obj objectForKey:@"hourlyWage"]];
+                        [empArray addObject:@(tips)];
+                        [empArray addObject:emp_obj[@"hourlyWage"]];
                         
                     }
                     [resultArray  setObject:empArray forKey:emp_id];
@@ -426,13 +424,13 @@
             }
             
             NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-            [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+            response[@"action"] = @1;
             if ( !error ) {
-                [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-                [response setObject:resultArray forKey:@"objects"];
+                response[@"responseCode"] = @YES;
+                response[@"objects"] = resultArray;
                 
             } else {
-                [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+                response[@"responseCode"] = @NO;
                 [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
             }
             
@@ -474,59 +472,59 @@
         
         for(PFObject *orditem_obj in objects){
             //get item name
-            item_obj =[orditem_obj objectForKey:@"menuItem"];
+            item_obj = orditem_obj[@"menuItem"];
             item_id = item_obj.objectId;
             NSString *item_name = item_obj[@"name"];
             
             //get category name
-            item_obj =[item_obj objectForKey:@"menuCategory"];
-            item_obj =[category_query getObjectWithId:item_obj.objectId];
+            item_obj = item_obj[@"menuCategory"];
+            item_obj = [category_query getObjectWithId:item_obj.objectId];
             NSString *cat_name =item_obj[@"name"];
             //get menu name
-            item_obj =[item_obj objectForKey:@"menu"];
-            item_obj =[menu_query getObjectWithId:item_obj.objectId];
-            NSString *menu_name =[item_obj objectForKey:@"name"];
+            item_obj = item_obj[@"menu"];
+            item_obj = [menu_query getObjectWithId:item_obj.objectId];
+            NSString *menu_name = item_obj[@"name"];
             
             //Sales
-            item_obj =[orditem_obj objectForKey:@"order"];
-            pay_obj =[item_obj objectForKey:@"payment"];
-            pay_obj =[pay_query getObjectWithId:pay_obj.objectId];
-            float total_sales =[[pay_obj objectForKey:@"total"] floatValue];
+            item_obj = orditem_obj[@"order"];
+            pay_obj = item_obj[@"payment"];
+            pay_obj = [pay_query getObjectWithId:pay_obj.objectId];
+            CGFloat total_sales = [pay_obj[@"total"] floatValue];
             
             //if exist same menu item
-            if([resultArray objectForKey:item_id]){
+            if(resultArray[item_id]){
                 //get that info
-                orderArray = [resultArray objectForKey:item_id];
+                orderArray = resultArray[item_id];
                 
                 //times
-                timesOrdered = [[orderArray objectAtIndex:3] intValue] + 1;
-                [orderArray replaceObjectAtIndex:3 withObject: [NSNumber numberWithInt:timesOrdered]];
+                timesOrdered = [orderArray[3] intValue] + 1;
+                [orderArray replaceObjectAtIndex:3 withObject: @(timesOrdered)];
                 //sales
-                total_sales = total_sales + [[orderArray objectAtIndex:4] floatValue];
-                [orderArray replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:total_sales]];
+                total_sales = total_sales + [orderArray[4] floatValue];
+                [orderArray replaceObjectAtIndex:4 withObject: @(total_sales)];
                 
             }
-            else{
+            else {
                 //if not exist then init
                 orderArray = [[NSMutableArray alloc] init];
                 
                 [orderArray addObject:item_name];
                 [orderArray addObject:menu_name];
                 [orderArray addObject:cat_name];
-                [orderArray addObject:[NSNumber numberWithInt:1]];
-                [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
+                [orderArray addObject:@1];
+                [orderArray addObject:@(total_sales)];
             }
             [resultArray  setObject:orderArray forKey:item_id];
         }
 
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        response[@"action"] = @1;
         if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:resultArray forKey:@"objects"];
+            response[@"responseCode"] = @YES;
+            response[@"objects"] = resultArray;
             
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         
@@ -567,35 +565,35 @@
         
         for(PFObject *orditem_obj in objects){
             //get item name
-            item_obj =[orditem_obj objectForKey:@"menuItem"];
+            item_obj = orditem_obj[@"menuItem"];
             item_id = item_obj.objectId;
             
-            NSString *item_name =[item_obj objectForKey:@"name"];
+            NSString *item_name = item_obj[@"name"];
             
             //get category name
-            item_obj =[item_obj objectForKey:@"menuCategory"];
-            item_obj =[category_query getObjectWithId:item_obj.objectId];
-            NSString *cat_name =[item_obj objectForKey:@"name"];
+            item_obj = item_obj[@"menuCategory"];
+            item_obj = [category_query getObjectWithId:item_obj.objectId];
+            NSString *cat_name = item_obj[@"name"];
             
             //get modifier
             
-            NSArray *modifierArray =[orditem_obj objectForKey:@"menuItemModifiers"];
+            NSArray *modifierArray = orditem_obj[@"menuItemModifiers"];
             for(PFObject *modifier_obj in modifierArray){
-                item_obj =[modifier_query getObjectWithId:modifier_obj.objectId];
-                NSString *modi_name = [item_obj objectForKey:@"name"];
+                item_obj = [modifier_query getObjectWithId:modifier_obj.objectId];
+                NSString *modi_name = item_obj[@"name"];
                 
                 //Sales
-                item_obj =[orditem_obj objectForKey:@"order"];
+                item_obj = orditem_obj[@"order"];
                 
-                pay_obj =[item_obj objectForKey:@"payment"];
-                pay_obj =[pay_query getObjectWithId:pay_obj.objectId];
-                float total_sales =[[pay_obj objectForKey:@"total"] floatValue];
+                pay_obj = item_obj[@"payment"];
+                pay_obj = [pay_query getObjectWithId:pay_obj.objectId];
+                CGFloat total_sales = [pay_obj[@"total"] floatValue];
                 
                 //if not exist then init
                 int times = 1;
-                if([timesArray objectForKey:item_id]){
+                if(timesArray[item_id]){
                     //get that info
-                    times = [[timesArray objectForKey:item_id] intValue]+1;
+                    times = [timesArray[item_id] intValue]+1;
                 }
                 else times=1;
                 
@@ -607,7 +605,7 @@
                 [orderArray addObject:item_name];
                 [orderArray addObject:cat_name];
                 [orderArray addObject:item_id];
-                [orderArray addObject:[NSNumber numberWithFloat:total_sales]];
+                [orderArray addObject:@(total_sales)];
                 
                 NSString *key_str = [NSString stringWithFormat:@"%@_%@", modifier_obj.objectId, item_id];
                 [resultArray  setObject:orderArray forKey:key_str];
@@ -616,14 +614,14 @@
         }
         
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-        [response setObject:[NSNumber numberWithInt:1] forKey:@"action"];
+        response[@"action"] = @1;
         if ( !error ) {
-            [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
-            [response setObject:resultArray forKey:@"objects"];
-            [response setObject:timesArray forKey:@"time_objects"];
+            response[@"responseCode"] = @YES;
+            response[@"objects"] = resultArray;
+            response[@"time_objects"] = timesArray;
             
         } else {
-            [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+            response[@"responseCode"] = @NO;
             [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
         }
         
@@ -640,8 +638,7 @@
     
     NSString *csv_name = @"analytics.csv";
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *curUserEmail = [defaults objectForKey:@"curUserEmail"];
+    NSString *curUserEmail =  [[NSUserDefaults standardUserDefaults] objectForKey:@"curUserEmail"];
 
     //send to current user's email
     if([userEmail isEqualToString:@""]) {
@@ -657,7 +654,7 @@
     
     NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
     //set response action code 9
-    [response setObject:[NSNumber numberWithInt:9] forKey:@"action"];
+    response[@"action"] = @9;
     
     MGMessage *message = [MGMessage messageFrom:@"Entree Manager <manager@entree.org>"
                                              to:userEmail
@@ -665,7 +662,7 @@
                                            body:emailContent];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = [paths objectAtIndex:0];
+    NSString *docDir = paths[0];
     NSString *filename = [docDir stringByAppendingPathComponent:csv_name];
     NSError *error = NULL;
     BOOL written = [emailContent writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:&error];
@@ -683,7 +680,7 @@
     
     [mailgun sendMessage:message success:^(NSString *messageId)
     {
-        [response setObject:[NSNumber numberWithBool:YES] forKey:@"responseCode"];
+        response[@"responseCode"] = @YES;
         
         
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
@@ -692,7 +689,7 @@
         
         NSLog(@"Message %@ sent successfully!", messageId);
     } failure:^(NSError *error) {
-        [response setObject:[NSNumber numberWithBool:NO] forKey:@"responseCode"];
+        response[@"responseCode"] = @NO;
         NSLog(@"Error sending message. The error was: %@", [error userInfo]);
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
             [delegate commsDidAction:response];

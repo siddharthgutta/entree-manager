@@ -26,8 +26,8 @@
     self.splitViewController.maximumPrimaryColumnWidth = self.maximumPrimaryColumnWidth;
     
     // Left menu show for each tab
-    menuItemsArray = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"By Payment Type", @"Modifier Sales", nil];
-    menuSegueIdArray= [[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ByPaymentType", @"ModifierSales", nil];
+    menuItemsArray = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"Modifier Sales", nil];
+    menuSegueIdArray= [[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ModifierSales", nil];
     [self.tableView reloadData];
     
 }

@@ -138,7 +138,7 @@
             [selected_key_array removeObject:key_string];
             [self.selected_items removeObject:item_obj];
         }
-        else{
+        else {
             [selected_key_array addObject:key_string];
             [self.selected_items addObject:item_obj];
         }
@@ -163,25 +163,25 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         
        
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
-            if([[response objectForKey:@"menu_type"] isEqualToString:@"Menu"])
+        if ([response[@"responseCode"] boolValue]) {
+            if([response[@"menu_type"] isEqualToString:@"Menu"])
             {
                 menu_array = [[NSMutableArray alloc] init];
-                menu_array = [response objectForKey:@"objects"];
+                menu_array = response[@"objects"];
                 [_menuView reloadData];
             }
-            else if([[response objectForKey:@"menu_type"] isEqualToString:@"MenuCategory"])
+            else if([response[@"menu_type"] isEqualToString:@"MenuCategory"])
             {
                 category_array = [[NSMutableArray alloc] init];
-                category_array = [response objectForKey:@"objects"];
+                category_array = response[@"objects"];
                 [_categoryView reloadData];
             }
-            else{
+            else {
                 item_array = [[NSMutableArray alloc] init];
-                item_array = [response objectForKey:@"objects"];
+                item_array = response[@"objects"];
                 [_itemView reloadData];
             }
         } else {

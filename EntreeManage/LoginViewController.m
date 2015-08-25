@@ -59,9 +59,9 @@
 
 - (void)commsDidAction:(NSDictionary *)response
 {
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+        if ([response[@"responseCode"] boolValue]) {
             [ProgressHUD dismiss];
             
             UITabBarController    *tab       = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];

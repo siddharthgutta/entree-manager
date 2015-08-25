@@ -77,12 +77,12 @@
     
         PFObject *shift_obj = [resultArray objectAtIndex:i];
         
-        PFObject *emp_obj = [shift_obj objectForKey:@"employee"];
+        PFObject *emp_obj = shift_obj[@"employee"];
         
-        NSString *emp_name = [emp_obj objectForKey:@"name"];
+        NSString *emp_name = emp_obj[@"name"];
         
-        NSDate *startDate = [shift_obj objectForKey:@"startedAt"];
-        NSDate *endDate = [shift_obj objectForKey:@"endedAt"];
+        NSDate *startDate = shift_obj[@"startedAt"];
+        NSDate *endDate = shift_obj[@"endedAt"];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd-MM-yy"];
         
@@ -98,12 +98,12 @@
         NSTimeInterval timeDifference = [endDate timeIntervalSinceDate:startDate];
         
         //Hours worked
-        float hoursDiff =  timeDifference/3600;
+        CGFloat hoursDiff =  timeDifference/3600;
         
         
         //Tips
-        float hourlyWage = [[emp_obj objectForKey:@"hourlyWage"] floatValue];
-        float tips = hourlyWage * hoursDiff;
+        CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
+        CGFloat tips = hourlyWage * hoursDiff;
         
     
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, emp_name, startText, endText, hoursDiff, tips];
@@ -177,17 +177,17 @@
     
     PFObject *shift_obj = [resultArray objectAtIndex:indexPath.row];
     
-    PFObject *emp_obj = [shift_obj objectForKey:@"employee"];
+    PFObject *emp_obj = shift_obj[@"employee"];
     
     
-    NSString *emp_name = [emp_obj objectForKey:@"name"];
+    NSString *emp_name = emp_obj[@"name"];
     
     //employee name
     label = (UILabel*) [cell viewWithTag:6];
     label.text = emp_name;
     
-    NSDate *startDate = [shift_obj objectForKey:@"startedAt"];
-    NSDate *endDate = [shift_obj objectForKey:@"endedAt"];
+    NSDate *startDate = shift_obj[@"startedAt"];
+    NSDate *endDate = shift_obj[@"endedAt"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yy"];
     
@@ -209,15 +209,15 @@
     
     //calculate Time
     NSTimeInterval timeDifference = [endDate timeIntervalSinceDate:startDate];
-    float hoursDiff =  timeDifference/3600;
+    CGFloat hoursDiff =  timeDifference/3600;
     
     //Hours worked
     label = (UILabel*) [cell viewWithTag:4];
     label.text = [NSString stringWithFormat:@"%.03f", hoursDiff];
     
     //Tips
-    float hourlyWage = [[emp_obj objectForKey:@"hourlyWage"] floatValue];
-    float tips = hourlyWage * hoursDiff;
+    CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
+    CGFloat tips = hourlyWage * hoursDiff;
     
     label = (UILabel*) [cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", tips];
@@ -234,9 +234,9 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = [response objectForKey:@"objects"];
+        resultArray = response[@"objects"];
         [_analTableView reloadData];
     }
     else {

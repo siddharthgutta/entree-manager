@@ -9,22 +9,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 #define HUD_STATUS_FONT			[UIFont boldSystemFontOfSize:16]
 #define HUD_STATUS_COLOR		[UIColor blackColor]
 
-#define HUD_SPINNER_COLOR		[UIColor colorWithRed:185.0/255.0 green:220.0/255.0 blue:47.0/255.0 alpha:1.0]
-#define HUD_BACKGROUND_COLOR	[UIColor colorWithWhite:0.0 alpha:0.1]
-#define HUD_WINDOW_COLOR		[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]
+#define HUD_SPINNER_COLOR		[UIColor colorWithWhite:0.422 alpha:1.000]
+#define HUD_BACKGROUND_COLOR	[UIColor colorWithWhite:0 alpha:0.1]
 
-#define HUD_IMAGE_SUCCESS		[UIImage imageNamed:@"ProgressHUD.bundle/progresshud-success.png"]
-#define HUD_IMAGE_ERROR			[UIImage imageNamed:@"ProgressHUD.bundle/progresshud-error.png"]
+#define HUD_IMAGE_SUCCESS		[UIImage imageNamed:@"hud_success"]
+#define HUD_IMAGE_ERROR			[UIImage imageNamed:@"hud_error"]
+#define HUD_IMAGE_RESTRICTED    [UIImage imageNamed:@"hud_restricted"]
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 @interface ProgressHUD : UIView
-//-------------------------------------------------------------------------------------------------------------------------------------------------
 
 + (ProgressHUD *)shared;
 
@@ -42,6 +37,7 @@
 @property (nonatomic, assign) BOOL interaction;
 
 @property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) UIWindow *senderWindow;
 @property (nonatomic, retain) UIView *background;
 @property (nonatomic, retain) UIToolbar *hud;
 @property (nonatomic, retain) UIActivityIndicatorView *spinner;

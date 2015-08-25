@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "FLEXManager.h"
+#import "ProgressHUD.h"
 
 @implementation AppDelegate
 
@@ -16,9 +18,12 @@
     [Parse setApplicationId:ParseSetApplicationID clientKey:ParseClientKey];
     [PFUser enableAutomaticUser];
     
-    [UINavigationBar appearance].translucent = NO;
-    [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:0.121 green:0.406 blue:0.872 alpha:1.000];
+    [UINavigationBar appearance].translucent         = NO;
+    [UINavigationBar appearance].barTintColor        = [UIColor colorWithRed:0.121 green:0.406 blue:0.872 alpha:1.000];
+    [UINavigationBar appearance].tintColor           = [UIColor whiteColor];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
+    
+    [[FLEXManager sharedManager] showExplorer];
     
     return YES;
 }

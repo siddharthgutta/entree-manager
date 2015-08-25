@@ -230,7 +230,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     }
     if(total == 1){
         return NSNotFound;
-    }else{
+    } else {
         CGFloat itemWidth = availableWidth / (total - 1);
         CGFloat x = self.leftPadding + index * itemWidth;
         if(self.showDots){
@@ -249,7 +249,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGFloat percentageOfDataPointToRange =  (normalizedDataPointYValue / range);
     if(range == 0){
         return NSNotFound;
-    }else{
+    } else {
         CGFloat x = self.leftPadding + percentageOfDataPointToRange * availableWidth;
         if(self.showDots){
             availableWidth -= (self.dotRadius * 2) + self.lineWidth;

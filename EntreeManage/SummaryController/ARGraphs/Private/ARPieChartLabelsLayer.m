@@ -69,7 +69,7 @@
     if(_textLayers.count != self.numberOfSlices){
         [_textLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
         _textLayers = [self makeLabels];
-    }else{
+    } else {
         [self updateLabels];
     }
 }

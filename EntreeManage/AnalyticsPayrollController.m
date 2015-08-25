@@ -73,11 +73,11 @@
     
     NSMutableArray *empArray;
     for(NSString *key in keyArray){
-        empArray =[resultArray objectForKey:key];
+        empArray =resultArray[key];
        
         
         //owed $ = hourly wage * hours worked + tips
-        float temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
+        CGFloat temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
         
         content = [NSString stringWithFormat:@"%@ \n %@,%.02f,%.02f,%.02f,%.02f", content, empArray[0], [empArray[1] floatValue], [empArray[2] floatValue], [empArray[3] floatValue], temp ];
         
@@ -151,7 +151,7 @@
     
     NSString *key = [keyArray objectAtIndex:indexPath.row];
     
-    empArray =[resultArray objectForKey:key];
+    empArray =resultArray[key];
     
     UILabel *label;
     label = (UILabel*) [cell viewWithTag:1];
@@ -167,7 +167,7 @@
     label.text = [NSString stringWithFormat:@"%.02f", [empArray[3] floatValue]];
     
     //owed $ = hourly wage * hours worked + tips
-    float temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
+    CGFloat temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
     label = (UILabel*) [cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", temp];
     
@@ -182,9 +182,9 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = [response objectForKey:@"objects"];
+        resultArray = response[@"objects"];
         keyArray = [resultArray allKeys];
         
         [_analTableView reloadData];

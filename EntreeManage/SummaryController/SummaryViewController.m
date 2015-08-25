@@ -7,6 +7,7 @@
 //
 
 #import "SummaryViewController.h"
+#import "PopularItemCell.h"
 #import "global.h"
 
 static NSString * const reuseIdentifier = @"Cell";
@@ -47,7 +48,8 @@ NSString * StringFromSummaryView(SummaryView sv) {
 
 
 #pragma mark - SummaryViewController -
-@interface SummaryViewController () <UICollectionViewDelegateFlowLayout>
+@interface SummaryViewController () <UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate>;
+@property (nonatomic) UITableView *tableView;
 @end
 
 @implementation SummaryViewController
@@ -58,6 +60,7 @@ NSString * StringFromSummaryView(SummaryView sv) {
     
     self.title = @"Summary";
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.scrollEnabled   = NO;
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     flowLayout.sectionInset       = UIEdgeInsetsMake(kSectionInset, kSectionInset, kSectionInset, kSectionInset);
@@ -81,7 +84,20 @@ NSString * StringFromSummaryView(SummaryView sv) {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:StringFromSummaryView(indexPath.row) forIndexPath:indexPath];
-//    cell.backgroundColor = [UIColor blueColor];
+    
+    // Only needs to run once
+    if (indexPath.row == SummaryViewMostPopular) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            self.tableView = [(id)cell tableView];
+            self.tableView.delegate      = self;
+            self.tableView.dataSource    = self;
+            self.tableView.rowHeight     = 40.5;
+            self.tableView.scrollEnabled = NO;
+            [self.tableView registerNib:[UINib nibWithNibName:krSummaryPopularItemCell bundle:nil] forCellReuseIdentifier:krSummaryPopularItemCell];
+        });
+    }
+    
     return cell;
 }
 
@@ -108,6 +124,21 @@ NSString * StringFromSummaryView(SummaryView sv) {
         default:
             return CGSizeMake([UIScreen mainScreen].bounds.size.width - 2*kSectionInset, 0);
     }
+}
+
+#pragma mark UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PopularItemCell *cell = (id)[self.tableView dequeueReusableCellWithIdentifier:krSummaryPopularItemCell];
+    cell.titleLabel.text = @"Fooo";
+    cell.index = indexPath.row;
+    cell.saleCount = arc4random_uniform(100);
+    cell.saleRevenue = (CGFloat)arc4random_uniform(100);
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
 }
 
 @end

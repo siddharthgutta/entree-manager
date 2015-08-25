@@ -118,7 +118,7 @@
         if(_totalNumberOfLabels != canFit){
             _totalNumberOfLabels = MIN(canFit, _numberOfDataPoints);
             [self createMissingLabelsOrDeleteExtras];
-        }else{
+        } else {
             [self updateAllLabelValues];
         }
     }else {

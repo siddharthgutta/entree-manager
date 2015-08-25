@@ -200,7 +200,7 @@
     CGFloat inversePercentage = 1.0 - percentageOfDataPointToRange; // Must invert because the greater the value the higher we want it on the chart which is a smaller y value on a iOS coordinate system
     if(range.length == 0){
         return NSNotFound;
-    }else{
+    } else {
         return inversePercentage * availableHeight;
     }
 }
@@ -211,7 +211,7 @@
     CGFloat percentageOfDataPointToRange =  (normalizedDataPointYValue / range.length);
     if(range.length == 0){
         return NSNotFound;
-    }else{
+    } else {
         return percentageOfDataPointToRange * availableWidth;
     }
 }
@@ -223,7 +223,7 @@
 
     if(range.length == 0){
         return NSNotFound;
-    }else{
+    } else {
         return range.location + normalizedDataPointXValue;
     }
 }

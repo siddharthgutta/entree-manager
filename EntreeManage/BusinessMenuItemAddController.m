@@ -75,7 +75,7 @@
     
     NSNumber *price = [NSNumber numberWithFloat:[_txtPrice.text floatValue]];
     
-    [_menuObj setObject:price forKey:@"price"];
+    _menuObj[@"price"] = price;
     
     //Get Color Picker Value
     NSInteger color_index = [_pickerColor selectedRowInComponent:0];
@@ -89,8 +89,8 @@
 {
     [ProgressHUD dismiss];
     
-    if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
             //Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];

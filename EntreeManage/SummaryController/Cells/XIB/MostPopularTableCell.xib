@@ -14,7 +14,7 @@
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="z49-la-vhk">
                         <rect key="frame" x="0.0" y="0.0" width="315" height="251"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                     </tableView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -29,7 +29,7 @@
             <connections>
                 <outlet property="tableView" destination="z49-la-vhk" id="YwG-p5-crd"/>
             </connections>
-            <point key="canvasLocation" x="425.5" y="444.5"/>
+            <point key="canvasLocation" x="190.5" y="474.5"/>
         </collectionViewCell>
     </objects>
 </document>

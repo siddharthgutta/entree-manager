@@ -82,8 +82,8 @@
 {
     [ProgressHUD dismiss];
     
-    if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
             //Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];

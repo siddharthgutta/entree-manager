@@ -61,17 +61,15 @@
     [CommParse getAnalyticsOrderReport:self StartDate:start_date EndDate:NSDate.date];
 }
 // On Export
--(void)exportItemClicked{
+- (void)exportItemClicked {
     
-    NSString *title;
-    title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Orders Overview", _startDateText.text, _endDateText.text];
+    NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Orders Overview", _startDateText.text, _endDateText.text];
     
-    NSString *content;;
-    content = @"Item,Menu,Category,Times Ordered,Sales";
+    NSString *content = @"Item,Menu,Category,Times Ordered,Sales";
     
     NSMutableArray *itemArray;
     for(NSString *key in keyArray){
-        itemArray =[resultArray objectForKey:key];
+        itemArray =resultArray[key];
         
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, itemArray[0], itemArray[1], itemArray[2], [itemArray[3] floatValue], [itemArray[4] floatValue] ];
         
@@ -79,8 +77,6 @@
     
     //export with csv format
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +85,7 @@
 }
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     static NSString * CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -145,7 +141,7 @@
     
     NSString *key = [keyArray objectAtIndex:indexPath.row];
     
-    itemArray =[resultArray objectForKey:key];
+    itemArray =resultArray[key];
     
     UILabel *label;
     label = (UILabel*) [cell viewWithTag:1];
@@ -177,9 +173,9 @@
 - (void)commsDidAction:(NSDictionary *)response
 {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = [response objectForKey:@"objects"];
+        resultArray = response[@"objects"];
         keyArray = [resultArray allKeys];
         
         [_analTableView reloadData];

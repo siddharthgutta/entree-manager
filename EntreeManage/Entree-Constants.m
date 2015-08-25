@@ -15,6 +15,7 @@ NSString * const krSummaryNetSalesMeanPaymentCell    = @"NetSalesMeanPaymentCell
 NSString * const krSummaryMostPopularPieChartCell    = @"MostPopularPieChartCell";
 NSString * const krSummaryMostPopularTableCell       = @"MostPopularTableCell";
 NSString * const krSummaryGuestsTransactionLaborCell = @"GuestsTransactionLaborCell";
+NSString * const krSummaryPopularItemCell            = @"PopularItemCell";
 
 #pragma mark - Parse -
 NSString * const kParseSetApplicationID = @"siTMH1dC5Qk84JvfZ3U5xfRfKwqb5jQv4CnCQGZn";

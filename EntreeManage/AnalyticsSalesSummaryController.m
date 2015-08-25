@@ -147,49 +147,49 @@
     
     sumVal = [[NSMutableArray alloc]init];
     for(int i = 0;i <16;i++){
-        [sumVal addObject:[NSNumber numberWithFloat:0]];
+        [sumVal addObject:@0];
     }
 
-    if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"responseCode"] boolValue]) {
         
         //export csv and send email
-        if ([[response objectForKey:@"action"] intValue] == 9) {
+        if ([response[@"action"] intValue] == 9) {
             
         }
         else {
             NSMutableArray *quotes =  [[NSMutableArray alloc] init];
-            quotes = [response objectForKey:@"objects"];
+            quotes = response[@"objects"];
             
             //calculate sums
             for(int i = 0;i < [quotes count];i++){ //PFObject *item_obj in quotes
                 PFObject *item_obj = [quotes objectAtIndex:i];
                 //Gross Sales
-                [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"subtotal"] floatValue] + [[sumVal objectAtIndex:0] floatValue]]];
+                [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[0] floatValue]]];
                 //Tax
-                [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"tax"] floatValue] + [[sumVal objectAtIndex:3] floatValue]]];
+                [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[item_obj[@"tax"] floatValue] + [sumVal[3] floatValue]]];
                 //Tips
-                [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"tip"] floatValue] + [[sumVal objectAtIndex:4] floatValue]]];
+                [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[item_obj[@"tip"] floatValue] + [sumVal[4] floatValue]]];
                 
                 //Cash
-                if([[item_obj objectForKey:@"type"] isEqualToString:@"Cash"]) {
-                    [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"subtotal"] floatValue] + [[sumVal objectAtIndex:9] floatValue]]];
+                if([item_obj[@"type"] isEqualToString:@"Cash"]) {
+                    [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[9] floatValue]]];
                 }
                 //Card
                 else {
-                    [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[[item_obj objectForKey:@"subtotal"] floatValue] + [[sumVal objectAtIndex:10] floatValue]]];
+                    [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[10] floatValue]]];
                 }
             }
             //Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
-            float temp = [[response objectForKey:@"discount"] floatValue];
-            [sumVal replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:temp]];
-            temp = [[sumVal objectAtIndex:0] floatValue]-temp;
-            [sumVal replaceObjectAtIndex:2 withObject:[NSNumber numberWithFloat:temp]];
+            CGFloat temp = [response[@"discount"] floatValue];
+            [sumVal replaceObjectAtIndex:1 withObject:@(temp)];
+            temp = [sumVal[0] floatValue]-temp;
+            [sumVal replaceObjectAtIndex:2 withObject:@(temp)];
             
             //Total collected (Net sales + Tax + Tips)
-            temp = [[sumVal objectAtIndex:2] floatValue]+[[sumVal objectAtIndex:3] floatValue]+[[sumVal objectAtIndex:4] floatValue];
-            [sumVal replaceObjectAtIndex:6 withObject:[NSNumber numberWithFloat:temp]];
+            temp = [sumVal[2] floatValue]+[sumVal[3] floatValue]+[sumVal[4] floatValue];
+            [sumVal replaceObjectAtIndex:6 withObject:@(temp)];
             
-            [sumVal replaceObjectAtIndex:8 withObject:[sumVal objectAtIndex:0]];
+            [sumVal replaceObjectAtIndex:8 withObject:sumVal[0]];
             
             [_analTableView reloadData];
         }
