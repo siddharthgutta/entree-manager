@@ -10,8 +10,7 @@
 
 @implementation PFObject (copyShallow)
 
-- (PFObject *)copyShallow
-{
+- (PFObject *)copyShallow {
     PFObject *clone = [PFObject objectWithoutDataWithClassName:self.parseClassName objectId:self.objectId];
     NSArray *keys = [self allKeys];
     for (NSString *key in keys) {

@@ -16,12 +16,11 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 @interface ARLineGraphPointsLayer ()
 
 @end
-@implementation ARLineGraphPointsLayer{
+@implementation ARLineGraphPointsLayer {
     NSInteger _dataCount;
     CAShapeLayer *_maskLayer;
 }
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     self.dotRadius = 2.0;
     self.lineWidth = 2.0;
@@ -44,13 +43,11 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     return self;
 }
 
-- (void)setLineColor:(CGColorRef)lineColor
-{
+- (void)setLineColor:(CGColorRef)lineColor {
     _lineColor = CGColorCreateCopy(lineColor);
 }
 
-- (void)animate
-{
+- (void)animate {
     _maskLayer = [self maskLayer];
     self.mask = _maskLayer;
     
@@ -65,8 +62,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
 }
 
-- (CAShapeLayer*)maskLayer
-{
+- (CAShapeLayer*)maskLayer {
     CAShapeLayer *mask = [CAShapeLayer layer];
     
     CGFloat fillColors [] = {
@@ -91,8 +87,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     return mask;
 }
 
-- (void)layoutSublayers
-{
+- (void)layoutSublayers {
     [super layoutSublayers];
     _maskLayer.path = [self pathForMask];
     _maskLayer.frame = self.bounds;
@@ -100,8 +95,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 
 }
 
-- (CGMutablePathRef)pathForMask
-{
+- (CGMutablePathRef)pathForMask {
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, 0, self.bounds.size.height/2);
     CGPathAddLineToPoint(path, NULL, self.bounds.size.width, self.bounds.size.height/2);
@@ -112,8 +106,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 #pragma mark - Path Methods
 
 // Generates a mutble path for the area under our data point line
-- (CGMutablePathRef)fillPath
-{
+- (CGMutablePathRef)fillPath {
     CGMutablePathRef fillPath = CGPathCreateMutable();
     
     for(int x = 0; x < _dataCount; x++){
@@ -128,64 +121,59 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         if(x == _dataCount - 1){//last
             CGPathAddLineToPoint(fillPath, NULL, relativePoint.x, self.bounds.size.height);
             CGPathCloseSubpath(fillPath);
-            
         }
     }
     return fillPath;
 }
 // generates a mutable path for a smooth line that connects the datapoints
-- (CGMutablePathRef)smoothLinePath
-{
-    CGMutablePathRef path = CGPathCreateMutable();
-    NSInteger ctr = 0;
-    CGPoint *ptsArray = [self convertDataPointsToPointsInView];  //NEED TO RELEASE
-    CGPoint *ptsSmoothingArray = (CGPoint *)malloc(sizeof(CGPoint) * 5);  //NEED TO RELEASE
+- (CGMutablePathRef)smoothLinePath {
+    CGMutablePathRef path      = CGPathCreateMutable();
+    NSInteger ctr              = 0;
+    CGPoint *ptss          = [self convertDataPointsToPointsInView];//NEED TO RELEASE
+    CGPoint *ptsSmoothings = (CGPoint *)malloc(sizeof(CGPoint) * 5);//NEED TO RELEASE
     
     
-    CGPathMoveToPoint(path, NULL, ptsArray[0].x, ptsArray[0].y);
+    CGPathMoveToPoint(path, NULL, ptss[0].x, ptss[0].y);
     
     for(int x = 0; x < _dataCount; x++){
         
-        ptsSmoothingArray[ctr] = ptsArray[x];
+        ptsSmoothings[ctr] = ptss[x];
         
-        if (ctr == 4)
-        {
-            ptsSmoothingArray[3] = CGPointMake((ptsSmoothingArray[2].x + ptsSmoothingArray[4].x)/2.0, (ptsSmoothingArray[2].y + ptsSmoothingArray[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
-            CGPathAddCurveToPoint(path, NULL, ptsSmoothingArray[1].x, ptsSmoothingArray[1].y, ptsSmoothingArray[2].x, ptsSmoothingArray[2].y, ptsSmoothingArray[3].x, ptsSmoothingArray[3].y);
+        if (ctr == 4) {
+            ptsSmoothings[3] = CGPointMake((ptsSmoothings[2].x + ptsSmoothings[4].x)/2.0, (ptsSmoothings[2].y + ptsSmoothings[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
+            CGPathAddCurveToPoint(path, NULL, ptsSmoothings[1].x, ptsSmoothings[1].y, ptsSmoothings[2].x, ptsSmoothings[2].y, ptsSmoothings[3].x, ptsSmoothings[3].y);
             
             
             // replace points and get ready to handle the next segment
-            ptsSmoothingArray[0] = ptsSmoothingArray[3];
-            ptsSmoothingArray[1] = ptsSmoothingArray[4];
+            ptsSmoothings[0] = ptsSmoothings[3];
+            ptsSmoothings[1] = ptsSmoothings[4];
             ctr = 0;
         }
         ctr++;
         
-        
     }
-    free(ptsArray); // RELEASED
-    free(ptsSmoothingArray); // RELEASED
+    free(ptss); // RELEASED
+    free(ptsSmoothings); // RELEASED
     
     return path;
 }
 
 // Creates a mutable path of the area under a smooth line that connects the datapoints
-- (CGMutablePathRef)smoothFillPath
-{
+- (CGMutablePathRef)smoothFillPath {
     CGMutablePathRef path = CGPathCreateMutable();
     CGMutablePathRef line = [self smoothLinePath];  //NEED TO RELEASE
     
-    CGPoint *ptsArray = [self convertDataPointsToPointsInView];  //NEED TO RELEASE
-    CGPathMoveToPoint(path, NULL,  ptsArray[0].x, self.bounds.size.height);
-    CGPathAddLineToPoint(path, NULL, ptsArray[0].x, ptsArray[0].y);
+    CGPoint *ptss = [self convertDataPointsToPointsInView];  //NEED TO RELEASE
+    CGPathMoveToPoint(path, NULL,  ptss[0].x, self.bounds.size.height);
+    CGPathAddLineToPoint(path, NULL, ptss[0].x, ptss[0].y);
     CGPathAddPath(path, NULL, line);
     
-    CGPathAddLineToPoint(path, NULL, ptsArray[_dataCount-5].x, self.bounds.size.height);
-    CGPathAddLineToPoint(path, NULL,  ptsArray[0].x, self.bounds.size.height);
+    CGPathAddLineToPoint(path, NULL, ptss[_dataCount-5].x, self.bounds.size.height);
+    CGPathAddLineToPoint(path, NULL,  ptss[0].x, self.bounds.size.height);
     
     CGPathCloseSubpath(path);
     
-    free(ptsArray); // RELEASED
+    free(ptss); // RELEASED
     CGPathRelease(line); // RELEASED
     return path;
 }
@@ -194,19 +182,17 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 #pragma mark - Helpers
 
 // In order to graph our data we need to convert it into point relative to our chart bounds
-- (CGPoint*)convertDataPointsToPointsInView
-{
-    CGPoint *ptsArray = (CGPoint *)malloc(sizeof(CGPoint) * _dataCount);
+- (CGPoint*)convertDataPointsToPointsInView {
+    CGPoint *ptss = (CGPoint *)malloc(sizeof(CGPoint) * _dataCount);
     
     for(NSInteger x = 0; x < _dataCount; x++){
         ARGraphDataPoint *dp = [self.dataPoints objectAtIndex:x];
-        ptsArray[x] = [self pointForDataPoint:dp index:x total:_dataCount];
+        ptss[x] = [self pointForDataPoint:dp index:x total:_dataCount];
     }
-    return ptsArray;
+    return ptss;
 }
 
-- (CGPoint)pointForDataPoint:(ARGraphDataPoint*)dataPoint index:(NSInteger)index total:(NSInteger)total
-{
+- (CGPoint)pointForDataPoint:(ARGraphDataPoint*)dataPoint index:(NSInteger)index total:(NSInteger)total {
     ARGraphDataPoint *dp = [self.dataPoints objectAtIndex:index];
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
     
@@ -222,8 +208,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     return CGPointMake(xVal, yVal);
 }
 
-- (CGFloat)xPositionEquallySpacedForDataPointIndex:(NSInteger)index totalPoints:(NSInteger)total inWidth:(CGFloat)width
-{
+- (CGFloat)xPositionEquallySpacedForDataPointIndex:(NSInteger)index totalPoints:(NSInteger)total inWidth:(CGFloat)width {
     CGFloat availableWidth = width - self.leftPadding - self.rightPadding;
     if (self.showDots) {
         availableWidth -= (self.dotRadius + self.lineWidth)*2;
@@ -232,7 +217,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         return NSNotFound;
     } else {
         CGFloat itemWidth = availableWidth / (total - 1);
-        CGFloat x = self.leftPadding + index * itemWidth;
+        CGFloat x = self.leftPadding + index *itemWidth;
         if(self.showDots){
             x += self.dotRadius + self.lineWidth;
         }
@@ -240,33 +225,30 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     }
 }
 
-- (CGFloat)xPositionForXDataPoint:(NSInteger)dataPoint inWidth:(CGFloat)width
-{
+- (CGFloat)xPositionForXDataPoint:(NSInteger)dataPoint inWidth:(CGFloat)width {
     CGFloat range = self.xMax - self.xMin;
     CGFloat availableWidth = width;
     CGFloat normalizedDataPointYValue = dataPoint - self.xMin;
     
-    CGFloat percentageOfDataPointToRange =  (normalizedDataPointYValue / range);
+    CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range);
     if(range == 0){
         return NSNotFound;
     } else {
-        CGFloat x = self.leftPadding + percentageOfDataPointToRange * availableWidth;
+        CGFloat x = self.leftPadding + percentageOfDataPointToRange *availableWidth;
         if(self.showDots){
-            availableWidth -= (self.dotRadius * 2) + self.lineWidth;
+            availableWidth -= (self.dotRadius *2) + self.lineWidth;
             x += self.dotRadius + self.lineWidth;
         }
         return x;
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     CGColorRelease(self.lineColor);
 }
 #pragma mark - Drawing methods
 
-- (void)drawInContext:(CGContextRef)ctx
-{
+- (void)drawInContext:(CGContextRef)ctx {
     if(self.dataPoints.count < 1){
         return;
     }
@@ -285,22 +267,18 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
     if(self.shouldSmooth && _dataCount > kSMOOTHING_MINIMUM){
         [self drawSmoothLineInContext:ctx];
-        
     }else {
         [self drawGraphLinesInContext:ctx];
-        
     }
     CGContextStrokePath(ctx);
     
     if(self.shouldFill){
         [self fillGraphInContext:ctx];
-        
     }
     
 }
 
-- (void)fillGraphInContext:(CGContextRef)ctx
-{
+- (void)fillGraphInContext:(CGContextRef)ctx {
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.6,
         1.0, 1.0, 1.0, 0.0
@@ -314,7 +292,6 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
     if(self.shouldSmooth && self.dataPoints.count > kSMOOTHING_MINIMUM){
         fillPath = [self smoothFillPath];
-        
     }else {
         fillPath = [self fillPath];
     }
@@ -336,8 +313,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGPathRelease(fillPath); //RELEASED
 }
 
-- (void)drawSmoothLineInContext:(CGContextRef)ctx
-{
+- (void)drawSmoothLineInContext:(CGContextRef)ctx {
     CGMutablePathRef path = [self smoothLinePath]; //NEED TO RELEASE
     
     CGContextAddPath(ctx, path);
@@ -346,18 +322,16 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGPathRelease(path); //RELEASE
 }
 
-- (BOOL)drawDataPointDot:(ARGraphDataPoint*)dataPoint index:(NSInteger)index inContext:(CGContextRef)context inRect:(CGRect)rect
-{
+- (BOOL)drawDataPointDot:(ARGraphDataPoint*)dataPoint index:(NSInteger)index inContext:(CGContextRef)context inRect:(CGRect)rect {
     CGPoint relativePoint = [self pointForDataPoint:dataPoint index:index total:_dataCount];
     BOOL canDrawPoint = (relativePoint.x != NSNotFound && relativePoint.y != NSNotFound);
     if(canDrawPoint){
-        CGContextAddArc(context, relativePoint.x, relativePoint.y, self.dotRadius, 0.0, M_PI * 2.0, NO);
+        CGContextAddArc(context, relativePoint.x, relativePoint.y, self.dotRadius, 0.0, M_PI *2.0, NO);
     }
     return canDrawPoint;
 }
 
-- (void)drawConnectingLineFromPT1:(CGPoint)PT1 toPT2:(CGPoint)PT2 inContext:(CGContextRef)context
-{
+- (void)drawConnectingLineFromPT1:(CGPoint)PT1 toPT2:(CGPoint)PT2 inContext:(CGContextRef)context {
     CGFloat opposite = 0;
     CGFloat adjacent = 0;
     // We dont want the line to go through our dot but to stop at the dots radius so we need to offset our start and end points. We need to know where on the dot to move to so we need angle.
@@ -373,8 +347,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGContextAddLineToPoint(context, PT2.x + adjacent, PT2.y + opposite);
 }
 
-- (void)drawGraphLinesInContext:(CGContextRef)ctx
-{
+- (void)drawGraphLinesInContext:(CGContextRef)ctx {
     for(int x = 0; x < _dataCount; x++){
         ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
         CGPoint relativePoint = [self pointForDataPoint:currentDataPoint index:x total:_dataCount];

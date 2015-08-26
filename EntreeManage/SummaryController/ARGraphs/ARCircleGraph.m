@@ -19,8 +19,7 @@
 
 @implementation ARCircleGraph
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self){
         [self initialSetup];
@@ -28,8 +27,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self initialSetup];
@@ -37,8 +35,7 @@
     return self;
 }
 
-- (void)initialSetup
-{
+- (void)initialSetup {
     _ring = [[ARCircleRingLayer alloc] init];
     _ring.lineCap = kCALineCapRound;
     _ring.fillColor = [UIColor clearColor].CGColor;
@@ -52,8 +49,7 @@
     [self applyDefaults];
 }
 
-- (void)applyDefaults
-{
+- (void)applyDefaults {
     self.lineWidth = 8.0;
     self.valueFormat = @"%.0f";
     self.animationDuration = 1.0;
@@ -64,79 +60,67 @@
 
 }
 
-- (void)beginAnimationIn
-{
+- (void)beginAnimationIn {
     [_valueLabel countFromZeroTo:self.value];
     [self.ring animateToPercent:self.percent];
 }
 
 #pragma mark - Setters
 
-- (void)setPercent:(CGFloat)percent
-{
+- (void)setPercent:(CGFloat)percent {
     _percent = percent;
     self.ring.percent = percent;
 }
 
-- (void)setLineWidth:(CGFloat)lineWidth
-{
+- (void)setLineWidth:(CGFloat)lineWidth {
     _lineWidth = lineWidth;
     self.ring.lineWidth = lineWidth;
     self.valueLabel.lineWidth = lineWidth;
 }
-- (void)setValue:(CGFloat)value
-{
+- (void)setValue:(CGFloat)value {
     _value = value;
     _valueLabel.currentValue = value;
 }
 
-- (void)setValueFormat:(NSString *)valueFormat
-{
+- (void)setValueFormat:(NSString *)valueFormat {
     _valueFormat = valueFormat;
     _valueLabel.format = valueFormat;
 }
 
-- (void)setAnimationDuration:(CGFloat)animationDuration
-{
+- (void)setAnimationDuration:(CGFloat)animationDuration {
     _animationDuration = animationDuration;
     _ring.animationDuration = animationDuration;
     _valueLabel.animationDuration = animationDuration;
 }
 
-- (void)setMinColor:(UIColor *)minColor
-{
+- (void)setMinColor:(UIColor *)minColor {
     _minColor = minColor;
     _ring.minColor = minColor.CGColor;
 
 }
 
-- (void)setMaxColor:(UIColor *)maxColor
-{
+- (void)setMaxColor:(UIColor *)maxColor {
     _maxColor = maxColor;
     _ring.maxColor = maxColor.CGColor;
 }
 
-- (void)setRingColor:(UIColor *)ringColor
-{
+- (void)setRingColor:(UIColor *)ringColor {
     _ringColor = ringColor;
     _ring.lineColor = ringColor.CGColor;
 }
 
-- (void)setLabelColor:(UIColor *)labelColor
-{
+- (void)setLabelColor:(UIColor *)labelColor {
     _labelColor = labelColor;
     _titleLabel.textColor = labelColor;
 }
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     _title = title;
     _titleLabel.text = title;
     [self setNeedsDisplay];
 }
 
-- (void)setTitlePosition:(ARCircleGraphTitlePosition)titlePosition
-{
+- (void)setTitlePosition:(ARCircleGraphTitlePosition)titlePosition {
     _titlePosition = titlePosition;
     switch (titlePosition) {
         case ARCircleGraphTitlePositionBottom:
@@ -153,8 +137,7 @@
 }
 
 #pragma mark - Layout
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     if(_title == nil || _title.length == 0){
         _ring.frame = self.bounds;

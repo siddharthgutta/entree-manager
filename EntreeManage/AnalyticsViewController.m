@@ -30,7 +30,7 @@
 
 
 // show Pages func when onclick Left Menu
--(void)showAnalyticsPage:(NSString*)segueId{
+- (void)showAnalyticsPage:(NSString*)segueId {
     [self performSegueWithIdentifier:segueId sender:self];
 }
 

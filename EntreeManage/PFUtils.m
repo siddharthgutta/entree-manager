@@ -10,14 +10,12 @@
 
 @implementation PFUtils
 
-+ (BOOL)exists:(NSString *)key InObject:(PFObject *)object
-{
++ (BOOL)exists:(NSString *)key InObject:(PFObject *)object {
     return [[object allKeys] containsObject:key];
     
 }
 
-+ (id)getProperty:(NSString *)propertyName InObject:(PFObject *)object
-{
++ (id)getProperty:(NSString *)propertyName InObject:(PFObject *)object {
     id value = nil;
     if ([PFUtils exists:propertyName InObject:object]) {
         value = object[propertyName];
@@ -26,8 +24,7 @@
     return value;
 }
 
-+ (id)getData:(NSString *)colName WithKey:(NSString *)key InObject:(PFObject *)object
-{
++ (id)getData:(NSString *)colName WithKey:(NSString *)key InObject:(PFObject *)object {
     id data = nil;
     NSArray *array = [PFUtils getProperty:colName InObject:object];
     for (NSDictionary *elementDict in array) {

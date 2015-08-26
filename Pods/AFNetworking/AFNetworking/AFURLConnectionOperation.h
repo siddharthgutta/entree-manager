@@ -290,14 +290,14 @@ NSCoding, NSCopying>
 
  @param block A block object to be executed when the request URL was changed. The block returns an `NSURLRequest` object, the URL request to redirect, and takes three arguments: the URL connection object, the the proposed redirected request, and the URL response that caused the redirect.
  */
-- (void)setRedirectResponseBlock:(NSURLRequest * (^)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse))block;
+- (void)setRedirectResponseBlock:(NSURLRequest *(^)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse))block;
 
 /**
  Sets a block to be executed to modify the response a connection will cache, if any, as handled by the `NSURLConnectionDelegate` method `connection:willCacheResponse:`.
 
  @param block A block object to be executed to determine what response a connection will cache, if any. The block returns an `NSCachedURLResponse` object, the cached response to store in memory or `nil` to prevent the response from being cached, and takes two arguments: the URL connection object, and the cached response provided for the request.
  */
-- (void)setCacheResponseBlock:(NSCachedURLResponse * (^)(NSURLConnection *connection, NSCachedURLResponse *cachedResponse))block;
+- (void)setCacheResponseBlock:(NSCachedURLResponse *(^)(NSURLConnection *connection, NSCachedURLResponse *cachedResponse))block;
 
 @end
 
@@ -329,8 +329,8 @@ NSCoding, NSCopying>
 
  These keys may exist in the user info dictionary, in addition to those defined for NSError.
 
- - `NSString * const AFNetworkingOperationFailingURLRequestErrorKey`
- - `NSString * const AFNetworkingOperationFailingURLResponseErrorKey`
+ - `NSString *const AFNetworkingOperationFailingURLRequestErrorKey`
+ - `NSString *const AFNetworkingOperationFailingURLResponseErrorKey`
 
  ### Constants
 
@@ -344,16 +344,16 @@ NSCoding, NSCopying>
 
  The following error domain is predefined.
 
- - `NSString * const AFNetworkingErrorDomain`
+ - `NSString *const AFNetworkingErrorDomain`
 
  ### Constants
 
  `AFNetworkingErrorDomain`
  AFNetworking errors. Error codes for `AFNetworkingErrorDomain` correspond to codes in `NSURLErrorDomain`.
  */
-extern NSString * const AFNetworkingErrorDomain;
-extern NSString * const AFNetworkingOperationFailingURLRequestErrorKey;
-extern NSString * const AFNetworkingOperationFailingURLResponseErrorKey;
+extern NSString *const AFNetworkingErrorDomain;
+extern NSString *const AFNetworkingOperationFailingURLRequestErrorKey;
+extern NSString *const AFNetworkingOperationFailingURLResponseErrorKey;
 
 ///--------------------
 /// @name Notifications
@@ -362,9 +362,9 @@ extern NSString * const AFNetworkingOperationFailingURLResponseErrorKey;
 /**
  Posted when an operation begins executing.
  */
-extern NSString * const AFNetworkingOperationDidStartNotification;
+extern NSString *const AFNetworkingOperationDidStartNotification;
 
 /**
  Posted when an operation finishes.
  */
-extern NSString * const AFNetworkingOperationDidFinishNotification;
+extern NSString *const AFNetworkingOperationDidFinishNotification;

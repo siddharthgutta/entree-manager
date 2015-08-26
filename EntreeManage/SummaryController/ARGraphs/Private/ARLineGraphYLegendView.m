@@ -18,11 +18,10 @@
 
 static CGFloat kPaddingBetweenLabels = 2.0;
 
-@implementation ARLineGraphYLegendView{
+@implementation ARLineGraphYLegendView {
     NSArray *_labels;
 }
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self addSubview:self.titleLabel];
@@ -33,8 +32,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }
     return self;
 }
-- (void)didMoveToSuperview
-{
+- (void)didMoveToSuperview {
     [super didMoveToSuperview];
     if(self.superview){
         self.leftConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
@@ -45,8 +43,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 }
 #pragma mark - Setters
 
-- (void)setYMax:(NSInteger)yMax
-{
+- (void)setYMax:(NSInteger)yMax {
     _yMax = yMax;
     self.range = NSMakeRange(_yMin, _yMax - _yMin);
 
@@ -57,14 +54,12 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 
 }
 
-- (void)setYMin:(NSInteger)yMin
-{
+- (void)setYMin:(NSInteger)yMin {
     _yMin = yMin;
     self.range = NSMakeRange(_yMin, _yMax - _yMin);
 }
 
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     _title = title;
     self.titleLabel.text = title;
     if(self.widthConstraint.constant > 0){
@@ -73,8 +68,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }
 }
 
-- (void)setLabelColor:(UIColor *)labelColor
-{
+- (void)setLabelColor:(UIColor *)labelColor {
     _labelColor = labelColor;
     self.titleLabel.textColor = labelColor;
     [_labels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger index, BOOL *stop) {
@@ -83,14 +77,12 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 }
  
 #pragma mark - Getters
-- (void)reloadData
-{
+- (void)reloadData {
     if(_range.length > 0){
         [self createOrUpdateLabels];
     }
 }
-- (CGSize)contentSize
-{
+- (CGSize)contentSize {
     CGFloat width = 0;
     CGFloat widthOfTestString = [ARHelpers widthOfCaptionText:[NSString stringWithFormat:@"%li", (long)_yMax] inHeight:self.bounds.size.height];
 
@@ -101,8 +93,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }
     return CGSizeMake(width, self.bounds.size.height);
 }
-- (UILabel*)titleLabel
-{
+- (UILabel*)titleLabel {
     if(_titleLabel == nil){
         UILabel *label = [[UILabel alloc] init];
         label.translatesAutoresizingMaskIntoConstraints = NO;
@@ -119,8 +110,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 
 #pragma mark - Helpers
 
-- (void)createOrUpdateLabels
-{
+- (void)createOrUpdateLabels {
     if(self.showYValues){
         NSInteger canFit = [self numberOfLabelsForHeight:self.bounds.size.height];
         if(_totalNumberOfLabels != canFit){
@@ -135,12 +125,11 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }
 }
 
-- (void)createMissingLabelsOrDeleteExtras
-{
+- (void)createMissingLabelsOrDeleteExtras {
     NSMutableArray *copiedLabels = [NSMutableArray arrayWithArray:_labels];
-    NSArray *increments = [ARHelpers incrementArrayForNumberOfItems:_totalNumberOfLabels range:_range];
+    NSArray *increments = [ARHelpers incrementsForNumberOfItems:_totalNumberOfLabels range:_range];
     CGFloat stringHeight = [ARHelpers heightOfCaptionText:@"foo" inWidth:self.bounds.size.width];
-    NSArray *yPositionIncrements = [ARHelpers incrementArrayForNumberOfItems:_totalNumberOfLabels range:NSMakeRange(0, self.bounds.size.height - stringHeight)];
+    NSArray *yPositionIncrements = [ARHelpers incrementsForNumberOfItems:_totalNumberOfLabels range:NSMakeRange(0, self.bounds.size.height - stringHeight)];
     [ARHelpers CRUDObjectsWithExisting:_labels totalNeeded:_totalNumberOfLabels create:^(NSInteger index) {
         NSInteger inverseYPosition = yPositionIncrements.count - index - 1;
         UILabel *label = [self makeLabel];
@@ -158,12 +147,11 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     _labels = copiedLabels;
 }
 
-- (void)updateAllLabelValues
-{
+- (void)updateAllLabelValues {
     NSArray *copiedLabels = [_labels copy];
-    NSArray *increments = [ARHelpers incrementArrayForNumberOfItems:copiedLabels.count range:_range];
+    NSArray *increments = [ARHelpers incrementsForNumberOfItems:copiedLabels.count range:_range];
     CGFloat stringHeight = [ARHelpers heightOfCaptionText:@"foo" inWidth:self.bounds.size.width];
-    NSArray *yPositionIncrements = [ARHelpers incrementArrayForNumberOfItems:_totalNumberOfLabels range:NSMakeRange(0, self.bounds.size.height - stringHeight)];
+    NSArray *yPositionIncrements = [ARHelpers incrementsForNumberOfItems:_totalNumberOfLabels range:NSMakeRange(0, self.bounds.size.height - stringHeight)];
 
     [copiedLabels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger index, BOOL *stop) {
         NSInteger inverseYPosition = yPositionIncrements.count - index - 1;
@@ -171,39 +159,34 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }];
 }
 
-- (void)updateLabel:(UILabel*)label yValue:(CGFloat)yValue value:(NSNumber*)value
-{
+- (void)updateLabel:(UILabel*)label yValue:(CGFloat)yValue value:(NSNumber*)value {
     label.textColor = self.labelColor;
     label.text = [NSString stringWithFormat:@"%li",(long)[value integerValue]];
     [self updateFrameOfLabel:label yValue:yValue];
 }
 
-- (UILabel*)makeLabel
-{
+- (UILabel*)makeLabel {
     UILabel *label = [[UILabel alloc] init];
     label.textColor = self.labelColor;
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     return label;
 }
 
-- (void)updateFrameOfLabel:(UILabel*)label yValue:(CGFloat)yValue
-{
+- (void)updateFrameOfLabel:(UILabel*)label yValue:(CGFloat)yValue {
     [label sizeToFit];
     CGRect frame = label.frame;
     frame.origin.x = self.bounds.size.width - frame.size.width;
     frame.origin.y = yValue;
     label.frame = frame;
 }
-- (NSUInteger)numberOfLabelsForHeight:(CGFloat)height
-{
+- (NSUInteger)numberOfLabelsForHeight:(CGFloat)height {
     NSString *testString = @"1234";
     CGFloat heightOfTestString = [ARHelpers heightOfCaptionText:testString inWidth:self.bounds.size.width];
-    NSUInteger numberofLabels =  floor(height / (heightOfTestString + kPaddingBetweenLabels));
+    NSUInteger numberofLabels = floor(height / (heightOfTestString + kPaddingBetweenLabels));
     return numberofLabels;
 }
 
-- (void)addTitleLabelConstraints
-{
+- (void)addTitleLabelConstraints {
     NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
     

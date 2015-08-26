@@ -42,7 +42,7 @@
 /**
  The Mailgun SDK allows your Mac OS X or iOS application to connect with the [Mailgun](http://www.mailgun.com) programmable email platform. Send and manage mailing list subscriptions from your desktop or mobile applications and connect with your users directly in your application.
  
- *Requirements* The AFNetworking library is required for the `Mailgun` client library.
+ *Requirements *The AFNetworking library is required for the `Mailgun` client library.
  
  ## Easy Image Attaching
  
@@ -52,7 +52,7 @@
  
  At this time the full Mailgun REST API is not supported. Currently support is only provided to send messages, subscribe/unsubscribe from mailing lists and to check mailing lists subscriptions.
  
- *Note* These features may be implemented at a later date.
+ *Note *These features may be implemented at a later date.
  
  ## Sending Example
  

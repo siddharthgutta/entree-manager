@@ -10,7 +10,7 @@
 @import UIKit;
 @class ARGraphDataPoint;
 
-#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
+#define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 *M_PI)
 #define RADIANS_TO_DEGREES(radians) ((radians) * 180.0 / M_PI)
 
 
@@ -60,7 +60,7 @@
  *  @param  range for the increments to cover
  *  @return NSArray of NSNumbers that are the increments
  */
-+ (NSArray *)incrementArrayForNumberOfItems:(NSInteger)numberOfItems range:(NSRange)range;
++ (NSArray *)incrementsForNumberOfItems:(NSInteger)numberOfItems range:(NSRange)range;
 
 /**
  *  @abstract Measures a string at caption size

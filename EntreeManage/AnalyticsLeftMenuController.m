@@ -10,8 +10,8 @@
 #import "AnalyticsViewController.h"
 
 @interface AnalyticsLeftMenuController (){
-    NSMutableArray * menuItemsArray;
-    NSMutableArray * menuSegueIdArray;
+    NSMutableArray *menuItemss;
+    NSMutableArray *menuSegueIds;
     
 }
 
@@ -26,8 +26,8 @@
     self.splitViewController.maximumPrimaryColumnWidth = self.maximumPrimaryColumnWidth;
     
     // Left menu show for each tab
-    menuItemsArray = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"Modifier Sales", nil];
-    menuSegueIdArray= [[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ModifierSales", nil];
+    menuItemss = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"Modifier Sales", nil];
+    menuSegueIds= [[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ModifierSales", nil];
     [self.tableView reloadData];
     
 }
@@ -46,24 +46,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [menuItemsArray count];
+    return [menuItemss count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"LeftMenuCell";
+    static NSString *CellIdentifier = @"LeftMenuCell";
     
-    UITableViewCell *cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     
     // Configure the cell...
-    cell.textLabel.text = menuItemsArray[indexPath.row];
+    cell.textLabel.text = menuItemss[indexPath.row];
     
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
     [self changeLeftMenuSel:(NSInteger)indexPath.row];
 }
@@ -73,9 +73,9 @@
  descript:   change view content for tab, left menu
  param:      tab ID, left menu ID
  */
--(void)changeLeftMenuSel:(NSInteger)leftMenuID{
+- (void)changeLeftMenuSel:(NSInteger)leftMenuID {
     
-    NSString * menuType;
+    NSString *menuType;
     UINavigationController *nc = (UINavigationController *)self.parentViewController;
     UISplitViewController *splitVC = (UISplitViewController *)nc.parentViewController;
     
@@ -83,7 +83,7 @@
     AnalyticsViewController *viewInstance = (AnalyticsViewController *)nc.childViewControllers[0];    
     
     //get segue id
-    menuType = [@"segueAnalytics" stringByAppendingString:menuSegueIdArray[leftMenuID]];
+    menuType = [@"segueAnalytics" stringByAppendingString:menuSegueIds[leftMenuID]];
     [viewInstance showAnalyticsPage:menuType];
     
 }

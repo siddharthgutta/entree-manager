@@ -48,8 +48,7 @@
 
 @implementation ARLineGraph
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self){
         [self initialSetup];
@@ -57,8 +56,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self initialSetup];
@@ -66,8 +64,7 @@
     return self;
 }
 
-- (void)initialSetup
-{
+- (void)initialSetup {
     self.dataPointUtility = [[ARLineGraphDataPointUtility alloc] init];
     
     
@@ -95,8 +92,7 @@
     [self applyDefaults];
 }
 
-- (void)applyDefaults
-{
+- (void)applyDefaults {
     self.backgroundColor = [UIColor clearColor];
     _labelColor = [UIColor whiteColor];
     self.xAxisContainerView.labelColor = _labelColor;
@@ -120,62 +116,53 @@
 
 #pragma mark - Setters
 
-- (void)setUseBackgroundGradient:(BOOL)useBackgroundGradient
-{
+- (void)setUseBackgroundGradient:(BOOL)useBackgroundGradient {
     _useBackgroundGradient = useBackgroundGradient;
     _background.hidden = !useBackgroundGradient;
 }
 
-- (void)setDataSource:(id<ARLineGraphDataSource>)dataSource
-{
+- (void)setDataSource:(id<ARLineGraphDataSource>)dataSource {
     _dataSource = dataSource;
     [self reloadData];
 }
 
-- (void)setShowXLegend:(BOOL)showXLegend
-{
+- (void)setShowXLegend:(BOOL)showXLegend {
     _showXLegend = showXLegend;
     [self layoutLegends];
 
 }
 
-- (void)setShowYLegend:(BOOL)showYLegend
-{
+- (void)setShowYLegend:(BOOL)showYLegend {
     _showYLegend = showYLegend;
 
     [self layoutLegends];
 }
-- (void)setNormalizeXValues:(BOOL)normalizeXValues
-{
+- (void)setNormalizeXValues:(BOOL)normalizeXValues {
     _normalizeXValues = normalizeXValues;
     self.pointsLayer.normalizeXValues = normalizeXValues;
     [self.pointsLayer layoutIfNeeded];
     self.xAxisContainerView.normalizeXValues = normalizeXValues;
 }
-- (void)setShowXLegendValues:(BOOL)showXLegendValues
-{
+- (void)setShowXLegendValues:(BOOL)showXLegendValues {
     _showXLegendValues = showXLegendValues;
     self.xAxisContainerView.showXValues = showXLegendValues;
     [self layoutLegends];
 }
 
-- (void)setShowYLegendValues:(BOOL)showYLegendValues
-{
+- (void)setShowYLegendValues:(BOOL)showYLegendValues {
     _showYLegendValues = showYLegendValues;
     self.yAxisContainerView.showYValues = showYLegendValues;
     [self layoutLegends];
 }
 
 
-- (void)setShowDots:(BOOL)showDots
-{
+- (void)setShowDots:(BOOL)showDots {
     _showDots = showDots;
     self.pointsLayer.showDots = showDots;
     self.subLayersPadding = [self calculatePaddingForSubLayers];
 }
 
-- (void)setShowMinMaxLines:(BOOL)showMinMaxLines
-{
+- (void)setShowMinMaxLines:(BOOL)showMinMaxLines {
     _showMinMaxLines = showMinMaxLines;
     self.minMaxLayer.hidden = !showMinMaxLines;
     self.subLayersPadding = [self calculatePaddingForSubLayers];
@@ -186,45 +173,38 @@
     }
 }
 
-- (void)setShowMeanLine:(BOOL)showMeanLine
-{
+- (void)setShowMeanLine:(BOOL)showMeanLine {
     _showMeanLine = showMeanLine;
     self.meanLayer.hidden = !showMeanLine;
 }
 
-- (void)setShouldSmooth:(BOOL)shouldSmooth
-{
+- (void)setShouldSmooth:(BOOL)shouldSmooth {
     _shouldSmooth = shouldSmooth;
     self.pointsLayer.shouldSmooth = shouldSmooth;
 }
 
-- (void)setShouldFill:(BOOL)shouldFill
-{
+- (void)setShouldFill:(BOOL)shouldFill {
     _shouldFill = shouldFill;
     self.pointsLayer.shouldFill = shouldFill;
 }
 
-- (void)setDotRadius:(CGFloat)dotRadius
-{
+- (void)setDotRadius:(CGFloat)dotRadius {
     _dotRadius = dotRadius;
     self.pointsLayer.dotRadius = dotRadius;
 }
 
-- (void)setLineColor:(UIColor *)lineColor
-{
+- (void)setLineColor:(UIColor *)lineColor {
     _lineColor = lineColor;
     self.pointsLayer.lineColor = lineColor.CGColor;
     self.minMaxLayer.lineColor = lineColor.CGColor;
     self.meanLayer.lineColor = lineColor.CGColor;
 }
-- (void)setLabelColor:(UIColor *)labelColor
-{
+- (void)setLabelColor:(UIColor *)labelColor {
     _labelColor = labelColor;
     self.xAxisContainerView.labelColor = labelColor;
     self.minMaxLayer.labelColor = labelColor.CGColor;
 }
-- (void)setSubLayersPadding:(UIEdgeInsets)subLayersPadding
-{
+- (void)setSubLayersPadding:(UIEdgeInsets)subLayersPadding {
     _subLayersPadding = subLayersPadding;
     self.pointsLayer.rightPadding = subLayersPadding.right;
     self.pointsLayer.topPadding = subLayersPadding.top;
@@ -236,8 +216,7 @@
     
 }
 
-- (void)setTintColor:(UIColor *)tintColor
-{
+- (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
     if(_background != nil){
         self.background.color = tintColor.CGColor;
@@ -245,8 +224,7 @@
     }
     
 }
-- (void)setInsets:(UIEdgeInsets)insets
-{
+- (void)setInsets:(UIEdgeInsets)insets {
     _insets = insets;
     self.yAxisContainerView.leftConstraint.constant = insets.left;
     self.titleContainerView.topConstraint.constant = insets.top;
@@ -254,8 +232,7 @@
     self.titleContainerView.rightConstraint.constant = insets.right;
     [self layoutIfNeeded];
 }
-- (void)setAnimationDuration:(CGFloat)animationDuration
-{
+- (void)setAnimationDuration:(CGFloat)animationDuration {
     _animationDuration = animationDuration;
     _pointsLayer.animationDuration = animationDuration;
 }
@@ -263,8 +240,7 @@
 #pragma mark - Getters
 
 
-- (NSString *)xAxisTitle
-{
+- (NSString *)xAxisTitle {
     if([self.dataSource respondsToSelector:@selector(ARGraphTitleForXAxis:)]){
         return [self.dataSource ARGraphTitleForXAxis:self];
     }else {
@@ -272,8 +248,7 @@
     }
 }
 
-- (NSString *)yAxisTitle
-{
+- (NSString *)yAxisTitle {
     if([self.dataSource respondsToSelector:@selector(ARGraphTitleForYAxis:)]){
         return [self.dataSource ARGraphTitleForYAxis:self];
     }else {
@@ -281,13 +256,11 @@
     }
 }
 
-- (NSUInteger)dataCount
-{
+- (NSUInteger)dataCount {
     return self.dataPoints.count;
 }
 
-- (void)appendDataPoint:(ARGraphDataPoint *)dataPoint
-{
+- (void)appendDataPoint:(ARGraphDataPoint *)dataPoint {
     NSMutableArray *temp = [NSMutableArray arrayWithArray:self.dataPoints];
     [temp addObject:dataPoint];
     self.dataPoints = temp;
@@ -297,8 +270,7 @@
 
 #pragma mark - Base MEthods
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     CGRect pointsLayerFrame = self.bounds;
     pointsLayerFrame.size.height -= (self.bounds.size.height - CGRectGetMinY(self.xAxisContainerView.frame));
@@ -313,13 +285,11 @@
     _background.frame = self.bounds;
 }
 
-- (void)layoutLegends
-{
+- (void)layoutLegends {
     if(self.showXLegend){
         self.xAxisContainerView.heightConstraint.constant = [self.xAxisContainerView contentSize].height;
     }else {
         self.xAxisContainerView.heightConstraint.constant = 0.0;
-        
     }
     
     if(self.showYLegend){
@@ -331,8 +301,7 @@
     [self layoutIfNeeded];
 }
 
-- (void)reloadData
-{
+- (void)reloadData {
 
     _dataPoints = [[self.dataSource ARGraphDataPoints:self] copy];
     _dataPointUtility.datapoints = _dataPoints;
@@ -349,8 +318,7 @@
     [self updateSubLayers];
 }
 
-- (void)updateSubLayers
-{
+- (void)updateSubLayers {
 
 
     NSInteger yMin = [[self dataPointUtility] yMin];
@@ -389,21 +357,18 @@
 
 }
 #pragma mark - X Legend Delegate
-- (NSInteger)xLegend:(ARLineGraphXLegendView *)lengend valueAtIndex:(NSUInteger)index
-{
+- (NSInteger)xLegend:(ARLineGraphXLegendView *)lengend valueAtIndex:(NSUInteger)index {
     ARGraphDataPoint *dp = [self.dataPoints objectAtIndex:index];
     return dp.xValue;
 }
 
-- (NSUInteger)numberOfDataPoints
-{
+- (NSUInteger)numberOfDataPoints {
     return self.dataPoints.count;
 }
 
 #pragma mark - View Creation
 
-- (ARGraphTitleView *)titleContainerView
-{
+- (ARGraphTitleView *)titleContainerView {
     if(_titleContainerView == nil){
         ARGraphTitleView *view = [[ARGraphTitleView alloc] init];
         [self addSubview:view];
@@ -412,8 +377,7 @@
     
     return _titleContainerView;
 }
-- (ARLineGraphXLegendView*)xAxisContainerView
-{
+- (ARLineGraphXLegendView*)xAxisContainerView {
     if(_xAxisContainerView == nil){
         _xAxisContainerView = [[ARLineGraphXLegendView alloc] init];
         _xAxisContainerView.delegate = self;
@@ -426,8 +390,7 @@
     return _xAxisContainerView;
 }
 
-- (ARLineGraphYLegendView*)yAxisContainerView
-{
+- (ARLineGraphYLegendView*)yAxisContainerView {
     if(_yAxisContainerView == nil){
         _yAxisContainerView = [[ARLineGraphYLegendView alloc] init];
         [self addSubview:_yAxisContainerView];
@@ -441,8 +404,7 @@
 }
 
 #pragma mark - Helpers
-- (UIEdgeInsets)calculatePaddingForSubLayers
-{
+- (UIEdgeInsets)calculatePaddingForSubLayers {
     CGFloat left = 0, right = 0, top = 0, bottom = 0;
     if(_showMinMaxLines){
         right += 20;
@@ -471,8 +433,7 @@
     return size;
 }
 
-- (void)beginAnimationIn
-{
+- (void)beginAnimationIn {
     [_pointsLayer animate];
 }
 

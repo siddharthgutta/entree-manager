@@ -15,7 +15,7 @@
     NSInteger   totalComponents = CGColorGetNumberOfComponents(color);
     BOOL  isGreyscale     = totalComponents == 2 ? YES : NO;
     
-    CGFloat* oldComponents = (CGFloat *)CGColorGetComponents(color);
+    CGFloat *oldComponents = (CGFloat *)CGColorGetComponents(color);
     CGFloat newComponents[4];
     
     if (isGreyscale) {
@@ -43,7 +43,7 @@
     NSInteger   totalComponents = CGColorGetNumberOfComponents(color);
     bool  isGreyscale     = totalComponents == 2 ? YES : NO;
     
-    CGFloat* oldComponents = (CGFloat *)CGColorGetComponents(color);
+    CGFloat *oldComponents = (CGFloat *)CGColorGetComponents(color);
     CGFloat newComponents[4];
     
     // FIXME: Clean this SHITE up
@@ -65,8 +65,7 @@
     return newColor;
 }
 
-+ (CGColorRef)colorPercentBetween:(CGFloat)percent betweenMinColor:(CGColorRef)minColor maxColor:(CGColorRef)maxColor
-{
++ (CGColorRef)colorPercentBetween:(CGFloat)percent betweenMinColor:(CGColorRef)minColor maxColor:(CGColorRef)maxColor {
     CGFloat inverseProgress = 1.0 - percent;
     NSInteger   totalMinComponents = CGColorGetNumberOfComponents(minColor);
     BOOL  isMinGreyscale     = totalMinComponents == 2 ? YES : NO;
@@ -74,8 +73,8 @@
     NSInteger   totalMaxComponents = CGColorGetNumberOfComponents(maxColor);
     BOOL  isMaxGreyscale        = totalMaxComponents == 2 ? YES : NO;
     
-    CGFloat* minComponents = (CGFloat *)CGColorGetComponents(minColor);
-    CGFloat* maxComponents = (CGFloat *)CGColorGetComponents(maxColor);
+    CGFloat *minComponents = (CGFloat *)CGColorGetComponents(minColor);
+    CGFloat *maxComponents = (CGFloat *)CGColorGetComponents(maxColor);
     
     CGFloat newComponents[4];
     
@@ -107,8 +106,7 @@
     return newColor;
 }
 
-+ (CGPoint)pointInCircle:(CGPoint)point insetFromCenterBy:(CGFloat)inset angle:(CGFloat)angle
-{
++ (CGPoint)pointInCircle:(CGPoint)point insetFromCenterBy:(CGFloat)inset angle:(CGFloat)angle {
     CGFloat newAngle = 360.0 - angle;
     CGFloat rads = DEGREES_TO_RADIANS(newAngle);
     CGFloat hypotenues = inset;
@@ -118,33 +116,29 @@
     return CGPointMake(point.x + adjacent, point.y - opposite);// invert due to x,y coordinate plane
 }
 
-+ (NSArray *)incrementArrayForNumberOfItems:(NSInteger)numberOfItems range:(NSRange)range
-{
++ (NSArray *)incrementsForNumberOfItems:(NSInteger)numberOfItems range:(NSRange)range {
     NSMutableArray *increments = [[NSMutableArray alloc] init];
     CGFloat increment = (CGFloat)range.length/(numberOfItems - 1);
     for(NSInteger x = 0; x < numberOfItems; x++){
         if(range.length == 0 || numberOfItems <= 1){
             [increments addObject:@(0)];
         }else {
-            [increments addObject:@((NSInteger)range.location + x * increment)];
+            [increments addObject:@((NSInteger)range.location + x *increment)];
         }
     }
     
     return increments;
 }
 
-+ (CGFloat)heightOfCaptionText:(NSString*)text inWidth:(CGFloat)width;
-{
++ (CGFloat)heightOfCaptionText:(NSString*)text inWidth:(CGFloat)width; {
     return [self sizeOfText:text constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)].height;
 }
 
-+ (CGFloat)widthOfCaptionText:(NSString *)text inHeight:(CGFloat)height
-{
++ (CGFloat)widthOfCaptionText:(NSString *)text inHeight:(CGFloat)height {
     return [self sizeOfText:text constrainedToSize:CGSizeMake(CGFLOAT_MAX, height)].width;
 }
 
-+ (void)CRUDObjectsWithExisting:(NSArray*)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock
-{
++ (void)CRUDObjectsWithExisting:(NSArray*)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock {
     NSInteger numberOfExisiting = existing.count;
     NSInteger diff = totalNeeded - numberOfExisiting;
     if(diff >= 0){// create or update
@@ -173,8 +167,7 @@
 
 #pragma mark - Private Methods
 
-+ (CGSize)sizeOfText:(NSString *)text constrainedToSize:(CGSize)sizeLimit
-{
++ (CGSize)sizeOfText:(NSString *)text constrainedToSize:(CGSize)sizeLimit {
     UIFont *font = [UIFont fontWithName:@"Helvetica" size:12.0];
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: font}];
     
@@ -192,34 +185,31 @@
 
 
 
-+ (CGFloat)yPositionForYDataPoint:(NSInteger)dataPoint availableHeight:(CGFloat)availableHeight yRange:(NSRange)range
-{
++ (CGFloat)yPositionForYDataPoint:(NSInteger)dataPoint availableHeight:(CGFloat)availableHeight yRange:(NSRange)range {
     CGFloat normalizedDataPointYValue = dataPoint - range.location;
     
-    CGFloat percentageOfDataPointToRange =  (normalizedDataPointYValue / range.length);
+    CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range.length);
     CGFloat inversePercentage = 1.0 - percentageOfDataPointToRange; // Must invert because the greater the value the higher we want it on the chart which is a smaller y value on a iOS coordinate system
     if(range.length == 0){
         return NSNotFound;
     } else {
-        return inversePercentage * availableHeight;
+        return inversePercentage *availableHeight;
     }
 }
 
-+ (CGFloat)xPositionForXDataPoint:(NSInteger)dataPoint availableWidth:(CGFloat)availableWidth yRange:(NSRange)range
-{
++ (CGFloat)xPositionForXDataPoint:(NSInteger)dataPoint availableWidth:(CGFloat)availableWidth yRange:(NSRange)range {
     CGFloat normalizedDataPointYValue = dataPoint - range.location;
-    CGFloat percentageOfDataPointToRange =  (normalizedDataPointYValue / range.length);
+    CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range.length);
     if(range.length == 0){
         return NSNotFound;
     } else {
-        return percentageOfDataPointToRange * availableWidth;
+        return percentageOfDataPointToRange *availableWidth;
     }
 }
 
-+ (CGFloat)dataPointXValueForXPosition:(CGFloat)xPosition availableWidth:(CGFloat)availableWidth yRange:(NSRange)range
-{
++ (CGFloat)dataPointXValueForXPosition:(CGFloat)xPosition availableWidth:(CGFloat)availableWidth yRange:(NSRange)range {
     CGFloat percentageOfPositionToRange = xPosition / availableWidth;
-    CGFloat normalizedDataPointXValue = percentageOfPositionToRange * range.length;
+    CGFloat normalizedDataPointXValue = percentageOfPositionToRange *range.length;
 
     if(range.length == 0){
         return NSNotFound;

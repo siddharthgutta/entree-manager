@@ -10,7 +10,7 @@
 #import "PopularItemCell.h"
 #import "global.h"
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString *const reuseIdentifier = @"Cell";
 
 typedef NS_ENUM(NSInteger, SummaryView) {
     SummaryViewNetSalesGraph,
@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, SummaryView) {
     SummaryViewGuestCountTransactionsCountLaborCost,
 };
 
-NSString * StringFromSummaryView(SummaryView sv) {
+NSString *StringFromSummaryView(SummaryView sv) {
     switch (sv) {
         case SummaryViewNetSalesGraph: {
             return krSummaryNetSalesGraphCell;

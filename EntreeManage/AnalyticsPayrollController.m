@@ -10,8 +10,8 @@
 
 @interface AnalyticsPayrollController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
-    NSMutableDictionary *resultArray;
-    NSArray *keyArray;
+    NSMutableDictionary *results;
+    NSArray *keys;
     //if selected text is start date then true
     BOOL startDate_Flag;
     
@@ -40,7 +40,7 @@
     // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:exportButton, nil];
+    self.navigationItem.rightBarButtonItems = @[exportButton];
     
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Employee Overview";
@@ -63,24 +63,22 @@
     
 }
 // On Export
--(void)exportItemClicked{
+- (void)exportItemClicked {
     
-    NSString *title;
-    title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Employee Overview", _startDateText.text, _endDateText.text];
+NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Employee Overview", _startDateText.text, _endDateText.text];
     
     NSString *content;;
     content = @"Employee,Hours Worked,Tips,Hourly Wage,$ Owed";
     
-    NSMutableArray *empArray;
-    for(NSString *key in keyArray){
-        empArray =resultArray[key];
+    NSMutableArray *emps;
+    for(NSString *key in keys){
+        emps =results[key];
        
         
-        //owed $ = hourly wage * hours worked + tips
-        CGFloat temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
+        //owed $ = hourly wage *hours worked + tips
+        CGFloat temp = [emps[1] floatValue] * [emps[3] floatValue] + [emps[2] floatValue];
         
-        content = [NSString stringWithFormat:@"%@ \n %@,%.02f,%.02f,%.02f,%.02f", content, empArray[0], [empArray[1] floatValue], [empArray[2] floatValue], [empArray[3] floatValue], temp ];
-        
+        content = [NSString stringWithFormat:@"%@ \n %@,%.02f,%.02f,%.02f,%.02f", content, emps[0], [emps[1] floatValue], [emps[2] floatValue], [emps[3] floatValue], temp ];
     }
     
     //export with csv format
@@ -95,13 +93,12 @@
 }
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
     label.text = @"Employee";
     
     label = (UILabel*) [cell viewWithTag:2];
@@ -121,7 +118,7 @@
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
@@ -132,13 +129,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [resultArray count];
+    return [results count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -147,51 +144,48 @@
     }
     
     // Configure the cell...
-    NSMutableArray * empArray;
+    NSMutableArray *emps;
     
-    NSString *key = [keyArray objectAtIndex:indexPath.row];
+    NSString *key = [keys objectAtIndex:indexPath.row];
     
-    empArray =resultArray[key];
+    emps =results[key];
     
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
-    label.text = empArray[0];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
+    label.text = emps[0];
     
     label = (UILabel*) [cell viewWithTag:2];
-    label.text = [NSString stringWithFormat:@"%.02f", [empArray[1] floatValue]];
+    label.text = [NSString stringWithFormat:@"%.02f", [emps[1] floatValue]];
     
     label = (UILabel*) [cell viewWithTag:3];
-    label.text = [NSString stringWithFormat:@"%.02f", [empArray[2] floatValue]];
+    label.text = [NSString stringWithFormat:@"%.02f", [emps[2] floatValue]];
 
     label = (UILabel*) [cell viewWithTag:4];
-    label.text = [NSString stringWithFormat:@"%.02f", [empArray[3] floatValue]];
+    label.text = [NSString stringWithFormat:@"%.02f", [emps[3] floatValue]];
     
-    //owed $ = hourly wage * hours worked + tips
-    CGFloat temp = [empArray[1] floatValue] *[empArray[3] floatValue] + [empArray[2] floatValue];
+    //owed $ = hourly wage *hours worked + tips
+    CGFloat temp = [emps[1] floatValue] *[emps[3] floatValue] + [emps[2] floatValue];
     label = (UILabel*) [cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", temp];
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = response[@"objects"];
-        keyArray = [resultArray allKeys];
+        results = response[@"objects"];
+        keys = [results allKeys];
         
         [_analTableView reloadData];
     }
     else {
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        
     }
 }
 

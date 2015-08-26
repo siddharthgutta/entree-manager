@@ -10,7 +10,7 @@
 
 @interface AnalyticsEmployeeShiftsController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
-    NSMutableArray *resultArray;
+    NSMutableArray *results;
     NSMutableArray *sumVal;
 
     //if selected text is start date then true
@@ -42,7 +42,7 @@
     // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:exportButton, nil];
+    self.navigationItem.rightBarButtonItems = @[exportButton];
     
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Employee Shift Log";
@@ -65,17 +65,16 @@
     
 }
 // On Export
--(void)exportItemClicked{
+- (void)exportItemClicked {
     
-    NSString *title;
-    title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
+NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
     
     NSString *content;;
     content = @"Employee,Date,Clocked In,Clocked Out,Hours Worked,Tips";
     
-    for(int i=0; i< [resultArray count]; i++) {
+    for(int i=0; i< [results count]; i++) {
     
-        PFObject *shift_obj = [resultArray objectAtIndex:i];
+        PFObject *shift_obj = [results objectAtIndex:i];
         
         PFObject *emp_obj = shift_obj[@"employee"];
         
@@ -103,7 +102,7 @@
         
         //Tips
         CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
-        CGFloat tips = hourlyWage * hoursDiff;
+        CGFloat tips = hourlyWage *hoursDiff;
         
     
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, emp_name, startText, endText, hoursDiff, tips];
@@ -119,12 +118,11 @@
 }
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
     label.text = @"Employee";
     
     label = (UILabel*) [cell viewWithTag:2];
@@ -147,7 +145,7 @@
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
@@ -158,13 +156,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [resultArray count];
+    return [results count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -175,7 +173,7 @@
     // Configure the cell...
     UILabel *label;
     
-    PFObject *shift_obj = [resultArray objectAtIndex:indexPath.row];
+    PFObject *shift_obj = [results objectAtIndex:indexPath.row];
     
     PFObject *emp_obj = shift_obj[@"employee"];
     
@@ -217,7 +215,7 @@
     
     //Tips
     CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
-    CGFloat tips = hourlyWage * hoursDiff;
+    CGFloat tips = hourlyWage *hoursDiff;
     
     label = (UILabel*) [cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", tips];
@@ -226,22 +224,20 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = response[@"objects"];
+        results = response[@"objects"];
         [_analTableView reloadData];
     }
     else {
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        
     }
 }
 

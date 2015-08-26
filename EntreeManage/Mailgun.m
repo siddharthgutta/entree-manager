@@ -8,7 +8,7 @@
 
 #import "Mailgun.h"
 
-NSString * const kMailgunURL = @"https://api.mailgun.net/v2";
+NSString *const kMailgunURL = @"https://api.mailgun.net/v2";
 
 @implementation Mailgun
 
@@ -67,7 +67,6 @@ NSString * const kMailgunURL = @"https://api.mailgun.net/v2";
                                        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                            [self buildFormData:formData withAttachments:message.attachments];
                                            [self buildFormData:formData withAttachments:message.inlineAttachments];
-        
                                        }];
     return request;
 }

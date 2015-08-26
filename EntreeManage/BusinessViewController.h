@@ -15,6 +15,6 @@
 }
 @property (strong, nonatomic) IBOutlet UITableView *menuView;
 
--(void)showBusinessMenus:(NSString*)MenuType;
+- (void)showBusinessMenus:(NSString*)MenuType;
 
 @end

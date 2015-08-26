@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** Animation easing function. Default value EaseOutBounce */
 @property (nonatomic, assign) MGSwipeEasingFunction easingFunction;
 /** Override this method to implement custom easing functions */
--(CGFloat) value:(CGFloat) elapsed duration:(CGFloat) duration from:(CGFloat) from to:(CGFloat) to;
+- (CGFloat)value:(CGFloat) elapsed duration:(CGFloat) duration from:(CGFloat) from to:(CGFloat) to;
 
 @end
 
@@ -81,11 +81,11 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  **/
 @property (nonatomic, assign) CGFloat offset;
 /** Animation settings when the swipe buttons are shown */
-@property (nonatomic, strong) MGSwipeAnimation * showAnimation;
+@property (nonatomic, strong) MGSwipeAnimation *showAnimation;
 /** Animation settings when the swipe buttons are hided */
-@property (nonatomic, strong) MGSwipeAnimation * hideAnimation;
+@property (nonatomic, strong) MGSwipeAnimation *hideAnimation;
 /** Animation settings when the cell is stretched from the swipe buttons */
-@property (nonatomic, strong) MGSwipeAnimation * stretchAnimation;
+@property (nonatomic, strong) MGSwipeAnimation *stretchAnimation;
 
 /** Property to read or change swipe animation durations. Default value 0.3 */
 @property (nonatomic, assign) CGFloat animationDuration DEPRECATED_ATTRIBUTE;
@@ -113,11 +113,11 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** Size proportional threshold to trigger the expansion button. Default value 1.5 */
 @property (nonatomic, assign) CGFloat threshold;
 /** Optional expansion color. Expanded button's background color is used by default **/
-@property (nonatomic, strong) UIColor * expansionColor;
+@property (nonatomic, strong) UIColor *expansionColor;
 /** Defines the layout of the expanded button **/
 @property (nonatomic, assign) MGSwipeExpansionLayout expansionLayout;
 /** Animation settings when the expansion is triggered **/
-@property (nonatomic, strong) MGSwipeAnimation * triggerAnimation;
+@property (nonatomic, strong) MGSwipeAnimation *triggerAnimation;
 
 /** Property to read or change expansion animation durations. Default value 0.2 
  * The target animation is the change of a button from normal state to expanded state
@@ -141,21 +141,21 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * Delegate method to enable/disable swipe gestures
  * @return YES if swipe is allowed
  **/
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point;
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction DEPRECATED_ATTRIBUTE; //backwards compatibility
+- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point;
+- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction DEPRECATED_ATTRIBUTE; //backwards compatibility
 
 /**
  * Delegate method invoked when the current swipe state changes
  @param state the current Swipe State
  @param gestureIsActive YES if the user swipe gesture is active. No if the uses has already ended the gesture
  **/
--(void) swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState) state gestureIsActive:(BOOL) gestureIsActive;
+- (void)swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState) state gestureIsActive:(BOOL) gestureIsActive;
 
 /**
  * Called when the user clicks a swipe button or when a expandable button is automatically triggered
  * @return YES to autohide the current swipe buttons
  **/
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion;
+- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion;
 /**
  * Delegate method to setup the swipe buttons and swipe/expansion settings
  * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
@@ -173,18 +173,18 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * Called when the user taps on a swiped cell
  * @return YES to autohide the current swipe buttons
  **/
--(BOOL) swipeTableCell:(MGSwipeTableCell *)cell shouldHideSwipeOnTap:(CGPoint) point;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell shouldHideSwipeOnTap:(CGPoint) point;
 
 /**
  * Called when the cell will begin swiping
  * Useful to make cell changes that only are shown after the cell is swiped open
  **/
--(void) swipeTableCellWillBeginSwiping:(MGSwipeTableCell *) cell;
+- (void)swipeTableCellWillBeginSwiping:(MGSwipeTableCell *) cell;
 
 /**
  * Called when the cell will end swiping
  **/
--(void) swipeTableCellWillEndSwiping:(MGSwipeTableCell *) cell;
+- (void)swipeTableCellWillEndSwiping:(MGSwipeTableCell *) cell;
 
 @end
 
@@ -200,20 +200,20 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @property (nonatomic, weak) id<MGSwipeTableCellDelegate> delegate;
 
 /** optional to use contentView alternative. Use this property instead of contentView to support animated views while swiping */
-@property (nonatomic, strong, readonly) UIView * swipeContentView;
+@property (nonatomic, strong, readonly) UIView *swipeContentView;
 
 /** 
  * Left and right swipe buttons and its settings.
  * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
  */
-@property (nonatomic, copy) NSArray * leftButtons;
-@property (nonatomic, copy) NSArray * rightButtons;
-@property (nonatomic, strong) MGSwipeSettings * leftSwipeSettings;
-@property (nonatomic, strong) MGSwipeSettings * rightSwipeSettings;
+@property (nonatomic, copy) NSArray *leftButtons;
+@property (nonatomic, copy) NSArray *rightButtons;
+@property (nonatomic, strong) MGSwipeSettings *leftSwipeSettings;
+@property (nonatomic, strong) MGSwipeSettings *rightSwipeSettings;
 
 /** Optional settings to allow expandable buttons */
-@property (nonatomic, strong) MGSwipeExpansionSettings * leftExpansion;
-@property (nonatomic, strong) MGSwipeExpansionSettings * rightExpansion;
+@property (nonatomic, strong) MGSwipeExpansionSettings *leftExpansion;
+@property (nonatomic, strong) MGSwipeExpansionSettings *rightExpansion;
 
 /** Readonly property to fetch the current swipe state */
 @property (nonatomic, readonly) MGSwipeState swipeState;
@@ -230,26 +230,26 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @property (nonatomic) BOOL preservesSelectionStatus;
 
 /** Optional background color for swipe overlay. If not set, its inferred automatically from the cell contentView */
-@property (nonatomic, strong) UIColor * swipeBackgroundColor;
+@property (nonatomic, strong) UIColor *swipeBackgroundColor;
 /** Property to read or change the current swipe offset programmatically */
 @property (nonatomic, assign) CGFloat swipeOffset;
 
 /** Utility methods to show or hide swipe buttons programmatically */
--(void) hideSwipeAnimated: (BOOL) animated;
--(void) hideSwipeAnimated: (BOOL) animated completion:(void(^)()) completion;
--(void) showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
--(void) showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated completion:(void(^)()) completion;
--(void) setSwipeOffset:(CGFloat)offset animated: (BOOL) animated completion:(void(^)()) completion;
--(void) setSwipeOffset:(CGFloat)offset animation: (MGSwipeAnimation *) animation completion:(void(^)()) completion;
--(void) expandSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
+- (void)hideSwipeAnimated: (BOOL) animated;
+- (void)hideSwipeAnimated: (BOOL) animated completion:(void(^)()) completion;
+- (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
+- (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated completion:(void(^)()) completion;
+- (void)setSwipeOffset:(CGFloat)offset animated: (BOOL) animated completion:(void(^)()) completion;
+- (void)setSwipeOffset:(CGFloat)offset animation: (MGSwipeAnimation *) animation completion:(void(^)()) completion;
+- (void)expandSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
 
 /** Refresh method to be used when you want to update the cell contents while the user is swiping */
--(void) refreshContentView;
+- (void)refreshContentView;
 /** Refresh method to be used when you want to dinamically change the left or right buttons (add or remove)
  * If you only want to change the title or the backgroundColor of a button you can change it's properties (get the button instance from leftButtons or rightButtons arrays)
  * @param usingDelegate if YES new buttons will be fetched using the MGSwipeTableCellDelegate. Otherwise new buttons will be fetched from leftButtons/rightButtons properties.
  */
--(void) refreshButtons: (BOOL) usingDelegate;
+- (void)refreshButtons: (BOOL) usingDelegate;
 
 @end
 

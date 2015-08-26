@@ -13,7 +13,7 @@
 #import "BusinessViewController.h"
 
 @interface BusinessLeftMenuViewController (){
-    NSMutableArray * menuItemsArray;
+    NSMutableArray *menuItemss;
 }
 
 @end
@@ -24,7 +24,7 @@
     [super viewDidLoad];
   
     // Left menu show for each tab
-    menuItemsArray =  [[NSMutableArray alloc] initWithObjects:@"Menu Builder", @"Menu Modifiers", @"Employees", nil];
+    menuItemss = [[NSMutableArray alloc] initWithObjects:@"Menu Builder", @"Menu Modifiers", @"Employees", nil];
     
     [self.tableView reloadData];
     
@@ -44,27 +44,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [menuItemsArray count];
+    return [menuItemss count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"LeftMenuCell";
+    static NSString *CellIdentifier = @"LeftMenuCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
     }
     // Configure the cell...
-    cell.textLabel.text = menuItemsArray[indexPath.row];
+    cell.textLabel.text = menuItemss[indexPath.row];
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
     [self changeLeftMenuSel:(NSInteger)indexPath.row];
 }
@@ -74,10 +73,10 @@
     descript:   change view content for tab, left menu
     param:      tab ID, left menu ID
 */
--(void)changeLeftMenuSel:(NSInteger)leftMenuID{
+- (void)changeLeftMenuSel:(NSInteger)leftMenuID {
     //Summary
     
-        NSString * menuType;
+        NSString *menuType;
         UINavigationController *nc = (UINavigationController *)self.parentViewController;
         UISplitViewController *splitVC = (UISplitViewController *)nc.parentViewController;
         nc = (UINavigationController *)splitVC.viewControllers[1];
@@ -90,7 +89,6 @@
             viewInstance.title = @"Menus";
             menuType = @"Menu";
             [viewInstance showBusinessMenus:menuType];
-            
         }
         else if(leftMenuID==1){
             menuType = @"MenuItemModifier";

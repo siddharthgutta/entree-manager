@@ -14,7 +14,7 @@
 @end
 @implementation ARCircleRingLayer
 
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     CGMutablePathRef path = [self circlePath];
     self.path = path;
@@ -28,8 +28,7 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     CGColorRelease(self.lineColor);
     CGColorRelease(self.minColor);
     CGColorRelease(self.maxColor);
@@ -37,34 +36,29 @@
 
 }
 
-- (CGMutablePathRef)circlePath
-{
+- (CGMutablePathRef)circlePath {
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     CGFloat radius = MIN(self.bounds.size.width/2, self.bounds.size.height/2) - self.lineWidth/2;
     
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddArc(path, NULL, center.x, center.y, radius, -M_PI/2, 1.5 * M_PI, NO);
+    CGPathAddArc(path, NULL, center.x, center.y, radius, -M_PI/2, 1.5 *M_PI, NO);
     return path;
 }
 
-- (void)setLineColor:(CGColorRef)lineColor
-{
+- (void)setLineColor:(CGColorRef)lineColor {
     _lineColor = CGColorCreateCopy(lineColor);
     self.strokeColor = self.lineColor;
 }
 
-- (void)setMaxColor:(CGColorRef)maxColor
-{
+- (void)setMaxColor:(CGColorRef)maxColor {
     _maxColor = CGColorCreateCopy(maxColor);
 }
 
-- (void)setMinColor:(CGColorRef)minColor
-{
+- (void)setMinColor:(CGColorRef)minColor {
     _minColor = CGColorCreateCopy(minColor);
 }
 
-- (void)setPercent:(CGFloat)percent
-{
+- (void)setPercent:(CGFloat)percent {
     _percent = percent;
     [self setThePercentColor];
 
@@ -72,21 +66,18 @@
     self.strokeColor = _percentColor;
 }
 
-- (void)animateToPercent:(CGFloat)percent
-{
+- (void)animateToPercent:(CGFloat)percent {
     _percent = percent;
     [self animatePercentage:percent];
 }
 
-- (void)setThePercentColor
-{
+- (void)setThePercentColor {
     if(self.maxColor && self.minColor && self.percent){
         _percentColor = [ARHelpers colorPercentBetween:self.percent betweenMinColor:self.minColor maxColor:self.maxColor];
     }
 }
 
-- (void)animatePercentage:(CGFloat)percentage
-{
+- (void)animatePercentage:(CGFloat)percentage {
 
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     animation.duration = self.animationDuration;
@@ -109,8 +100,7 @@
     }
 }
 
-- (void)layoutSublayers
-{
+- (void)layoutSublayers {
     CGMutablePathRef path = [self circlePath];
     self.path = path;
     CGPathRelease(path);

@@ -25,8 +25,7 @@
 @end
 @implementation ARPieChart
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self){
         [self initialSetup];
@@ -34,8 +33,7 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self initialSetup];
@@ -43,8 +41,7 @@
     return self;
 }
 
-- (void)initialSetup
-{
+- (void)initialSetup {
     self.backgroundColor = [UIColor clearColor];
     self.dataPointUtility = [[ARPieChartDataPointUtility alloc] init];
     
@@ -62,8 +59,7 @@
     [self applyDefaults];
 }
 
-- (void)applyDefaults
-{
+- (void)applyDefaults {
     self.useBackgroundGradient = YES;
     self.animationDuration = 0.6;
     self.labelColor = [UIColor whiteColor];
@@ -77,13 +73,11 @@
 }
 
 #pragma mark - Setters
-- (void)setUseBackgroundGradient:(BOOL)useBackgroundGradient
-{
+- (void)setUseBackgroundGradient:(BOOL)useBackgroundGradient {
     _background.hidden = !useBackgroundGradient;
 }
 
-- (void)setDataSource:(id<ARPieChartDataSource>)dataSource
-{
+- (void)setDataSource:(id<ARPieChartDataSource>)dataSource {
     _dataSource = dataSource;
     _dataPoints = [[self.dataSource ARPieChartDataPoints:self] copy];
     _dataPointUtility.datapoints = _dataPoints;
@@ -92,8 +86,7 @@
     [self reloadData];
 }
 
-- (void)setTintColor:(UIColor *)tintColor
-{
+- (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
     self.background.color = tintColor.CGColor;
     self.pieLayer.fillBaseColor = tintColor.CGColor;
@@ -101,55 +94,47 @@
 }
 
 
-- (void)setInnerRadiusPercent:(CGFloat)innerRadiusPercent
-{
+- (void)setInnerRadiusPercent:(CGFloat)innerRadiusPercent {
     self.pieLayer.innerRadiusPercent = innerRadiusPercent;
     self.labelsLayer.innerRadiusPercent = innerRadiusPercent;
 }
 
-- (void)setSliceGutterWidth:(CGFloat)sliceGutterWidth
-{
+- (void)setSliceGutterWidth:(CGFloat)sliceGutterWidth {
     self.pieLayer.sliceGutterWidth = sliceGutterWidth;
 }
 
-- (void)setLabelColor:(UIColor *)labelColor
-{
+- (void)setLabelColor:(UIColor *)labelColor {
     _labelColor = labelColor;
     _labelsLayer.labelColor = labelColor.CGColor;
 }
 
-- (void)setAnimationType:(ARSliceAnimation)animationType
-{
+- (void)setAnimationType:(ARSliceAnimation)animationType {
     _animationType = animationType;
     self.pieLayer.animationType = animationType;
 }
 
-- (void)setAnimationDuration:(CGFloat)animationDuration
-{
+- (void)setAnimationDuration:(CGFloat)animationDuration {
     _animationDuration = animationDuration;
     self.pieLayer.animationDuration = animationDuration;
     self.labelsLayer.animationDuration = animationDuration;
 }
 
-- (void)reloadData
-{    
+- (void)reloadData {    
     _pieLayer.percentages = [self.dataPointUtility percentages];
     _pieLayer.numberOfSlices = self.dataCount;
     [_pieLayer setNeedsDisplay];
     
     _labelsLayer.percentages = [self.dataPointUtility percentages];
     _labelsLayer.numberOfSlices = self.dataCount;
-    _labelsLayer.labelStrings = [self getLabelStringArray];
+    _labelsLayer.labelStrings = [self getLabelStrings];
     [_labelsLayer setNeedsDisplay];
 }
 
-- (NSUInteger)dataCount
-{
+- (NSUInteger)dataCount {
     return self.dataPoints.count;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     CGRect pointsLayerFrame = self.bounds;
 
     _pieLayer.frame = pointsLayerFrame;
@@ -157,8 +142,7 @@
     _labelsLayer.frame = self.bounds;
 }
 
-- (NSArray*)getLabelStringArray
-{
+- (NSArray*)getLabelStrings {
     NSInteger count = self.dataCount;
     NSMutableArray *array = [[NSMutableArray alloc] init];
     while (count--) {
@@ -169,8 +153,7 @@
     return array;
 }
 
-- (void)beginAnimationIn
-{
+- (void)beginAnimationIn {
     [_pieLayer animate];
     _labelsLayer.opacity = 0.0;
     [_labelsLayer performSelector:@selector(animate) withObject:nil afterDelay:self.animationDuration];

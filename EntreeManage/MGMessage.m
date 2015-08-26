@@ -7,7 +7,7 @@
 
 #import "MGMessage.h"
 
-NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
+NSString *const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 @interface NSDate (RFC2822)
 - (NSString *)rfc2822String;
 + (NSDate *)dateFromRFC2822String:(NSString *)string;
@@ -28,22 +28,12 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 @end
 
 @implementation MGMessage
-+ (instancetype)messageFrom:(NSString *)from
-                         to:(NSString *)to
-                    subject:(NSString *)subject
-                       body:(NSString *)body {
-    MGMessage *message = [[MGMessage alloc] initWithFrom:from to:to subject:subject body:body];
-    return message;
++ (instancetype)messageFrom:(NSString *)from to:(NSString *)to subject:(NSString *)subject body:(NSString *)body {
+    return [[MGMessage alloc] initWithFrom:from to:to subject:subject body:body];
 }
 
-- (id)initWithFrom:(NSString *)from
-                to:(NSString *)to
-           subject:(NSString *)subject
-              body:(NSString *)body {
-    NSParameterAssert(from);
-    NSParameterAssert(to);
-    NSParameterAssert(subject);
-    NSParameterAssert(body);
+- (id)initWithFrom:(NSString *)from to:(NSString *)to subject:(NSString *)subject body:(NSString *)body {
+    NSParameterAssert(from); NSParameterAssert(to); NSParameterAssert(subject); NSParameterAssert(body);
     self = [super init];
     if (self) {
         self.from = from;
@@ -62,7 +52,7 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 - (void)addCc:(NSString *)recipient {
     NSParameterAssert(recipient);
     if (!self.cc) {
-        self.cc = [NSArray arrayWithObject:recipient];
+        self.cc = @[recipient];
     } else {
         self.cc = [self.cc arrayByAddingObject:recipient];
     }
@@ -71,7 +61,7 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 - (void)addBcc:(NSString *)recipient {
     NSParameterAssert(recipient);
     if (!self.bcc) {
-        self.bcc = [NSArray arrayWithObject:recipient];
+        self.bcc = @[recipient];
     } else {
         self.bcc = [self.bcc arrayByAddingObject:recipient];
     }
@@ -84,8 +74,8 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 
 - (void)addTags:(NSArray *)tags {
     NSParameterAssert(tags);
-    if (!_tags) {
-        _tags = [NSArray arrayWithArray:tags];
+    if (!_tags.count) {
+        _tags = tags;
     } else {
         _tags = [_tags arrayByAddingObjectsFromArray:tags];
     }

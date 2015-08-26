@@ -10,8 +10,8 @@
 
 @interface AnalyticsOrderReportController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
-    NSMutableDictionary *resultArray;
-    NSArray *keyArray;
+    NSMutableDictionary *results;
+    NSArray *keys;
     //if selected text is start date then true
     BOOL startDate_Flag;
     
@@ -39,7 +39,7 @@
 
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:exportButton, nil];
+    self.navigationItem.rightBarButtonItems = @[exportButton];
     
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Orders Overview";
@@ -67,12 +67,11 @@
     
     NSString *content = @"Item,Menu,Category,Times Ordered,Sales";
     
-    NSMutableArray *itemArray;
-    for(NSString *key in keyArray){
-        itemArray =resultArray[key];
+    NSMutableArray *items;
+    for(NSString *key in keys){
+        items =results[key];
         
-        content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, itemArray[0], itemArray[1], itemArray[2], [itemArray[3] floatValue], [itemArray[4] floatValue] ];
-        
+        content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, items[0], items[1], items[2], [items[3] floatValue], [items[4] floatValue] ];
     }
     
     //export with csv format
@@ -85,13 +84,12 @@
 }
 
 #pragma mark - Table view data source
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
     label.text = @"Item";
     
     label = (UILabel*) [cell viewWithTag:2];
@@ -111,7 +109,7 @@
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
@@ -122,13 +120,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [resultArray count];
+    return [results count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -137,52 +135,49 @@
     }
     
     // Configure the cell...
-    NSMutableArray * itemArray;
+    NSMutableArray *items;
     
-    NSString *key = [keyArray objectAtIndex:indexPath.row];
+    NSString *key = [keys objectAtIndex:indexPath.row];
     
-    itemArray =resultArray[key];
+    items =results[key];
     
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
-    label.text = itemArray[0];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
+    label.text = items[0];
     
     label = (UILabel*) [cell viewWithTag:2];
-    label.text = itemArray[1];
+    label.text = items[1];
     
     label = (UILabel*) [cell viewWithTag:3];
-    label.text = itemArray[2];
+    label.text = items[2];
     
     label = (UILabel*) [cell viewWithTag:4];
     
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = [NSString stringWithFormat:@"%d", [itemArray[3] intValue]];
+    label.text = [NSString stringWithFormat:@"%d", [items[3] intValue]];
     
     label = (UILabel*) [cell viewWithTag:5];
-    label.text = [NSString stringWithFormat:@"%.02f", [itemArray[4] floatValue]];
+    label.text = [NSString stringWithFormat:@"%.02f", [items[4] floatValue]];
 
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"responseCode"] boolValue]) {
         
-        resultArray = response[@"objects"];
-        keyArray = [resultArray allKeys];
+        results = response[@"objects"];
+        keys = [results allKeys];
         
         [_analTableView reloadData];
     }
     else {
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        
     }
 }
 

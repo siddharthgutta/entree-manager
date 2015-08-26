@@ -9,8 +9,7 @@
 #import "BusinessMenuItemAddController.h"
 #import "BusinessViewController.h"
 
-@interface BusinessMenuItemAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-{
+@interface BusinessMenuItemAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
 
@@ -32,25 +31,21 @@
         NSNumber *price = [PFUtils getProperty:@"price" InObject:_menuObj];
         
         _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
-        
     }
 }
 
 // The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor {
     return 1;
 }
 
 // The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component {
     return [COLOR_ARRAY count];
 }
 
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return COLOR_ARRAY[row];
 }
 
@@ -85,8 +80,7 @@
     [CommParse updateQuoteRequest:self Quote:_menuObj];
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
     if ([response[@"action"] intValue] == 2) {
@@ -98,11 +92,9 @@
             
             [_parent_delegate showBusinessMenus:_menuType];
             
-            
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 

@@ -15,8 +15,7 @@
 
 @implementation ARGraphTitleView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self addSubview:self.titleLabel];
@@ -28,8 +27,7 @@
     }
     return self;
 }
-- (void)didMoveToSuperview
-{
+- (void)didMoveToSuperview {
     [super didMoveToSuperview];
     if(self.superview){
         self.topConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
@@ -42,39 +40,35 @@
 }
 
 #pragma mark - Setters
-- (void)setLabelColor:(UIColor *)labelColor
-{
+- (void)setLabelColor:(UIColor *)labelColor {
     _labelColor = labelColor;
     self.titleLabel.textColor = labelColor;
     self.subtitleLabel.textColor = labelColor;
 }
-- (void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     _title = title;
     self.titleLabel.text = title;
     self.heightConstraint.constant = [self sizeOfText:title preferredFontForTextStyle:UIFontTextStyleBody].height;
     [self layoutIfNeeded];
 }
 
-- (void)setSubtitle:(NSString *)subtitle
-{
+- (void)setSubtitle:(NSString *)subtitle {
     _subtitle = subtitle;
     self.subtitleLabel.text = subtitle;
 }
 
-- (UILabel *)titleLabel{
+- (UILabel *)titleLabel {
     if(_titleLabel == nil){
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
         _titleLabel.text = @"foo";
-        _titleLabel.textColor =  self.labelColor;
+        _titleLabel.textColor = self.labelColor;
     }
     return _titleLabel;
 }
 
-- (void)addConstraintsToTitleLabel
-{
+- (void)addConstraintsToTitleLabel {
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_titleLabel.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_titleLabel.superview attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.subtitleLabel attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-10.0];
@@ -82,7 +76,7 @@
     [_titleLabel.superview addConstraints:@[centerY, left, right]];
 }
 
-- (UILabel *)subtitleLabel{
+- (UILabel *)subtitleLabel {
     if(_subtitleLabel == nil){
         _subtitleLabel = [[UILabel alloc] init];
         _subtitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -92,12 +86,10 @@
 
         [_subtitleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         [_subtitleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-        
     }
     return _subtitleLabel;
 }
-- (void)addConstraintsToSubTitleLabel
-{
+- (void)addConstraintsToSubTitleLabel {
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:_subtitleLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_subtitleLabel.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
     NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:_subtitleLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_subtitleLabel.superview attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
     NSLayoutConstraint *left = [NSLayoutConstraint constraintWithItem:_subtitleLabel attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.titleLabel attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:10.0];

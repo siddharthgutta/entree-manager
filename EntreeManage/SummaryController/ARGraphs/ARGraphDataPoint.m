@@ -14,16 +14,14 @@
     return [[self alloc] initWithX:x y:y];
 }
 
-- (instancetype)initWithX:(CGFloat)xValue y:(CGFloat)yValue
-{
+- (instancetype)initWithX:(CGFloat)xValue y:(CGFloat)yValue {
     self = [super init];
     self.xValue = xValue;
     self.yValue = yValue;
     return self;
 }
 
-- (instancetype)initWithY:(CGFloat)yValue
-{
+- (instancetype)initWithY:(CGFloat)yValue {
     self = [super init];
     self.xValue = NSNotFound;
     self.yValue = yValue;

@@ -10,22 +10,20 @@
 #import "ARGraphDataPoint.h"
 
 
-@implementation ARPieChartDataPointUtility{
+@implementation ARPieChartDataPointUtility {
     NSInteger _allDataPointsTotal;
     NSUInteger _smallestIndex;
     NSUInteger _largestIndex;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     _allDataPointsTotal = 0;
     _smallestIndex = NSNotFound;
     _largestIndex = NSNotFound;
     return self;
 }
-- (void)setDatapoints:(NSArray *)datapoints
-{
+- (void)setDatapoints:(NSArray *)datapoints {
     _datapoints = datapoints;
     _percentages = @[];
     _sums = @[];
@@ -33,8 +31,7 @@
     
 }
 
-- (void)parseDataPoints:(NSArray*)dataPoints
-{
+- (void)parseDataPoints:(NSArray*)dataPoints {
     _allDataPointsTotal = 0;
     _smallestIndex = 0;
     NSInteger __block smallestValue = NSIntegerMax;
@@ -73,8 +70,7 @@
     _percentages = percentages;
 }
 
-- (NSInteger)sumDataPoints:(NSArray*)dataPoints
-{
+- (NSInteger)sumDataPoints:(NSArray*)dataPoints {
     NSInteger __block sum = 0;
     [dataPoints enumerateObjectsUsingBlock:^(ARGraphDataPoint *dataPoint, NSUInteger idx, BOOL *stop) {
         sum += dataPoint.yValue;
@@ -84,18 +80,16 @@
 
 #pragma mark - Public Methods
 
-- (CGFloat)slicePercentageAtIndex:(NSUInteger)index
-{
+- (CGFloat)slicePercentageAtIndex:(NSUInteger)index {
     if(index < self.datapoints.count){
-        CGFloat sectionSum =  [_sums[index] doubleValue];
+        CGFloat sectionSum = [_sums[index] doubleValue];
         return sectionSum / (CGFloat)_allDataPointsTotal;
     }else {
         return 0.0;
     }
 }
 
-- (CGFloat)sliceSumAtIndex:(NSUInteger)index
-{
+- (CGFloat)sliceSumAtIndex:(NSUInteger)index {
     if(index < self.datapoints.count){
         return [_sums[index] doubleValue];
     }else {
@@ -103,18 +97,15 @@
     }
 }
 
-- (NSInteger)datapointsTotal
-{
+- (NSInteger)datapointsTotal {
     return _allDataPointsTotal;
 }
 
-- (NSUInteger)largestSliceIndex
-{
+- (NSUInteger)largestSliceIndex {
     return _largestIndex;
 }
 
-- (NSUInteger)smallestSliceIndex
-{
+- (NSUInteger)smallestSliceIndex {
     return _smallestIndex;
 }
 @end

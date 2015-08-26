@@ -14,8 +14,7 @@
 #import "BusinessEmployeeAddController.h"
 #import "MGSwipeButton.h"
 
-@implementation  BusinessViewController
-{
+@implementation  BusinessViewController {
     NSMutableArray *quotes;
     NSIndexPath *selectedIndexPath;
     NSString *selectedMenuType;
@@ -28,7 +27,6 @@
    if([segue.identifier isEqualToString:@"segueCategoryMenu"]){
         BusinessMenuCategoryController *destController = segue.destinationViewController;
         destController.topMenuObj = quotes[selectedIndexPath.row];
-       
    }
     //  go to add menu popup
    else if([segue.identifier isEqualToString:@"segueBusinessMenuAdd"]){
@@ -37,7 +35,6 @@
        destController.menuType = selectedMenuType;
        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
        destController.parent_delegate = self;
-       
    }
     //  go to add Menu Modifier popup
    else if([segue.identifier isEqualToString:@"segueBusinessMenuModifierAdd"]){
@@ -46,7 +43,6 @@
        destController.menuType = selectedMenuType;
        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
        destController.parent_delegate = self;
-       
    }
     //  go to add Menu Business popup
    else if([segue.identifier isEqualToString:@"segueBusinessMenuEmployeeAdd"]){
@@ -68,7 +64,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemClicked)];
     
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, nil];
+    self.navigationItem.rightBarButtonItems = @[addButton];
     
     
     self.title = @"Menu";
@@ -86,7 +82,6 @@
     }
     else if([selectedMenuType isEqualToString:@"Employee"]){
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
-        
     }
 }
 - (void)updateItemClicked {
@@ -99,7 +94,6 @@
     }
     else if([selectedMenuType isEqualToString:@"Employee"]){
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
-        
     }
 }
 
@@ -128,12 +122,11 @@
 
 
 // table cell update
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"businessCell";
     
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    MGSwipeTableCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     PFObject *menu_obj = [quotes objectAtIndex:indexPath.row];
     
@@ -156,8 +149,7 @@
 }
 
 -(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
-             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings;
-{
+             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings; {
     
         swipeSettings.transition = MGSwipeTransition3D;
     
@@ -168,14 +160,12 @@
     
 }
 
--(NSArray *) createRightButtons: (int) number
-{
-    NSMutableArray * result = [NSMutableArray array];
-    NSString* titles[2] = {@"Delete", @"Edit"};
-    UIColor * colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
-    for (int i = 0; i < number; ++i)
-    {
-        MGSwipeButton * button = [MGSwipeButton buttonWithTitle:titles[i] backgroundColor:colors[i] callback:^BOOL(MGSwipeTableCell * sender){
+-(NSArray *) createRightButtons: (int) number {
+    NSMutableArray *result = [NSMutableArray array];
+    NSString *titles[2] = {@"Delete", @"Edit"};
+    UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
+    for (int i = 0; i < number; ++i) {
+        MGSwipeButton *button = [MGSwipeButton buttonWithTitle:titles[i] backgroundColor:colors[i] callback:^BOOL(MGSwipeTableCell *sender){
             NSLog(@"Convenience callback received (right).");
             BOOL autoHide = i != 0;
             return autoHide; //Don't autohide in delete button to improve delete expansion animation
@@ -186,11 +176,10 @@
 }
 
 
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion
-{
+- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     
     //delete button
-    NSIndexPath * path = [menuView indexPathForCell:cell];
+    NSIndexPath *path = [menuView indexPathForCell:cell];
     if (index == 0) {
         //delete button
         [CommParse deleteQuoteRequest:self Quote:[quotes objectAtIndex:path.row]];
@@ -208,8 +197,7 @@
 }
 
 // table cell tapping - click
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedIndexPath = indexPath;
     
     //sub menu show when menu Type = "Menu"
@@ -230,7 +218,7 @@
 
 
 // show business Menus func
--(void)showBusinessMenus:(NSString*)MenuType{
+- (void)showBusinessMenus:(NSString*)MenuType {
     
     selectedMenuType = MenuType;
     
@@ -245,8 +233,7 @@
 //==================================================
 #pragma mark- Comms Delegate Methods
 //==================================================
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         quotes = [[NSMutableArray alloc] init];
@@ -255,7 +242,6 @@
             quotes = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         
         [menuView reloadData];

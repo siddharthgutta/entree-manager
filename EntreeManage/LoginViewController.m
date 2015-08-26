@@ -15,7 +15,7 @@
     __weak IBOutlet UITextField *emailField;
     __weak IBOutlet UITextField *passField;    
 
-    //UITabBarController * tabBarController;
+    //UITabBarController *tabBarController;
 }
 
 @end
@@ -30,7 +30,7 @@
     
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [[textField nextResponder] becomeFirstResponder];
     
@@ -57,8 +57,7 @@
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     if ([response[@"action"] intValue] == 1) {
         
         if ([response[@"responseCode"] boolValue]) {
@@ -72,16 +71,14 @@
             
             [summary pushViewController:[[SummaryViewController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]] animated:NO];
             
-            NSArray * controllers = [NSArray arrayWithObjects:summary, business, analytics, settings, nil]; //navController,
+            NSArray *controllers = @[summary, business, analytics, settings]; //navController,
             tab.viewControllers = controllers;
             
             AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;
             del.window.rootViewController = tab;
-            
         } else {
             [ProgressHUD showError:@"Login Error"];
         }
-        
     }
 }
 

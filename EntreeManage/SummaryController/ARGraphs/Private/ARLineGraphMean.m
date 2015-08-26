@@ -10,8 +10,7 @@
 #import "ARHelpers.h"
 
 @implementation ARLineGraphMean
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     self.leftPadding = 0;
     self.rightPadding = 0;
@@ -30,8 +29,7 @@
     return self;
 }
 
-- (void)setYMean:(CGFloat)yMean
-{
+- (void)setYMean:(CGFloat)yMean {
     _yMean = yMean;
     if(self.animateChanges){
         [self addAnimation:[self animationToMean:yMean] forKey:@"meanAnimation"];
@@ -42,23 +40,20 @@
         CGPathRelease(newPath);
     }
 }
-- (void)layoutSublayers
-{
+- (void)layoutSublayers {
     [super layoutSublayers];
     
     CGMutablePathRef newPath = [self pathForMean:self.yMean];
     self.path = newPath;
     CGPathRelease(newPath);}
 
-- (void)setLineColor:(CGColorRef)lineColor
-{
+- (void)setLineColor:(CGColorRef)lineColor {
     _lineColor = lineColor;
     self.strokeColor = _lineColor;
     [self setNeedsDisplay];
 }
 
-- (CABasicAnimation*)animationToMean:(CGFloat)mean
-{
+- (CABasicAnimation*)animationToMean:(CGFloat)mean {
     CGMutablePathRef newPath = [self pathForMean:mean];
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"path"];
     animation.duration = 0.3;
@@ -71,8 +66,7 @@
     return animation;
 }
 
-- (CGMutablePathRef)pathForMean:(CGFloat)mean
-{
+- (CGMutablePathRef)pathForMean:(CGFloat)mean {
     CGMutablePathRef path = CGPathCreateMutable();
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
     CGFloat yPosition = [ARHelpers yPositionForYDataPoint:self.yMean availableHeight:availableHeight yRange:NSMakeRange(self.yMin, self.yMax - self.yMin)];

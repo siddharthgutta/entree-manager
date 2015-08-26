@@ -20,7 +20,7 @@
 @end
 
 @implementation ARCircleValueLabel
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     if(self){
         self.font = [UIFont fontWithName:@"Helvetica" size:22];
@@ -40,16 +40,14 @@
 }
 */
 
-- (void)didMoveToSuperview
-{
+- (void)didMoveToSuperview {
     [super didMoveToSuperview];
     if(self.superview){
         [self createConstraints];
     }
 }
 
-- (void)setLineWidth:(CGFloat)lineWidth
-{
+- (void)setLineWidth:(CGFloat)lineWidth {
     CGFloat padding = 8.0;
     _lineWidth = lineWidth;
     _left.constant = lineWidth + padding;
@@ -59,14 +57,12 @@
     [self.superview layoutIfNeeded];
 }
 
-- (void)setCurrentValue:(CGFloat)currentValue
-{
+- (void)setCurrentValue:(CGFloat)currentValue {
     if(self.format == nil)
         self.format = @"%f";
     [self setTextValue:currentValue];
 }
-- (void)createConstraints
-{
+- (void)createConstraints {
     _left = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
     _right = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0];
     _bottom = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
@@ -76,7 +72,7 @@
 
 
 
--(void)countFrom:(CGFloat)value to:(CGFloat)endValue {
+- (void)countFrom:(CGFloat)value to:(CGFloat)endValue {
     
     if (self.animationDuration == 0.0f) {
         self.animationDuration = 2.0f;
@@ -85,7 +81,7 @@
     [self countFrom:value to:endValue withDuration:self.animationDuration];
 }
 
--(void)countFrom:(CGFloat)startValue to:(CGFloat)endValue withDuration:(NSTimeInterval)duration {
+- (void)countFrom:(CGFloat)startValue to:(CGFloat)endValue withDuration:(NSTimeInterval)duration {
     
     self.startingValue = startValue;
     self.destinationValue = endValue;
@@ -153,8 +149,7 @@
     }
 }
 
-- (void)setTextValue:(CGFloat)value
-{
+- (void)setTextValue:(CGFloat)value {
     self.text = [NSString stringWithFormat:self.format, value];
 }
 
@@ -180,11 +175,10 @@
     
     CGFloat percent = self.progress / self.totalTime;
     CGFloat updateVal = [self update:percent];
-    return self.startingValue + (updateVal * (self.destinationValue - self.startingValue));
+    return self.startingValue + (updateVal *(self.destinationValue - self.startingValue));
 }
 
--(CGFloat)update:(CGFloat)progress
-{
+- (CGFloat)update:(CGFloat)progress {
     return 1.0-powf((1.0-progress), self.rate);
 }
 

@@ -22,8 +22,7 @@
 
 @implementation ARYMinMaxLayer
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.6
@@ -41,21 +40,18 @@
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     CGColorRelease(_defaultLineColor);
     CGColorRelease(_defaultLabelColor);
 }
 #pragma mark - Setters
 
-- (void)setLineColor:(CGColorRef)lineColor
-{
+- (void)setLineColor:(CGColorRef)lineColor {
     _lineColor = lineColor;
     [self setNeedsDisplay];
 }
 
-- (void)setLabelColor:(CGColorRef)labelColor
-{
+- (void)setLabelColor:(CGColorRef)labelColor {
     _labelColor = labelColor;
     self.minTextLayer.foregroundColor = labelColor;
     self.maxTextLayer.foregroundColor = labelColor;
@@ -63,23 +59,20 @@
 }
 
 
-- (void)setYMax:(NSInteger)yMax
-{
+- (void)setYMax:(NSInteger)yMax {
     _yMax = yMax;
     [self.maxTextLayer setString:[NSString stringWithFormat:@"%ld",(long)yMax]];
 
 }
 
-- (void)setYMin:(NSInteger)yMin
-{
+- (void)setYMin:(NSInteger)yMin {
     _yMin = yMin;
     [self.minTextLayer setString:[NSString stringWithFormat:@"%ld",(long)yMin]];
     
 }
 
 #pragma mark - Helpers
-- (CGRect)frameforMinLabel
-{
+- (CGRect)frameforMinLabel {
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
 
     CGRect rect = [self.minTextLayer.string boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:nil context:nil];
@@ -96,8 +89,7 @@
 
 }
 
-- (CGRect)frameforMaxLabel
-{
+- (CGRect)frameforMaxLabel {
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
 
     CGRect rect = [self.maxTextLayer.string boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:nil context:nil];
@@ -113,14 +105,12 @@
     return rect;
 }
 
-- (void)layoutSublayers
-{
+- (void)layoutSublayers {
     self.minTextLayer.frame = [self frameforMinLabel];
     self.maxTextLayer.frame = [self frameforMaxLabel];
 }
 
-- (void)drawInContext:(CGContextRef)ctx
-{
+- (void)drawInContext:(CGContextRef)ctx {
     if(_lineColor){
         CGContextSetStrokeColorWithColor(ctx, self.lineColor);
     }else {
@@ -147,8 +137,7 @@
 
 #pragma mark - Layer Creation Methods
 
-- (CATextLayer *)minTextLayer
-{
+- (CATextLayer *)minTextLayer {
     if(_minTextLayer == nil){
         CATextLayer *textLayer = [CATextLayer layer];
 
@@ -173,8 +162,7 @@
     return _minTextLayer;
 }
 
-- (CATextLayer *)maxTextLayer
-{
+- (CATextLayer *)maxTextLayer {
     if(_maxTextLayer == nil){
         CATextLayer *textLayer = [CATextLayer layer];
  

@@ -16,8 +16,7 @@
 @synthesize interaction, window, senderWindow, background, hud, spinner, image, label;
 
 
-+ (ProgressHUD *)shared
-{
++ (ProgressHUD *)shared {
     static dispatch_once_t once = 0;
     static ProgressHUD *progressHUD;
     
@@ -26,49 +25,41 @@
     return progressHUD;
 }
 
-+ (void)dismiss
-{
++ (void)dismiss {
     [[self shared] hudHide];
 }
 
-+ (void)show:(NSString *)status
-{
++ (void)show:(NSString *)status {
     [self shared].interaction = NO;
     [[self shared] hudMake:status image:nil spin:YES hide:NO];
 }
 
-+ (void)show:(NSString *)status Interaction:(BOOL)Interaction
-{
++ (void)show:(NSString *)status Interaction:(BOOL)Interaction {
     [self shared].interaction = Interaction;
     [[self shared] hudMake:status image:nil spin:YES hide:NO];
 }
 
-+ (void)showSuccess:(NSString *)status
-{
++ (void)showSuccess:(NSString *)status {
     [self shared].interaction = NO;
     [[self shared] hudMake:status image:HUD_IMAGE_SUCCESS spin:NO hide:YES];
 }
 
-+ (void)showSuccess:(NSString *)status Interaction:(BOOL)Interaction
-{
++ (void)showSuccess:(NSString *)status Interaction:(BOOL)Interaction {
     [self shared].interaction = Interaction;
     [[self shared] hudMake:status image:HUD_IMAGE_SUCCESS spin:NO hide:YES];
 }
 
-+ (void)showError:(NSString *)status
-{
++ (void)showError:(NSString *)status {
     [self shared].interaction = NO;
     [[self shared] hudMake:status image:HUD_IMAGE_ERROR spin:NO hide:YES];
 }
 
-+ (void)showError:(NSString *)status Interaction:(BOOL)Interaction
-{
++ (void)showError:(NSString *)status Interaction:(BOOL)Interaction {
     [self shared].interaction = Interaction;
     [[self shared] hudMake:status image:HUD_IMAGE_ERROR spin:NO hide:YES];
 }
 
-- (id)init
-{
+- (id)init {
     self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
     
     id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
@@ -84,14 +75,12 @@
     return self;
 }
 
-- (void)hudMake:(NSString *)status image:(UIImage *)img spin:(BOOL)spin hide:(BOOL)hide
-{
+- (void)hudMake:(NSString *)status image:(UIImage *)img spin:(BOOL)spin hide:(BOOL)hide {
     [self hudCreate];
     
     CGFloat delay = 0.8;
     
-    if (status)
-    {
+    if (status) {
         label.text = status;
         label.hidden = NO;
         delay = 1.0;
@@ -102,8 +91,7 @@
         label.hidden = YES;
     }
     
-    if (image)
-    {
+    if (image) {
         image.image = img;
         image.hidden = NO;
     }
@@ -127,10 +115,8 @@
         [NSThread detachNewThreadSelector:@selector(hideAfterDelay:) toTarget:self withObject:@(delay)];
 }
 
-- (void)hudCreate
-{
-    if (hud == nil)
-    {
+- (void)hudCreate {
+    if (hud == nil) {
         hud = [[UIToolbar alloc] initWithFrame:CGRectZero];
         hud.translucent = YES;
         hud.backgroundColor = HUD_BACKGROUND_COLOR;
@@ -139,10 +125,8 @@
         [self registerNotifications];
     }
     
-    if (hud.superview == nil)
-    {
-        if (interaction == NO)
-        {
+    if (hud.superview == nil) {
+        if (interaction == NO) {
             CGRect frame = CGRectMake(window.frame.origin.x, window.frame.origin.y, CGRectGetWidth(window.frame), CGRectGetHeight(window.frame));
             background = [[UIView alloc] initWithFrame:frame];
             background.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.500];
@@ -152,8 +136,7 @@
         else [window addSubview:hud];
     }
     
-    if (spinner == nil)
-    {
+    if (spinner == nil) {
         spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         spinner.color = [UIColor blackColor];
         spinner.hidesWhenStopped = YES;
@@ -161,14 +144,12 @@
     if (spinner.superview == nil) {
         [hud addSubview:spinner];
     }
-    if (image == nil)
-    {
+    if (image == nil) {
         image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 28, 28)];
     }
     if (image.superview == nil) [hud addSubview:image];
     
-    if (label == nil)
-    {
+    if (label == nil) {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.font = HUD_STATUS_FONT;
         label.textColor = HUD_STATUS_COLOR;
@@ -180,8 +161,7 @@
     if (label.superview == nil) [hud addSubview:label];
 }
 
-- (void)registerNotifications
-{
+- (void)registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hudOrient)
                                                  name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
@@ -191,8 +171,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hudPosition:) name:UIKeyboardDidShowNotification object:nil];
 }
 
-- (void)hudDestroy
-{
+- (void)hudDestroy {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [label removeFromSuperview];		label = nil;
@@ -202,13 +181,11 @@
     [background removeFromSuperview];	background = nil;
 }
 
-- (void)hudSize
-{
+- (void)hudSize {
     CGRect labelRect = CGRectZero;
     CGFloat hudWidth = 100, hudHeight = 100;
     
-    if (label.text != nil)
-    {
+    if (label.text != nil) {
         NSDictionary *attributes = @{NSFontAttributeName:label.font};
         NSInteger options = NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin;
         labelRect = [label.text boundingRectWithSize:CGSizeMake(200, 300) options:options attributes:attributes context:NULL];
@@ -219,8 +196,7 @@
         hudWidth = labelRect.size.width + 24;
         hudHeight = labelRect.size.height + 80;
         
-        if (hudWidth < 100)
-        {
+        if (hudWidth < 100) {
             hudWidth = 100;
             labelRect.origin.x = 0;
             labelRect.size.width = 100;
@@ -236,8 +212,7 @@
     label.frame = labelRect;
 }
 
-- (void)hudOrient
-{
+- (void)hudOrient {
     CGFloat rotate = 0.0;
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
@@ -250,21 +225,18 @@
     hud.transform = CGAffineTransformMakeRotation(rotate);
 }
 
-- (void)hudPosition:(NSNotification *)notification
-{
+- (void)hudPosition:(NSNotification *)notification {
     CGFloat heightKeyboard = 0;
     NSTimeInterval duration = 0;
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
-    if (notification != nil)
-    {
+    if (notification != nil) {
         NSDictionary *keyboardInfo = [notification userInfo];
         duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGRect keyboard = [[keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
         
-        if ((notification.name == UIKeyboardWillShowNotification) || (notification.name == UIKeyboardDidShowNotification))
-        {
+        if ((notification.name == UIKeyboardWillShowNotification) || (notification.name == UIKeyboardDidShowNotification)) {
             if (UIInterfaceOrientationIsPortrait(orientation))
                 heightKeyboard = keyboard.size.height;
             else heightKeyboard = keyboard.size.width;
@@ -273,8 +245,7 @@
     else heightKeyboard = [self keyboardHeight];
     
     CGRect screen = [UIScreen mainScreen].bounds;
-    if (UIInterfaceOrientationIsLandscape(orientation))
-    {
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
         CGFloat temp = screen.size.width;
         screen.size.width = screen.size.height;
         screen.size.height = temp;
@@ -294,14 +265,10 @@
     } completion:nil];
 }
 
-- (CGFloat)keyboardHeight
-{
-    for (UIWindow *testWindow in [[UIApplication sharedApplication] windows])
-    {
-        if ([[testWindow class] isEqual:[UIWindow class]] == NO)
-        {
-            for (UIView *possibleKeyboard in [testWindow subviews])
-            {
+- (CGFloat)keyboardHeight {
+    for (UIWindow *testWindow in [[UIApplication sharedApplication] windows]) {
+        if ([[testWindow class] isEqual:[UIWindow class]] == NO) {
+            for (UIView *possibleKeyboard in [testWindow subviews]) {
                 if ([possibleKeyboard isKindOfClass:NSClassFromString(@"UIPeripheralHostView")] ||
                     [possibleKeyboard isKindOfClass:NSClassFromString(@"UIKeyboard")])
                     return possibleKeyboard.bounds.size.height;
@@ -311,10 +278,8 @@
     return 0;
 }
 
-- (void)hudShow
-{
-    if (self.alpha == 0)
-    {
+- (void)hudShow {
+    if (self.alpha == 0) {
         self.alpha = 1;
         
         hud.alpha = 0;
@@ -328,25 +293,21 @@
     }
 }
 
-- (void)hudHide
-{
-    if (self.alpha == 1)
-    {
+- (void)hudHide {
+    if (self.alpha == 1) {
         NSUInteger options = UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn;
         [UIView animateWithDuration:0.15 delay:0 options:options animations:^{
             hud.transform = CGAffineTransformScale(hud.transform, 0.7, 0.7);
             hud.alpha = 0;
         }
-                         completion:^(BOOL finished)
-         {
+                         completion:^(BOOL finished) {
              [self hudDestroy];
              self.alpha = 0;
          }];
     }
 }
 
-- (void)hideAfterDelay:(NSNumber *)delay
-{
+- (void)hideAfterDelay:(NSNumber *)delay {
     @autoreleasepool {
         //NSUInteger length = label.text.length;
         

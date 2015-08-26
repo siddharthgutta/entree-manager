@@ -11,8 +11,7 @@
 #import "BusinessMenuAddController.h"
 #import "MGSwipeButton.h"
 
-@interface BusinessMenuCategoryController ()<CommsDelegate, MGSwipeTableCellDelegate, UIActionSheetDelegate>
-{
+@interface BusinessMenuCategoryController ()<CommsDelegate, MGSwipeTableCellDelegate, UIActionSheetDelegate> {
     NSMutableArray *quotes;
     NSIndexPath *selectedIndexPath;
     BOOL updateFlag;
@@ -36,7 +35,6 @@
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.menuType = @"MenuCategory";
         destController.parent_delegate = self;
-        
     }
 
 }
@@ -46,14 +44,14 @@
     [super viewDidLoad];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemClicked)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:addButton, nil];
+    self.navigationItem.rightBarButtonItems = @[addButton];
     
     self.title = @"Menu Categories";
     [self showBusinessMenus:@"MenuCategory"];
 }
 
 // show business Menus func
--(void)showBusinessMenus:(NSString*)MenuType{
+- (void)showBusinessMenus:(NSString*)MenuType {
     
     [ProgressHUD show:@"" Interaction:NO];
     [CommParse getBusinessMenus:self MenuType:MenuType TopKey:@"menu" TopObject:self.topMenuObj];
@@ -88,10 +86,9 @@
     return [quotes count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MGSwipeTableCell * cell = [tableView dequeueReusableCellWithIdentifier:@"categoryMenuCell"];
+    MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryMenuCell"];
     
     PFObject *menu_obj = [quotes objectAtIndex:indexPath.row];
     
@@ -114,8 +111,7 @@
 }
 
 -(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
-             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings;
-{
+             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
     
@@ -126,14 +122,12 @@
     
 }
 
--(NSArray *) createRightButtons: (int) number
-{
-    NSMutableArray * result = [NSMutableArray array];
-    NSString* titles[2] = {@"Delete", @"Edit"};
-    UIColor * colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
-    for (int i = 0; i < number; ++i)
-    {
-        MGSwipeButton * button = [MGSwipeButton buttonWithTitle:titles[i] backgroundColor:colors[i] callback:^BOOL(MGSwipeTableCell * sender){
+-(NSArray *) createRightButtons: (int) number {
+    NSMutableArray *result = [NSMutableArray array];
+    NSString *titles[2] = {@"Delete", @"Edit"};
+    UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
+    for (int i = 0; i < number; ++i) {
+        MGSwipeButton *button = [MGSwipeButton buttonWithTitle:titles[i] backgroundColor:colors[i] callback:^BOOL(MGSwipeTableCell *sender){
             NSLog(@"Convenience callback received (right).");
             BOOL autoHide = i != 0;
             return autoHide; //Don't autohide in delete button to improve delete expansion animation
@@ -144,11 +138,10 @@
 }
 
 
--(BOOL) swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion
-{
+- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     
     //delete button
-    NSIndexPath * path = [self.tableView indexPathForCell:cell];
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
     if (index == 0) {
         //delete button
         [CommParse deleteQuoteRequest:self Quote:[quotes objectAtIndex:path.row]];
@@ -166,8 +159,7 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedIndexPath = indexPath;
     [self performSegueWithIdentifier:@"segueItemMenu" sender:self];
 }
@@ -177,8 +169,7 @@
 //==================================================
 #pragma mark- Comms Delegate Methods
 //==================================================
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         
@@ -188,7 +179,6 @@
             quotes = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         [self.tableView reloadData];
     }

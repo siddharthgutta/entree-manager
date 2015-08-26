@@ -16,11 +16,11 @@
     CGColorRef colorTwo = [ARHelpers darkenColor:color withPercent:0.2];
     //CGColorRelease(color);
     
-    NSArray *colors = [NSArray arrayWithObjects:(__bridge id)(colorOne), colorTwo, nil];
+    NSArray *colors = @[(__bridge id)(colorOne), (__bridge id)colorTwo];
     NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
     NSNumber *stopTwo = [NSNumber numberWithFloat:1.0];
     
-    NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, nil];
+    NSArray *locations = @[stopOne, stopTwo];
     
     ARGraphBackground *headerLayer = [ARGraphBackground layer];
     headerLayer.colors = colors;
@@ -29,11 +29,10 @@
 }
 
 
-- (void)setColor:(CGColorRef)color
-{
+- (void)setColor:(CGColorRef)color {
     CGColorRef colorOne = [ARHelpers lightenColor:color withPercent:0.2];
     CGColorRef colorTwo = [ARHelpers darkenColor:color withPercent:0.2];
-    self.colors = [NSArray arrayWithObjects:(__bridge id)(colorOne), colorTwo, nil];
+    self.colors = @[(__bridge id)(colorOne), (__bridge id)colorTwo];
     
 }
 

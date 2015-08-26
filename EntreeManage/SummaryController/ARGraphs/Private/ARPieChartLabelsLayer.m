@@ -8,11 +8,10 @@
 
 #import "ARPieChartLabelsLayer.h"
 #import "ARHelpers.h"
-@implementation ARPieChartLabelsLayer{
+@implementation ARPieChartLabelsLayer {
     NSArray *_textLayers;
 }
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if(self){
         self.interalLabels = YES;
@@ -22,8 +21,7 @@
 
 #pragma mark - Setters
 
-- (void)setNumberOfSlices:(NSInteger)numberOfSlices
-{
+- (void)setNumberOfSlices:(NSInteger)numberOfSlices {
     _numberOfSlices = numberOfSlices;
     if(self.numberOfSlices > 0){
         [self layoutLabels];
@@ -31,23 +29,20 @@
     [self setNeedsDisplay];
 }
 
-- (void)setLabelStrings:(NSArray *)labelStrings
-{
+- (void)setLabelStrings:(NSArray *)labelStrings {
     _labelStrings = labelStrings;
     [self setNeedsDisplay];
 }
 
 #pragma mark - Animation
 
-- (void)animate
-{
+- (void)animate {
     self.opacity = 1.0;
 
     [self addAnimation:[self opacityAnimation] forKey:@"opacityAnimation"];
 }
 
-- (CABasicAnimation*)opacityAnimation
-{
+- (CABasicAnimation*)opacityAnimation {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     animation.duration = self.animationDuration;
     animation.fromValue = @0;
@@ -57,15 +52,13 @@
 }
 
 #pragma mark - Layout
-- (void)layoutSublayers
-{
+- (void)layoutSublayers {
     [super layoutSublayers];
     [self updateLabels];
 
 }
 
-- (void)layoutLabels
-{
+- (void)layoutLabels {
     if(_textLayers.count != self.numberOfSlices){
         [_textLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
         _textLayers = [self makeLabels];
@@ -74,8 +67,7 @@
     }
 }
 
-- (NSArray*)makeLabels
-{
+- (NSArray*)makeLabels {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     NSInteger count = self.numberOfSlices;
     for(NSInteger x = 0; x < count; x++){
@@ -86,8 +78,7 @@
     return array;
 }
 
-- (void)updateLabels
-{
+- (void)updateLabels {
     CGFloat __block lastAngle = 0;
     [_textLayers enumerateObjectsUsingBlock:^(CATextLayer *label, NSUInteger idx, BOOL *stop) {
         if(self.labelStrings.count > idx){
@@ -96,8 +87,8 @@
 
             if(self.interalLabels){
                 CGFloat percent = [self.percentages[idx] doubleValue];
-                CGFloat degrees = 360.0 * percent;
-                label.frame =  [self insetLabelFrameForLabelSize:textRect.size sliceDegrees:degrees sliceStartAngel:lastAngle];
+                CGFloat degrees = 360.0 *percent;
+                label.frame = [self insetLabelFrameForLabelSize:textRect.size sliceDegrees:degrees sliceStartAngel:lastAngle];
                 lastAngle += degrees;
             }else {
                 // NEED TO WRITE POSITIONING METHOD FOR EXTERNAL LABELS
@@ -109,8 +100,7 @@
     }];
 }
 
-- (CGRect)insetLabelFrameForLabelSize:(CGSize)size sliceDegrees:(CGFloat)degrees sliceStartAngel:(CGFloat)startAngle
-{
+- (CGRect)insetLabelFrameForLabelSize:(CGSize)size sliceDegrees:(CGFloat)degrees sliceStartAngel:(CGFloat)startAngle {
     CGFloat radius = [self radiusOfPie];
     CGFloat offset = (radius/2) + (radius*self.innerRadiusPercent);
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
@@ -118,8 +108,7 @@
     CGRect frame = CGRectMake(origin.x - size.width/2, origin.y - size.height/2, size.width, size.height);
     return frame;
 }
-- (CATextLayer*)textLayerForPieIndex:(NSUInteger)index
-{
+- (CATextLayer*)textLayerForPieIndex:(NSUInteger)index {
     CATextLayer *textLayer = [CATextLayer layer];    
     [textLayer setString:@"Hello World"];
     [textLayer setForegroundColor:self.labelColor];
@@ -135,8 +124,7 @@
     return textLayer;
 }
 
-- (CGFloat)radiusOfPie
-{
+- (CGFloat)radiusOfPie {
     return MIN(self.bounds.size.width - self.leftPadding - self.rightPadding, self.bounds.size.height - self.topPadding - self.bottomPadding) / 2;
 }
 

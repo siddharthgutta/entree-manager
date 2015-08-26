@@ -10,7 +10,7 @@
 
 @implementation ARCircleTitleLabel
 
-- (instancetype)init{
+- (instancetype)init {
     self = [super init];
     if(self){
         self.font = [UIFont fontWithName:@"Helvetica" size:22];
@@ -23,22 +23,19 @@
     return self;
 }
 
-- (void)didMoveToSuperview
-{
+- (void)didMoveToSuperview {
     [super didMoveToSuperview];
     if(self.superview){
         [self createConstraints];
     }
 }
 
-- (void)setText:(NSString *)text
-{
+- (void)setText:(NSString *)text {
     [super setText:text];
     [self sizeToFit];
 }
 
-- (void)createConstraints
-{
+- (void)createConstraints {
     _left = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
     _right = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0];
     _bottom = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];

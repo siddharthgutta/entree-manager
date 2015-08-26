@@ -8,8 +8,7 @@
 
 #import "BusinessMenuModifierController.h"
 
-@interface BusinessMenuModifierController ()<CommsDelegate>
-{
+@interface BusinessMenuModifierController ()<CommsDelegate> {
     NSArray *quotes;
     NSIndexPath *selectedIndexPath;
 }
@@ -43,8 +42,7 @@
     return [quotes count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modifierMenuCell"];
     
@@ -57,8 +55,7 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     selectedIndexPath = indexPath;
     
 }
@@ -68,8 +65,7 @@
 //==================================================
 #pragma mark- Comms Delegate Methods
 //==================================================
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         
@@ -79,7 +75,6 @@
             quotes = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         [self.tableView reloadData];
     }

@@ -10,8 +10,7 @@
 #import "BusinessViewController.h"
 #import "BusinessModifierItemSelController.h"
 
-@interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource>
-{
+@interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource> {
     PFRelation *relation;
     NSMutableArray *selected_items;
 }
@@ -43,8 +42,8 @@
         destController.parent_delegate = self;
     }
 }
--(void)returnSelectedItems:(NSMutableArray*)returnArray{
-    selected_items = returnArray;
+- (void)returnSelectedItems:(NSMutableArray*)returns {
+    selected_items = returns;
     [_menuView reloadData];
 }
 
@@ -59,7 +58,6 @@
         
         _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
         [CommParse getMenuItemsOfModifier:self ModifierObject:_menuObj];
-        
         
     }
 }
@@ -82,11 +80,10 @@
     return [selected_items count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
     
     PFObject *item_obj = [selected_items objectAtIndex:indexPath.row];
     
@@ -125,8 +122,7 @@
     [CommParse updateQuoteRequest:self Quote:_menuObj];
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         selected_items = [[NSMutableArray alloc] init];
@@ -135,11 +131,9 @@
             selected_items = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         
         [_menuView reloadData];
-        
     }
     else if ([response[@"action"] intValue] == 2) {
         if ([response[@"responseCode"] boolValue]) {
@@ -150,11 +144,9 @@
             
             [_parent_delegate showBusinessMenus:_menuType];
             
-            
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 

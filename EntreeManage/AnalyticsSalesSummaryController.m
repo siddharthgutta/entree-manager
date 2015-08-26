@@ -10,7 +10,7 @@
 
 @interface AnalyticsSalesSummaryController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
-    NSMutableArray *rowNameArray;
+    NSMutableArray *rowNames;
     NSMutableArray *sumVal;
     
     BOOL startDate_Flag;
@@ -37,12 +37,12 @@
     _pickDateView.hidden = true;
     
     
-    rowNameArray = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"", @"Payments", @"Cash", @"Card", nil];
+    rowNames = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"", @"Payments", @"Cash", @"Card", nil];
     
     // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:exportButton, nil];
+    self.navigationItem.rightBarButtonItems = @[exportButton];
     
     self.navigationItem.hidesBackButton = YES;
     
@@ -66,17 +66,16 @@
 }
 
 // On Export
--(void)exportItemClicked{
+- (void)exportItemClicked {
     
-    NSString *title;
-    title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
+NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
     
     NSString *content;;
     content = @"Type,Total";
     
     //export with csv format
-    for(int i=0; i< [rowNameArray count]; i++) {
-        content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNameArray[i], sumVal[i] ];
+    for(int i=0; i< [rowNames count]; i++) {
+        content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNames[i], sumVal[i] ];
     }
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
     
@@ -90,8 +89,8 @@
 
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -100,7 +99,7 @@
     return cell;
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
@@ -111,13 +110,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [rowNameArray count];
+    return [rowNames count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * CellIdentifier = @"AnalyticsTableCell";
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -126,9 +125,8 @@
     }
     
     // Configure the cell...
-    UILabel *label;
-    label = (UILabel*) [cell viewWithTag:1];
-    label.text =rowNameArray[indexPath.row];
+UILabel *label = (UILabel*) [cell viewWithTag:1];
+    label.text =rowNames[indexPath.row];
     
     label = (UILabel*) [cell viewWithTag:2];
     label.text = [NSString stringWithFormat:@"%.02f", [sumVal[indexPath.row]floatValue]];
@@ -136,13 +134,12 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
     sumVal = [[NSMutableArray alloc]init];
@@ -154,7 +151,6 @@
         
         //export csv and send email
         if ([response[@"action"] intValue] == 9) {
-            
         }
         else {
             NSMutableArray *quotes =  [[NSMutableArray alloc] init];
@@ -181,23 +177,21 @@
             }
             //Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
             CGFloat temp = [response[@"discount"] floatValue];
-            [sumVal replaceObjectAtIndex:1 withObject:@(temp)];
+            sumVal[1] = @(temp);
             temp = [sumVal[0] floatValue]-temp;
-            [sumVal replaceObjectAtIndex:2 withObject:@(temp)];
+            sumVal[2] = @(temp);
             
             //Total collected (Net sales + Tax + Tips)
             temp = [sumVal[2] floatValue]+[sumVal[3] floatValue]+[sumVal[4] floatValue];
-            [sumVal replaceObjectAtIndex:6 withObject:@(temp)];
+            sumVal[6] = @(temp);
             
             [sumVal replaceObjectAtIndex:8 withObject:sumVal[0]];
             
             [_analTableView reloadData];
         }
-        
     }
     else {
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        
     }
     
 }

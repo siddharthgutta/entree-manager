@@ -46,9 +46,7 @@ typedef NS_ENUM(NSUInteger, ClickTrackingType) {
 /// @name Managing Message Setup
 ///-----------------------------
 
-/**
- Email address for From header
-*/
+/** Email address for From header */
 @property (nonatomic, strong) NSString *from;
 
 /**
@@ -66,38 +64,26 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
  */
 @property (nonatomic, strong) NSArray *bcc;
 
-/**
- Message subject
-*/
+/** Message subject */
 @property (nonatomic, strong) NSString *subject;
 
-/**
- Body of the message, text version
-*/
+/** Body of the message, text version */
 @property (nonatomic, strong) NSString *text;
 
-/**
- Body of the message. HTML version
-*/
+/** Body of the message. HTML version */
 @property (nonatomic, strong) NSString *html;
 
 ///------------------------------------
 /// @name Mailgun Message Configuration
 ///------------------------------------
 
-/**
- ID of the campaign the message belongs to. See [Campaign Analytics](http://documentation.mailgun.net/user_manual.html#um-campaign-analytics) for details.
-*/
+/** ID of the campaign the message belongs to. See [Campaign Analytics](http://documentation.mailgun.net/user_manual.html#um-campaign-analytics) for details. */
 @property (nonatomic, strong) NSString *campaign;
 
-/**
- An `NSArray` of tag strings. See [Tagging](http://documentation.mailgun.net/user_manual.html#tagging) for more information.
-*/
+/** An `NSArray` of tag strings. See [Tagging](http://documentation.mailgun.net/user_manual.html#tagging) for more information. */
 @property (nonatomic, strong, readonly) NSArray *tags;
 
-/**
- `NSMutableDictionary` of custom MIME headers to the message. For example, `Reply-To` to specify a Reply-To address.
-*/
+/** `NSMutableDictionary` of custom MIME headers to the message. For example, `Reply-To` to specify a Reply-To address. */
 @property (nonatomic, strong, readonly) NSMutableDictionary *headers;
 
 /**
@@ -105,9 +91,7 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
  */
 @property (nonatomic, strong, readonly) NSMutableDictionary *variables;
 
-/**
- `NSMutableDictionary` of attachments to the message.
-*/
+/** `NSMutableDictionary` of attachments to the message. */
 @property (nonatomic, strong, readonly) NSMutableDictionary *attachments;
 
 /**
@@ -115,34 +99,22 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
  */
 @property (nonatomic, strong, readonly) NSMutableDictionary *inlineAttachments;
 
-/**
- Enables/disables DKIM signatures on per-message basis.
-*/
+/** Enables/disables DKIM signatures on per-message basis. */
 @property (nonatomic) BOOL *dkim;
 
-/**
- Enables sending in test mode. See [Sending in Test Mode](http://documentation.mailgun.net/user_manual.html#manual-testmode)
-*/
+/** Enables sending in test mode. See [Sending in Test Mode](http://documentation.mailgun.net/user_manual.html#manual-testmode) */
 @property (nonatomic) BOOL *testing;
 
-/**
- Toggles tracking on a per-message basis, see [Tracking Messages](http://documentation.mailgun.net/user_manual.html#tracking-messages) for details.
-*/
+/** Toggles tracking on a per-message basis, see [Tracking Messages](http://documentation.mailgun.net/user_manual.html#tracking-messages) for details. */
 @property (nonatomic) BOOL *tracking;
 
-/**
- Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting.
-*/
+/** Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. */
 @property (nonatomic) BOOL *trackOpens;
 
-/**
- An `NSDate` representing the desired time of delivery.
-*/
+/** An `NSDate` representing the desired time of delivery. */
 @property (nonatomic, strong) NSDate *deliverAt;
 
-/**
- Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting.
-*/
+/** Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting. */
 @property (nonatomic) ClickTrackingType trackClicks;
 
 ///--------------------------------------------------
