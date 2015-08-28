@@ -51,17 +51,17 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
     comps.month -= 1;
-    NSDate *start_date = [cal dateFromComponents:comps];
+    NSDate *startDate = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: start_date];
+    NSString *dateText = [dateFormat stringFromDate: startDate];
     _startDateText.text = dateText;
     dateText = [dateFormat stringFromDate: NSDate.date];
     _endDateText.text = dateText;
     
     
-    [CommParse getAnalyticsEmployeeShifts:self StartDate:start_date EndDate:NSDate.date];
+    [CommParse getAnalyticsEmployeeShifts:self StartDate:startDate EndDate:NSDate.date];
     
 }
 // On Export
@@ -74,14 +74,14 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
     
     for(int i = 0; i< results.count; i++) {
     
-        PFObject *shift_obj = results[i];
+        PFObject *shiftObj = results[i];
         
-        PFObject *emp_obj = shift_obj[@"employee"];
+        PFObject *empObj = shiftObj[@"employee"];
         
-        NSString *emp_name = emp_obj[@"name"];
+        NSString *empName = empObj[@"name"];
         
-        NSDate *startDate = shift_obj[@"startedAt"];
-        NSDate *endDate = shift_obj[@"endedAt"];
+        NSDate *startDate = shiftObj[@"startedAt"];
+        NSDate *endDate = shiftObj[@"endedAt"];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd-MM-yy"];
         
@@ -101,11 +101,11 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
         
         
         // Tips
-        CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
+        CGFloat hourlyWage = [empObj[@"hourlyWage"] floatValue];
         CGFloat tips = hourlyWage *hoursDiff;
         
     
-        content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, emp_name, startText, endText, hoursDiff, tips];
+        content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, empName, startText, endText, hoursDiff, tips];
     }
     
     // export with csv format
@@ -164,19 +164,19 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     // Configure the cell...
     UILabel *label;
     
-    PFObject *shift_obj = results[indexPath.row];
+    PFObject *shiftObj = results[indexPath.row];
     
-    PFObject *emp_obj = shift_obj[@"employee"];
+    PFObject *empObj = shiftObj[@"employee"];
     
     
-    NSString *emp_name = emp_obj[@"name"];
+    NSString *empName = empObj[@"name"];
     
     // employee name
     label = (UILabel *)[cell viewWithTag:6];
-    label.text = emp_name;
+    label.text = empName;
     
-    NSDate *startDate = shift_obj[@"startedAt"];
-    NSDate *endDate = shift_obj[@"endedAt"];
+    NSDate *startDate = shiftObj[@"startedAt"];
+    NSDate *endDate = shiftObj[@"endedAt"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yy"];
     
@@ -205,7 +205,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = [NSString stringWithFormat:@"%.03f", hoursDiff];
     
     // Tips
-    CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
+    CGFloat hourlyWage = [empObj[@"hourlyWage"] floatValue];
     CGFloat tips = hourlyWage *hoursDiff;
     
     label = (UILabel *)[cell viewWithTag:5];

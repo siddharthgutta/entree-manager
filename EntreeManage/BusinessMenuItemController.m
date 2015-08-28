@@ -29,7 +29,7 @@
         BusinessMenuItemAddController *destController = segue.destinationViewController;
         destController.menuType = @"MenuItem";
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
 
 }
@@ -73,9 +73,9 @@
     
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemMenuCell"];
     
-    PFObject *menu_obj = quotes[indexPath.row];
+    PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
+    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
     cell.textLabel.text = name;
     
     cell.delegate = self;
@@ -101,9 +101,9 @@
     
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;
-    int button_nums = 1;
-    // if(selectedModifierObj!=nil) button_nums = 2;
-    return [self createRightButtons:button_nums];
+    int buttonNums = 1;
+    // if(selectedModifierObj!=nil) buttonNums = 2;
+    return [self createRightButtons:buttonNums];
     
 }
 

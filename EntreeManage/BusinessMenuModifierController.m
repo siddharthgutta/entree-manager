@@ -37,9 +37,9 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modifierMenuCell"];
     
-    PFObject *menu_obj = quotes[indexPath.row];
+    PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
+    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
     cell.textLabel.text = name;
     
     return cell;

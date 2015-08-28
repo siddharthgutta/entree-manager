@@ -30,13 +30,13 @@
     NSString *password = [userInfo valueForKey:@"pswd"];
     
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
-        NSString *user_email = user[@"email"];
+        NSString *userEmail = user[@"email"];
         
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
         response[@"action"] = @1;
         if ( !error ) {
             // save current user email address
-            [[NSUserDefaults standardUserDefaults] setObject:user_email forKey:@"curUserEmail"];
+            [[NSUserDefaults standardUserDefaults] setObject:userEmail forKey:@"curUserEmail"];
             
             
             response[@"responseCode"] = @YES;
@@ -53,8 +53,8 @@
 // 1: get, 2: add update, 3: delete
 
 // Get Business Menus
-+ (void)getBusinessMenus:(id < CommsDelegate>) delegate MenuType:(NSString *)menu_type TopKey:(NSString *)topKey TopObject:(PFObject *)topObject {
-    PFQuery *query = [PFQuery queryWithClassName:menu_type];
++ (void)getBusinessMenus:(id < CommsDelegate>) delegate MenuType:(NSString *)menuType TopKey:(NSString *)topKey TopObject:(PFObject *)topObject {
+    PFQuery *query = [PFQuery queryWithClassName:menuType];
     if(![topKey isEqualToString:@""]){
         [query whereKey:topKey equalTo:topObject];
     }
@@ -62,7 +62,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
         response[@"action"] = @1;
-        response[@"menu_type"] = menu_type;
+        response[@"menu_type"] = menuType;
         if ( !error ) {
             response[@"responseCode"] = @YES;
             response[@"objects"] = objects;
@@ -127,9 +127,9 @@
     }];
 }
 
-+ (void)getBusinessMenuInfo:(id < CommsDelegate>)delegate MenuType:(NSString *)menu_type MenuId:(NSString *)menu_id {
-    PFQuery *query = [PFQuery queryWithClassName:menu_type];
-    [query whereKey:@"objectID" equalTo:menu_id];
++ (void)getBusinessMenuInfo:(id < CommsDelegate>)delegate MenuType:(NSString *)menuType MenuId:(NSString *)menuId {
+    PFQuery *query = [PFQuery queryWithClassName:menuType];
+    [query whereKey:@"objectID" equalTo:menuId];
    
 }
 
@@ -138,25 +138,25 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    __block CGFloat discount_val;
-    discount_val = 0;
+    __block CGFloat discountVal;
+    discountVal = 0;
     
-    PFQuery *order_query = [PFQuery queryWithClassName:@"OrderItem"];
-    [order_query whereKey:@"onTheHouse" equalTo:@YES];
-    [order_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [order_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [order_query includeKey:@"menuItem"];
+    PFQuery *orderQuery = [PFQuery queryWithClassName:@"OrderItem"];
+    [orderQuery whereKey:@"onTheHouse" equalTo:@YES];
+    [orderQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [orderQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [orderQuery includeKey:@"menuItem"];
     
-    [order_query findObjectsInBackgroundWithBlock:^(NSArray *order_objects, NSError *error) {
+    [orderQuery findObjectsInBackgroundWithBlock:^(NSArray *orderObjects, NSError *error) {
         
         if(!error){
-            PFObject *item_obj;
-            for(PFObject *object in order_objects){
-                item_obj = object[@"menuItem"];
+            PFObject *itemObj;
+            for(PFObject *object in orderObjects){
+                itemObj = object[@"menuItem"];
                 
-                discount_val += [item_obj[@"price"] floatValue];
+                discountVal += [itemObj[@"price"] floatValue];
             }
-            NSLog(@"%f", discount_val);
+            NSLog(@"%f", discountVal);
             
             // Get Payments
             PFQuery *query = [PFQuery queryWithClassName:@"Payment"];
@@ -169,7 +169,7 @@
                 if ( !error ) {
                     response[@"responseCode"] = @YES;
                     response[@"objects"] = objects;
-                    [response setObject:@(discount_val) forKey:@"discount"];
+                    [response setObject:@(discountVal) forKey:@"discount"];
                 } else {
                     response[@"responseCode"] = @NO;
                     [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
@@ -189,11 +189,11 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    PFQuery *orditem_query = [PFQuery queryWithClassName:@"OrderItem"];
-    [orditem_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orditem_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orditem_query includeKey:@"menuItem"];
-    [orditem_query includeKey:@"order"];
+    PFQuery *orditemQuery = [PFQuery queryWithClassName:@"OrderItem"];
+    [orditemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [orditemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [orditemQuery includeKey:@"menuItem"];
+    [orditemQuery includeKey:@"order"];
     
     NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
     
@@ -204,7 +204,7 @@
    
     __block NSString *categoryIdentifier;
     
-    [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [orditemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         PFObject *item;
         
         for(PFObject *orderItem in objects){
@@ -221,7 +221,7 @@
             item = item[@"menuCategory"];
             categoryIdentifier = item.objectId;
             item = [categoryQuery getObjectWithId:item.objectId];
-            NSString *cat_name = item[@"name"];
+            NSString *catName = item[@"name"];
             
             // Sales
             item = orderItem[@"order"];
@@ -246,7 +246,7 @@
                 // if not exist then init
                 orders = [[NSMutableArray alloc] init];
                 
-                [orders addObject:cat_name];
+                [orders addObject:catName];
                 [orders addObject:@(totalSales)];
                 [orders addObject:@(discountValue)];
             }
@@ -273,28 +273,28 @@
 + (void)getAnalyticsEmployeeShifts:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shift_query = [PFQuery queryWithClassName:@"Shift"];
-    [shift_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [shift_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [shift_query includeKey:@"employee"];
-    [shift_query orderByAscending:@"employee"];
+    PFQuery *shiftQuery = [PFQuery queryWithClassName:@"Shift"];
+    [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [shiftQuery includeKey:@"employee"];
+    [shiftQuery orderByAscending:@"employee"];
     
     // emp name, date, start time, end time, calculate times, hours worked, tips
     
-    [shift_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         // calculate tips
-        PFQuery *pay_query = [PFQuery queryWithClassName:@"Payment"];
-        [pay_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-        [pay_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-        [pay_query findObjectsInBackgroundWithBlock:^(NSArray *pay_objects, NSError *error) {
+        PFQuery *payQuery = [PFQuery queryWithClassName:@"Payment"];
+        [payQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+        [payQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+        [payQuery findObjectsInBackgroundWithBlock:^(NSArray *payObjects, NSError *error) {
             
             NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
             response[@"action"] = @1;
             if ( !error ) {
                 response[@"responseCode"] = @YES;
                 response[@"objects"] = objects;
-                response[@"pay_objects"] = pay_objects;
+                response[@"pay_objects"] = payObjects;
             } else {
                 response[@"responseCode"] = @NO;
                 [response setObject:[CommParse parseErrorMsgFromError:error] forKey:@"errorMsg"];
@@ -312,37 +312,37 @@
 + (void)getAnalyticsPayroll:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shift_query = [PFQuery queryWithClassName:@"Shift"];
-    [shift_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [shift_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [shift_query includeKey:@"employee"];
-    [shift_query orderByAscending:@"employee"];
+    PFQuery *shiftQuery = [PFQuery queryWithClassName:@"Shift"];
+    [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [shiftQuery includeKey:@"employee"];
+    [shiftQuery orderByAscending:@"employee"];
     
 NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
 
     __block NSMutableArray *emps;
-    __block PFObject *emp_obj;
-    __block PFQuery *emp_query = [PFQuery queryWithClassName:@"Employee"];
-    __block PFQuery *party_query = [PFQuery queryWithClassName:@"Party"];
-    __block NSString *emp_id;
+    __block PFObject *empObj;
+    __block PFQuery *empQuery = [PFQuery queryWithClassName:@"Employee"];
+    __block PFQuery *partyQuery = [PFQuery queryWithClassName:@"Party"];
+    __block NSString *empId;
     
     // name, hours worked, tips, hourly wage
     
-    [shift_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         
-        for(PFObject *shift_obj in objects){
-            emp_obj = shift_obj[@"employee"];
-            emp_id = emp_obj.objectId;
+        for(PFObject *shiftObj in objects){
+            empObj = shiftObj[@"employee"];
+            empId = empObj.objectId;
             
             // calculate Time
-            NSTimeInterval timeDifference = [shift_obj[@"endedAt"] timeIntervalSinceDate:shift_obj[@"startedAt"]];
+            NSTimeInterval timeDifference = [shiftObj[@"endedAt"] timeIntervalSinceDate:shiftObj[@"startedAt"]];
             CGFloat hoursDiff =  timeDifference/3600;
             
             // if exist same emp
-            if(results[emp_id]){
+            if(results[empId]){
                 // get that info
-                emps = results[emp_id];
+                emps = results[empId];
                 
                 hoursDiff = hoursDiff + [emps[1] floatValue];
                 // hours
@@ -352,53 +352,53 @@ NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
                 // if not exist then init
                 emps = [[NSMutableArray alloc] init];
                 
-                [emps addObject:emp_obj[@"name"]];
+                [emps addObject:empObj[@"name"]];
                 [emps addObject:@(hoursDiff)];
                 [emps addObject:@0.0];
-                [emps addObject:emp_obj[@"hourlyWage"]];
+                [emps addObject:empObj[@"hourlyWage"]];
             }
             
-            [results  setObject:emps forKey:emp_id];
+            [results  setObject:emps forKey:empId];
         }
         
         // calculate tips
-        PFQuery *pay_query = [Payment query];
-        [pay_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-        [pay_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-        [pay_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFQuery *payQuery = [Payment query];
+        [payQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+        [payQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+        [payQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             
             if(!error){
                 
-                for(PFObject *pay_obj in objects){
-                    PFObject *party_obj = pay_obj[@"party"];
-                    party_obj = [party_query getObjectWithId:party_obj.objectId];
-                    emp_obj = party_obj[@"server"];
-                    emp_id = emp_obj.objectId;
+                for(PFObject *payObj in objects){
+                    PFObject *partyObj = payObj[@"party"];
+                    partyObj = [partyQuery getObjectWithId:partyObj.objectId];
+                    empObj = partyObj[@"server"];
+                    empId = empObj.objectId;
                     
                     
-                    CGFloat tips = [pay_obj[@"tip"] floatValue];
+                    CGFloat tips = [payObj[@"tip"] floatValue];
                     
                     // if exist same emp
-                    if(results[emp_id]){
+                    if(results[empId]){
                         // get that info
-                        emps = results[emp_id];
+                        emps = results[empId];
                         
                         tips = tips + [emps[2] floatValue];
                         // tips
                         emps[2] = @(tips);
                     }
                     else {
-                        emp_obj = [emp_query getObjectWithId:emp_id];
+                        empObj = [empQuery getObjectWithId:empId];
                         
                         // if not exist then init
                         emps = [[NSMutableArray alloc] init];
                         
-                        [emps addObject:emp_obj[@"name"]];
+                        [emps addObject:empObj[@"name"]];
                         [emps addObject:@0.0];
                         [emps addObject:@(tips)];
-                        [emps addObject:emp_obj[@"hourlyWage"]];
+                        [emps addObject:empObj[@"hourlyWage"]];
                     }
-                    [results  setObject:emps forKey:emp_id];
+                    [results  setObject:emps forKey:empId];
                 }
             }
             
@@ -422,69 +422,69 @@ NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
 + (void)getAnalyticsOrderReport:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orditem_query = [PFQuery queryWithClassName:@"OrderItem"];
-    [orditem_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orditem_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orditem_query includeKey:@"menuItem"];
-    [orditem_query includeKey:@"order"];
+    PFQuery *orditemQuery = [PFQuery queryWithClassName:@"OrderItem"];
+    [orditemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [orditemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [orditemQuery includeKey:@"menuItem"];
+    [orditemQuery includeKey:@"order"];
     
 NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
     
     __block NSMutableArray *orders;
-    __block PFObject *pay_obj;
-    __block PFQuery *pay_query = [PFQuery queryWithClassName:@"Payment"];
-    __block PFQuery *category_query = [PFQuery queryWithClassName:@"MenuCategory"];
-    __block PFQuery *menu_query = [PFQuery queryWithClassName:@"Menu"];
-    __block NSString *item_id;
+    __block PFObject *payObj;
+    __block PFQuery *payQuery = [PFQuery queryWithClassName:@"Payment"];
+    __block PFQuery *categoryQuery = [PFQuery queryWithClassName:@"MenuCategory"];
+    __block PFQuery *menuQuery = [PFQuery queryWithClassName:@"Menu"];
+    __block NSString *itemId;
     __block int timesOrdered;
     
-    [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        PFObject *item_obj;
+    [orditemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject *itemObj;
         
-        for(PFObject *orditem_obj in objects){
+        for(PFObject *orditemObj in objects){
             // get item name
-            item_obj = orditem_obj[@"menuItem"];
-            item_id = item_obj.objectId;
-            NSString *item_name = item_obj[@"name"];
+            itemObj = orditemObj[@"menuItem"];
+            itemId = itemObj.objectId;
+            NSString *itemName = itemObj[@"name"];
             
             // get category name
-            item_obj = item_obj[@"menuCategory"];
-            item_obj = [category_query getObjectWithId:item_obj.objectId];
-            NSString *cat_name = item_obj[@"name"];
+            itemObj = itemObj[@"menuCategory"];
+            itemObj = [categoryQuery getObjectWithId:itemObj.objectId];
+            NSString *catName = itemObj[@"name"];
             // get menu name
-            item_obj = item_obj[@"menu"];
-            item_obj = [menu_query getObjectWithId:item_obj.objectId];
-            NSString *menu_name = item_obj[@"name"];
+            itemObj = itemObj[@"menu"];
+            itemObj = [menuQuery getObjectWithId:itemObj.objectId];
+            NSString *menuName = itemObj[@"name"];
             
             // Sales
-            item_obj = orditem_obj[@"order"];
-            pay_obj = item_obj[@"payment"];
-            pay_obj = [pay_query getObjectWithId:pay_obj.objectId];
-            CGFloat total_sales = [pay_obj[@"total"] floatValue];
+            itemObj = orditemObj[@"order"];
+            payObj = itemObj[@"payment"];
+            payObj = [payQuery getObjectWithId:payObj.objectId];
+            CGFloat totalSales = [payObj[@"total"] floatValue];
             
             // if exist same menu item
-            if(results[item_id]){
+            if(results[itemId]){
                 // get that info
-                orders = results[item_id];
+                orders = results[itemId];
                 
                 // times
                 timesOrdered = [orders[3] intValue] + 1;
                 orders[3] = @(timesOrdered);
                 // sales
-                total_sales = total_sales + [orders[4] floatValue];
-                orders[4] = @(total_sales);
+                totalSales = totalSales + [orders[4] floatValue];
+                orders[4] = @(totalSales);
             }
             else {
                 // if not exist then init
                 orders = [[NSMutableArray alloc] init];
                 
-                [orders addObject:item_name];
-                [orders addObject:menu_name];
-                [orders addObject:cat_name];
+                [orders addObject:itemName];
+                [orders addObject:menuName];
+                [orders addObject:catName];
                 [orders addObject:@1];
-                [orders addObject:@(total_sales)];
+                [orders addObject:@(totalSales)];
             }
-            [results  setObject:orders forKey:item_id];
+            [results  setObject:orders forKey:itemId];
         }
 
         NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
@@ -507,74 +507,74 @@ NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
 + (void)getAnalyticsModifierSales:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orditem_query = [PFQuery queryWithClassName:@"OrderItem"];
-    [orditem_query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orditem_query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orditem_query includeKey:@"menuItem"];
-    [orditem_query includeKey:@"order"];
-//    [orditem_query includeKey:@"menuItemModifiers"];
+    PFQuery *orditemQuery = [PFQuery queryWithClassName:@"OrderItem"];
+    [orditemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [orditemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [orditemQuery includeKey:@"menuItem"];
+    [orditemQuery includeKey:@"order"];
+//    [orditemQuery includeKey:@"menuItemModifiers"];
     
 NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
     
 NSMutableDictionary *timess = [[NSMutableDictionary alloc] init];
     
     __block NSMutableArray *orders;
-    __block PFObject *pay_obj;
-    __block PFQuery *pay_query = [PFQuery queryWithClassName:@"Payment"];
-    __block PFQuery *category_query = [PFQuery queryWithClassName:@"MenuCategory"];
-    __block PFQuery *modifier_query = [PFQuery queryWithClassName:@"MenuItemModifier"];
-    __block NSString *item_id;
+    __block PFObject *payObj;
+    __block PFQuery *payQuery = [PFQuery queryWithClassName:@"Payment"];
+    __block PFQuery *categoryQuery = [PFQuery queryWithClassName:@"MenuCategory"];
+    __block PFQuery *modifierQuery = [PFQuery queryWithClassName:@"MenuItemModifier"];
+    __block NSString *itemId;
     
     
-    [orditem_query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        PFObject *item_obj;
+    [orditemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        PFObject *itemObj;
         
-        for(PFObject *orditem_obj in objects){
+        for(PFObject *orditemObj in objects){
             // get item name
-            item_obj = orditem_obj[@"menuItem"];
-            item_id = item_obj.objectId;
+            itemObj = orditemObj[@"menuItem"];
+            itemId = itemObj.objectId;
             
-            NSString *item_name = item_obj[@"name"];
+            NSString *itemName = itemObj[@"name"];
             
             // get category name
-            item_obj = item_obj[@"menuCategory"];
-            item_obj = [category_query getObjectWithId:item_obj.objectId];
-            NSString *cat_name = item_obj[@"name"];
+            itemObj = itemObj[@"menuCategory"];
+            itemObj = [categoryQuery getObjectWithId:itemObj.objectId];
+            NSString *catName = itemObj[@"name"];
             
             // get modifier
             
-            NSArray *modifiers = orditem_obj[@"menuItemModifiers"];
-            for(PFObject *modifier_obj in modifiers){
-                item_obj = [modifier_query getObjectWithId:modifier_obj.objectId];
-                NSString *modi_name = item_obj[@"name"];
+            NSArray *modifiers = orditemObj[@"menuItemModifiers"];
+            for(PFObject *modifierObj in modifiers){
+                itemObj = [modifierQuery getObjectWithId:modifierObj.objectId];
+                NSString *modiName = itemObj[@"name"];
                 
                 // Sales
-                item_obj = orditem_obj[@"order"];
+                itemObj = orditemObj[@"order"];
                 
-                pay_obj = item_obj[@"payment"];
-                pay_obj = [pay_query getObjectWithId:pay_obj.objectId];
-                CGFloat total_sales = [pay_obj[@"total"] floatValue];
+                payObj = itemObj[@"payment"];
+                payObj = [payQuery getObjectWithId:payObj.objectId];
+                CGFloat totalSales = [payObj[@"total"] floatValue];
                 
                 // if not exist then init
                 int times = 1;
-                if(timess[item_id]){
+                if(timess[itemId]){
                     // get that info
-                    times = [timess[item_id] intValue]+1;
+                    times = [timess[itemId] intValue]+1;
                 }
                 else times = 1;
                 
-                [timess  setObject:[ NSNumber numberWithInt:times ] forKey:item_id];
+                [timess  setObject:[ NSNumber numberWithInt:times ] forKey:itemId];
                 
                 orders = [[NSMutableArray alloc] init];
                 
-                [orders addObject:modi_name];
-                [orders addObject:item_name];
-                [orders addObject:cat_name];
-                [orders addObject:item_id];
-                [orders addObject:@(total_sales)];
+                [orders addObject:modiName];
+                [orders addObject:itemName];
+                [orders addObject:catName];
+                [orders addObject:itemId];
+                [orders addObject:@(totalSales)];
                 
-                NSString *key_str = [NSString stringWithFormat:@"%@_%@", modifier_obj.objectId, item_id];
-                [results  setObject:orders forKey:key_str];
+                NSString *keyStr = [NSString stringWithFormat:@"%@_%@", modifierObj.objectId, itemId];
+                [results  setObject:orders forKey:keyStr];
             }
         }
         
@@ -600,7 +600,7 @@ NSMutableDictionary *timess = [[NSMutableDictionary alloc] init];
 // Email Send via MailGun
 + (void)sendEmailwithMailGun:(id < CommsDelegate>)delegate userEmail:(NSString *)userEmail EmailSubject:(NSString *)emailSubject EmailContent:(NSString *)emailContent {
     
-    NSString *csv_name = @"analytics.csv";
+    NSString *csvName = @"analytics.csv";
     
     NSString *curUserEmail =  [[NSUserDefaults standardUserDefaults] objectForKey:@"curUserEmail"];
 
@@ -626,16 +626,16 @@ NSMutableDictionary *timess = [[NSMutableDictionary alloc] init];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docDir = paths[0];
-    NSString *filename = [docDir stringByAppendingPathComponent:csv_name];
+    NSString *filename = [docDir stringByAppendingPathComponent:csvName];
     NSError *error = NULL;
     BOOL written = [emailContent writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if(!written) NSLog(@"write failed, error = %@", error);
     
     NSData *emailData = [NSData dataWithContentsOfFile:filename];
     
-    csv_name = [NSString stringWithFormat:@"%@%@", emailSubject, @".csv"];
+    csvName = [NSString stringWithFormat:@"%@%@", emailSubject, @".csv"];
     
-    [message addAttachment:emailData withName:csv_name type:@"csv"];
+    [message addAttachment:emailData withName:csvName type:@"csv"];
     
     NSString *emailMsg = [NSString stringWithFormat:@"Sending email to %@...", userEmail];
     

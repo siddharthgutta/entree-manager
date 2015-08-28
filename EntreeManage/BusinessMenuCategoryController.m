@@ -34,7 +34,7 @@
         BusinessMenuAddController *destController = segue.destinationViewController;
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.menuType = @"MenuCategory";
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
 
 }
@@ -82,9 +82,9 @@
     
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryMenuCell"];
     
-    PFObject *menu_obj = quotes[indexPath.row];
+    PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
+    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
     cell.textLabel.text = name;
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;

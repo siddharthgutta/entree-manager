@@ -34,7 +34,7 @@
         BusinessMenuAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
     //  go to add Menu Modifier popup
     else if([segue.identifier isEqualToString:@"segueBusinessMenuModifierAdd"]){
@@ -42,7 +42,7 @@
         BusinessMenuModifierAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
     //  go to add Menu Business popup
     else if([segue.identifier isEqualToString:@"segueBusinessMenuEmployeeAdd"]){
@@ -50,7 +50,7 @@
         BusinessEmployeeAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
         if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
 }
 
@@ -111,9 +111,9 @@
     // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    PFObject *menu_obj = quotes[indexPath.row];
+    PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
+    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
     cell.textLabel.text = name;
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;

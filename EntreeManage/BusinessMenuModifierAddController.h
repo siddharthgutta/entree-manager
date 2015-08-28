@@ -11,7 +11,7 @@
 @interface BusinessMenuModifierAddController : UIViewController
     @property (nonatomic, weak) PFObject *menuObj;
     @property (nonatomic, weak) NSString *menuType;
-    @property (nonatomic, assign) id parent_delegate;
+    @property (nonatomic, assign) id parentDelegate;
 
 - (void)returnSelectedItems:(NSMutableArray *)returns;
 @end

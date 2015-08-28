@@ -34,8 +34,8 @@
     if(_menuObj!=nil){
        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
        _txtRole.text = [PFUtils getProperty:@"role" InObject:_menuObj];
-        NSNumber *admin_flag = [PFUtils getProperty:@"administrator" InObject:_menuObj];
-        if([admin_flag intValue]==1)  {
+        NSNumber *adminFlag = [PFUtils getProperty:@"administrator" InObject:_menuObj];
+        if([adminFlag intValue]==1)  {
             _switchManager.on = YES;
         }
         else {
@@ -89,9 +89,9 @@
     _menuObj[@"hourlyWage"] = hourlyWage;
     
     // Get Color Picker Value
-    NSInteger color_index = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    // NSString *color_str = COLOR_ARRAY[color_index];
+    NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
+    [_menuObj setObject:@(colorIndex) forKey:@"colorIndex"];
+    // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];
     

@@ -69,9 +69,9 @@
     _menuObj[@"price"] = price;
     
     // Get Color Picker Value
-    NSInteger color_index = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    // NSString *color_str = COLOR_ARRAY[color_index];
+    NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
+    [_menuObj setObject:@(colorIndex) forKey:@"colorIndex"];
+    // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];
 }

@@ -74,9 +74,9 @@
         items = categories[key];
         
         NSString *text1 = [NSString stringWithFormat:@"%.02f", [items[1] floatValue]];
-        CGFloat net_pro = ([items[1] floatValue]-[items[2] floatValue])/[items[1] floatValue]*100;
+        CGFloat netPro = ([items[1] floatValue]-[items[2] floatValue])/[items[1] floatValue]*100;
         
-        NSString *text2 = [NSString stringWithFormat:@"%.02f", net_pro];
+        NSString *text2 = [NSString stringWithFormat:@"%.02f", netPro];
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@", content, items[0], text1, text2 ];
     }
     
@@ -135,9 +135,9 @@
     label.text = items[0];
     
     // Net Sales =  Total - discount
-    CGFloat net_pro = ([items[1] floatValue] - [items[2] floatValue])/[items[1] floatValue]*100;
-    if (net_pro != net_pro) // nan
-        net_pro = 0;
+    CGFloat netPro = ([items[1] floatValue] - [items[2] floatValue])/[items[1] floatValue]*100;
+    if (netPro != netPro) // nan
+        netPro = 0;
     
     // Total
     label = (UILabel *)[cell viewWithTag:2];
@@ -145,7 +145,7 @@
     
     // % of Net Sales
     label = (UILabel *)[cell viewWithTag:3];
-    label.text = [NSString stringWithFormat:@"%.02f", net_pro];
+    label.text = [NSString stringWithFormat:@"%.02f", netPro];
     
     return cell;
 }
@@ -157,14 +157,14 @@
         categories = response[@"objects"];
         keys = [categories allKeys];
         
-        CGFloat sum_net = 0;
+        CGFloat sumNet = 0;
         NSMutableArray *items;
         for(NSString *key in keys){
             items = categories[key];
-            sum_net += [items[1] floatValue]-[items[2] floatValue];
+            sumNet += [items[1] floatValue]-[items[2] floatValue];
         }
         
-        _lblNetSales.text = [NSString stringWithFormat:@"$%.02f", sum_net];
+        _lblNetSales.text = [NSString stringWithFormat:@"$%.02f", sumNet];
         
         [_analTableView reloadData];
     }

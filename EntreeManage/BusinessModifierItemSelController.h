@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessModifierItemSelController : UIViewController
-    @property (nonatomic, assign) id parent_delegate;
+    @property (nonatomic, assign) id parentDelegate;
     // array is object lists of selected items
-    @property (nonatomic, assign) NSMutableArray *selected_items;
+    @property (nonatomic, assign) NSMutableArray *selectedItems;
 @end

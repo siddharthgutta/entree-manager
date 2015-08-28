@@ -77,17 +77,17 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
 /// @name Mailgun Message Configuration
 ///------------------------------------
 
-/** ID of the campaign the message belongs to. See [Campaign Analytics](http:// documentation.mailgun.net/user_manual.html#um-campaign-analytics) for details. */
+/** ID of the campaign the message belongs to. See [Campaign Analytics](http:// documentation.mailgun.net/userManual.html#um-campaign-analytics) for details. */
 @property (nonatomic, strong) NSString *campaign;
 
-/** An `NSArray` of tag strings. See [Tagging](http:// documentation.mailgun.net/user_manual.html#tagging) for more information. */
+/** An `NSArray` of tag strings. See [Tagging](http:// documentation.mailgun.net/userManual.html#tagging) for more information. */
 @property (nonatomic, strong, readonly) NSArray *tags;
 
 /** `NSMutableDictionary` of custom MIME headers to the message. For example, `Reply-To` to specify a Reply-To address. */
 @property (nonatomic, strong, readonly) NSMutableDictionary *headers;
 
 /**
- `NSMutableDictionary` for attaching custom JSON data to the message. See [Attaching Data to Messages](http:// documentation.mailgun.net/user_manual.html#manual-customdata) for more information.
+ `NSMutableDictionary` for attaching custom JSON data to the message. See [Attaching Data to Messages](http:// documentation.mailgun.net/userManual.html#manual-customdata) for more information.
  */
 @property (nonatomic, strong, readonly) NSMutableDictionary *variables;
 
@@ -102,10 +102,10 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
 /** Enables/disables DKIM signatures on per-message basis. */
 @property (nonatomic) BOOL *dkim;
 
-/** Enables sending in test mode. See [Sending in Test Mode](http:// documentation.mailgun.net/user_manual.html#manual-testmode) */
+/** Enables sending in test mode. See [Sending in Test Mode](http:// documentation.mailgun.net/userManual.html#manual-testmode) */
 @property (nonatomic) BOOL *testing;
 
-/** Toggles tracking on a per-message basis, see [Tracking Messages](http:// documentation.mailgun.net/user_manual.html#tracking-messages) for details. */
+/** Toggles tracking on a per-message basis, see [Tracking Messages](http:// documentation.mailgun.net/userManual.html#tracking-messages) for details. */
 @property (nonatomic) BOOL *tracking;
 
 /** Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. */

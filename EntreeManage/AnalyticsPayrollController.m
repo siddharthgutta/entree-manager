@@ -49,17 +49,17 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
     comps.month -= 1;
-    NSDate *start_date = [cal dateFromComponents:comps];
+    NSDate *startDate = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: start_date];
+    NSString *dateText = [dateFormat stringFromDate: startDate];
     _startDateText.text = dateText;
     dateText = [dateFormat stringFromDate: NSDate.date];
     _endDateText.text = dateText;
     
     
-    [CommParse getAnalyticsPayroll:self StartDate:start_date EndDate:NSDate.date];
+    [CommParse getAnalyticsPayroll:self StartDate:startDate EndDate:NSDate.date];
     
 }
 // On Export

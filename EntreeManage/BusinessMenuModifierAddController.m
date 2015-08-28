@@ -12,7 +12,7 @@
 
 @interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource> {
     PFRelation *relation;
-    NSMutableArray *selected_items;
+    NSMutableArray *selectedItems;
 }
 
 - (IBAction)onClickCancel:(id)sender;
@@ -37,19 +37,19 @@
        BusinessModifierItemSelController *destController = segue.destinationViewController;
         
         
-        destController.selected_items = selected_items;
+        destController.selectedItems = selectedItems;
         
-        destController.parent_delegate = self;
+        destController.parentDelegate = self;
     }
 }
 - (void)returnSelectedItems:(NSMutableArray *)returns {
-    selected_items = returns;
+    selectedItems = returns;
     [_menuView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    selected_items = [[NSMutableArray alloc] init];
+    selectedItems = [[NSMutableArray alloc] init];
     
     // Do any additional setup after loading the view.
     if(_menuObj!=nil){
@@ -68,7 +68,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return selected_items.count;
+    return selectedItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,9 +76,9 @@
     
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
     
-    PFObject *item_obj = selected_items[indexPath.row];
+    PFObject *itemObj = selectedItems[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:item_obj];
+    NSString *name = [PFUtils getProperty:@"name" InObject:itemObj];
     cell.textLabel.text = name;
     
     
@@ -103,8 +103,8 @@
     
     // save selected items with relation
     relation = [_menuObj relationForKey:@"menuItems"];
-    for(PFObject *item_obj in selected_items){
-        [relation addObject:item_obj];
+    for(PFObject *itemObj in selectedItems){
+        [relation addObject:itemObj];
     }
     
     _menuObj[@"price"] = price;
@@ -116,10 +116,10 @@
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
-        selected_items = [[NSMutableArray alloc] init];
+        selectedItems = [[NSMutableArray alloc] init];
         if ([response[@"responseCode"] boolValue]) {
             
-            selected_items = response[@"objects"];
+            selectedItems = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }

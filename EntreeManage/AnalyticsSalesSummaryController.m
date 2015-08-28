@@ -50,16 +50,16 @@
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
     comps.month -= 1;
-    NSDate *start_date = [cal dateFromComponents:comps];
+    NSDate *startDate = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: start_date];
+    NSString *dateText = [dateFormat stringFromDate: startDate];
     _startDateText.text = dateText;
     dateText = [dateFormat stringFromDate: NSDate.date];
     _endDateText.text = dateText;
     
-    [CommParse getAnalyticsSalesView:self StartDate:start_date EndDate:NSDate.date];
+    [CommParse getAnalyticsSalesView:self StartDate:startDate EndDate:NSDate.date];
     
     self.title = @"Sales Overview";
     
@@ -148,22 +148,22 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
             quotes = response[@"objects"];
             
             // calculate sums
-            for(int i = 0;i < quotes.count;i++){ // PFObject *item_obj in quotes
-                PFObject *item_obj = quotes[i];
+            for(int i = 0;i < quotes.count;i++){ // PFObject *itemObj in quotes
+                PFObject *itemObj = quotes[i];
                 // Gross Sales
-                [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[0] floatValue]]];
+                [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[0] floatValue]]];
                 // Tax
-                [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[item_obj[@"tax"] floatValue] + [sumVal[3] floatValue]]];
+                [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[itemObj[@"tax"] floatValue] + [sumVal[3] floatValue]]];
                 // Tips
-                [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[item_obj[@"tip"] floatValue] + [sumVal[4] floatValue]]];
+                [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[itemObj[@"tip"] floatValue] + [sumVal[4] floatValue]]];
                 
                 // Cash
-                if([item_obj[@"type"] isEqualToString:@"Cash"]) {
-                    [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[9] floatValue]]];
+                if([itemObj[@"type"] isEqualToString:@"Cash"]) {
+                    [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[9] floatValue]]];
                 }
                 // Card
                 else {
-                    [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[10] floatValue]]];
+                    [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[10] floatValue]]];
                 }
             }
             // Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)

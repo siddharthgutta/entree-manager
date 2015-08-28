@@ -23,8 +23,8 @@
 + (void)emailLogin:(id < CommsDelegate>)delegate UserInfo:(NSDictionary *)userInfo;
 
 // Get Business Menus
-+ (void)getBusinessMenus:(id < CommsDelegate>) delegate MenuType:(NSString *)menu_type TopKey:(NSString *)topKey TopObject:(PFObject *)topObject;
-+ (void)getBusinessMenuInfo:(id < CommsDelegate>)delegate MenuType:(NSString *)menu_type MenuId:(NSString *)menu_id;
++ (void)getBusinessMenus:(id < CommsDelegate>) delegate MenuType:(NSString *)menuType TopKey:(NSString *)topKey TopObject:(PFObject *)topObject;
++ (void)getBusinessMenuInfo:(id < CommsDelegate>)delegate MenuType:(NSString *)menuType MenuId:(NSString *)menuId;
 + (void)getMenuItemsOfModifier:(id < CommsDelegate>) delegate ModifierObject:(PFObject *)modifierObject;
 
 // Add, Update Business Menus
