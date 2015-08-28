@@ -20,8 +20,8 @@
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.6
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    self.strokeColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    self.strokeColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     CGColorSpaceRelease(colorSpace);
     
     self.lineDashPattern = @[@4, @2];
@@ -53,7 +53,7 @@
     [self setNeedsDisplay];
 }
 
-- (CABasicAnimation*)animationToMean:(CGFloat)mean {
+- (CABasicAnimation *)animationToMean:(CGFloat)mean {
     CGMutablePathRef newPath = [self pathForMean:mean];
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"path"];
     animation.duration = 0.3;

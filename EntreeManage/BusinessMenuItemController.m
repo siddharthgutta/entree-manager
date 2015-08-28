@@ -47,7 +47,7 @@
 }
 
 // show business Menus func
-- (void)showBusinessMenus:(NSString*)MenuType {
+- (void)showBusinessMenus:(NSString *)MenuType {
     
     [ProgressHUD show:@"" Interaction:NO];
     
@@ -61,28 +61,19 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [quotes count];
+    return quotes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MGSwipeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemMenuCell"];
     
-    PFObject *menu_obj = [quotes objectAtIndex:indexPath.row];
+    PFObject *menu_obj = quotes[indexPath.row];
     
     NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
     cell.textLabel.text = name;
@@ -103,20 +94,20 @@
 }
 
 
--(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
-             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings; {
+-(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+             swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
     
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;
     int button_nums = 1;
-    //if(selectedModifierObj!=nil) button_nums = 2;
+    // if(selectedModifierObj!=nil) button_nums = 2;
     return [self createRightButtons:button_nums];
     
 }
 
--(NSArray *) createRightButtons: (int) number {
+-(NSArray *)createRightButtons: (int) number {
     NSMutableArray *result = [NSMutableArray array];
     NSString *titles[2] = {@"Delete", @"Edit"};
     UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
@@ -124,7 +115,7 @@
         MGSwipeButton *button = [MGSwipeButton buttonWithTitle:titles[i] backgroundColor:colors[i] callback:^BOOL(MGSwipeTableCell *sender){
             NSLog(@"Convenience callback received (right).");
             BOOL autoHide = i != 0;
-            return autoHide; //Don't autohide in delete button to improve delete expansion animation
+            return autoHide; // Don't autohide in delete button to improve delete expansion animation
         }];
         [result addObject:button];
     }
@@ -132,19 +123,19 @@
 }
 
 
-- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     
-    //delete button
+    // delete button
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     if (index == 0) {
-        //delete button
-        [CommParse deleteQuoteRequest:self Quote:[quotes objectAtIndex:path.row]];
+        // delete button
+        [CommParse deleteQuoteRequest:self Quote:quotes[path.row]];
         
         [quotes removeObjectAtIndex:path.row];
         [self.tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-        return NO; //Don't autohide to improve delete expansion animation
+        return NO; // Don't autohide to improve delete expansion animation
     }
-    //edit button
+    // edit button
     else if (index==1){
         selectedIndexPath = path;
         updateFlag = true;

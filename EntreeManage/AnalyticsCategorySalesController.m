@@ -10,12 +10,9 @@
 
 
 @interface AnalyticsCategorySalesController () <CommsDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
-    
     NSMutableDictionary *categories;
-    
     NSArray *keys;
-    
-    //if selected text is start date then true
+    // if selected text is start date then true
     BOOL startDate_Flag;
 }
 
@@ -50,10 +47,10 @@
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Category Sales";
     
-    //get previous month
+    // get previous month
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month-=1;
+    comps.month -= 1;
     NSDate *startDate = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -63,12 +60,10 @@
     dateText                    = [dateFormat stringFromDate: NSDate.date];
     self.startDateText.text     = dateText;
     
-    
     [CommParse getAnalyticsCategorySales:self StartDate:startDate EndDate:NSDate.date];
 }
 // On Export
 - (void)exportItemClicked {
-    
     NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
     
     NSString *content;;
@@ -76,7 +71,7 @@
     
     NSMutableArray *items;
     for(NSString *key in keys){
-        items =categories[key];
+        items = categories[key];
         
         NSString *text1 = [NSString stringWithFormat:@"%.02f", [items[1] floatValue]];
         CGFloat net_pro = ([items[1] floatValue]-[items[2] floatValue])/[items[1] floatValue]*100;
@@ -85,28 +80,23 @@
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@", content, items[0], text1, text2 ];
     }
     
-    //export with csv format
+    // export with csv format
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UILabel *label = (UILabel*) [cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = @"Menu Category";
     
-    label = (UILabel*) [cell viewWithTag:2];
+    label = (UILabel *)[cell viewWithTag:2];
     label.text = @"Total";
     
-    label = (UILabel*) [cell viewWithTag:3];
+    label = (UILabel *)[cell viewWithTag:3];
     label.text = @"% of Net Sales";
     
     [cell setBackgroundColor:[UIColor lightGrayColor]];
@@ -118,19 +108,15 @@
     return 40;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [categories count];
+    return categories.count;
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -140,33 +126,28 @@
     }
     
     // Configure the cell...
-    NSString *key = [keys objectAtIndex:indexPath.row];
+    NSString *key = keys[indexPath.row];
     NSMutableArray *items;
     
-    items =categories[key];
+    items = categories[key];
     
-    UILabel *label = (UILabel*) [cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = items[0];
     
-    //Net Sales =  Total - discount
+    // Net Sales =  Total - discount
     CGFloat net_pro = ([items[1] floatValue] - [items[2] floatValue])/[items[1] floatValue]*100;
     if (net_pro != net_pro) // nan
         net_pro = 0;
     
-    //Total
-    label = (UILabel*) [cell viewWithTag:2];
+    // Total
+    label = (UILabel *)[cell viewWithTag:2];
     label.text = [NSString stringWithFormat:@"%.02f", [items[1] floatValue]];
     
-    //% of Net Sales
-    label = (UILabel*) [cell viewWithTag:3];
+    // % of Net Sales
+    label = (UILabel *)[cell viewWithTag:3];
     label.text = [NSString stringWithFormat:@"%.02f", net_pro];
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
 }
 
 
@@ -179,7 +160,7 @@
         CGFloat sum_net = 0;
         NSMutableArray *items;
         for(NSString *key in keys){
-            items =categories[key];
+            items = categories[key];
             sum_net += [items[1] floatValue]-[items[2] floatValue];
         }
         
@@ -191,7 +172,6 @@
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
     }
 }
-
 
 - (IBAction)onChangedDate:(id)sender {
     NSDate *selDate = [_datePicker date];
@@ -208,7 +188,7 @@
     
     NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
     NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
-    //from start day 00:00 to end day 24:00
+    // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
     if(startDate && endDate) {
@@ -241,7 +221,7 @@
 }
 
 
-- (BOOL)textfield:(UITextField *)textField shouldchangeCharactersInRange:(NSRange)range replacementString:(NSString *) string {
+- (BOOL)textfield:(UITextField *)textField shouldchangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;
 }
 

@@ -13,7 +13,7 @@
     NSMutableArray *results;
     NSMutableArray *sumVal;
 
-    //if selected text is start date then true
+    // if selected text is start date then true
     BOOL startDate_Flag;
     
 }
@@ -47,10 +47,10 @@
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Employee Shift Log";
     
-    //get previous month
+    // get previous month
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month-=1;
+    comps.month -= 1;
     NSDate *start_date = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -72,9 +72,9 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
     NSString *content;;
     content = @"Employee,Date,Clocked In,Clocked Out,Hours Worked,Tips";
     
-    for(int i=0; i< [results count]; i++) {
+    for(int i = 0; i< results.count; i++) {
     
-        PFObject *shift_obj = [results objectAtIndex:i];
+        PFObject *shift_obj = results[i];
         
         PFObject *emp_obj = shift_obj[@"employee"];
         
@@ -87,20 +87,20 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
         
         
         [dateFormat setDateFormat:@"hh:mm a"];
-        //Start Time
+        // Start Time
         NSString *startText = [dateFormat stringFromDate: startDate];
         
-        //End Time
+        // End Time
         NSString *endText = [dateFormat stringFromDate: endDate];
         
-        //calculate Time
+        // calculate Time
         NSTimeInterval timeDifference = [endDate timeIntervalSinceDate:startDate];
         
-        //Hours worked
+        // Hours worked
         CGFloat hoursDiff =  timeDifference/3600;
         
         
-        //Tips
+        // Tips
         CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
         CGFloat tips = hourlyWage *hoursDiff;
         
@@ -108,36 +108,32 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, emp_name, startText, endText, hoursDiff, tips];
     }
     
-    //export with csv format
+    // export with csv format
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-UILabel *label = (UILabel*) [cell viewWithTag:1];
+UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = @"Employee";
     
-    label = (UILabel*) [cell viewWithTag:2];
+    label = (UILabel *)[cell viewWithTag:2];
     label.text = @"Date";
     
-    label = (UILabel*) [cell viewWithTag:3];
+    label = (UILabel *)[cell viewWithTag:3];
     label.text = @"Clocked In";
     
-    label = (UILabel*) [cell viewWithTag:4];
+    label = (UILabel *)[cell viewWithTag:4];
     label.text = @"Clocked Out";
     
-    label = (UILabel*) [cell viewWithTag:5];
+    label = (UILabel *)[cell viewWithTag:5];
     label.text = @"Hours Worked";
 
-    label = (UILabel*) [cell viewWithTag:6];
+    label = (UILabel *)[cell viewWithTag:6];
     label.text = @"Tips";
     
     [cell setBackgroundColor:[UIColor lightGrayColor]];
@@ -149,14 +145,9 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     return 40;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [results count];
+    return results.count;
 }
 
 
@@ -173,15 +164,15 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     // Configure the cell...
     UILabel *label;
     
-    PFObject *shift_obj = [results objectAtIndex:indexPath.row];
+    PFObject *shift_obj = results[indexPath.row];
     
     PFObject *emp_obj = shift_obj[@"employee"];
     
     
     NSString *emp_name = emp_obj[@"name"];
     
-    //employee name
-    label = (UILabel*) [cell viewWithTag:6];
+    // employee name
+    label = (UILabel *)[cell viewWithTag:6];
     label.text = emp_name;
     
     NSDate *startDate = shift_obj[@"startedAt"];
@@ -190,34 +181,34 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     [dateFormat setDateFormat:@"dd-MM-yy"];
     
     NSString *dateText = [dateFormat stringFromDate: startDate];
-    //Date
-    label = (UILabel*) [cell viewWithTag:1];
+    // Date
+    label = (UILabel *)[cell viewWithTag:1];
     label.text = dateText;
     
     [dateFormat setDateFormat:@"hh:mm a"];
     dateText = [dateFormat stringFromDate: startDate];
-    //Start Time
-    label = (UILabel*) [cell viewWithTag:2];
+    // Start Time
+    label = (UILabel *)[cell viewWithTag:2];
     label.text = dateText;
     
     dateText = [dateFormat stringFromDate: endDate];
-    //End Time
-    label = (UILabel*) [cell viewWithTag:3];
+    // End Time
+    label = (UILabel *)[cell viewWithTag:3];
     label.text = dateText;
     
-    //calculate Time
+    // calculate Time
     NSTimeInterval timeDifference = [endDate timeIntervalSinceDate:startDate];
     CGFloat hoursDiff =  timeDifference/3600;
     
-    //Hours worked
-    label = (UILabel*) [cell viewWithTag:4];
+    // Hours worked
+    label = (UILabel *)[cell viewWithTag:4];
     label.text = [NSString stringWithFormat:@"%.03f", hoursDiff];
     
-    //Tips
+    // Tips
     CGFloat hourlyWage = [emp_obj[@"hourlyWage"] floatValue];
     CGFloat tips = hourlyWage *hoursDiff;
     
-    label = (UILabel*) [cell viewWithTag:5];
+    label = (UILabel *)[cell viewWithTag:5];
     label.text = [NSString stringWithFormat:@"%.02f", tips];
     
     
@@ -256,7 +247,7 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     _pickDateView.hidden = true;
     NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
     NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
-    //from start day 00:00 to end day 24:00
+    // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
     if(startDate && endDate) {

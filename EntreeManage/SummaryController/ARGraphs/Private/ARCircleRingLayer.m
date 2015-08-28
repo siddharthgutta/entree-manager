@@ -22,8 +22,8 @@
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 1.0
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    _lineColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    _lineColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     CGColorSpaceRelease(colorSpace);
     return self;
 }

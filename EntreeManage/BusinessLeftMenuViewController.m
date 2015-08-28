@@ -30,21 +30,12 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [menuItemss count];
+    return menuItemss.count;
 }
 
 
@@ -74,7 +65,7 @@
     param:      tab ID, left menu ID
 */
 - (void)changeLeftMenuSel:(NSInteger)leftMenuID {
-    //Summary
+    // Summary
     
         NSString *menuType;
         UINavigationController *nc = (UINavigationController *)self.parentViewController;
@@ -83,7 +74,7 @@
         BusinessViewController *viewInstance = (BusinessViewController *)nc.childViewControllers[0];
         
         
-        //BusinessViewController *viewInstance = [self.storyboard instantiateViewControllerWithIdentifier:@"businessDetailBoard"];
+        // BusinessViewController *viewInstance = [self.storyboard instantiateViewControllerWithIdentifier:@"businessDetailBoard"];
         
         if(leftMenuID==0)   {
             viewInstance.title = @"Menus";

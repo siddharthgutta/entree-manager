@@ -77,7 +77,7 @@
     _background.hidden = !useBackgroundGradient;
 }
 
-- (void)setDataSource:(id<ARPieChartDataSource>)dataSource {
+- (void)setDataSource:(id < ARPieChartDataSource>)dataSource {
     _dataSource = dataSource;
     _dataPoints = [[self.dataSource ARPieChartDataPoints:self] copy];
     _dataPointUtility.datapoints = _dataPoints;
@@ -142,7 +142,7 @@
     _labelsLayer.frame = self.bounds;
 }
 
-- (NSArray*)getLabelStrings {
+- (NSArray *)getLabelStrings {
     NSInteger count = self.dataCount;
     NSMutableArray *array = [[NSMutableArray alloc] init];
     while (count--) {

@@ -73,6 +73,7 @@
 		92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */; };
 		92FFDA8C1B7E26DF00B2D3A0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */; };
 		92FFDA8E1B7E26E900B2D3A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8D1B7E26E900B2D3A0 /* Social.framework */; };
+		B4D11B7F1B8FCF980012116A /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D11B7E1B8FCF980012116A /* Payment.m */; };
 		B4F582FB1B84413200DCF20C /* ARCircleGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BA1B84413200DCF20C /* ARCircleGraph.m */; };
 		B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */; };
 		B4F582FD1B84413200DCF20C /* ARLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BE1B84413200DCF20C /* ARLineGraph.m */; };
@@ -151,7 +152,7 @@
 		9287343B1B6A552E005E112A /* BusinessMenuItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BusinessMenuItemController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9287343C1B6A552E005E112A /* BusinessMenuItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuItemController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9287343E1B6A55CE005E112A /* BusinessMenuModifierController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuModifierController.h; sourceTree = "<group>"; };
-		9287343F1B6A55CE005E112A /* BusinessMenuModifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessMenuModifierController.m; sourceTree = "<group>"; };
+		9287343F1B6A55CE005E112A /* BusinessMenuModifierController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuModifierController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734411B6AA1E5005E112A /* BusinessMenuAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuAddController.h; sourceTree = "<group>"; };
 		928734421B6AA1E5005E112A /* BusinessMenuAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734441B6BC759005E112A /* BusinessMenuItemAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuItemAddController.h; sourceTree = "<group>"; };
@@ -224,6 +225,8 @@
 		92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		92FFDA8D1B7E26E900B2D3A0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9B7C2B71A79E7E36C8894553 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D11B7D1B8FCF980012116A /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = Model/Payment.h; sourceTree = "<group>"; };
+		B4D11B7E1B8FCF980012116A /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = Model/Payment.m; sourceTree = "<group>"; };
 		B4F582B91B84413200DCF20C /* ARCircleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleGraph.h; sourceTree = "<group>"; };
 		B4F582BA1B84413200DCF20C /* ARCircleGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleGraph.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582BB1B84413200DCF20C /* ARGraphDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphDataPoint.h; sourceTree = "<group>"; };
@@ -384,6 +387,7 @@
 		92C8F1081B60958A00ADF1D8 /* EntreeManage */ = {
 			isa = PBXGroup;
 			children = (
+				B4D11B7C1B8FCEB50012116A /* Model */,
 				92C8F1671B6401FE00ADF1D8 /* libs */,
 				92C8F1331B60DFC000ADF1D8 /* Classes */,
 				92C8F1321B60DFA400ADF1D8 /* Resources */,
@@ -573,6 +577,15 @@
 				92C8F1511B629F5500ADF1D8 /* LoginViewController.m */,
 			);
 			name = UserController;
+			sourceTree = "<group>";
+		};
+		B4D11B7C1B8FCEB50012116A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B4D11B7D1B8FCF980012116A /* Payment.h */,
+				B4D11B7E1B8FCF980012116A /* Payment.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		B4F582B71B84413200DCF20C /* SummaryController */ = {
@@ -864,6 +877,7 @@
 				928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */,
 				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
 				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
+				B4D11B7F1B8FCF980012116A /* Payment.m in Sources */,
 				92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */,
 				B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */,
 				B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */,

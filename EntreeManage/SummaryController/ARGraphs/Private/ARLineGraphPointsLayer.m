@@ -36,8 +36,8 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 1.0
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    _lineColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    _lineColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     CGColorSpaceRelease(colorSpace);
     
     return self;
@@ -62,14 +62,14 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
 }
 
-- (CAShapeLayer*)maskLayer {
+- (CAShapeLayer *)maskLayer {
     CAShapeLayer *mask = [CAShapeLayer layer];
     
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.8
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    CGColorRef stroke  = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    CGColorRef stroke  = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     
     CGMutablePathRef path = [self pathForMask];
     mask.path = path;
@@ -112,13 +112,13 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     for(int x = 0; x < _dataCount; x++){
         ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
         CGPoint relativePoint = [self pointForDataPoint:currentDataPoint index:x total:_dataCount];
-        if(x == 0){ //first
+        if(x == 0){ // first
             CGPathMoveToPoint(fillPath, NULL, relativePoint.x, self.bounds.size.height);
         }
         
         CGPathAddLineToPoint(fillPath, NULL, relativePoint.x, relativePoint.y);
         
-        if(x == _dataCount - 1){//last
+        if(x == _dataCount - 1){// last
             CGPathAddLineToPoint(fillPath, NULL, relativePoint.x, self.bounds.size.height);
             CGPathCloseSubpath(fillPath);
         }
@@ -129,8 +129,8 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 - (CGMutablePathRef)smoothLinePath {
     CGMutablePathRef path      = CGPathCreateMutable();
     NSInteger ctr              = 0;
-    CGPoint *ptss          = [self convertDataPointsToPointsInView];//NEED TO RELEASE
-    CGPoint *ptsSmoothings = (CGPoint *)malloc(sizeof(CGPoint) * 5);//NEED TO RELEASE
+    CGPoint *ptss          = [self convertDataPointsToPointsInView];// NEED TO RELEASE
+    CGPoint *ptsSmoothings = (CGPoint *)malloc(sizeof(CGPoint) * 5);// NEED TO RELEASE
     
     
     CGPathMoveToPoint(path, NULL, ptss[0].x, ptss[0].y);
@@ -161,9 +161,9 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 // Creates a mutable path of the area under a smooth line that connects the datapoints
 - (CGMutablePathRef)smoothFillPath {
     CGMutablePathRef path = CGPathCreateMutable();
-    CGMutablePathRef line = [self smoothLinePath];  //NEED TO RELEASE
+    CGMutablePathRef line = [self smoothLinePath];  // NEED TO RELEASE
     
-    CGPoint *ptss = [self convertDataPointsToPointsInView];  //NEED TO RELEASE
+    CGPoint *ptss = [self convertDataPointsToPointsInView];  // NEED TO RELEASE
     CGPathMoveToPoint(path, NULL,  ptss[0].x, self.bounds.size.height);
     CGPathAddLineToPoint(path, NULL, ptss[0].x, ptss[0].y);
     CGPathAddPath(path, NULL, line);
@@ -182,7 +182,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 #pragma mark - Helpers
 
 // In order to graph our data we need to convert it into point relative to our chart bounds
-- (CGPoint*)convertDataPointsToPointsInView {
+- (CGPoint *)convertDataPointsToPointsInView {
     CGPoint *ptss = (CGPoint *)malloc(sizeof(CGPoint) * _dataCount);
     
     for(NSInteger x = 0; x < _dataCount; x++){
@@ -192,7 +192,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     return ptss;
 }
 
-- (CGPoint)pointForDataPoint:(ARGraphDataPoint*)dataPoint index:(NSInteger)index total:(NSInteger)total {
+- (CGPoint)pointForDataPoint:(ARGraphDataPoint *)dataPoint index:(NSInteger)index total:(NSInteger)total {
     ARGraphDataPoint *dp = [self.dataPoints objectAtIndex:index];
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
     
@@ -253,7 +253,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         return;
     }
     _dataCount = [self.dataPoints count];
-    //CGContextSetRGBStrokeColor(ctx, 1.0, 1.0, 1.0, 1.0);
+    // CGContextSetRGBStrokeColor(ctx, 1.0, 1.0, 1.0, 1.0);
     CGContextSetStrokeColorWithColor(ctx, self.lineColor);
     CGContextSetShouldAntialias(ctx, YES);
     CGContextSetLineWidth(ctx, self.lineWidth);
@@ -302,7 +302,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
     CGContextClip(ctx);
     
-    //ADD gradient to chart
+    // ADD gradient to chart
     CGPoint startPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMinY(self.bounds) + self.topPadding);
     CGPoint endPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds) - self.bottomPadding);
     
@@ -310,19 +310,19 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGGradientRelease(gradient), gradient = NULL;
     CGContextRestoreGState(ctx);
     
-    CGPathRelease(fillPath); //RELEASED
+    CGPathRelease(fillPath); // RELEASED
 }
 
 - (void)drawSmoothLineInContext:(CGContextRef)ctx {
-    CGMutablePathRef path = [self smoothLinePath]; //NEED TO RELEASE
+    CGMutablePathRef path = [self smoothLinePath]; // NEED TO RELEASE
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
     
-    CGPathRelease(path); //RELEASE
+    CGPathRelease(path); // RELEASE
 }
 
-- (BOOL)drawDataPointDot:(ARGraphDataPoint*)dataPoint index:(NSInteger)index inContext:(CGContextRef)context inRect:(CGRect)rect {
+- (BOOL)drawDataPointDot:(ARGraphDataPoint *)dataPoint index:(NSInteger)index inContext:(CGContextRef)context inRect:(CGRect)rect {
     CGPoint relativePoint = [self pointForDataPoint:dataPoint index:index total:_dataCount];
     BOOL canDrawPoint = (relativePoint.x != NSNotFound && relativePoint.y != NSNotFound);
     if(canDrawPoint){
@@ -352,7 +352,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
         CGPoint relativePoint = [self pointForDataPoint:currentDataPoint index:x total:_dataCount];
 
-        if(x == 0){ //first
+        if(x == 0){ // first
             CGContextMoveToPoint(ctx, relativePoint.x, relativePoint.y);
         }else {
             ARGraphDataPoint *lastDP = [self.dataPoints objectAtIndex:x-1];

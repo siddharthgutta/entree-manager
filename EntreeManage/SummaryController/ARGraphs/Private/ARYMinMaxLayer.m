@@ -27,9 +27,9 @@
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.6
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    _defaultLineColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
-    _defaultLabelColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    _defaultLineColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
+    _defaultLabelColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     
     CGColorSpaceRelease(colorSpace);
     
@@ -148,10 +148,10 @@
             [textLayer setForegroundColor:_defaultLabelColor];
         }
         [textLayer setFontSize:12.0];
-        CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); //NEED TO RELEASE
+        CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); // NEED TO RELEASE
         textLayer.font = font;
 
-        CGFontRelease(font); //RELEASED
+        CGFontRelease(font); // RELEASED
         textLayer.shouldRasterize = NO;
         textLayer.anchorPoint = CGPointMake(0, 0.5);
         textLayer.contentsScale = 2.0;
@@ -173,10 +173,10 @@
             [textLayer setForegroundColor:_defaultLabelColor];
         }
         [textLayer setFontSize:12.0];
-        CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); //NEED TO RELEASE
+        CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); // NEED TO RELEASE
         textLayer.font = font;
         
-        CGFontRelease(font); //RELEASED
+        CGFontRelease(font); // RELEASED
         textLayer.shouldRasterize = NO;
         textLayer.anchorPoint = CGPointMake(0, 0.5);
         textLayer.contentsScale = 2.0;

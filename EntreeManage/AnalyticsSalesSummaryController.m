@@ -46,10 +46,10 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    //get previous month
+    // get previous month
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month-=1;
+    comps.month -= 1;
     NSDate *start_date = [cal dateFromComponents:comps];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -73,8 +73,8 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
     NSString *content;;
     content = @"Type,Total";
     
-    //export with csv format
-    for(int i=0; i< [rowNames count]; i++) {
+    // export with csv format
+    for(int i = 0; i< rowNames.count; i++) {
         content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNames[i], sumVal[i] ];
     }
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
@@ -82,14 +82,10 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 #pragma mark - Table view data source
-- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -103,14 +99,9 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
     return 40;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [rowNames count];
+    return rowNames.count;
 }
 
 
@@ -125,10 +116,10 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
     }
     
     // Configure the cell...
-UILabel *label = (UILabel*) [cell viewWithTag:1];
-    label.text =rowNames[indexPath.row];
+UILabel *label = (UILabel *)[cell viewWithTag:1];
+    label.text = rowNames[indexPath.row];
     
-    label = (UILabel*) [cell viewWithTag:2];
+    label = (UILabel *)[cell viewWithTag:2];
     label.text = [NSString stringWithFormat:@"%.02f", [sumVal[indexPath.row]floatValue]];
     
     return cell;
@@ -149,39 +140,39 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
 
     if ([response[@"responseCode"] boolValue]) {
         
-        //export csv and send email
+        // export csv and send email
         if ([response[@"action"] intValue] == 9) {
         }
         else {
             NSMutableArray *quotes =  [[NSMutableArray alloc] init];
             quotes = response[@"objects"];
             
-            //calculate sums
-            for(int i = 0;i < [quotes count];i++){ //PFObject *item_obj in quotes
-                PFObject *item_obj = [quotes objectAtIndex:i];
-                //Gross Sales
+            // calculate sums
+            for(int i = 0;i < quotes.count;i++){ // PFObject *item_obj in quotes
+                PFObject *item_obj = quotes[i];
+                // Gross Sales
                 [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[0] floatValue]]];
-                //Tax
+                // Tax
                 [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[item_obj[@"tax"] floatValue] + [sumVal[3] floatValue]]];
-                //Tips
+                // Tips
                 [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[item_obj[@"tip"] floatValue] + [sumVal[4] floatValue]]];
                 
-                //Cash
+                // Cash
                 if([item_obj[@"type"] isEqualToString:@"Cash"]) {
                     [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[9] floatValue]]];
                 }
-                //Card
+                // Card
                 else {
                     [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[item_obj[@"subtotal"] floatValue] + [sumVal[10] floatValue]]];
                 }
             }
-            //Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
+            // Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
             CGFloat temp = [response[@"discount"] floatValue];
             sumVal[1] = @(temp);
             temp = [sumVal[0] floatValue]-temp;
             sumVal[2] = @(temp);
             
-            //Total collected (Net sales + Tax + Tips)
+            // Total collected (Net sales + Tax + Tips)
             temp = [sumVal[2] floatValue]+[sumVal[3] floatValue]+[sumVal[4] floatValue];
             sumVal[6] = @(temp);
             
@@ -212,7 +203,7 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     
     NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
     NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
-    //from start day 00:00 to end day 24:00
+    // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
     if(startDate && endDate) {
@@ -231,7 +222,7 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     [_datePicker setDate:date];
     
     _pickDateView.frame = CGRectMake(200,140,390,0);
-    _pickDateView.hidden=false;
+    _pickDateView.hidden = false;
     [UIView animateWithDuration:1.0  animations:^ {
                          _pickDateView.frame = CGRectMake(200,140,390,270);
                      }];
@@ -248,7 +239,7 @@ UILabel *label = (UILabel*) [cell viewWithTag:1];
     [_datePicker setDate:date];
     
     _pickDateView.frame = CGRectMake(200,140,390,0);
-    _pickDateView.hidden=false;
+    _pickDateView.hidden = false;
     [UIView animateWithDuration:1.0  animations:^ {
         _pickDateView.frame = CGRectMake(200,140,390,270);
     }];

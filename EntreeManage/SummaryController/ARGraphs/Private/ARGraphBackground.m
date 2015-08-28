@@ -14,7 +14,7 @@
     
     CGColorRef colorOne = [ARHelpers lightenColor:color withPercent:0.2];
     CGColorRef colorTwo = [ARHelpers darkenColor:color withPercent:0.2];
-    //CGColorRelease(color);
+    // CGColorRelease(color);
     
     NSArray *colors = @[(__bridge id)(colorOne), (__bridge id)colorTwo];
     NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
@@ -33,7 +33,6 @@
     CGColorRef colorOne = [ARHelpers lightenColor:color withPercent:0.2];
     CGColorRef colorTwo = [ARHelpers darkenColor:color withPercent:0.2];
     self.colors = @[(__bridge id)(colorOne), (__bridge id)colorTwo];
-    
 }
 
 @end

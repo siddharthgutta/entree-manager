@@ -31,7 +31,7 @@
     
 }
 
-- (void)parseDataPoints:(NSArray*)dataPoints {
+- (void)parseDataPoints:(NSArray *)dataPoints {
     _allDataPointsTotal = 0;
     _smallestIndex = 0;
     NSInteger __block smallestValue = NSIntegerMax;
@@ -64,13 +64,13 @@
     }];
     
     for (NSInteger x = 0; x < dataPoints.count; x++) {
-        [percentages addObject:@([[sum objectAtIndex:x] doubleValue] / (double)_allDataPointsTotal)];
+        [percentages addObject:@([sum[x] doubleValue] / (double)_allDataPointsTotal)];
     }
     _sums = sum;
     _percentages = percentages;
 }
 
-- (NSInteger)sumDataPoints:(NSArray*)dataPoints {
+- (NSInteger)sumDataPoints:(NSArray *)dataPoints {
     NSInteger __block sum = 0;
     [dataPoints enumerateObjectsUsingBlock:^(ARGraphDataPoint *dataPoint, NSUInteger idx, BOOL *stop) {
         sum += dataPoint.yValue;

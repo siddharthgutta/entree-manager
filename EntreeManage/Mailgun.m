@@ -8,7 +8,7 @@
 
 #import "Mailgun.h"
 
-NSString *const kMailgunURL = @"https://api.mailgun.net/v2";
+NSString *const kMailgunURL = @"https:// api.mailgun.net/v2";
 
 @implementation Mailgun
 
@@ -47,7 +47,7 @@ NSString *const kMailgunURL = @"https://api.mailgun.net/v2";
     _apiKey = apiKey;
 }
 
-- (void)buildFormData:(id<AFMultipartFormData>)formData withAttachments:(NSDictionary *)attachments {
+- (void)buildFormData:(id < AFMultipartFormData>)formData withAttachments:(NSDictionary *)attachments {
     NSUInteger idx = 1;
     [attachments enumerateKeysAndObjectsUsingBlock:^(NSString *filename, NSArray *attachment, BOOL *stop) {
         NSString *name = [NSString stringWithFormat:@"attachment[%d]", (unsigned int)idx];
@@ -64,7 +64,7 @@ NSString *const kMailgunURL = @"https://api.mailgun.net/v2";
     NSURLRequest *request = [self multipartFormRequestWithMethod:@"POST"
                                                             path:messagePath
                                                       parameters:params
-                                       constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                       constructingBodyWithBlock:^(id < AFMultipartFormData> formData) {
                                            [self buildFormData:formData withAttachments:message.attachments];
                                            [self buildFormData:formData withAttachments:message.inlineAttachments];
                                        }];

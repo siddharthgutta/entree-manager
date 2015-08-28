@@ -20,7 +20,7 @@
 
 @interface ARLineGraph ()<ARGraphXLegendDelegate>
 
-//UI
+// UI
 @property (nonatomic, strong) ARGraphBackground *background;
 
 @property (strong, nonatomic) NSLayoutConstraint *titleHeightConstraint;
@@ -121,7 +121,7 @@
     _background.hidden = !useBackgroundGradient;
 }
 
-- (void)setDataSource:(id<ARLineGraphDataSource>)dataSource {
+- (void)setDataSource:(id < ARLineGraphDataSource>)dataSource {
     _dataSource = dataSource;
     [self reloadData];
 }
@@ -377,7 +377,7 @@
     
     return _titleContainerView;
 }
-- (ARLineGraphXLegendView*)xAxisContainerView {
+- (ARLineGraphXLegendView *)xAxisContainerView {
     if(_xAxisContainerView == nil){
         _xAxisContainerView = [[ARLineGraphXLegendView alloc] init];
         _xAxisContainerView.delegate = self;
@@ -390,7 +390,7 @@
     return _xAxisContainerView;
 }
 
-- (ARLineGraphYLegendView*)yAxisContainerView {
+- (ARLineGraphYLegendView *)yAxisContainerView {
     if(_yAxisContainerView == nil){
         _yAxisContainerView = [[ARLineGraphYLegendView alloc] init];
         [self addSubview:_yAxisContainerView];
@@ -416,7 +416,7 @@
     
     return UIEdgeInsetsMake(top, left, bottom, right);
 }
-- (CGSize)sizeOfText:(NSString*)text preferredFontForTextStyle:(NSString*)style {
+- (CGSize)sizeOfText:(NSString *)text preferredFontForTextStyle:(NSString *)style {
     UIFont *font = [UIFont preferredFontForTextStyle:style];
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: font}];
     

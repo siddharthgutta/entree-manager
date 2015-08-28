@@ -15,7 +15,7 @@
     NSMutableArray *category_s;
     NSMutableArray *item_s;
     
-    //tableviews' selected index key string save
+    // tableviews' selected index key string save
     NSMutableArray *selected_key_s;
     
 }
@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
     [CommParse getBusinessMenus:self MenuType:@"Menu" TopKey:@"" TopObject:nil];
     
-    //init key array
+    // init key array
     selected_key_s = [[NSMutableArray alloc] init];
     for(PFObject *item_obj in self.selected_items){
         [selected_key_s addObject:item_obj.objectId];
@@ -43,24 +43,15 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     NSInteger nums;
-    if(tableView == _menuView) nums = [menu_s count];
-    else if(tableView == _categoryView) nums = [category_s count];
-    else if(tableView == _itemView) nums = [item_s count];
+    if(tableView == _menuView) nums = menu_s.count;
+    else if(tableView == _categoryView) nums = category_s.count;
+    else if(tableView == _itemView) nums = item_s.count;
     
     return nums;
 }
@@ -90,12 +81,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_id];
     }
 
-    PFObject *item_obj = [cell_s objectAtIndex:indexPath.row];
+    PFObject *item_obj = cell_s[indexPath.row];
     
     // Item Table Multi select with Check Accessory Type
     if(tableView==_itemView){
         
-        //NSString *key_string = [NSString stringWithFormat:@"%ld-%ld-%ld", selected_index1, selected_index2, indexPath.row];
+        // NSString *key_string = [NSString stringWithFormat:@"%ld-%ld-%ld", selected_index1, selected_index2, indexPath.row];
         NSString *key_string = item_obj.objectId;
         
         BOOL is_contain = [selected_key_s containsObject:key_string];
@@ -114,14 +105,14 @@
 // table cell tapping - click
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(tableView == _menuView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuCategory" TopKey:@"menu" TopObject:[menu_s objectAtIndex:indexPath.row]];
+        [CommParse getBusinessMenus:self MenuType:@"MenuCategory" TopKey:@"menu" TopObject:menu_s[indexPath.row]];
     }
     else if(tableView == _categoryView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuItem" TopKey:@"menuCategory" TopObject:[category_s objectAtIndex:indexPath.row]];
+        [CommParse getBusinessMenus:self MenuType:@"MenuItem" TopKey:@"menuCategory" TopObject:category_s[indexPath.row]];
     }
     else if(tableView == _itemView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        PFObject *item_obj = [item_s objectAtIndex:indexPath.row];
+        PFObject *item_obj = item_s[indexPath.row];
         
         
         NSString *key_string = item_obj.objectId;
@@ -146,7 +137,7 @@
 - (IBAction)onClickSave:(id)sender {
     //[ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
+    // if not exist then add
     [_parent_delegate returnSelectedItems:self.selected_items];
     
     [self dismissViewControllerAnimated:YES completion:nil];

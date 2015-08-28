@@ -22,15 +22,11 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 
 // show Pages func when onclick Left Menu
-- (void)showAnalyticsPage:(NSString*)segueId {
+- (void)showAnalyticsPage:(NSString *)segueId {
     [self performSegueWithIdentifier:segueId sender:self];
 }
 

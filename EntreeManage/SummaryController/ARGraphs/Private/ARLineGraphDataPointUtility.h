@@ -20,6 +20,6 @@
 @property (nonatomic, readonly) NSInteger xMean;
 @property (nonatomic, readonly) NSInteger yMean;
 
-- (void)appendDataPoint:(ARGraphDataPoint*)dataPoint;
+- (void)appendDataPoint:(ARGraphDataPoint *)dataPoint;
 
 @end

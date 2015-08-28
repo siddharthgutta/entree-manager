@@ -15,7 +15,7 @@
     __weak IBOutlet UITextField *emailField;
     __weak IBOutlet UITextField *passField;    
 
-    //UITabBarController *tabBarController;
+    // UITabBarController *tabBarController;
 }
 
 @end
@@ -71,7 +71,7 @@
             
             [summary pushViewController:[[SummaryViewController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]] animated:NO];
             
-            NSArray *controllers = @[summary, business, analytics, settings]; //navController,
+            NSArray *controllers = @[summary, business, analytics, settings]; // navController,
             tab.viewControllers = controllers;
             
             AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;

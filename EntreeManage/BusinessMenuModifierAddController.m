@@ -42,7 +42,7 @@
         destController.parent_delegate = self;
     }
 }
-- (void)returnSelectedItems:(NSMutableArray*)returns {
+- (void)returnSelectedItems:(NSMutableArray *)returns {
     selected_items = returns;
     [_menuView reloadData];
 }
@@ -63,21 +63,12 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [selected_items count];
+    return selected_items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,7 +76,7 @@
     
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
     
-    PFObject *item_obj = [selected_items objectAtIndex:indexPath.row];
+    PFObject *item_obj = selected_items[indexPath.row];
     
     NSString *name = [PFUtils getProperty:@"name" InObject:item_obj];
     cell.textLabel.text = name;
@@ -101,7 +92,7 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
+    // if not exist then add
     if(_menuObj==nil) {
         _menuObj = [PFObject objectWithClassName:_menuType];
     }
@@ -138,9 +129,9 @@
     else if ([response[@"action"] intValue] == 2) {
         if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
+            // Menus Refresh
             
             [_parent_delegate showBusinessMenus:_menuType];
             
@@ -150,10 +141,10 @@
     }
 }
 
-//Add Items to Modifier
+// Add Items to Modifier
 - (IBAction)onClickAddItems:(id)sender {
 
-    //show item add window
+    // show item add window
     [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
     
     

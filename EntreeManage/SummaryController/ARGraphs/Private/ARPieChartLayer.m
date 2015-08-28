@@ -26,8 +26,8 @@
     CGFloat fillColors [] = {
         1.0, 1.0, 1.0, 0.8
     };
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); //NEED TO RELEASE
-    self.fillBaseColor = CGColorCreate(colorSpace, fillColors); //RELEASE ON DEalloc
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB(); // NEED TO RELEASE
+    self.fillBaseColor = CGColorCreate(colorSpace, fillColors); // RELEASE ON DEalloc
     CGColorSpaceRelease(colorSpace);
     return self;
 }
@@ -176,7 +176,7 @@
 
 #pragma mark - Layer Creation
 
-- (CAShapeLayer*)sliceLayerForPercentage:(CGFloat)percentage startAngle:(CGFloat)startAngle {
+- (CAShapeLayer *)sliceLayerForPercentage:(CGFloat)percentage startAngle:(CGFloat)startAngle {
     CAShapeLayer *slice = [CAShapeLayer layer];
     CGMutablePathRef path = [self pathForSliceWithPercent:percentage startAngle:startAngle];
     slice.path = path;
@@ -186,7 +186,7 @@
     return slice;
 }
 
-- (CAShapeLayer*)maskLayer {
+- (CAShapeLayer *)maskLayer {
     CAShapeLayer *mask = [CAShapeLayer layer];
     CGFloat radius = [self radiusOfPie];
 
@@ -255,7 +255,7 @@
 
 #pragma mark - Path Creation
 
-- (UIBezierPath*)pathForMask {
+- (UIBezierPath *)pathForMask {
     CGFloat radius = [self radiusOfPie];
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center

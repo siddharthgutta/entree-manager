@@ -93,7 +93,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }
     return CGSizeMake(width, self.bounds.size.height);
 }
-- (UILabel*)titleLabel {
+- (UILabel *)titleLabel {
     if(_titleLabel == nil){
         UILabel *label = [[UILabel alloc] init];
         label.translatesAutoresizingMaskIntoConstraints = NO;
@@ -137,7 +137,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
         [self addSubview:label];
         [copiedLabels addObject:label];
     } delete:^(NSInteger index) {
-        [[copiedLabels objectAtIndex:index] removeFromSuperview];
+        [copiedLabels[index] removeFromSuperview];
         [copiedLabels removeObjectAtIndex:index];
     } update:^(NSInteger index) {
         
@@ -159,20 +159,20 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     }];
 }
 
-- (void)updateLabel:(UILabel*)label yValue:(CGFloat)yValue value:(NSNumber*)value {
+- (void)updateLabel:(UILabel *)label yValue:(CGFloat)yValue value:(NSNumber *)value {
     label.textColor = self.labelColor;
     label.text = [NSString stringWithFormat:@"%li",(long)[value integerValue]];
     [self updateFrameOfLabel:label yValue:yValue];
 }
 
-- (UILabel*)makeLabel {
+- (UILabel *)makeLabel {
     UILabel *label = [[UILabel alloc] init];
     label.textColor = self.labelColor;
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     return label;
 }
 
-- (void)updateFrameOfLabel:(UILabel*)label yValue:(CGFloat)yValue {
+- (void)updateFrameOfLabel:(UILabel *)label yValue:(CGFloat)yValue {
     [label sizeToFit];
     CGRect frame = label.frame;
     frame.origin.x = self.bounds.size.width - frame.size.width;

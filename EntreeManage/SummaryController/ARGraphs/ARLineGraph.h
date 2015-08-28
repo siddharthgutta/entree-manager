@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ARGraphDataPoint.h"
 
-//typedef NS_OPTIONS(NSInteger, CYCGraphyLegendAlignment){
+// typedef NS_OPTIONS(NSInteger, CYCGraphyLegendAlignment){
 //    CYCGraphyLegendAlignmentLeft,
 //    CYCGraphyLegendAlignmentRight
 //};
@@ -92,7 +92,7 @@
  
  @param dataPoint data point to append to the current graph
  */
-- (void)appendDataPoint:(ARGraphDataPoint*)dataPoint;
+- (void)appendDataPoint:(ARGraphDataPoint *)dataPoint;
 
 /*!
  @abstract Animate the graph into view
@@ -113,7 +113,7 @@
  
  @return array of @c ARGraphDataPoint objects
  */
-- (NSArray*)ARGraphDataPoints:(ARLineGraph*)graph;
+- (NSArray *)ARGraphDataPoints:(ARLineGraph *)graph;
 @optional
 /*!
  Get the title for the graph.
@@ -122,7 +122,7 @@
  
  @return title for the graph
  */
-- (NSString*)titleForGraph:(ARLineGraph*)graph;
+- (NSString *)titleForGraph:(ARLineGraph *)graph;
 
 /*!
  Get the subtitle for the graph.
@@ -130,7 +130,7 @@
  @param graph the @c ARGraph to get the subtitle for
  
  @return subtitle for the graph
- */- (NSString*)subTitleForGraph:(ARLineGraph*)graph;
+ */- (NSString *)subTitleForGraph:(ARLineGraph *)graph;
 
 /*!
  Get the title for the X Axis of the graph.
@@ -139,7 +139,7 @@
  
  @return title of the X Axis of the graph
  */
-- (NSString*)ARGraphTitleForXAxis:(ARLineGraph *)graph;
+- (NSString *)ARGraphTitleForXAxis:(ARLineGraph *)graph;
 
 /*!
  Get the title for the Y Axis of the graph.
@@ -147,6 +147,6 @@
  @param graph the @c ARGraph to get the Y Axis title for
  
  @return title of the Y Axis of the graph
- */- (NSString*)ARGraphTitleForYAxis:(ARLineGraph *)graph;
+ */- (NSString *)ARGraphTitleForYAxis:(ARLineGraph *)graph;
 
 @end

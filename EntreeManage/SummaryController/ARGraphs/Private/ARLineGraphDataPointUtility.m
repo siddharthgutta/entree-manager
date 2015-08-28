@@ -67,7 +67,7 @@
     _xMean = floor(_realXMean); // round down
 }
 
-- (void)updateMinMaxMean:(ARGraphDataPoint*)newDataPoint {
+- (void)updateMinMaxMean:(ARGraphDataPoint *)newDataPoint {
     [self parseMinMaxForDataPoint:newDataPoint];
     _realXMean = (_realXMean *self.datapoints.count + newDataPoint.xValue)/(float)(self.datapoints.count + 1);
     _realYMean = (_realYMean *self.datapoints.count + newDataPoint.yValue)/(float)(self.datapoints.count + 1);
@@ -76,7 +76,7 @@
 
 }
 
-- (void)parseMinMaxForDataPoint:(ARGraphDataPoint*)dp {
+- (void)parseMinMaxForDataPoint:(ARGraphDataPoint *)dp {
     _yMin = _yMin != NSNotFound ? _yMin : NSIntegerMax;
     _yMax = _yMax != NSNotFound ? _yMax : NSIntegerMin;
     _xMin = _xMin != NSNotFound ? _xMin : NSIntegerMax;

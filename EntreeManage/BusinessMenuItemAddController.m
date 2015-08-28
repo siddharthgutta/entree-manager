@@ -41,18 +41,14 @@
 
 // The number of rows of data
 - (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component {
-    return [COLOR_ARRAY count];
+    return COLOR_ARRAY.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return COLOR_ARRAY[row];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (IBAction)onClickCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -61,7 +57,7 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
+    // if not exist then add
     if(_menuObj==nil) {
         _menuObj = [PFObject objectWithClassName:_menuType];
     }
@@ -72,10 +68,10 @@
     
     _menuObj[@"price"] = price;
     
-    //Get Color Picker Value
+    // Get Color Picker Value
     NSInteger color_index = [_pickerColor selectedRowInComponent:0];
     [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    //NSString *color_str = [COLOR_ARRAY objectAtIndex:color_index];
+    // NSString *color_str = COLOR_ARRAY[color_index];
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];
 }
@@ -86,9 +82,9 @@
     if ([response[@"action"] intValue] == 2) {
         if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
+            // Menus Refresh
             
             [_parent_delegate showBusinessMenus:_menuType];
             

@@ -42,7 +42,7 @@
     [self addAnimation:[self opacityAnimation] forKey:@"opacityAnimation"];
 }
 
-- (CABasicAnimation*)opacityAnimation {
+- (CABasicAnimation *)opacityAnimation {
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     animation.duration = self.animationDuration;
     animation.fromValue = @0;
@@ -67,7 +67,7 @@
     }
 }
 
-- (NSArray*)makeLabels {
+- (NSArray *)makeLabels {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     NSInteger count = self.numberOfSlices;
     for(NSInteger x = 0; x < count; x++){
@@ -108,15 +108,15 @@
     CGRect frame = CGRectMake(origin.x - size.width/2, origin.y - size.height/2, size.width, size.height);
     return frame;
 }
-- (CATextLayer*)textLayerForPieIndex:(NSUInteger)index {
+- (CATextLayer *)textLayerForPieIndex:(NSUInteger)index {
     CATextLayer *textLayer = [CATextLayer layer];    
     [textLayer setString:@"Hello World"];
     [textLayer setForegroundColor:self.labelColor];
     [textLayer setFontSize:12.0];
-    CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); //NEED TO RELEASE
+    CGFontRef font = CGFontCreateWithFontName((CFStringRef)@"Helvetica"); // NEED TO RELEASE
     textLayer.font = font;
     
-    CGFontRelease(font); //RELEASED
+    CGFontRelease(font); // RELEASED
     textLayer.shouldRasterize = NO;
     textLayer.anchorPoint = CGPointMake(0, 0.5);
     textLayer.contentsScale = 2.0;

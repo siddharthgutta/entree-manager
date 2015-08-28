@@ -130,7 +130,7 @@
     return increments;
 }
 
-+ (CGFloat)heightOfCaptionText:(NSString*)text inWidth:(CGFloat)width; {
++ (CGFloat)heightOfCaptionText:(NSString *)text inWidth:(CGFloat)width; {
     return [self sizeOfText:text constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)].height;
 }
 
@@ -138,7 +138,7 @@
     return [self sizeOfText:text constrainedToSize:CGSizeMake(CGFLOAT_MAX, height)].width;
 }
 
-+ (void)CRUDObjectsWithExisting:(NSArray*)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock {
++ (void)CRUDObjectsWithExisting:(NSArray *)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock {
     NSInteger numberOfExisiting = existing.count;
     NSInteger diff = totalNeeded - numberOfExisiting;
     if(diff >= 0){// create or update

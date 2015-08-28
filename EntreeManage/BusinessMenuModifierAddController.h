@@ -13,5 +13,5 @@
     @property (nonatomic, weak) NSString *menuType;
     @property (nonatomic, assign) id parent_delegate;
 
-- (void)returnSelectedItems:(NSMutableArray*)returns;
+- (void)returnSelectedItems:(NSMutableArray *)returns;
 @end

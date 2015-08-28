@@ -11,5 +11,5 @@
 
 @interface BusinessMenuCategoryController : UITableViewController
     @property (nonatomic, weak) PFObject *topMenuObj;
-    - (void)showBusinessMenus:(NSString*)MenuType;
+    - (void)showBusinessMenus:(NSString *)MenuType;
 @end

@@ -88,7 +88,7 @@
 
 #pragma mark - Getter
 
-- (UILabel*)titleLabel {
+- (UILabel *)titleLabel {
     if(_titleLabel == nil){
         UILabel *label = [[UILabel alloc] init];
         label.translatesAutoresizingMaskIntoConstraints = NO;
@@ -131,7 +131,7 @@
         [self addSubview:label];
         [copiedLabels addObject:label];
     } delete:^(NSInteger index) {
-        [[copiedLabels objectAtIndex:index] removeFromSuperview];
+        [copiedLabels[index] removeFromSuperview];
         [copiedLabels removeObjectAtIndex:index];
     } update:^(NSInteger index) {
         [self updateLabel:copiedLabels[index] xValue:[xPositionIncrements[index] floatValue] dpIndex:increments[index]];
@@ -139,14 +139,14 @@
     _labels = copiedLabels;
 }
 
-- (UILabel*)makeLabel {
+- (UILabel *)makeLabel {
     UILabel *label = [[UILabel alloc] init];
     label.textColor = self.labelColor;
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     return label;
 }
 
-- (void)updateLabel:(UILabel*)label xValue:(CGFloat)xValue dpIndex:(NSNumber*)dpIndex {
+- (void)updateLabel:(UILabel *)label xValue:(CGFloat)xValue dpIndex:(NSNumber *)dpIndex {
     label.textColor = self.labelColor;
     if(self.normalizeXValues){
         label.text = [self stringForXLegendAtIndex:[dpIndex integerValue]];
@@ -162,7 +162,7 @@
 
 }
 
-- (void)updateFrameOfLabel:(UILabel*)label xValue:(CGFloat)xValue {
+- (void)updateFrameOfLabel:(UILabel *)label xValue:(CGFloat)xValue {
     [label sizeToFit];
     CGRect frame = label.frame;
     frame.origin.x = xValue;
@@ -188,7 +188,7 @@
     }];
 }
 
-- (NSString*)stringForXLegendAtIndex:(NSUInteger)index {
+- (NSString *)stringForXLegendAtIndex:(NSUInteger)index {
     NSInteger value = [self.delegate xLegend:self valueAtIndex:index];
     
     return [NSString stringWithFormat:@"%li", (long)value];

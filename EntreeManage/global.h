@@ -22,3 +22,10 @@
 
 #endif
 
+#define PARSE_REGISTER_CLASS + (void)initialize { \
+    [self registerSubclass]; \
+}
+
+#define PARSE_CLASS_NAME + (NSString *)parseClassName { \
+    return NSStringFromClass([self class]); \
+}

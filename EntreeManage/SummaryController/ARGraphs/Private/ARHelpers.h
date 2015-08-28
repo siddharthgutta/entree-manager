@@ -71,7 +71,7 @@
  *  @param  width to fit the text into
  *  @return CGFloat of the string at the caption font size
  */
-+ (CGFloat)heightOfCaptionText:(NSString*)text inWidth:(CGFloat)width;
++ (CGFloat)heightOfCaptionText:(NSString *)text inWidth:(CGFloat)width;
 
 /**
  *  @abstract Measures a string at caption size
@@ -82,7 +82,7 @@
  *  @param  width to fit the text into
  *  @return CGFloat of the string at the caption font size
  */
-+ (CGFloat)widthOfCaptionText:(NSString*)text inHeight:(CGFloat)height;
++ (CGFloat)widthOfCaptionText:(NSString *)text inHeight:(CGFloat)height;
 
 /**
  *  @abstract Calls CRUD blocks so we dont have to recreate exisiting items
@@ -96,7 +96,7 @@
  *  @param  updateBlock block to call when an object exists and should be update
 
  */
-+ (void)CRUDObjectsWithExisting:(NSArray*)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock;
++ (void)CRUDObjectsWithExisting:(NSArray *)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock;
 
 /**
  *  @abstract Converts a datapoint to a coordinate in a view

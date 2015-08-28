@@ -27,26 +27,17 @@
     
     // Left menu show for each tab
     menuItemss = [[NSMutableArray alloc] initWithObjects:@"Sales Summary", @"Category Sales", @"Employee Shifts", @"Payroll", @"Order Report", @"Modifier Sales", nil];
-    menuSegueIds= [[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ModifierSales", nil];
+    menuSegueIds =[[NSMutableArray alloc] initWithObjects:@"SalesSummary", @"CategorySales", @"EmployeeShifts", @"Payroll", @"OrderReport", @"ModifierSales", nil];
     [self.tableView reloadData];
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [menuItemss count];
+    return menuItemss.count;
 }
 
 
@@ -82,7 +73,7 @@
     nc = (UINavigationController *)splitVC.viewControllers[1];
     AnalyticsViewController *viewInstance = (AnalyticsViewController *)nc.childViewControllers[0];    
     
-    //get segue id
+    // get segue id
     menuType = [@"segueAnalytics" stringByAppendingString:menuSegueIds[leftMenuID]];
     [viewInstance showAnalyticsPage:menuType];
     

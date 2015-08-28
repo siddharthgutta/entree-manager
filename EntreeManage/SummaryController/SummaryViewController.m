@@ -103,7 +103,7 @@ NSString *StringFromSummaryView(SummaryView sv) {
 
 #pragma mark UICollectionViewDelegateFlowLayout
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     SummaryView idx = (SummaryView)indexPath.row;
     switch (idx) {
         case SummaryViewNetSalesGraph: {

@@ -97,7 +97,7 @@
     [_subtitleLabel.superview addConstraints:@[centerY, left, right]];
 }
 
-- (CGSize)sizeOfText:(NSString*)text preferredFontForTextStyle:(NSString*)style {
+- (CGSize)sizeOfText:(NSString *)text preferredFontForTextStyle:(NSString *)style {
     UIFont *font = [UIFont preferredFontForTextStyle:style];
     NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text attributes:@{NSFontAttributeName: font}];
     

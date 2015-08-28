@@ -10,6 +10,6 @@
 
 @interface BusinessModifierItemSelController : UIViewController
     @property (nonatomic, assign) id parent_delegate;
-    //array is object lists of selected items
+    // array is object lists of selected items
     @property (nonatomic, assign) NSMutableArray *selected_items;
 @end

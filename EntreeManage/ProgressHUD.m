@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2014 Related Code - http://relatedcode.com
+// Copyright (c) 2014 Related Code - http:// relatedcode.com
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -62,7 +62,7 @@
 - (id)init {
     self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
+    id < UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
     
     if ([delegate respondsToSelector:@selector(window)])
         window = [delegate performSelector:@selector(window)];
@@ -309,7 +309,7 @@
 
 - (void)hideAfterDelay:(NSNumber *)delay {
     @autoreleasepool {
-        //NSUInteger length = label.text.length;
+        // NSUInteger length = label.text.length;
         
         [NSThread sleepForTimeInterval:[delay floatValue]];
         

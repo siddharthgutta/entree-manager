@@ -33,6 +33,6 @@
 
 @protocol ARGraphXLegendDelegate <NSObject>
 @required
-- (NSInteger)xLegend:(ARLineGraphXLegendView*)lengend valueAtIndex:(NSUInteger)index;
+- (NSInteger)xLegend:(ARLineGraphXLegendView *)lengend valueAtIndex:(NSUInteger)index;
 - (NSUInteger)numberOfDataPoints;
 @end

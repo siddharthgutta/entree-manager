@@ -141,21 +141,21 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * Delegate method to enable/disable swipe gestures
  * @return YES if swipe is allowed
  **/
-- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point;
-- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell canSwipe:(MGSwipeDirection) direction DEPRECATED_ATTRIBUTE; //backwards compatibility
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection) direction DEPRECATED_ATTRIBUTE; // backwards compatibility
 
 /**
  * Delegate method invoked when the current swipe state changes
  @param state the current Swipe State
  @param gestureIsActive YES if the user swipe gesture is active. No if the uses has already ended the gesture
  **/
-- (void)swipeTableCell:(MGSwipeTableCell*) cell didChangeSwipeState:(MGSwipeState) state gestureIsActive:(BOOL) gestureIsActive;
+- (void)swipeTableCell:(MGSwipeTableCell *)cell didChangeSwipeState:(MGSwipeState) state gestureIsActive:(BOOL) gestureIsActive;
 
 /**
  * Called when the user clicks a swipe button or when a expandable button is automatically triggered
  * @return YES to autohide the current swipe buttons
  **/
-- (BOOL)swipeTableCell:(MGSwipeTableCell*) cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion;
 /**
  * Delegate method to setup the swipe buttons and swipe/expansion settings
  * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
@@ -166,8 +166,8 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * @param expansionSettings instance to configure button expansions (optional)
  * @return Buttons array
  **/
--(NSArray*) swipeTableCell:(MGSwipeTableCell*) cell swipeButtonsForDirection:(MGSwipeDirection)direction
-             swipeSettings:(MGSwipeSettings*) swipeSettings expansionSettings:(MGSwipeExpansionSettings*) expansionSettings;
+-(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+             swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings;
 
 /**
  * Called when the user taps on a swiped cell
@@ -179,12 +179,12 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * Called when the cell will begin swiping
  * Useful to make cell changes that only are shown after the cell is swiped open
  **/
-- (void)swipeTableCellWillBeginSwiping:(MGSwipeTableCell *) cell;
+- (void)swipeTableCellWillBeginSwiping:(MGSwipeTableCell *)cell;
 
 /**
  * Called when the cell will end swiping
  **/
-- (void)swipeTableCellWillEndSwiping:(MGSwipeTableCell *) cell;
+- (void)swipeTableCellWillEndSwiping:(MGSwipeTableCell *)cell;
 
 @end
 
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @interface MGSwipeTableCell : UITableViewCell
 
 /** optional delegate (not retained) */
-@property (nonatomic, weak) id<MGSwipeTableCellDelegate> delegate;
+@property (nonatomic, weak) id < MGSwipeTableCellDelegate> delegate;
 
 /** optional to use contentView alternative. Use this property instead of contentView to support animated views while swiping */
 @property (nonatomic, strong, readonly) UIView *swipeContentView;
@@ -224,7 +224,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @property (nonatomic) BOOL allowsMultipleSwipe;
 // default is NO. Controls whether buttons with different width are allowed. Buttons are resized to have the same size by default.
 @property (nonatomic) BOOL allowsButtonsWithDifferentWidth;
-//default is YES. Controls wheter swipe gesture is allowed when the touch starts into the swiped buttons
+// default is YES. Controls wheter swipe gesture is allowed when the touch starts into the swiped buttons
 @property (nonatomic) BOOL allowsSwipeWhenTappingButtons;
 // default is NO.  Controls whether the cell selection/highlight status is preserved when expansion occurs
 @property (nonatomic) BOOL preservesSelectionStatus;
@@ -240,7 +240,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 - (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
 - (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated completion:(void(^)()) completion;
 - (void)setSwipeOffset:(CGFloat)offset animated: (BOOL) animated completion:(void(^)()) completion;
-- (void)setSwipeOffset:(CGFloat)offset animation: (MGSwipeAnimation *) animation completion:(void(^)()) completion;
+- (void)setSwipeOffset:(CGFloat)offset animation: (MGSwipeAnimation *)animation completion:(void(^)()) completion;
 - (void)expandSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
 
 /** Refresh method to be used when you want to update the cell contents while the user is swiping */
