@@ -227,7 +227,7 @@
             item = orderItem[@"order"];
             
             payment = item[@"payment"];
-            payment = [paymentQuery getObjectWithId:payment.objectId];
+            payment = (id)[paymentQuery getObjectWithId:payment.objectId];
             CGFloat totalSales = payment.total;
             
             // if exist same menu item
@@ -360,7 +360,7 @@ NSMutableDictionary *results = [[NSMutableDictionary alloc] init];
             
             [results  setObject:emps forKey:empId];
         }
-        
+         
         // calculate tips
         PFQuery *payQuery = [Payment query];
         [payQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];

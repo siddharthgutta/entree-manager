@@ -138,7 +138,7 @@
     //[ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    [_parent_delegate returnSelectedItems:self.selectedItems];
+    [_parentDelegate returnSelectedItems:self.selectedItems];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
