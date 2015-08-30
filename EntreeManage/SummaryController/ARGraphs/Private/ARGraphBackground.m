@@ -17,8 +17,8 @@
     // CGColorRelease(color);
     
     NSArray *colors = @[(__bridge id)(colorOne), (__bridge id)colorTwo];
-    NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
-    NSNumber *stopTwo = [NSNumber numberWithFloat:1.0];
+    NSNumber *stopOne = @(0.0);
+    NSNumber *stopTwo = @(1.0);
     
     NSArray *locations = @[stopOne, stopTwo];
     

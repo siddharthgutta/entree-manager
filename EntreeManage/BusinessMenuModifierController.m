@@ -22,14 +22,13 @@
     [super viewDidLoad];
      self.title = @"Menu Modifiers";
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self MenuType:@"MenuItemModifier" TopKey:@"" TopObject:nil];
+    [CommParse getBusinessMenus:self menuType:@"MenuItemModifier" topKey:@"" topObject:nil];
 }
 
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return quotes.count;
 }
 
@@ -39,7 +38,7 @@
     
     PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
+    NSString *name = menuObj[@"name"];
     cell.textLabel.text = name;
     
     return cell;
@@ -47,8 +46,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectedIndexPath = indexPath;
-    
 }
 
 //==================================================
@@ -60,7 +59,7 @@
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         
-        quotes = [[NSArray alloc] init];
+        quotes = @[];
         if ([response[@"responseCode"] boolValue]) {
             
             quotes = response[@"objects"];

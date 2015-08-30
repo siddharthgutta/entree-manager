@@ -39,7 +39,6 @@
     
     _pickDateView.hidden = true;
     
-    // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
     self.navigationItem.rightBarButtonItems = @[exportButton];
@@ -47,22 +46,16 @@
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Category Sales";
     
-    // get previous month
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month -= 1;
-    NSDate *startDate = [cal dateFromComponents:comps];
+    // Previous month's data
+    NSDate *startDate = [NSDate date30DaysAgo];
+    NSDate *endDate   = [NSDate date];
+    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
+    _startDateText.text         = [dateFormat stringFromDate:startDate];
+    _endDateText.text           = [dateFormat stringFromDate:endDate];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText          = [dateFormat stringFromDate: startDate];
-    self.startDateText.text     = dateText;
-    dateText                    = [dateFormat stringFromDate: NSDate.date];
-    self.startDateText.text     = dateText;
-    
-    [CommParse getAnalyticsCategorySales:self StartDate:startDate EndDate:NSDate.date];
+    [CommParse getAnalyticsCategorySales:self startDate:startDate endDate:endDate];
 }
-// On Export
+
 - (void)exportItemClicked {
     NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
     
@@ -81,7 +74,7 @@
     }
     
     // export with csv format
-    [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
+    [CommParse sendEmailwithMailGun:self userEmail:@"" emailSubject:title emailContent:content];
 }
 
 
@@ -121,7 +114,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -181,7 +174,7 @@
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
     NSString *dateText = [dateFormat stringFromDate: selDate];
-    if(startDate_Flag)  _startDateText.text = dateText;
+    if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
@@ -191,8 +184,8 @@
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
-    if(startDate && endDate) {
-        [CommParse getAnalyticsCategorySales:self StartDate:startDate EndDate:endDate];
+    if (startDate && endDate) {
+        [CommParse getAnalyticsCategorySales:self startDate:startDate endDate:endDate];
     }
 }
 

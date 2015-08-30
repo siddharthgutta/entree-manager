@@ -21,7 +21,7 @@
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self addSubview:self.titleLabel];
         [self addTitleLabelConstraints];
         self.labelColor = [UIColor whiteColor];
@@ -33,7 +33,7 @@
 
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
-    if(self.superview){
+    if (self.superview) {
         self.bottomConstraint = [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
         self.rightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0];
         self.heightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:40.0];
@@ -55,7 +55,7 @@
 - (void)setTitle:(NSString *)title {
     _title = title;
     self.titleLabel.text = title;
-    if(self.heightConstraint.constant > 0){
+    if (self.heightConstraint.constant > 0) {
         self.heightConstraint.constant = [self contentSize].height;
         [self.superview layoutIfNeeded];
     }
@@ -69,12 +69,12 @@
 - (CGSize)contentSize {
     CGFloat height = 0;
     CGFloat heightOfTestString = [ARHelpers heightOfCaptionText:@"1234" inWidth:self.bounds.size.width];
-    if(self.showXValues){
+    if (self.showXValues) {
         height += heightOfTestString;
     }
-    if(_title != nil && _title.length){
+    if (_title != nil && _title.length) {
         height += [ARHelpers heightOfCaptionText:_title inWidth:self.bounds.size.width];
-        if(self.showXValues){
+        if (self.showXValues) {
             height += 2;
         }
     }
@@ -89,7 +89,7 @@
 #pragma mark - Getter
 
 - (UILabel *)titleLabel {
-    if(_titleLabel == nil){
+    if (_titleLabel == nil) {
         UILabel *label = [[UILabel alloc] init];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         label.text = _title;
@@ -104,9 +104,9 @@
 #pragma mark - Creation Methods
 
 - (void)createOrUpdateLabels {
-    if(self.showXValues){
+    if (self.showXValues) {
         NSUInteger canFit = [self numberOfLabelsForWidth:self.bounds.size.width];
-        if(_totalNumberOfLabels != canFit){
+        if (_totalNumberOfLabels != canFit) {
             _totalNumberOfLabels = MIN(canFit, _numberOfDataPoints);
             [self createMissingLabelsOrDeleteExtras];
         } else {
@@ -148,11 +148,11 @@
 
 - (void)updateLabel:(UILabel *)label xValue:(CGFloat)xValue dpIndex:(NSNumber *)dpIndex {
     label.textColor = self.labelColor;
-    if(self.normalizeXValues){
+    if (self.normalizeXValues) {
         label.text = [self stringForXLegendAtIndex:[dpIndex integerValue]];
     }else {
         CGFloat value = [ARHelpers dataPointXValueForXPosition:xValue availableWidth:self.bounds.size.width yRange:NSMakeRange(self.xMin, self.xMax - self.xMin)];
-        if(value != NSNotFound){
+        if (value != NSNotFound) {
             label.text = [NSString stringWithFormat:@"%li", (long)value];
         }else {
             label.text = @"";
@@ -172,7 +172,7 @@
 #pragma mark - Update Methods
 
 - (void)updateAllLabelValues {
-    if(_labels.count == 0){
+    if (_labels.count == 0) {
         return;
     }
     NSArray *copiedLabels = [_labels copy];

@@ -32,7 +32,7 @@
 - (void)setDatapoints:(NSArray *)datapoints {
     _datapoints = datapoints;
     [self resetValues];
-    if(_datapoints.count){
+    if (_datapoints.count) {
         [self setMaxMinMean];
     }
     

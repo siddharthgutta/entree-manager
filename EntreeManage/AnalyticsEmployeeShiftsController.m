@@ -8,11 +8,9 @@
 
 #import "AnalyticsEmployeeShiftsController.h"
 
-@interface AnalyticsEmployeeShiftsController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
-    
+@interface AnalyticsEmployeeShiftsController () <CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     NSMutableArray *results;
     NSMutableArray *sumVal;
-
     // if selected text is start date then true
     BOOL startDate_Flag;
     
@@ -24,8 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *startDateText;
 @property (weak, nonatomic) IBOutlet UITextField *endDateText;
 
-- (IBAction)onChangedDate:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *pickDateView;
+
+- (IBAction)onChangedDate:(id)sender;
 - (IBAction)onTouchTextStartDate:(id)sender;
 - (IBAction)onTouchTextEndDate:(id)sender;
 
@@ -35,49 +34,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-   
+    
     _pickDateView.hidden = true;
     
-    // Do any additional setup after loading the view.
-    UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
-    
-    self.navigationItem.rightBarButtonItems = @[exportButton];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Employee Shift Log";
     
-    // get previous month
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month -= 1;
-    NSDate *startDate = [cal dateFromComponents:comps];
+    // Previous month's data
+    NSDate *startDate = [NSDate date30DaysAgo];
+    NSDate *endDate   = [NSDate date];
+    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
+    _startDateText.text         = [dateFormat stringFromDate:startDate];
+    _endDateText.text           = [dateFormat stringFromDate:endDate];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: startDate];
-    _startDateText.text = dateText;
-    dateText = [dateFormat stringFromDate: NSDate.date];
-    _endDateText.text = dateText;
-    
-    
-    [CommParse getAnalyticsEmployeeShifts:self StartDate:startDate EndDate:NSDate.date];
-    
+    [CommParse getAnalyticsEmployeeShifts:self startDate:startDate endDate:endDate];
 }
-// On Export
+
 - (void)exportItemClicked {
+    NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
+    NSString *content = @"Employee,Date,Clocked In,Clocked Out,Hours Worked,Tips";
     
-NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
-    
-    NSString *content;;
-    content = @"Employee,Date,Clocked In,Clocked Out,Hours Worked,Tips";
-    
-    for(int i = 0; i< results.count; i++) {
-    
-        PFObject *shiftObj = results[i];
-        
+    for(PFObject *shiftObj in results) {
         PFObject *empObj = shiftObj[@"employee"];
-        
         NSString *empName = empObj[@"name"];
         
         NSDate *startDate = shiftObj[@"startedAt"];
@@ -104,13 +84,12 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
         CGFloat hourlyWage = [empObj[@"hourlyWage"] floatValue];
         CGFloat tips = hourlyWage *hoursDiff;
         
-    
+        
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, empName, startText, endText, hoursDiff, tips];
     }
     
     // export with csv format
-    [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
-    
+    [CommParse sendEmailwithMailGun:self userEmail:@"" emailSubject:title emailContent:content];
 }
 
 #pragma mark - Table view data source
@@ -118,7 +97,7 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Catego
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = @"Employee";
     
     label = (UILabel *)[cell viewWithTag:2];
@@ -132,7 +111,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     
     label = (UILabel *)[cell viewWithTag:5];
     label.text = @"Hours Worked";
-
+    
     label = (UILabel *)[cell viewWithTag:6];
     label.text = @"Tips";
     
@@ -146,18 +125,14 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return results.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"AnalyticsTableCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -165,9 +140,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     UILabel *label;
     
     PFObject *shiftObj = results[indexPath.row];
-    
     PFObject *empObj = shiftObj[@"employee"];
-    
     
     NSString *empName = empObj[@"name"];
     
@@ -215,15 +188,13 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"responseCode"] boolValue]) {
-        
         results = response[@"objects"];
         [_analTableView reloadData];
     }
@@ -241,7 +212,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
     NSString *dateText = [dateFormat stringFromDate: selDate];
-    if(startDate_Flag)  _startDateText.text = dateText;
+    if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
@@ -250,8 +221,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
-    if(startDate && endDate) {
-        [CommParse getAnalyticsEmployeeShifts:self StartDate:startDate EndDate:endDate];
+    if (startDate && endDate) {
+        [CommParse getAnalyticsEmployeeShifts:self startDate:startDate endDate:endDate];
     }
 }
 
@@ -260,7 +231,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-
+    
     NSDate *date = [dateFormat dateFromString: _startDateText.text];
     [_datePicker setDate:date];
     
@@ -272,7 +243,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-
+    
     NSDate *date = [dateFormat dateFromString: _endDateText.text];
     [_datePicker setDate:date];
     

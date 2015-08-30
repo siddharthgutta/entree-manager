@@ -13,7 +13,7 @@
 }
 - (instancetype)init {
     self = [super init];
-    if(self){
+    if (self) {
         self.interalLabels = YES;
     }
     return self;
@@ -23,7 +23,7 @@
 
 - (void)setNumberOfSlices:(NSInteger)numberOfSlices {
     _numberOfSlices = numberOfSlices;
-    if(self.numberOfSlices > 0){
+    if (self.numberOfSlices > 0) {
         [self layoutLabels];
     }
     [self setNeedsDisplay];
@@ -59,7 +59,7 @@
 }
 
 - (void)layoutLabels {
-    if(_textLayers.count != self.numberOfSlices){
+    if (_textLayers.count != self.numberOfSlices) {
         [_textLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
         _textLayers = [self makeLabels];
     } else {
@@ -68,7 +68,7 @@
 }
 
 - (NSArray *)makeLabels {
-    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSMutableArray *array = [NSMutableArray array];
     NSInteger count = self.numberOfSlices;
     for(NSInteger x = 0; x < count; x++){
         CATextLayer *textLayer = [self textLayerForPieIndex:x];
@@ -81,11 +81,11 @@
 - (void)updateLabels {
     CGFloat __block lastAngle = 0;
     [_textLayers enumerateObjectsUsingBlock:^(CATextLayer *label, NSUInteger idx, BOOL *stop) {
-        if(self.labelStrings.count > idx){
+        if (self.labelStrings.count > idx) {
             label.string = [self.labelStrings objectAtIndex:idx];
             CGRect textRect = [label.string boundingRectWithSize:self.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:nil context:nil];
 
-            if(self.interalLabels){
+            if (self.interalLabels) {
                 CGFloat percent = [self.percentages[idx] doubleValue];
                 CGFloat degrees = 360.0 *percent;
                 label.frame = [self insetLabelFrameForLabelSize:textRect.size sliceDegrees:degrees sliceStartAngel:lastAngle];

@@ -14,7 +14,8 @@ realpath() {
   echo "$DIRECTORY/$FILENAME"
 }
 
-install_resource() {
+install_resource()
+{
   case $1 in
     *.storyboard)
       echo "ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .storyboard`.storyboardc ${PODS_ROOT}/$1 --sdk ${SDKROOT}"

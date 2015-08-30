@@ -32,7 +32,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     //  go to add menuitems window popup
-    if([segue.identifier isEqualToString:@"segue_modifiertoitem"]){
+    if ([segue.identifier isEqualToString:@"segue_modifiertoitem"]) {
         
        BusinessModifierItemSelController *destController = segue.destinationViewController;
         
@@ -49,12 +49,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    selectedItems = [[NSMutableArray alloc] init];
+    selectedItems = [NSMutableArray array];
     
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-        NSNumber *price = [PFUtils getProperty:@"price" InObject:_menuObj];
+    if (_menuObj!=nil) {
+        _txtName.text = _menuObj[@"name"];
+        NSNumber *price = _menuObj[@"price"];
         
         _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
         [CommParse getMenuItemsOfModifier:self ModifierObject:_menuObj];
@@ -67,7 +66,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return selectedItems.count;
 }
 
@@ -78,7 +76,7 @@
     
     PFObject *itemObj = selectedItems[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:itemObj];
+    NSString *name = itemObj[@"name"];
     cell.textLabel.text = name;
     
     
@@ -93,13 +91,13 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    if(_menuObj==nil) {
+    if (_menuObj==nil) {
         _menuObj = [PFObject objectWithClassName:_menuType];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
+    _menuObj[@"name"] = _txtName.text;
     
-    NSNumber *price = [NSNumber numberWithFloat:[_txtPrice.text floatValue]];
+    NSNumber *price = @([_txtPrice.text floatValue]);
     
     // save selected items with relation
     relation = [_menuObj relationForKey:@"menuItems"];
@@ -116,7 +114,7 @@
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
-        selectedItems = [[NSMutableArray alloc] init];
+        selectedItems = [NSMutableArray array];
         if ([response[@"responseCode"] boolValue]) {
             
             selectedItems = response[@"objects"];

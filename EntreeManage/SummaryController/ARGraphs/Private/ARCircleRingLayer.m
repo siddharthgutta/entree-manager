@@ -72,7 +72,7 @@
 }
 
 - (void)setThePercentColor {
-    if(self.maxColor && self.minColor && self.percent){
+    if (self.maxColor && self.minColor && self.percent) {
         _percentColor = [ARHelpers colorPercentBetween:self.percent betweenMinColor:self.minColor maxColor:self.maxColor];
     }
 }
@@ -88,7 +88,7 @@
     [self addAnimation:animation forKey:@"reveal"];
     self.strokeEnd = percentage;
     
-    if(self.maxColor && self.minColor){
+    if (self.maxColor && self.minColor) {
         CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"strokeColor"];
         colorAnimation.duration = self.animationDuration;
         colorAnimation.fromValue = (id)(self.minColor);

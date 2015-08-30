@@ -32,11 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [CommParse getBusinessMenus:self MenuType:@"Menu" TopKey:@"" TopObject:nil];
+    [CommParse getBusinessMenus:self menuType:@"Menu" topKey:@"" topObject:nil];
     
     // init key array
-    selectedKey_s = [[NSMutableArray alloc] init];
+    selectedKey_s = [NSMutableArray array];
     for(PFObject *itemObj in self.selectedItems){
         [selectedKey_s addObject:itemObj.objectId];
     }
@@ -47,11 +46,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     NSInteger nums;
-    if(tableView == _menuView) nums = menuS.count;
-    else if(tableView == _categoryView) nums = categoryS.count;
-    else if(tableView == _itemView) nums = itemS.count;
+    if (tableView == _menuView) nums = menuS.count;
+    else if (tableView == _categoryView) nums = categoryS.count;
+    else if (tableView == _itemView) nums = itemS.count;
     
     return nums;
 }
@@ -60,15 +58,15 @@
     NSString *cellId;
     NSMutableArray *cellS;
     
-    if(tableView == _menuView) {
+    if (tableView == _menuView) {
         cellId = @"cellMenuInModifier";
         cellS = menuS;
     }
-    else if(tableView == _categoryView) {
+    else if (tableView == _categoryView) {
         cellId = @"cellCategoryInModifier";
         cellS = categoryS;
     }
-    else if(tableView == _itemView) {
+    else if (tableView == _itemView) {
         cellId = @"cellItemInModifier";
         cellS = itemS;
         
@@ -77,26 +75,26 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
 
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
 
     PFObject *itemObj = cellS[indexPath.row];
     
     // Item Table Multi select with Check Accessory Type
-    if(tableView==_itemView){
+    if (tableView==_itemView) {
         
         // NSString *keyString = [NSString stringWithFormat:@"%ld-%ld-%ld", selectedIndex1, selectedIndex2, indexPath.row];
         NSString *keyString = itemObj.objectId;
         
         BOOL isContain = [selectedKey_s containsObject:keyString];
-        if(isContain) {
+        if (isContain) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
         else cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:itemObj];
+    NSString *name = itemObj[@"name"];
     cell.textLabel.text = name;
     
     
@@ -104,20 +102,21 @@
 }
 // table cell tapping - click
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(tableView == _menuView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuCategory" TopKey:@"menu" TopObject:menuS[indexPath.row]];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView == _menuView) {
+        [CommParse getBusinessMenus:self menuType:@"MenuCategory" topKey:@"menu" topObject:menuS[indexPath.row]];
     }
-    else if(tableView == _categoryView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuItem" TopKey:@"menuCategory" TopObject:categoryS[indexPath.row]];
+    else if (tableView == _categoryView) {
+        [CommParse getBusinessMenus:self menuType:@"MenuItem" topKey:@"menuCategory" topObject:categoryS[indexPath.row]];
     }
-    else if(tableView == _itemView) {
+    else if (tableView == _itemView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         PFObject *itemObj = itemS[indexPath.row];
         
         
         NSString *keyString = itemObj.objectId;
         
-        if([selectedKey_s containsObject:keyString]){
+        if ([selectedKey_s containsObject:keyString]) {
             [selectedKey_s removeObject:keyString];
             [self.selectedItems removeObject:itemObj];
         }
@@ -149,18 +148,18 @@
         
        
         if ([response[@"responseCode"] boolValue]) {
-            if([response[@"menu_type"] isEqualToString:@"Menu"]) {
-                menuS = [[NSMutableArray alloc] init];
+            if ([response[@"menu_type"] isEqualToString:@"Menu"]) {
+                menuS = [NSMutableArray array];
                 menuS = response[@"objects"];
                 [_menuView reloadData];
             }
-            else if([response[@"menu_type"] isEqualToString:@"MenuCategory"]) {
-                categoryS = [[NSMutableArray alloc] init];
+            else if ([response[@"menu_type"] isEqualToString:@"MenuCategory"]) {
+                categoryS = [NSMutableArray array];
                 categoryS = response[@"objects"];
                 [_categoryView reloadData];
             }
             else {
-                itemS = [[NSMutableArray alloc] init];
+                itemS = [NSMutableArray array];
                 itemS = response[@"objects"];
                 [_itemView reloadData];
             }

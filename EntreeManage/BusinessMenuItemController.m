@@ -24,11 +24,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     //  go to add menu popup
-    if([segue.identifier isEqualToString:@"segueBusinessMenuItemAdd"]){
+    if ([segue.identifier isEqualToString:@"segueBusinessMenuItemAdd"]) {
         
         BusinessMenuItemAddController *destController = segue.destinationViewController;
         destController.menuType = @"MenuItem";
-        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
 
@@ -51,7 +51,7 @@
     
     [ProgressHUD show:@"" Interaction:NO];
     
-    [CommParse getBusinessMenus:self MenuType:MenuType TopKey:@"menuCategory" TopObject:self.topMenuObj];
+    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"menuCategory" topObject:self.topMenuObj];
     
 }
 
@@ -65,7 +65,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return quotes.count;
 }
 
@@ -75,7 +74,7 @@
     
     PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
+    NSString *name = menuObj[@"name"];
     cell.textLabel.text = name;
     
     cell.delegate = self;
@@ -102,7 +101,7 @@
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;
     int buttonNums = 1;
-    // if(selectedModifierObj!=nil) buttonNums = 2;
+    // if (selectedModifierObj!=nil) buttonNums = 2;
     return [self createRightButtons:buttonNums];
     
 }
@@ -146,6 +145,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     updateFlag = true;
     [self performSegueWithIdentifier:@"segueBusinessMenuItemAdd" sender:self];
 }
@@ -159,7 +159,7 @@
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         
-        quotes = [[NSMutableArray alloc] init];
+        quotes = [NSMutableArray array];
         if ([response[@"responseCode"] boolValue]) {
             
             quotes = response[@"objects"];

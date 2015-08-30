@@ -34,7 +34,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return menuItemss.count;
 }
 
@@ -45,7 +44,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
@@ -55,6 +54,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
     [self changeLeftMenuSel:(NSInteger)indexPath.row];
 }
@@ -76,12 +76,12 @@
         
         // BusinessViewController *viewInstance = [self.storyboard instantiateViewControllerWithIdentifier:@"businessDetailBoard"];
         
-        if(leftMenuID==0)   {
+        if (leftMenuID==0)   {
             viewInstance.title = @"Menus";
             menuType = @"Menu";
             [viewInstance showBusinessMenus:menuType];
         }
-        else if(leftMenuID==1){
+        else if (leftMenuID==1) {
             menuType = @"MenuItemModifier";
             viewInstance.title = @"Menu Modifiers";
             [viewInstance showBusinessMenus:menuType];

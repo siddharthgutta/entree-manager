@@ -82,7 +82,7 @@
     yVal += self.topPadding;
     
     rect.origin.y = yVal - rect.size.height;
-    if(rect.origin.y == NSNotFound){
+    if (rect.origin.y == NSNotFound) {
         rect = CGRectZero;
     }
     return rect;
@@ -99,7 +99,7 @@
     yVal += self.topPadding;
     
     rect.origin.y = yVal;
-    if(rect.origin.y == NSNotFound){
+    if (rect.origin.y == NSNotFound) {
         rect = CGRectZero;
     }
     return rect;
@@ -111,7 +111,7 @@
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
-    if(_lineColor){
+    if (_lineColor) {
         CGContextSetStrokeColorWithColor(ctx, self.lineColor);
     }else {
         CGContextSetStrokeColorWithColor(ctx, _defaultLineColor);
@@ -122,12 +122,12 @@
     CGFloat minY = [ARHelpers yPositionForYDataPoint:self.yMin availableHeight:availableHeight yRange:NSMakeRange(self.yMin, self.yMax - self.yMin)];
     CGFloat maxY = [ARHelpers yPositionForYDataPoint:self.yMax availableHeight:availableHeight yRange:NSMakeRange(self.yMin, self.yMax - self.yMin)];
 
-    if(minY != NSNotFound){
+    if (minY != NSNotFound) {
         CGContextMoveToPoint(ctx, 0, minY + self.topPadding);
         CGContextAddLineToPoint(ctx, self.bounds.size.width, minY + self.topPadding);
     }
     
-    if(maxY != NSNotFound){
+    if (maxY != NSNotFound) {
         CGContextMoveToPoint(ctx, 0, maxY + self.topPadding);
         CGContextAddLineToPoint(ctx, self.bounds.size.width, maxY + self.topPadding);
     }
@@ -138,11 +138,11 @@
 #pragma mark - Layer Creation Methods
 
 - (CATextLayer *)minTextLayer {
-    if(_minTextLayer == nil){
+    if (_minTextLayer == nil) {
         CATextLayer *textLayer = [CATextLayer layer];
 
         [textLayer setString:@"Hello World"];
-        if(_labelColor){
+        if (_labelColor) {
             [textLayer setForegroundColor:self.labelColor];
         }else {
             [textLayer setForegroundColor:_defaultLabelColor];
@@ -163,11 +163,11 @@
 }
 
 - (CATextLayer *)maxTextLayer {
-    if(_maxTextLayer == nil){
+    if (_maxTextLayer == nil) {
         CATextLayer *textLayer = [CATextLayer layer];
  
         [textLayer setString:@"Hello World"];
-        if(_labelColor){
+        if (_labelColor) {
             [textLayer setForegroundColor:self.labelColor];
         }else {
             [textLayer setForegroundColor:_defaultLabelColor];

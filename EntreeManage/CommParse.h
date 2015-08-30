@@ -11,42 +11,40 @@
 
 
 @protocol CommsDelegate <NSObject>
-@optional
 - (void)commsDidAction:(NSDictionary *)response;
-
 @end
 
 
 @interface CommParse : NSObject
 
 
-+ (void)emailLogin:(id < CommsDelegate>)delegate UserInfo:(NSDictionary *)userInfo;
++ (void)emailLogin:(id<CommsDelegate>)delegate userInfo:(NSDictionary *)userInfo;
 
 // Get Business Menus
-+ (void)getBusinessMenus:(id < CommsDelegate>) delegate MenuType:(NSString *)menuType TopKey:(NSString *)topKey TopObject:(PFObject *)topObject;
-+ (void)getBusinessMenuInfo:(id < CommsDelegate>)delegate MenuType:(NSString *)menuType MenuId:(NSString *)menuId;
-+ (void)getMenuItemsOfModifier:(id < CommsDelegate>) delegate ModifierObject:(PFObject *)modifierObject;
++ (void)getBusinessMenus:(id<CommsDelegate>)delegate menuType:(NSString *)menuType topKey:(NSString *)topKey topObject:(PFObject *)topObject;
++ (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate menuType:(NSString *)menuType MenuId:(NSString *)menuId;
++ (void)getMenuItemsOfModifier:(id<CommsDelegate>)delegate ModifierObject:(PFObject *)modifierObject;
 
 // Add, Update Business Menus
-+ (void)updateQuoteRequest:(id < CommsDelegate>)delegate Quote:(PFObject *)quote;
++ (void)updateQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
 
 // delete business menus
-+ (void)deleteQuoteRequest:(id < CommsDelegate>)delegate Quote:(PFObject *)quote;
++ (void)deleteQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
 
 // Get Analytics
 
-+ (void)getAnalyticsSalesView:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)getAnalyticsCategorySales:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)getAnalyticsEmployeeShifts:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)getAnalyticsPayroll:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsPayroll:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)getAnalyticsOrderReport:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsOrderReport:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)getAnalyticsModifierSales:(id < CommsDelegate>)delegate StartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
++ (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 
-+ (void)sendEmailwithMailGun:(id < CommsDelegate>)delegate userEmail:(NSString *)userEmail EmailSubject:(NSString *)emailSubject EmailContent:(NSString *)emailContent;
++ (void)sendEmailwithMailGun:(id<CommsDelegate>)delegate userEmail:(NSString *)userEmail emailSubject:(NSString *)emailSubject emailContent:(NSString *)emailContent;
 
 @end

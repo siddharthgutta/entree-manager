@@ -31,7 +31,7 @@
 
 - (void)setYMean:(CGFloat)yMean {
     _yMean = yMean;
-    if(self.animateChanges){
+    if (self.animateChanges) {
         [self addAnimation:[self animationToMean:yMean] forKey:@"meanAnimation"];
 
     }else {

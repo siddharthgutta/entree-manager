@@ -83,12 +83,12 @@
         newComponents[1] = minComponents[0] * inverseProgress + maxComponents[0] * percent;
         newComponents[2] = minComponents[0] * inverseProgress + maxComponents[0] * percent;
         newComponents[3] = minComponents[1] * inverseProgress + maxComponents[1] * percent;
-    } else if(isMinGreyscale) {
+    } else if (isMinGreyscale) {
         newComponents[0] = minComponents[0] * inverseProgress + maxComponents[0] * percent;
         newComponents[1] = minComponents[0] * inverseProgress + maxComponents[1] * percent;
         newComponents[2] = minComponents[0] * inverseProgress + maxComponents[2] * percent;
         newComponents[3] = minComponents[1] * inverseProgress + maxComponents[3] * percent;
-    } else if(isMaxGreyscale){
+    } else if (isMaxGreyscale) {
         newComponents[0] = minComponents[0] * inverseProgress + maxComponents[0] * percent;
         newComponents[1] = minComponents[1] * inverseProgress + maxComponents[0] * percent;
         newComponents[2] = minComponents[2] * inverseProgress + maxComponents[0] * percent;
@@ -117,10 +117,10 @@
 }
 
 + (NSArray *)incrementsForNumberOfItems:(NSInteger)numberOfItems range:(NSRange)range {
-    NSMutableArray *increments = [[NSMutableArray alloc] init];
+    NSMutableArray *increments = [NSMutableArray array];
     CGFloat increment = (CGFloat)range.length/(numberOfItems - 1);
     for(NSInteger x = 0; x < numberOfItems; x++){
-        if(range.length == 0 || numberOfItems <= 1){
+        if (range.length == 0 || numberOfItems <= 1) {
             [increments addObject:@(0)];
         }else {
             [increments addObject:@((NSInteger)range.location + x *increment)];
@@ -141,23 +141,23 @@
 + (void)CRUDObjectsWithExisting:(NSArray *)existing totalNeeded:(NSInteger)totalNeeded create:(void(^)(NSInteger index))createBlock delete:(void(^)(NSInteger index))deleteBlock update:(void(^)(NSInteger index))updateBlock {
     NSInteger numberOfExisiting = existing.count;
     NSInteger diff = totalNeeded - numberOfExisiting;
-    if(diff >= 0){// create or update
+    if (diff >= 0) {// create or update
         for(NSInteger x = 0; x < totalNeeded; x++){
-            if(numberOfExisiting > x){
-                if(updateBlock){
+            if (numberOfExisiting > x) {
+                if (updateBlock) {
                     updateBlock(x);
                 }
             }else {
-                if(createBlock){
+                if (createBlock) {
                     createBlock(x);
                 }
             }
 
         }
-    }else if(diff < 0){// Delete
+    }else if (diff < 0) {// Delete
         for(NSInteger x = 0; x < ABS(diff); x++){
             NSInteger index = numberOfExisiting - 1 - x;
-            if(deleteBlock){
+            if (deleteBlock) {
                 deleteBlock(index);
             }
         }
@@ -190,7 +190,7 @@
     
     CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range.length);
     CGFloat inversePercentage = 1.0 - percentageOfDataPointToRange; // Must invert because the greater the value the higher we want it on the chart which is a smaller y value on a iOS coordinate system
-    if(range.length == 0){
+    if (range.length == 0) {
         return NSNotFound;
     } else {
         return inversePercentage *availableHeight;
@@ -200,7 +200,7 @@
 + (CGFloat)xPositionForXDataPoint:(NSInteger)dataPoint availableWidth:(CGFloat)availableWidth yRange:(NSRange)range {
     CGFloat normalizedDataPointYValue = dataPoint - range.location;
     CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range.length);
-    if(range.length == 0){
+    if (range.length == 0) {
         return NSNotFound;
     } else {
         return percentageOfDataPointToRange *availableWidth;
@@ -211,7 +211,7 @@
     CGFloat percentageOfPositionToRange = xPosition / availableWidth;
     CGFloat normalizedDataPointXValue = percentageOfPositionToRange *range.length;
 
-    if(range.length == 0){
+    if (range.length == 0) {
         return NSNotFound;
     } else {
         return range.location + normalizedDataPointXValue;

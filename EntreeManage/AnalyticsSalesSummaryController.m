@@ -22,8 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *startDateText;
 @property (weak, nonatomic) IBOutlet UITextField *endDateText;
 
-- (IBAction)onChangedDate:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *pickDateView;
+
+- (IBAction)onChangedDate:(id)sender;
 - (IBAction)onTouchTextStartDate:(id)sender;
 - (IBAction)onTouchTextEndDate:(id)sender;
 
@@ -33,42 +34,34 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     _pickDateView.hidden = true;
     
     
-    rowNames = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"", @"Payments", @"Cash", @"Card", nil];
+    rowNames = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"Payments", @"Cash", @"Card", nil];
     
-    // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
     self.navigationItem.rightBarButtonItems = @[exportButton];
     
     self.navigationItem.hidesBackButton = YES;
     
-    // get previous month
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month -= 1;
-    NSDate *startDate = [cal dateFromComponents:comps];
+    // Previous month's data
+    NSDate *startDate = [NSDate date30DaysAgo];
+    NSDate *endDate   = [NSDate date];
+    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
+    _startDateText.text         = [dateFormat stringFromDate:startDate];
+    _endDateText.text           = [dateFormat stringFromDate:endDate];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: startDate];
-    _startDateText.text = dateText;
-    dateText = [dateFormat stringFromDate: NSDate.date];
-    _endDateText.text = dateText;
-    
-    [CommParse getAnalyticsSalesView:self StartDate:startDate EndDate:NSDate.date];
+    [CommParse getAnalyticsSalesView:self startDate:startDate endDate:endDate];
     
     self.title = @"Sales Overview";
     
 }
 
-// On Export
 - (void)exportItemClicked {
     
-NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
+    NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
     
     NSString *content;;
     content = @"Type,Total";
@@ -77,11 +70,9 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
     for(int i = 0; i< rowNames.count; i++) {
         content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNames[i], sumVal[i] ];
     }
-    [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
+    [CommParse sendEmailwithMailGun:self userEmail:@"" emailSubject:title emailContent:content];
     
 }
-
-
 
 
 #pragma mark - Table view data source
@@ -100,23 +91,20 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return rowNames.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
-UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = rowNames[indexPath.row];
     
     label = (UILabel *)[cell viewWithTag:2];
@@ -125,66 +113,61 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
-    sumVal = [[NSMutableArray alloc]init];
+    sumVal = [NSMutableArray array];
+    // why 16?
     for(int i = 0;i <16;i++){
         [sumVal addObject:@0];
     }
-
+    
     if ([response[@"responseCode"] boolValue]) {
         
         // export csv and send email
         if ([response[@"action"] intValue] == 9) {
-        }
-        else {
-            NSMutableArray *quotes =  [[NSMutableArray alloc] init];
-            quotes = response[@"objects"];
+            NSLog(@"Action was 9");
+        } else {
+            NSArray *quotes = response[@"objects"];
             
             // calculate sums
-            for(int i = 0;i < quotes.count;i++){ // PFObject *itemObj in quotes
-                PFObject *itemObj = quotes[i];
-                // Gross Sales
-                [sumVal replaceObjectAtIndex:0 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[0] floatValue]]];
-                // Tax
-                [sumVal replaceObjectAtIndex:3 withObject: [NSNumber numberWithFloat:[itemObj[@"tax"] floatValue] + [sumVal[3] floatValue]]];
-                // Tips
-                [sumVal replaceObjectAtIndex:4 withObject: [NSNumber numberWithFloat:[itemObj[@"tip"] floatValue] + [sumVal[4] floatValue]]];
-                
-                // Cash
-                if([itemObj[@"type"] isEqualToString:@"Cash"]) {
-                    [sumVal replaceObjectAtIndex:9 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[9] floatValue]]];
-                }
-                // Card
-                else {
-                    [sumVal replaceObjectAtIndex:10 withObject: [NSNumber numberWithFloat:[itemObj[@"subtotal"] floatValue] + [sumVal[10] floatValue]]];
-                }
+            CGFloat grossSales = 0, tax = 0, tips = 0, cash = 0, card = 0;
+            for (Payment *payment in quotes) {
+                grossSales += payment.subtotal;
+                tax += payment.tax;
+                tips += payment.tip;
+                if ([payment.type isEqualToString:@"Cash"])
+                    cash += payment.subtotal;
+                else
+                    card += payment.subtotal;
             }
+            
+            sumVal[0]  = @(grossSales);
+            sumVal[3]  = @(tax);
+            sumVal[4]  = @(tips);
+            sumVal[8]  = @(cash);
+            sumVal[9] = @(card);
+            
             // Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
             CGFloat temp = [response[@"discount"] floatValue];
-            sumVal[1] = @(temp);
-            temp = [sumVal[0] floatValue]-temp;
-            sumVal[2] = @(temp);
+            sumVal[1]    = @(temp);
+            sumVal[2]    = @([sumVal[0] floatValue]-temp);
             
             // Total collected (Net sales + Tax + Tips)
             temp = [sumVal[2] floatValue]+[sumVal[3] floatValue]+[sumVal[4] floatValue];
             sumVal[6] = @(temp);
             
-            [sumVal replaceObjectAtIndex:8 withObject:sumVal[0]];
+            sumVal[7] = sumVal[0];
             
             [_analTableView reloadData];
         }
-    }
-    else {
+    } else {
         [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
     }
-    
 }
 
 
@@ -196,7 +179,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
     NSString *dateText = [dateFormat stringFromDate: selDate];
-    if(startDate_Flag)  _startDateText.text = dateText;
+    if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
@@ -206,8 +189,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
-    if(startDate && endDate) {
-        [CommParse getAnalyticsSalesView:self StartDate:startDate EndDate:endDate];
+    if (startDate && endDate) {
+        [CommParse getAnalyticsSalesView:self startDate:startDate endDate:endDate];
     }
 }
 
@@ -224,8 +207,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     _pickDateView.frame = CGRectMake(200,140,390,0);
     _pickDateView.hidden = false;
     [UIView animateWithDuration:1.0  animations:^ {
-                         _pickDateView.frame = CGRectMake(200,140,390,270);
-                     }];
+        _pickDateView.frame = CGRectMake(200,140,390,270);
+    }];
     
 }
 

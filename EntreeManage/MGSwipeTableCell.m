@@ -537,7 +537,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    if(self = [super initWithCoder:aDecoder]) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self initViews:YES];
     }
     return self;
@@ -861,7 +861,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     
     UIView *view = self.superview;
     while(view != nil) {
-        if([view isKindOfClass:[UITableView class]]) {
+        if ([view isKindOfClass:[UITableView class]]) {
             _cachedParentTable = (UITableView *)view;
         }
         view = view.superview;
@@ -970,7 +970,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     MGSwipeExpansionSettings *expSetting = direction == MGSwipeDirectionLeftToRight ? _leftExpansion : _rightExpansion;
     
     // only perform animation if there's no pending expansion animation and requested direction has fillOnTrigger enabled
-    if(!_activeExpansion && expSetting.fillOnTrigger) {
+    if (!_activeExpansion && expSetting.fillOnTrigger) {
         [self createSwipeViewIfNeeded];
         _allowSwipeLeftToRight = _leftButtons.count > 0;
         _allowSwipeRightToLeft = _rightButtons.count > 0;

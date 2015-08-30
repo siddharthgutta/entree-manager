@@ -23,7 +23,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self addSubview:self.titleLabel];
         [self addTitleLabelConstraints];
         self.labelColor = [UIColor whiteColor];
@@ -34,7 +34,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 }
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
-    if(self.superview){
+    if (self.superview) {
         self.leftConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
         self.widthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:40.0];
         
@@ -47,7 +47,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     _yMax = yMax;
     self.range = NSMakeRange(_yMin, _yMax - _yMin);
 
-    if(self.widthConstraint.constant > 0){
+    if (self.widthConstraint.constant > 0) {
         self.widthConstraint.constant = [self contentSize].width;
         [self.superview layoutIfNeeded];
     }
@@ -62,7 +62,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 - (void)setTitle:(NSString *)title {
     _title = title;
     self.titleLabel.text = title;
-    if(self.widthConstraint.constant > 0){
+    if (self.widthConstraint.constant > 0) {
         self.widthConstraint.constant = [self contentSize].width;
         [self.superview layoutIfNeeded];
     }
@@ -78,7 +78,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
  
 #pragma mark - Getters
 - (void)reloadData {
-    if(_range.length > 0){
+    if (_range.length > 0) {
         [self createOrUpdateLabels];
     }
 }
@@ -86,7 +86,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     CGFloat width = 0;
     CGFloat widthOfTestString = [ARHelpers widthOfCaptionText:[NSString stringWithFormat:@"%li", (long)_yMax] inHeight:self.bounds.size.height];
 
-    if(_title != nil && _title.length){
+    if (_title != nil && _title.length) {
         width = [ARHelpers heightOfCaptionText:self.title inWidth:self.bounds.size.width] + widthOfTestString + 6;
     } else {
         width = widthOfTestString;
@@ -94,7 +94,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     return CGSizeMake(width, self.bounds.size.height);
 }
 - (UILabel *)titleLabel {
-    if(_titleLabel == nil){
+    if (_titleLabel == nil) {
         UILabel *label = [[UILabel alloc] init];
         label.translatesAutoresizingMaskIntoConstraints = NO;
         label.text = _title;
@@ -111,9 +111,9 @@ static CGFloat kPaddingBetweenLabels = 2.0;
 #pragma mark - Helpers
 
 - (void)createOrUpdateLabels {
-    if(self.showYValues){
+    if (self.showYValues) {
         NSInteger canFit = [self numberOfLabelsForHeight:self.bounds.size.height];
-        if(_totalNumberOfLabels != canFit){
+        if (_totalNumberOfLabels != canFit) {
             _totalNumberOfLabels = MIN(canFit,_range.length + 1);
             [self createMissingLabelsOrDeleteExtras];
         } else {

@@ -22,7 +22,7 @@
 @implementation ARCircleValueLabel
 - (instancetype)init {
     self = [super init];
-    if(self){
+    if (self) {
         self.font = [UIFont fontWithName:@"Helvetica" size:22];
         self.textColor = [UIColor darkGrayColor];
         self.minimumScaleFactor = 0.5;
@@ -42,7 +42,7 @@
 
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
-    if(self.superview){
+    if (self.superview) {
         [self createConstraints];
     }
 }
@@ -58,7 +58,7 @@
 }
 
 - (void)setCurrentValue:(CGFloat)currentValue {
-    if(self.format == nil)
+    if (self.format == nil)
         self.format = @"%f";
     [self setTextValue:currentValue];
 }
@@ -102,7 +102,7 @@
     self.totalTime = duration;
     self.lastUpdate = [NSDate timeIntervalSinceReferenceDate];
     
-    if(self.format == nil)
+    if (self.format == nil)
         self.format = @"%f";
     
     self.rate = 3.0f;

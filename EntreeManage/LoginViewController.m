@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     emailField.text = @"siddharthgutta@gmail.com";
     passField.text  = @"pass1";
     
@@ -53,7 +52,7 @@
     }
     
     NSDictionary *userInfo = @{@"email":email, @"pswd":pswd};
-    [CommParse emailLogin:self UserInfo:userInfo];
+    [CommParse emailLogin:self userInfo:userInfo];
     
 }
 

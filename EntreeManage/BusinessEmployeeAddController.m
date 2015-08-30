@@ -30,19 +30,18 @@
     [super viewDidLoad];
     
     
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-       _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-       _txtRole.text = [PFUtils getProperty:@"role" InObject:_menuObj];
-        NSNumber *adminFlag = [PFUtils getProperty:@"administrator" InObject:_menuObj];
-        if([adminFlag intValue]==1)  {
+    if (_menuObj!=nil) {
+       _txtName.text = _menuObj[@"name"];
+       _txtRole.text = _menuObj[@"role"];
+        NSNumber *adminFlag = _menuObj[@"administrator"];
+        if ([adminFlag intValue]==1)  {
             _switchManager.on = YES;
         }
         else {
             _switchManager.on = NO;
         }
-        _txtPincode.text = [PFUtils getProperty:@"pinCode" InObject:_menuObj];
-        NSNumber *hourlyWage = [PFUtils getProperty:@"hourlyWage" InObject:_menuObj];
+        _txtPincode.text = _menuObj[@"pinCode"];
+        NSNumber *hourlyWage = _menuObj[@"hourlyWage"];
         
         _txtHourlyWage.text = [NSString stringWithFormat:@"%f", [hourlyWage floatValue]];
     }
@@ -74,23 +73,23 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    if(_menuObj==nil) {
+    if (_menuObj==nil) {
         _menuObj = [PFObject objectWithClassName:_menuType];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
-    [_menuObj setObject:_txtRole.text forKey:@"role"];
+    _menuObj[@"name"] = _txtName.text;
+    _menuObj[@"role"] = _txtRole.text;
     
-    [_menuObj setObject:[NSNumber numberWithBool:_switchManager.on] forKey:@"administrator"];
-    [_menuObj setObject:_txtPincode.text forKey:@"pinCode"];
+    _menuObj[@"administrator"] = @(_switchManager.on);
+    _menuObj[@"pinCode"] = _txtPincode.text;
     
-    NSNumber *hourlyWage = [NSNumber numberWithFloat:[_txtHourlyWage.text floatValue]];
+    NSNumber *hourlyWage = @([_txtHourlyWage.text floatValue]);
 
     _menuObj[@"hourlyWage"] = hourlyWage;
     
     // Get Color Picker Value
     NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(colorIndex) forKey:@"colorIndex"];
+    _menuObj[@"colorIndex"] = @(colorIndex);
     // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];

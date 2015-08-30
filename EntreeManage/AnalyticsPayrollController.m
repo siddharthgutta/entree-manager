@@ -34,10 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     _pickDateView.hidden = true;
     
-    // Do any additional setup after loading the view.
     UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
     
     self.navigationItem.rightBarButtonItems = @[exportButton];
@@ -45,21 +43,14 @@
     self.navigationItem.hidesBackButton = YES;
     self.title = @"Employee Overview";
     
-    // get previous month
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [cal components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitYear fromDate:NSDate.date];
-    comps.month -= 1;
-    NSDate *startDate = [cal dateFromComponents:comps];
+    // Previous month's data
+    NSDate *startDate = [NSDate date30DaysAgo];
+    NSDate *endDate   = [NSDate date];
+    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
+    _startDateText.text         = [dateFormat stringFromDate:startDate];
+    _endDateText.text           = [dateFormat stringFromDate:endDate];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    NSString *dateText = [dateFormat stringFromDate: startDate];
-    _startDateText.text = dateText;
-    dateText = [dateFormat stringFromDate: NSDate.date];
-    _endDateText.text = dateText;
-    
-    
-    [CommParse getAnalyticsPayroll:self StartDate:startDate EndDate:NSDate.date];
+    [CommParse getAnalyticsPayroll:self startDate:startDate endDate:endDate];
     
 }
 // On Export
@@ -82,7 +73,7 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Employ
     }
     
     // export with csv format
-    [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
+    [CommParse sendEmailwithMailGun:self userEmail:@"" emailSubject:title emailContent:content];
    
     
 }
@@ -119,7 +110,6 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return results.count;
 }
 
@@ -130,7 +120,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(cell == nil){
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
@@ -161,9 +151,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 - (void)commsDidAction:(NSDictionary *)response {
@@ -189,7 +178,7 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
     NSString *dateText = [dateFormat stringFromDate: selDate];
-    if(startDate_Flag)  _startDateText.text = dateText;
+    if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
@@ -198,8 +187,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
 
-    if(startDate && endDate) {
-        [CommParse getAnalyticsPayroll:self StartDate:startDate EndDate:endDate];
+    if (startDate && endDate) {
+        [CommParse getAnalyticsPayroll:self startDate:startDate endDate:endDate];
     }
 }
 

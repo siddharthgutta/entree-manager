@@ -27,7 +27,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -35,7 +35,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -144,9 +144,9 @@
 
 - (NSArray *)getLabelStrings {
     NSInteger count = self.dataCount;
-    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSMutableArray *array = [NSMutableArray array];
     while (count--) {
-        if([self.dataSource respondsToSelector:@selector(ARPieChart:titleForPieIndex:)]){
+        if ([self.dataSource respondsToSelector:@selector(ARPieChart:titleForPieIndex:)]) {
             [array addObject:[self.dataSource ARPieChart:self titleForPieIndex:count]];
         }
     }

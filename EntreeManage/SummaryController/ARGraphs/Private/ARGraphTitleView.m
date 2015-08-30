@@ -17,7 +17,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self addSubview:self.titleLabel];
         [self addSubview:self.subtitleLabel];
         [self addConstraintsToTitleLabel];
@@ -29,7 +29,7 @@
 }
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
-    if(self.superview){
+    if (self.superview) {
         self.topConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
         self.leftConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0];
         self.rightConstraint = [NSLayoutConstraint constraintWithItem:self.superview attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0];
@@ -58,7 +58,7 @@
 }
 
 - (UILabel *)titleLabel {
-    if(_titleLabel == nil){
+    if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -77,7 +77,7 @@
 }
 
 - (UILabel *)subtitleLabel {
-    if(_subtitleLabel == nil){
+    if (_subtitleLabel == nil) {
         _subtitleLabel = [[UILabel alloc] init];
         _subtitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _subtitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];

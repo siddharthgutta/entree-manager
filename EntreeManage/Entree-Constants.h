@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
-#import "PFUtils.h"
 
 #pragma mark - Summary -
 extern CGFloat const kSummaryViewCornerRadius;

@@ -21,7 +21,6 @@
 		9211F9C41B736061009CFEF8 /* AnalyticsModifierSalesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9C31B736061009CFEF8 /* AnalyticsModifierSalesController.m */; };
 		9253C5EF1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */; };
 		9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342D1B6914BE005E112A /* BusinessViewController.m */; };
-		928734301B69BC81005E112A /* PFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287342F1B69BC80005E112A /* PFUtils.m */; };
 		928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734321B69BD2D005E112A /* PFObject+copyShallow.m */; };
 		9287343A1B6A54FA005E112A /* BusinessMenuCategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928734391B6A54FA005E112A /* BusinessMenuCategoryController.m */; };
 		9287343D1B6A552E005E112A /* BusinessMenuItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9287343C1B6A552E005E112A /* BusinessMenuItemController.m */; };
@@ -74,6 +73,9 @@
 		92FFDA8C1B7E26DF00B2D3A0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */; };
 		92FFDA8E1B7E26E900B2D3A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8D1B7E26E900B2D3A0 /* Social.framework */; };
 		B4D11B7F1B8FCF980012116A /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D11B7E1B8FCF980012116A /* Payment.m */; };
+		B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22A1B923CAE00129F78 /* MenuItem.m */; };
+		B4E8F22E1B923DEE00129F78 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22D1B923DEE00129F78 /* Order.m */; };
+		B4E8F2311B923E5D00129F78 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2301B923E5D00129F78 /* OrderItem.m */; };
 		B4F582FB1B84413200DCF20C /* ARCircleGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BA1B84413200DCF20C /* ARCircleGraph.m */; };
 		B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */; };
 		B4F582FD1B84413200DCF20C /* ARLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BE1B84413200DCF20C /* ARLineGraph.m */; };
@@ -143,8 +145,6 @@
 		9253C5EE1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsByPaymentTypeController.m; sourceTree = "<group>"; };
 		9287342C1B6914BE005E112A /* BusinessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessViewController.h; sourceTree = "<group>"; };
 		9287342D1B6914BE005E112A /* BusinessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9287342F1B69BC80005E112A /* PFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFUtils.m; sourceTree = "<group>"; };
-		928734311B69BC8D005E112A /* PFUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PFUtils.h; sourceTree = "<group>"; };
 		928734321B69BD2D005E112A /* PFObject+copyShallow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFObject+copyShallow.m"; sourceTree = "<group>"; };
 		928734341B69BD36005E112A /* PFObject+copyShallow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PFObject+copyShallow.h"; sourceTree = "<group>"; };
 		928734381B6A54FA005E112A /* BusinessMenuCategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BusinessMenuCategoryController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -160,9 +160,9 @@
 		928734471B6BD1F4005E112A /* BusinessEmployeeAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessEmployeeAddController.h; sourceTree = "<group>"; };
 		928734481B6BD1F4005E112A /* BusinessEmployeeAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessEmployeeAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734691B6E6CB2005E112A /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MGSwipeTableCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9287346B1B6E6CC4005E112A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		9287346B1B6E6CC4005E112A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MGSwipeTableCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9287346C1B6E6CCB005E112A /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MGSwipeButton.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9287346E1B6E6CD0005E112A /* MGSwipeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
+		9287346E1B6E6CD0005E112A /* MGSwipeButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MGSwipeButton.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9287346F1B6F682F005E112A /* BusinessMenuModifierAddController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessMenuModifierAddController.h; sourceTree = "<group>"; };
 		928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessMenuModifierAddController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		928734731B6FA55C005E112A /* checkbox_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_unchecked.png; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 		92C8F15F1B63266D00ADF1D8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		92C8F1611B63267900ADF1D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		92C8F1631B637F8600ADF1D8 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
-		92C8F1641B63880B00ADF1D8 /* CommParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommParse.h; sourceTree = "<group>"; };
+		92C8F1641B63880B00ADF1D8 /* CommParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CommParse.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		92C8F1651B63880B00ADF1D8 /* CommParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CommParse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		92C8F1681B64022700ADF1D8 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
 		92C8F16A1B64023400ADF1D8 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProgressHUD.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -227,6 +227,13 @@
 		9B7C2B71A79E7E36C8894553 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D11B7D1B8FCF980012116A /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = Model/Payment.h; sourceTree = "<group>"; };
 		B4D11B7E1B8FCF980012116A /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = Model/Payment.m; sourceTree = "<group>"; };
+		B4E8F2291B923CAE00129F78 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuItem.h; path = Model/MenuItem.h; sourceTree = "<group>"; };
+		B4E8F22A1B923CAE00129F78 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItem.m; path = Model/MenuItem.m; sourceTree = "<group>"; };
+		B4E8F22C1B923DEE00129F78 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Model/Order.h; sourceTree = "<group>"; };
+		B4E8F22D1B923DEE00129F78 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Model/Order.m; sourceTree = "<group>"; };
+		B4E8F22F1B923E5D00129F78 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderItem.h; path = Model/OrderItem.h; sourceTree = "<group>"; };
+		B4E8F2301B923E5D00129F78 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderItem.m; path = Model/OrderItem.m; sourceTree = "<group>"; };
+		B4E8F2321B92405500129F78 /* Entree-Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Entree-Model.h"; sourceTree = "<group>"; };
 		B4F582B91B84413200DCF20C /* ARCircleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleGraph.h; sourceTree = "<group>"; };
 		B4F582BA1B84413200DCF20C /* ARCircleGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleGraph.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582BB1B84413200DCF20C /* ARGraphDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphDataPoint.h; sourceTree = "<group>"; };
@@ -238,7 +245,7 @@
 		B4F582C21B84413200DCF20C /* ARCircleRingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleRingLayer.h; sourceTree = "<group>"; };
 		B4F582C31B84413200DCF20C /* ARCircleRingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleRingLayer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582C41B84413200DCF20C /* ARCircleTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleTitleLabel.h; sourceTree = "<group>"; };
-		B4F582C51B84413200DCF20C /* ARCircleTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleTitleLabel.m; sourceTree = "<group>"; };
+		B4F582C51B84413200DCF20C /* ARCircleTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleTitleLabel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582C61B84413200DCF20C /* ARCircleValueLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ARCircleValueLabel.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B4F582C71B84413200DCF20C /* ARCircleValueLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleValueLabel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582C81B84413200DCF20C /* ARGraphBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphBackground.h; sourceTree = "<group>"; };
@@ -387,6 +394,7 @@
 		92C8F1081B60958A00ADF1D8 /* EntreeManage */ = {
 			isa = PBXGroup;
 			children = (
+				B4E8F2331B9280C000129F78 /* Categories */,
 				B4D11B7C1B8FCEB50012116A /* Model */,
 				92C8F1671B6401FE00ADF1D8 /* libs */,
 				92C8F1331B60DFC000ADF1D8 /* Classes */,
@@ -396,6 +404,7 @@
 				92D219541B8018FB00F395E6 /* PrefixHeader.pch */,
 				B4F5831D1B84420400DCF20C /* Entree-Constants.h */,
 				B4F5831E1B84420400DCF20C /* Entree-Constants.m */,
+				B4E8F2321B92405500129F78 /* Entree-Model.h */,
 			);
 			path = EntreeManage;
 			sourceTree = "<group>";
@@ -445,8 +454,6 @@
 			isa = PBXGroup;
 			children = (
 				B4F582B71B84413200DCF20C /* SummaryController */,
-				9287342F1B69BC80005E112A /* PFUtils.m */,
-				928734311B69BC8D005E112A /* PFUtils.h */,
 				92C8F10D1B60958A00ADF1D8 /* AppDelegate.h */,
 				92C8F10E1B60958A00ADF1D8 /* AppDelegate.m */,
 				92C8F1641B63880B00ADF1D8 /* CommParse.h */,
@@ -584,8 +591,21 @@
 			children = (
 				B4D11B7D1B8FCF980012116A /* Payment.h */,
 				B4D11B7E1B8FCF980012116A /* Payment.m */,
+				B4E8F2291B923CAE00129F78 /* MenuItem.h */,
+				B4E8F22A1B923CAE00129F78 /* MenuItem.m */,
+				B4E8F22C1B923DEE00129F78 /* Order.h */,
+				B4E8F22D1B923DEE00129F78 /* Order.m */,
+				B4E8F22F1B923E5D00129F78 /* OrderItem.h */,
+				B4E8F2301B923E5D00129F78 /* OrderItem.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B4E8F2331B9280C000129F78 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		B4F582B71B84413200DCF20C /* SummaryController */ = {
@@ -863,6 +883,7 @@
 				B4F583001B84413200DCF20C /* ARCircleTitleLabel.m in Sources */,
 				9211F9B81B735FE4009CFEF8 /* AnalyticsCategorySalesController.m in Sources */,
 				928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */,
+				B4E8F22E1B923DEE00129F78 /* Order.m in Sources */,
 				B4F5830D1B84413200DCF20C /* ARYMinMaxLayer.m in Sources */,
 				92C8F10C1B60958A00ADF1D8 /* main.m in Sources */,
 				928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */,
@@ -880,18 +901,19 @@
 				B4D11B7F1B8FCF980012116A /* Payment.m in Sources */,
 				92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */,
 				B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */,
+				B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */,
 				B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */,
 				928734791B6FAA65005E112A /* BusinessModifierItemSelController.m in Sources */,
 				9211F9C41B736061009CFEF8 /* AnalyticsModifierSalesController.m in Sources */,
 				928734461B6BC75A005E112A /* BusinessMenuItemAddController.m in Sources */,
 				9211F9BE1B736022009CFEF8 /* AnalyticsPayrollController.m in Sources */,
 				9253C5EF1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m in Sources */,
-				928734301B69BC81005E112A /* PFUtils.m in Sources */,
 				B4F583131B84413200DCF20C /* PopularItemCell.m in Sources */,
 				9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */,
 				B4F5830A1B84413200DCF20C /* ARPieChartDataPointUtility.m in Sources */,
 				92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */,
 				9211F9B21B72983E009CFEF8 /* AnalyticsLeftMenuController.m in Sources */,
+				B4E8F2311B923E5D00129F78 /* OrderItem.m in Sources */,
 				B4F5831B1B84413200DCF20C /* NSNumberFormatter+Dollars.m in Sources */,
 				928734711B6F682F005E112A /* BusinessMenuModifierAddController.m in Sources */,
 				B4F583071B84413200DCF20C /* ARLineGraphPointsLayer.m in Sources */,

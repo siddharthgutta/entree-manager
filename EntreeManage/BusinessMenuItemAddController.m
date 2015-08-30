@@ -25,10 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-        NSNumber *price = [PFUtils getProperty:@"price" InObject:_menuObj];
+    if (_menuObj!=nil) {
+        _txtName.text = _menuObj[@"name"];
+        NSNumber *price = _menuObj[@"price"];
         
         _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
     }
@@ -58,19 +57,19 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    if(_menuObj==nil) {
+    if (_menuObj==nil) {
         _menuObj = [PFObject objectWithClassName:_menuType];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
+    _menuObj[@"name"] = _txtName.text;
     
-    NSNumber *price = [NSNumber numberWithFloat:[_txtPrice.text floatValue]];
+    NSNumber *price = @([_txtPrice.text floatValue]);
     
     _menuObj[@"price"] = price;
     
     // Get Color Picker Value
     NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(colorIndex) forKey:@"colorIndex"];
+    _menuObj[@"colorIndex"] = @(colorIndex);
     // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
     [CommParse updateQuoteRequest:self Quote:_menuObj];

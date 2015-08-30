@@ -112,13 +112,13 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     for(int x = 0; x < _dataCount; x++){
         ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
         CGPoint relativePoint = [self pointForDataPoint:currentDataPoint index:x total:_dataCount];
-        if(x == 0){ // first
+        if (x == 0) { // first
             CGPathMoveToPoint(fillPath, NULL, relativePoint.x, self.bounds.size.height);
         }
         
         CGPathAddLineToPoint(fillPath, NULL, relativePoint.x, relativePoint.y);
         
-        if(x == _dataCount - 1){// last
+        if (x == _dataCount - 1) {// last
             CGPathAddLineToPoint(fillPath, NULL, relativePoint.x, self.bounds.size.height);
             CGPathCloseSubpath(fillPath);
         }
@@ -197,7 +197,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGFloat availableHeight = self.bounds.size.height - self.topPadding - self.bottomPadding;
     
     CGFloat xVal;
-    if(self.normalizeXValues){
+    if (self.normalizeXValues) {
         xVal = [self xPositionEquallySpacedForDataPointIndex:index totalPoints:total inWidth:self.bounds.size.width];
     }else {
         xVal = [self xPositionForXDataPoint:dp.xValue inWidth:self.bounds.size.width - self.rightPadding - self.leftPadding ];
@@ -213,12 +213,12 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     if (self.showDots) {
         availableWidth -= (self.dotRadius + self.lineWidth)*2;
     }
-    if(total == 1){
+    if (total == 1) {
         return NSNotFound;
     } else {
         CGFloat itemWidth = availableWidth / (total - 1);
         CGFloat x = self.leftPadding + index *itemWidth;
-        if(self.showDots){
+        if (self.showDots) {
             x += self.dotRadius + self.lineWidth;
         }
         return x;
@@ -231,11 +231,11 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGFloat normalizedDataPointYValue = dataPoint - self.xMin;
     
     CGFloat percentageOfDataPointToRange = (normalizedDataPointYValue / range);
-    if(range == 0){
+    if (range == 0) {
         return NSNotFound;
     } else {
         CGFloat x = self.leftPadding + percentageOfDataPointToRange *availableWidth;
-        if(self.showDots){
+        if (self.showDots) {
             availableWidth -= (self.dotRadius *2) + self.lineWidth;
             x += self.dotRadius + self.lineWidth;
         }
@@ -249,7 +249,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 #pragma mark - Drawing methods
 
 - (void)drawInContext:(CGContextRef)ctx {
-    if(self.dataPoints.count < 1){
+    if (self.dataPoints.count < 1) {
         return;
     }
     _dataCount = [self.dataPoints count];
@@ -257,7 +257,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGContextSetStrokeColorWithColor(ctx, self.lineColor);
     CGContextSetShouldAntialias(ctx, YES);
     CGContextSetLineWidth(ctx, self.lineWidth);
-    if(self.showDots){
+    if (self.showDots) {
         for(int x = 0; x < _dataCount; x++){
             ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
             [self drawDataPointDot:currentDataPoint index:x inContext:ctx inRect:self.bounds];
@@ -265,14 +265,14 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         }
     }
     
-    if(self.shouldSmooth && _dataCount > kSMOOTHING_MINIMUM){
+    if (self.shouldSmooth && _dataCount > kSMOOTHING_MINIMUM) {
         [self drawSmoothLineInContext:ctx];
     }else {
         [self drawGraphLinesInContext:ctx];
     }
     CGContextStrokePath(ctx);
     
-    if(self.shouldFill){
+    if (self.shouldFill) {
         [self fillGraphInContext:ctx];
     }
     
@@ -290,7 +290,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     
     CGMutablePathRef fillPath; // NEED TO RELEASE
     
-    if(self.shouldSmooth && self.dataPoints.count > kSMOOTHING_MINIMUM){
+    if (self.shouldSmooth && self.dataPoints.count > kSMOOTHING_MINIMUM) {
         fillPath = [self smoothFillPath];
     }else {
         fillPath = [self fillPath];
@@ -325,7 +325,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
 - (BOOL)drawDataPointDot:(ARGraphDataPoint *)dataPoint index:(NSInteger)index inContext:(CGContextRef)context inRect:(CGRect)rect {
     CGPoint relativePoint = [self pointForDataPoint:dataPoint index:index total:_dataCount];
     BOOL canDrawPoint = (relativePoint.x != NSNotFound && relativePoint.y != NSNotFound);
-    if(canDrawPoint){
+    if (canDrawPoint) {
         CGContextAddArc(context, relativePoint.x, relativePoint.y, self.dotRadius, 0.0, M_PI *2.0, NO);
     }
     return canDrawPoint;
@@ -336,7 +336,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
     CGFloat adjacent = 0;
     // We dont want the line to go through our dot but to stop at the dots radius so we need to offset our start and end points. We need to know where on the dot to move to so we need angle.
 
-    if(self.showDots){
+    if (self.showDots) {
         CGFloat angle = atan2f(PT1.y - PT2.y, PT1.x - PT2.x);
         CGFloat hypoteneus = self.dotRadius;
         opposite = sinf(angle) * hypoteneus;
@@ -352,7 +352,7 @@ static const NSInteger kSMOOTHING_MINIMUM = 20;
         ARGraphDataPoint *currentDataPoint = [self.dataPoints objectAtIndex:x];
         CGPoint relativePoint = [self pointForDataPoint:currentDataPoint index:x total:_dataCount];
 
-        if(x == 0){ // first
+        if (x == 0) { // first
             CGContextMoveToPoint(ctx, relativePoint.x, relativePoint.y);
         }else {
             ARGraphDataPoint *lastDP = [self.dataPoints objectAtIndex:x-1];

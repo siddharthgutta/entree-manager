@@ -21,7 +21,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -29,7 +29,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -139,7 +139,7 @@
 #pragma mark - Layout
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if(_title == nil || _title.length == 0){
+    if (_title == nil || _title.length == 0) {
         _ring.frame = self.bounds;
         _valueLabel.bottom.constant = 0;
     }else {

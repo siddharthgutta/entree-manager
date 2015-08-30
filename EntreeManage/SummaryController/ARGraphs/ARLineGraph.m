@@ -50,7 +50,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -58,7 +58,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self initialSetup];
     }
     return self;
@@ -166,7 +166,7 @@
     _showMinMaxLines = showMinMaxLines;
     self.minMaxLayer.hidden = !showMinMaxLines;
     self.subLayersPadding = [self calculatePaddingForSubLayers];
-    if(self.showMinMaxLines){
+    if (self.showMinMaxLines) {
         self.xAxisContainerView.rightConstraint.constant = -20;
     }else {
         self.xAxisContainerView.rightConstraint.constant = 0;
@@ -218,7 +218,7 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
-    if(_background != nil){
+    if (_background != nil) {
         self.background.color = tintColor.CGColor;
         _background.frame = self.bounds;
     }
@@ -241,7 +241,7 @@
 
 
 - (NSString *)xAxisTitle {
-    if([self.dataSource respondsToSelector:@selector(ARGraphTitleForXAxis:)]){
+    if ([self.dataSource respondsToSelector:@selector(ARGraphTitleForXAxis:)]) {
         return [self.dataSource ARGraphTitleForXAxis:self];
     }else {
         return nil;
@@ -249,7 +249,7 @@
 }
 
 - (NSString *)yAxisTitle {
-    if([self.dataSource respondsToSelector:@selector(ARGraphTitleForYAxis:)]){
+    if ([self.dataSource respondsToSelector:@selector(ARGraphTitleForYAxis:)]) {
         return [self.dataSource ARGraphTitleForYAxis:self];
     }else {
         return nil;
@@ -286,13 +286,13 @@
 }
 
 - (void)layoutLegends {
-    if(self.showXLegend){
+    if (self.showXLegend) {
         self.xAxisContainerView.heightConstraint.constant = [self.xAxisContainerView contentSize].height;
     }else {
         self.xAxisContainerView.heightConstraint.constant = 0.0;
     }
     
-    if(self.showYLegend){
+    if (self.showYLegend) {
         self.yAxisContainerView.widthConstraint.constant = [self.yAxisContainerView contentSize].width;
     }else {
         self.yAxisContainerView.widthConstraint.constant = 0.0;
@@ -308,10 +308,10 @@
     self.xAxisContainerView.title = self.xAxisTitle;
     self.yAxisContainerView.title = self.yAxisTitle;
 
-    if([self.dataSource respondsToSelector:@selector(titleForGraph:)]){
+    if ([self.dataSource respondsToSelector:@selector(titleForGraph:)]) {
         self.titleContainerView.title = [self.dataSource titleForGraph:self] ?: @"";
     }
-    if([self.dataSource respondsToSelector:@selector(subTitleForGraph:)]){
+    if ([self.dataSource respondsToSelector:@selector(subTitleForGraph:)]) {
         self.titleContainerView.subtitle = [self.dataSource subTitleForGraph:self] ?: @"";
     }
 
@@ -325,7 +325,7 @@
     NSInteger yMax = [[self dataPointUtility] yMax];
     NSInteger xMin = [[self dataPointUtility] xMin];
     NSInteger xMax = [[self dataPointUtility] xMax];
-    if(yMax != NSNotFound && yMin != NSNotFound){
+    if (yMax != NSNotFound && yMin != NSNotFound) {
         self.minMaxLayer.yMin = yMin;
         self.minMaxLayer.yMax = yMax;
         [self.minMaxLayer setNeedsDisplay];
@@ -348,10 +348,10 @@
         self.xAxisContainerView.xMin = xMin;
     }
     
-    if(self.showXLegend){
+    if (self.showXLegend) {
         [self.xAxisContainerView reloadData];
     }
-    if(self.showYLegend){
+    if (self.showYLegend) {
         [self.yAxisContainerView reloadData];
     }
 
@@ -369,7 +369,7 @@
 #pragma mark - View Creation
 
 - (ARGraphTitleView *)titleContainerView {
-    if(_titleContainerView == nil){
+    if (_titleContainerView == nil) {
         ARGraphTitleView *view = [[ARGraphTitleView alloc] init];
         [self addSubview:view];
         _titleContainerView = view;
@@ -378,7 +378,7 @@
     return _titleContainerView;
 }
 - (ARLineGraphXLegendView *)xAxisContainerView {
-    if(_xAxisContainerView == nil){
+    if (_xAxisContainerView == nil) {
         _xAxisContainerView = [[ARLineGraphXLegendView alloc] init];
         _xAxisContainerView.delegate = self;
         [self addSubview:_xAxisContainerView];
@@ -391,7 +391,7 @@
 }
 
 - (ARLineGraphYLegendView *)yAxisContainerView {
-    if(_yAxisContainerView == nil){
+    if (_yAxisContainerView == nil) {
         _yAxisContainerView = [[ARLineGraphYLegendView alloc] init];
         [self addSubview:_yAxisContainerView];
         _yAxisContainerView.topConstraint = [NSLayoutConstraint constraintWithItem:_yAxisContainerView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.titleContainerView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
@@ -406,10 +406,10 @@
 #pragma mark - Helpers
 - (UIEdgeInsets)calculatePaddingForSubLayers {
     CGFloat left = 0, right = 0, top = 0, bottom = 0;
-    if(_showMinMaxLines){
+    if (_showMinMaxLines) {
         right += 20;
     }
-    if(_showDots){
+    if (_showDots) {
         top += self.pointsLayer.dotRadius + self.pointsLayer.lineWidth;
         bottom += self.pointsLayer.dotRadius + self.pointsLayer.lineWidth;
     }

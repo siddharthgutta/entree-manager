@@ -23,16 +23,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     //  go to category menu view
-    if([segue.identifier isEqualToString:@"segueItemMenu"]){
+    if ([segue.identifier isEqualToString:@"segueItemMenu"]) {
     
         BusinessMenuItemController *destController = segue.destinationViewController;
         destController.topMenuObj = quotes[selectedIndexPath.row];
     }
     //  go to add menu popup
-    else if([segue.identifier isEqualToString:@"segueBusinessMenuCategoryAdd"]){
+    else if ([segue.identifier isEqualToString:@"segueBusinessMenuCategoryAdd"]) {
         
         BusinessMenuAddController *destController = segue.destinationViewController;
-        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.menuType = @"MenuCategory";
         destController.parentDelegate = self;
     }
@@ -54,7 +54,7 @@
 - (void)showBusinessMenus:(NSString *)MenuType {
     
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self MenuType:MenuType TopKey:@"menu" TopObject:self.topMenuObj];
+    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"menu" topObject:self.topMenuObj];
     
 }
 
@@ -74,7 +74,6 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return quotes.count;
 }
 
@@ -84,7 +83,7 @@
     
     PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
+    NSString *name = menuObj[@"name"];
     cell.textLabel.text = name;
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;
@@ -106,7 +105,6 @@
              swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
-    
     
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;
@@ -131,7 +129,6 @@
 
 
 - (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
-    
     // delete button
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     if (index == 0) {
@@ -152,6 +149,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectedIndexPath = indexPath;
     [self performSegueWithIdentifier:@"segueItemMenu" sender:self];
 }
@@ -165,7 +163,7 @@
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
         
-        quotes = [[NSMutableArray alloc] init];
+        quotes = [NSMutableArray array];
         if ([response[@"responseCode"] boolValue]) {
             
             quotes = response[@"objects"];

@@ -24,32 +24,32 @@
 @synthesize menuView;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString:@"segueCategoryMenu"]){
+    if ([segue.identifier isEqualToString:@"segueCategoryMenu"]) {
         BusinessMenuCategoryController *destController = segue.destinationViewController;
         destController.topMenuObj = quotes[selectedIndexPath.row];
     }
     //  go to add menu popup
-    else if([segue.identifier isEqualToString:@"segueBusinessMenuAdd"]){
+    else if ([segue.identifier isEqualToString:@"segueBusinessMenuAdd"]) {
         
         BusinessMenuAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
-        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
     //  go to add Menu Modifier popup
-    else if([segue.identifier isEqualToString:@"segueBusinessMenuModifierAdd"]){
+    else if ([segue.identifier isEqualToString:@"segueBusinessMenuModifierAdd"]) {
         
         BusinessMenuModifierAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
-        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
     //  go to add Menu Business popup
-    else if([segue.identifier isEqualToString:@"segueBusinessMenuEmployeeAdd"]){
+    else if ([segue.identifier isEqualToString:@"segueBusinessMenuEmployeeAdd"]) {
         
         BusinessEmployeeAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
-        if(updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
 }
@@ -68,26 +68,26 @@
 
 - (void)addItemClicked {
     updateFlag = false;
-    if([selectedMenuType isEqualToString:@"Menu"]){
+    if ([selectedMenuType isEqualToString:@"Menu"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuAdd" sender:self];
     }
-    else if([selectedMenuType isEqualToString:@"MenuItemModifier"]){
+    else if ([selectedMenuType isEqualToString:@"MenuItemModifier"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuModifierAdd" sender:self];
     }
-    else if([selectedMenuType isEqualToString:@"Employee"]){
+    else if ([selectedMenuType isEqualToString:@"Employee"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
     }
 }
 
 - (void)updateItemClicked {
     updateFlag = true;
-    if([selectedMenuType isEqualToString:@"Menu"]){
+    if ([selectedMenuType isEqualToString:@"Menu"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuAdd" sender:self];
     }
-    else if([selectedMenuType isEqualToString:@"MenuItemModifier"]){
+    else if ([selectedMenuType isEqualToString:@"MenuItemModifier"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuModifierAdd" sender:self];
     }
-    else if([selectedMenuType isEqualToString:@"Employee"]){
+    else if ([selectedMenuType isEqualToString:@"Employee"]) {
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
     }
 }
@@ -113,7 +113,7 @@
     
     PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:menuObj];
+    NSString *name = menuObj[@"name"];
     cell.textLabel.text = name;
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;
@@ -181,19 +181,20 @@
 
 // table cell tapping - click
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectedIndexPath = indexPath;
     
     // sub menu show when menu Type = "Menu"
-    if([selectedMenuType isEqualToString:@"Menu"]) {
+    if ([selectedMenuType isEqualToString:@"Menu"]) {
         [self performSegueWithIdentifier:@"segueCategoryMenu" sender:self];
     }
     // go to Edit Mode- Modifier
-    else if([selectedMenuType isEqualToString:@"MenuItemModifier"]) {
+    else if ([selectedMenuType isEqualToString:@"MenuItemModifier"]) {
         updateFlag = true;
         [self performSegueWithIdentifier:@"segueBusinessMenuModifierAdd" sender:self];
     }
     // go to Edit Mode- Employee
-    else if([selectedMenuType isEqualToString:@"Employee"]) {
+    else if ([selectedMenuType isEqualToString:@"Employee"]) {
         updateFlag = true;
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
     }
@@ -206,7 +207,7 @@
     selectedMenuType = MenuType;
     
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self MenuType:MenuType TopKey:@"" TopObject:nil];
+    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"" topObject:nil];
     
 }
 
@@ -219,7 +220,7 @@
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
-        quotes = [[NSMutableArray alloc] init];
+        quotes = [NSMutableArray array];
         if ([response[@"responseCode"] boolValue]) {
             
             quotes = response[@"objects"];

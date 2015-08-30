@@ -37,24 +37,24 @@
     NSInteger __block smallestValue = NSIntegerMax;
     _largestIndex = 0;
     NSInteger __block largestValue = NSIntegerMin;
-    NSMutableArray *sum = [[NSMutableArray alloc] init];
-    NSMutableArray *percentages = [[NSMutableArray alloc] init];
+    NSMutableArray *sum = [NSMutableArray array];
+    NSMutableArray *percentages = [NSMutableArray array];
 
     
     [dataPoints enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSInteger value = 0;
-        if([obj isKindOfClass:[NSArray class]]){
+        if ([obj isKindOfClass:[NSArray class]]) {
             value = [self sumDataPoints:obj];
-        }else if([obj isKindOfClass:[ARGraphDataPoint class]]) {
+        }else if ([obj isKindOfClass:[ARGraphDataPoint class]]) {
             value = [self sumDataPoints:@[obj]];
         }
         
-        if(value < smallestValue){
+        if (value < smallestValue) {
             _smallestIndex = idx;
             smallestValue = value;
         }
         
-        if(value > largestValue){
+        if (value > largestValue) {
             _largestIndex = idx;
             largestValue = value;
         }
@@ -81,7 +81,7 @@
 #pragma mark - Public Methods
 
 - (CGFloat)slicePercentageAtIndex:(NSUInteger)index {
-    if(index < self.datapoints.count){
+    if (index < self.datapoints.count) {
         CGFloat sectionSum = [_sums[index] doubleValue];
         return sectionSum / (CGFloat)_allDataPointsTotal;
     }else {
@@ -90,7 +90,7 @@
 }
 
 - (CGFloat)sliceSumAtIndex:(NSUInteger)index {
-    if(index < self.datapoints.count){
+    if (index < self.datapoints.count) {
         return [_sums[index] doubleValue];
     }else {
         return NSNotFound;

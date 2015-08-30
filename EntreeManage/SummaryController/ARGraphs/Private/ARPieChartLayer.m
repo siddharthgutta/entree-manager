@@ -54,13 +54,13 @@
 
 - (void)setNumberOfSlices:(NSInteger)numberOfSlices {
     _numberOfSlices = numberOfSlices;
-    if([self canSlicePie]){
+    if ([self canSlicePie]) {
         [self slicePie];
     }
 }
 - (void)setPercentages:(NSArray *)percentages {
     _percentages = percentages;
-    if([self canSlicePie]){
+    if ([self canSlicePie]) {
         [self slicePie];
     }
 }
@@ -78,7 +78,7 @@
         CGFloat degrees = 360.0 *percent;
         CAShapeLayer *slice = [self sliceLayerForPercentage:percent startAngle:lastAngle];
 
-        if(self.colors.count > x){
+        if (self.colors.count > x) {
             CGColorRef fillColor = (__bridge CGColorRef)self.colors[x];
             CGColorRef stroke = [ARHelpers darkenColor:fillColor withPercent:0.2];
             slice.fillColor = fillColor;
@@ -137,8 +137,8 @@
         CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         animation.duration = self.animationDuration;
-        animation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(offsetDegreesToStart)];
-        animation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(0)];
+        animation.fromValue = @(DEGREES_TO_RADIANS(offsetDegreesToStart));
+        animation.toValue = @(DEGREES_TO_RADIANS(0));
         animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         animation.removedOnCompletion = YES;
         slice.transform = CATransform3DIdentity;
@@ -211,7 +211,7 @@
 }
 
 - (void)layoutSlices {
-    if(self.sublayers.count != self.numberOfSlices){
+    if (self.sublayers.count != self.numberOfSlices) {
         [self slicePie];
     }else {
         [self updateSlicePositions];
@@ -221,7 +221,7 @@
 - (void)updateSliceColors {
     for (NSInteger x = 0; x < self.numberOfSlices; x++) {
         CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
-        if(self.colors.count > x){
+        if (self.colors.count > x) {
             CGColorRef fillColor = (__bridge CGColorRef)self.colors[x];
             CGColorRef stroke = [ARHelpers darkenColor:fillColor withPercent:0.2];
             slice.fillColor = fillColor;
@@ -271,7 +271,7 @@
     CGFloat degrees = 360.0 *percent;
     CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     
-    if(self.sliceGutterWidth > 0){
+    if (self.sliceGutterWidth > 0) {
         center = [ARHelpers pointInCircle:center insetFromCenterBy:self.sliceGutterWidth angle:(startAngle + degrees/2)];
         radius -= self.sliceGutterWidth;
 
@@ -279,7 +279,7 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     
-    if(self.innerRadiusPercent > 0.0){
+    if (self.innerRadiusPercent > 0.0) {
         CGPathAddArc(path, NULL, center.x, center.y, radius *self.innerRadiusPercent, DEGREES_TO_RADIANS(startAngle + degrees), DEGREES_TO_RADIANS(startAngle), YES);
     } else {
         CGPathMoveToPoint(path, NULL, center.x, center.y);

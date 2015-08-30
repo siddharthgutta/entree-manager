@@ -76,6 +76,11 @@ NSString *StringFromSummaryView(SummaryView sv) {
     
 }
 
+- (void)loadPopularItemData {
+    PFQuery *query = [Payment query];
+    
+}
+
 #pragma mark UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
