@@ -75,7 +75,6 @@
 		B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22A1B923CAE00129F78 /* MenuItem.m */; };
 		B4E8F22E1B923DEE00129F78 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22D1B923DEE00129F78 /* Order.m */; };
 		B4E8F2311B923E5D00129F78 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2301B923E5D00129F78 /* OrderItem.m */; };
-		B4E8F2391B929AD500129F78 /* KBCollectionExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */; };
 		B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */; };
 		B4E8F23F1B939EBD00129F78 /* MenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F23E1B939EBD00129F78 /* MenuCategory.m */; };
 		B4E8F2421B939FCC00129F78 /* Shift.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2411B939FCC00129F78 /* Shift.m */; };
@@ -238,8 +237,6 @@
 		B4E8F22F1B923E5D00129F78 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderItem.h; path = Model/OrderItem.h; sourceTree = "<group>"; };
 		B4E8F2301B923E5D00129F78 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderItem.m; path = Model/OrderItem.m; sourceTree = "<group>"; };
 		B4E8F2321B92405500129F78 /* Entree-Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Entree-Model.h"; sourceTree = "<group>"; };
-		B4E8F2371B929AD500129F78 /* KBCollectionExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBCollectionExtensions.h; sourceTree = "<group>"; };
-		B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBCollectionExtensions.m; sourceTree = "<group>"; };
 		B4E8F23A1B93794900129F78 /* PFObject+QueryExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PFObject+QueryExtensions.h"; path = "Categories/PFObject+QueryExtensions.h"; sourceTree = "<group>"; };
 		B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PFObject+QueryExtensions.m"; path = "Categories/PFObject+QueryExtensions.m"; sourceTree = "<group>"; };
 		B4E8F23D1B939EBD00129F78 /* MenuCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuCategory.h; path = Model/MenuCategory.h; sourceTree = "<group>"; };
@@ -627,8 +624,6 @@
 		B4E8F2331B9280C000129F78 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				B4E8F2371B929AD500129F78 /* KBCollectionExtensions.h */,
-				B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */,
 				B4E8F23A1B93794900129F78 /* PFObject+QueryExtensions.h */,
 				B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */,
 			);
@@ -956,7 +951,6 @@
 				928734401B6A55CE005E112A /* BusinessMenuModifierController.m in Sources */,
 				92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */,
 				B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */,
-				B4E8F2391B929AD500129F78 /* KBCollectionExtensions.m in Sources */,
 				B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */,
 				92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */,
 				B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */,

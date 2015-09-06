@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-// #import "KBCollectionExtensions.h"
 
 int main(int argc, char *argv[]) {
     @autoreleasepool {
-//        KBInitializeCollectionExtensions();
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

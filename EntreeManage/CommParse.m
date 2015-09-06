@@ -9,7 +9,6 @@
 #import "CommParse.h"
 #import "AppDelegate.h"
 #import <Parse/PFConstants.h>
-#import "KBCollectionExtensions.h"
 
 @implementation CommParse
 
