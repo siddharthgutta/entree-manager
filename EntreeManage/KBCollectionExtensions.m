@@ -73,7 +73,7 @@ static IMP _originalValueForKeyPathMethod = NULL; // saved off implementation of
 - (id)valueForKeyPath:(NSString*)keyPath {
 	NSArray *path = [keyPath componentsSeparatedByString:@"."];
 	unsigned i, max;
-	max = [path count];
+	max = (unsigned)[path count];
 	id value = self;
 	for ( i = 0; i < max; i++ )
 	{
@@ -132,7 +132,7 @@ static IMP _originalValueForKeyPathMethod = NULL; // saved off implementation of
 				}
 				else
 				{
-					unsigned scanLocation = [scanner scanLocation];
+					unsigned scanLocation = (unsigned)[scanner scanLocation];
 					
 					if ( [scanner scanString:@"'" intoString:nil] == YES )
 					{
@@ -193,7 +193,7 @@ static IMP _originalValueForKeyPathMethod = NULL; // saved off implementation of
 			id evaluatedValue = nil;
 			BOOL didEvaluate = NO;
 			unsigned i, max;
-			max = [args count];
+			max = (unsigned)[args count];
 			for ( i = 0; i < max; i++ )
 			{
 				id arg = [args objectAtIndex:i];

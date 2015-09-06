@@ -841,7 +841,7 @@ typedef NS_ENUM(NSInteger, RMActionControllerAnimationStyle) {
     RMAction *action = [[RMAction alloc] init];
     action.style = style;
     
-    __weak RMAction *weakAction = action;
+//    __weak RMAction *weakAction = action;
     [action setHandler:^(RMActionController *controller) {
         if(handler) {
             handler(controller);

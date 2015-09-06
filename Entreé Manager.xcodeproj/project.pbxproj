@@ -173,7 +173,7 @@
 		928734751B6FA566005E112A /* checkbox_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_checked.png; sourceTree = "<group>"; };
 		928734771B6FAA65005E112A /* BusinessModifierItemSelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessModifierItemSelController.h; sourceTree = "<group>"; };
 		928734781B6FAA65005E112A /* BusinessModifierItemSelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BusinessModifierItemSelController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		92C8F1061B60958A00ADF1D8 /* EntreeManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntreeManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C8F1061B60958A00ADF1D8 /* Entreé Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Entreé Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C8F10A1B60958A00ADF1D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C8F10B1B60958A00ADF1D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		92C8F10D1B60958A00ADF1D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		92C8F1171B60958B00ADF1D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Business.storyboard; sourceTree = "<group>"; };
 		92C8F1191B60958B00ADF1D8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92C8F11C1B60958B00ADF1D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		92C8F1221B60958B00ADF1D8 /* EntreeManageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntreeManageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92C8F1221B60958B00ADF1D8 /* Entreé ManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Entreé ManagerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92C8F1271B60958B00ADF1D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92C8F1281B60958B00ADF1D8 /* EntreeManageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntreeManageTests.m; sourceTree = "<group>"; };
 		92C8F1401B61210800ADF1D8 /* BusinessLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessLeftMenuViewController.h; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		92FFDA7E1B7D75C500B2D3A0 /* Mailgun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mailgun.m; sourceTree = "<group>"; };
 		92FFDA7F1B7D75C500B2D3A0 /* MGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MGMessage.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		92FFDA801B7D75C500B2D3A0 /* MGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MGMessage.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "Pods/../build/Debug-iphoneos/libAFNetworking.a"; sourceTree = SOURCE_ROOT; };
+		92FFDA831B7E22D400B2D3A0 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "build/Debug-iphoneos/libAFNetworking.a"; sourceTree = SOURCE_ROOT; };
 		92FFDA851B7E26BA00B2D3A0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		92FFDA871B7E26C600B2D3A0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -401,8 +401,8 @@
 		92C8F1071B60958A00ADF1D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92C8F1061B60958A00ADF1D8 /* EntreeManage.app */,
-				92C8F1221B60958B00ADF1D8 /* EntreeManageTests.xctest */,
+				92C8F1061B60958A00ADF1D8 /* Entreé Manager.app */,
+				92C8F1221B60958B00ADF1D8 /* Entreé ManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -746,9 +746,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92C8F1051B60958A00ADF1D8 /* EntreeManage */ = {
+		92C8F1051B60958A00ADF1D8 /* Entreé Manager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C8F12C1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "EntreeManage" */;
+			buildConfigurationList = 92C8F12C1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "Entreé Manager" */;
 			buildPhases = (
 				D6141AF55A3D51E4E6922EFF /* Check Pods Manifest.lock */,
 				92C8F1021B60958A00ADF1D8 /* Sources */,
@@ -760,14 +760,14 @@
 			);
 			dependencies = (
 			);
-			name = EntreeManage;
+			name = "Entreé Manager";
 			productName = EntreeManage;
-			productReference = 92C8F1061B60958A00ADF1D8 /* EntreeManage.app */;
+			productReference = 92C8F1061B60958A00ADF1D8 /* Entreé Manager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92C8F1211B60958B00ADF1D8 /* EntreeManageTests */ = {
+		92C8F1211B60958B00ADF1D8 /* Entreé ManagerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92C8F12F1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "EntreeManageTests" */;
+			buildConfigurationList = 92C8F12F1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "Entreé ManagerTests" */;
 			buildPhases = (
 				92C8F11E1B60958B00ADF1D8 /* Sources */,
 				92C8F11F1B60958B00ADF1D8 /* Frameworks */,
@@ -778,9 +778,9 @@
 			dependencies = (
 				92C8F1241B60958B00ADF1D8 /* PBXTargetDependency */,
 			);
-			name = EntreeManageTests;
+			name = "Entreé ManagerTests";
 			productName = EntreeManageTests;
-			productReference = 92C8F1221B60958B00ADF1D8 /* EntreeManageTests.xctest */;
+			productReference = 92C8F1221B60958B00ADF1D8 /* Entreé ManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -801,7 +801,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92C8F1011B60958A00ADF1D8 /* Build configuration list for PBXProject "EntreeManage" */;
+			buildConfigurationList = 92C8F1011B60958A00ADF1D8 /* Build configuration list for PBXProject "Entreé Manager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -814,8 +814,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92C8F1051B60958A00ADF1D8 /* EntreeManage */,
-				92C8F1211B60958B00ADF1D8 /* EntreeManageTests */,
+				92C8F1051B60958A00ADF1D8 /* Entreé Manager */,
+				92C8F1211B60958B00ADF1D8 /* Entreé ManagerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -976,7 +976,7 @@
 /* Begin PBXTargetDependency section */
 		92C8F1241B60958B00ADF1D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92C8F1051B60958A00ADF1D8 /* EntreeManage */;
+			target = 92C8F1051B60958A00ADF1D8 /* Entreé Manager */;
 			targetProxy = 92C8F1231B60958B00ADF1D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1095,9 +1095,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Entreé Manager";
 			};
 			name = Debug;
 		};
@@ -1113,9 +1114,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Entreé Manager";
 			};
 			name = Release;
 		};
@@ -1133,7 +1135,7 @@
 				);
 				INFOPLIST_FILE = EntreeManageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Entreé ManagerTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntreeManage.app/EntreeManage";
 			};
 			name = Debug;
@@ -1148,7 +1150,7 @@
 				);
 				INFOPLIST_FILE = EntreeManageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Entreé ManagerTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntreeManage.app/EntreeManage";
 			};
 			name = Release;
@@ -1156,7 +1158,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92C8F1011B60958A00ADF1D8 /* Build configuration list for PBXProject "EntreeManage" */ = {
+		92C8F1011B60958A00ADF1D8 /* Build configuration list for PBXProject "Entreé Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C8F12A1B60958B00ADF1D8 /* Debug */,
@@ -1165,7 +1167,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C8F12C1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "EntreeManage" */ = {
+		92C8F12C1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "Entreé Manager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C8F12D1B60958B00ADF1D8 /* Debug */,
@@ -1174,7 +1176,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92C8F12F1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "EntreeManageTests" */ = {
+		92C8F12F1B60958B00ADF1D8 /* Build configuration list for PBXNativeTarget "Entreé ManagerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92C8F1301B60958B00ADF1D8 /* Debug */,

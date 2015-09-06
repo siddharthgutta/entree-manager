@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92C8F1051B60958A00ADF1D8"
-               BuildableName = "EntreeManage.app"
-               BlueprintName = "EntreeManage"
-               ReferencedContainer = "container:EntreeManage.xcodeproj">
+               BuildableName = "EntreeManager.app"
+               BlueprintName = "Entree&#x301; Manager"
+               ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92C8F1211B60958B00ADF1D8"
-               BuildableName = "EntreeManageTests.xctest"
-               BlueprintName = "EntreeManageTests"
-               ReferencedContainer = "container:EntreeManage.xcodeproj">
+               BuildableName = "EntreeManagerTests.xctest"
+               BlueprintName = "Entree&#x301; ManagerTests"
+               ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "92C8F1211B60958B00ADF1D8"
-               BuildableName = "EntreeManageTests.xctest"
-               BlueprintName = "EntreeManageTests"
-               ReferencedContainer = "container:EntreeManage.xcodeproj">
+               BuildableName = "EntreeManagerTests.xctest"
+               BlueprintName = "Entree&#x301; ManagerTests"
+               ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C8F1051B60958A00ADF1D8"
-            BuildableName = "EntreeManage.app"
-            BlueprintName = "EntreeManage"
-            ReferencedContainer = "container:EntreeManage.xcodeproj">
+            BuildableName = "EntreeManager.app"
+            BlueprintName = "Entree&#x301; Manager"
+            ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C8F1051B60958A00ADF1D8"
-            BuildableName = "EntreeManage.app"
-            BlueprintName = "EntreeManage"
-            ReferencedContainer = "container:EntreeManage.xcodeproj">
+            BuildableName = "EntreeManager.app"
+            BlueprintName = "Entree&#x301; Manager"
+            ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,9 +96,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "92C8F1051B60958A00ADF1D8"
-            BuildableName = "EntreeManage.app"
-            BlueprintName = "EntreeManage"
-            ReferencedContainer = "container:EntreeManage.xcodeproj">
+            BuildableName = "EntreeManager.app"
+            BlueprintName = "Entree&#x301; Manager"
+            ReferencedContainer = "container:Entree&#x301; Manager.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

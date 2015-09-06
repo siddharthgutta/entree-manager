@@ -24,8 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    emailField.text = @"siddharthgutta@gmail.com";
-    passField.text  = @"pass1";
+//    emailField.text = @"siddharthgutta@gmail.com";
+//    passField.text  = @"pass1";
     
 }
 
