@@ -10,8 +10,13 @@
 
 @interface GuestsTransactionLaborCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *guestCount;
-@property (nonatomic, weak) IBOutlet UILabel *transactionCount;
-@property (nonatomic, weak) IBOutlet UILabel *laborCostPercentage;
+@property (nonatomic) NSInteger guestCount;
+@property (nonatomic) NSInteger transactionCount;
+@property (nonatomic) CGFloat   laborCostPercentage;
+@property (nonatomic) CGFloat   laborCost;
+
+- (void)showLaborCostPercentage;
+- (void)hideLaborCostPercentage;
+
 
 @end

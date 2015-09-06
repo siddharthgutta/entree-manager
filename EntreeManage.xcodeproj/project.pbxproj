@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		8148EFEBC7821D083D1714F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7C2B71A79E7E36C8894553 /* libPods.a */; };
 		9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A71B72077B009CFEF8 /* Login.storyboard */; };
-		9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A91B7207C5009CFEF8 /* Summary.storyboard */; };
 		9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */; };
 		9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AD1B72080F009CFEF8 /* Settings.storyboard */; };
 		9211F9B21B72983E009CFEF8 /* AnalyticsLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */; };
@@ -76,6 +75,12 @@
 		B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22A1B923CAE00129F78 /* MenuItem.m */; };
 		B4E8F22E1B923DEE00129F78 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22D1B923DEE00129F78 /* Order.m */; };
 		B4E8F2311B923E5D00129F78 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2301B923E5D00129F78 /* OrderItem.m */; };
+		B4E8F2391B929AD500129F78 /* KBCollectionExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */; };
+		B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */; };
+		B4E8F23F1B939EBD00129F78 /* MenuCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F23E1B939EBD00129F78 /* MenuCategory.m */; };
+		B4E8F2421B939FCC00129F78 /* Shift.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2411B939FCC00129F78 /* Shift.m */; };
+		B4E8F2451B93A43700129F78 /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2441B93A43700129F78 /* Employee.m */; };
+		B4E8F2481B93A98000129F78 /* Party.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F2471B93A98000129F78 /* Party.m */; };
 		B4F582FB1B84413200DCF20C /* ARCircleGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BA1B84413200DCF20C /* ARCircleGraph.m */; };
 		B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BC1B84413200DCF20C /* ARGraphDataPoint.m */; };
 		B4F582FD1B84413200DCF20C /* ARLineGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582BE1B84413200DCF20C /* ARLineGraph.m */; };
@@ -124,7 +129,6 @@
 
 /* Begin PBXFileReference section */
 		9211F9A71B72077B009CFEF8 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		9211F9A91B7207C5009CFEF8 /* Summary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Summary.storyboard; sourceTree = "<group>"; };
 		9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Analytics.storyboard; sourceTree = "<group>"; };
 		9211F9AD1B72080F009CFEF8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9211F9B01B72983E009CFEF8 /* AnalyticsLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsLeftMenuController.h; sourceTree = "<group>"; };
@@ -234,6 +238,18 @@
 		B4E8F22F1B923E5D00129F78 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderItem.h; path = Model/OrderItem.h; sourceTree = "<group>"; };
 		B4E8F2301B923E5D00129F78 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderItem.m; path = Model/OrderItem.m; sourceTree = "<group>"; };
 		B4E8F2321B92405500129F78 /* Entree-Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Entree-Model.h"; sourceTree = "<group>"; };
+		B4E8F2371B929AD500129F78 /* KBCollectionExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBCollectionExtensions.h; sourceTree = "<group>"; };
+		B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBCollectionExtensions.m; sourceTree = "<group>"; };
+		B4E8F23A1B93794900129F78 /* PFObject+QueryExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PFObject+QueryExtensions.h"; path = "Categories/PFObject+QueryExtensions.h"; sourceTree = "<group>"; };
+		B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PFObject+QueryExtensions.m"; path = "Categories/PFObject+QueryExtensions.m"; sourceTree = "<group>"; };
+		B4E8F23D1B939EBD00129F78 /* MenuCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuCategory.h; path = Model/MenuCategory.h; sourceTree = "<group>"; };
+		B4E8F23E1B939EBD00129F78 /* MenuCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuCategory.m; path = Model/MenuCategory.m; sourceTree = "<group>"; };
+		B4E8F2401B939FCC00129F78 /* Shift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shift.h; path = Model/Shift.h; sourceTree = "<group>"; };
+		B4E8F2411B939FCC00129F78 /* Shift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Shift.m; path = Model/Shift.m; sourceTree = "<group>"; };
+		B4E8F2431B93A43700129F78 /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Employee.h; path = Model/Employee.h; sourceTree = "<group>"; };
+		B4E8F2441B93A43700129F78 /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Employee.m; path = Model/Employee.m; sourceTree = "<group>"; };
+		B4E8F2461B93A98000129F78 /* Party.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Party.h; path = Model/Party.h; sourceTree = "<group>"; };
+		B4E8F2471B93A98000129F78 /* Party.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Party.m; path = Model/Party.m; sourceTree = "<group>"; };
 		B4F582B91B84413200DCF20C /* ARCircleGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleGraph.h; sourceTree = "<group>"; };
 		B4F582BA1B84413200DCF20C /* ARCircleGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ARCircleGraph.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B4F582BB1B84413200DCF20C /* ARGraphDataPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGraphDataPoint.h; sourceTree = "<group>"; };
@@ -442,7 +458,6 @@
 				92C8F11B1B60958B00ADF1D8 /* LaunchScreen.xib */,
 				92C8F1191B60958B00ADF1D8 /* Images.xcassets */,
 				9211F9A71B72077B009CFEF8 /* Login.storyboard */,
-				9211F9A91B7207C5009CFEF8 /* Summary.storyboard */,
 				92C8F1161B60958B00ADF1D8 /* Business.storyboard */,
 				9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */,
 				9211F9AD1B72080F009CFEF8 /* Settings.storyboard */,
@@ -593,10 +608,18 @@
 				B4D11B7E1B8FCF980012116A /* Payment.m */,
 				B4E8F2291B923CAE00129F78 /* MenuItem.h */,
 				B4E8F22A1B923CAE00129F78 /* MenuItem.m */,
+				B4E8F23D1B939EBD00129F78 /* MenuCategory.h */,
+				B4E8F23E1B939EBD00129F78 /* MenuCategory.m */,
 				B4E8F22C1B923DEE00129F78 /* Order.h */,
 				B4E8F22D1B923DEE00129F78 /* Order.m */,
 				B4E8F22F1B923E5D00129F78 /* OrderItem.h */,
 				B4E8F2301B923E5D00129F78 /* OrderItem.m */,
+				B4E8F2401B939FCC00129F78 /* Shift.h */,
+				B4E8F2411B939FCC00129F78 /* Shift.m */,
+				B4E8F2431B93A43700129F78 /* Employee.h */,
+				B4E8F2441B93A43700129F78 /* Employee.m */,
+				B4E8F2461B93A98000129F78 /* Party.h */,
+				B4E8F2471B93A98000129F78 /* Party.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -604,6 +627,10 @@
 		B4E8F2331B9280C000129F78 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				B4E8F2371B929AD500129F78 /* KBCollectionExtensions.h */,
+				B4E8F2381B929AD500129F78 /* KBCollectionExtensions.m */,
+				B4E8F23A1B93794900129F78 /* PFObject+QueryExtensions.h */,
+				B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -813,7 +840,6 @@
 				B4F583141B84413200DCF20C /* GuestsTransactionLaborCell.xib in Resources */,
 				B4F583171B84413200DCF20C /* MostPopularTableCell.xib in Resources */,
 				9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */,
-				9211F9AA1B7207C5009CFEF8 /* Summary.storyboard in Resources */,
 				928734741B6FA55C005E112A /* checkbox_unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -879,14 +905,17 @@
 				B4F583091B84413200DCF20C /* ARLineGraphYLegendView.m in Sources */,
 				92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */,
 				B4F583051B84413200DCF20C /* ARLineGraphDataPointUtility.m in Sources */,
+				B4E8F23F1B939EBD00129F78 /* MenuCategory.m in Sources */,
 				92C8F1421B61210800ADF1D8 /* BusinessLeftMenuViewController.m in Sources */,
 				B4F583001B84413200DCF20C /* ARCircleTitleLabel.m in Sources */,
+				B4E8F2451B93A43700129F78 /* Employee.m in Sources */,
 				9211F9B81B735FE4009CFEF8 /* AnalyticsCategorySalesController.m in Sources */,
 				928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */,
 				B4E8F22E1B923DEE00129F78 /* Order.m in Sources */,
 				B4F5830D1B84413200DCF20C /* ARYMinMaxLayer.m in Sources */,
 				92C8F10C1B60958A00ADF1D8 /* main.m in Sources */,
 				928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */,
+				B4E8F2421B939FCC00129F78 /* Shift.m in Sources */,
 				B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */,
 				B4F5830E1B84413200DCF20C /* GuestsTransactionLaborCell.m in Sources */,
 				92C8F1661B63880B00ADF1D8 /* CommParse.m in Sources */,
@@ -898,6 +927,7 @@
 				928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */,
 				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
 				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
+				B4E8F2481B93A98000129F78 /* Party.m in Sources */,
 				B4D11B7F1B8FCF980012116A /* Payment.m in Sources */,
 				92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */,
 				B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */,
@@ -925,6 +955,8 @@
 				9287343A1B6A54FA005E112A /* BusinessMenuCategoryController.m in Sources */,
 				928734401B6A55CE005E112A /* BusinessMenuModifierController.m in Sources */,
 				92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */,
+				B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */,
+				B4E8F2391B929AD500129F78 /* KBCollectionExtensions.m in Sources */,
 				B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */,
 				92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */,
 				B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */,

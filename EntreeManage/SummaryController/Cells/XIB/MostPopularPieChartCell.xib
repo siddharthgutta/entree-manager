@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -26,6 +26,9 @@
                 <constraint firstItem="c9y-TN-s9y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="odf-bI-FUy"/>
             </constraints>
             <size key="customSize" width="278" height="224"/>
+            <connections>
+                <outlet property="chart" destination="c9y-TN-s9y" id="1uB-Hg-GjZ"/>
+            </connections>
             <point key="canvasLocation" x="-10" y="282"/>
         </collectionViewCell>
     </objects>

@@ -21,4 +21,6 @@
 @property (nonatomic) NSInteger seatNumber;
 @property (nonatomic) NSInteger timesPrinted;
 
+@property (nonatomic, readonly) CGFloat netProfit;
+
 @end

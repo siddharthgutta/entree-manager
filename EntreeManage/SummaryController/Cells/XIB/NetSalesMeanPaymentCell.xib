@@ -29,54 +29,39 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="$999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4h-To-O60">
-                                <rect key="frame" x="94" y="36" width="113" height="38.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <rect key="frame" x="66" y="36" width="169.5" height="57.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="MJR-uq-oGz" userLabel="Hairline2">
-                                <rect key="frame" x="0.0" y="82.5" width="300" height="1"/>
+                                <rect key="frame" x="0.0" y="101.5" width="300" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="yYd-68-vWR"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCU-b8-sc4" userLabel="Day">
-                                <rect key="frame" x="130" y="89.5" width="40" height="19.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85x-mR-9R7" userLabel="Week">
-                                <rect key="frame" x="130" y="112" width="40" height="19.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxx-fW-xMy" userLabel="Month">
-                                <rect key="frame" x="130" y="134.5" width="40" height="19.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <rect key="frame" x="126" y="110.5" width="48.5" height="47.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="nxx-fW-xMy" secondAttribute="centerX" id="2ey-W3-NT6"/>
-                            <constraint firstItem="mCU-b8-sc4" firstAttribute="top" secondItem="MJR-uq-oGz" secondAttribute="bottom" constant="6" id="33M-bG-AZB"/>
+                            <constraint firstItem="mCU-b8-sc4" firstAttribute="top" secondItem="MJR-uq-oGz" secondAttribute="bottom" constant="8" id="33M-bG-AZB"/>
                             <constraint firstItem="m4h-To-O60" firstAttribute="top" secondItem="cwh-gd-jDH" secondAttribute="bottom" constant="8" id="3hW-MJ-lrP"/>
-                            <constraint firstItem="nxx-fW-xMy" firstAttribute="top" secondItem="85x-mR-9R7" secondAttribute="bottom" constant="3" id="6s4-CI-r49"/>
                             <constraint firstAttribute="trailing" secondItem="cwh-gd-jDH" secondAttribute="trailing" id="GFV-2Z-hmK"/>
                             <constraint firstItem="sWh-Xt-u8V" firstAttribute="leading" secondItem="G0T-gu-gy7" secondAttribute="leading" constant="8" id="Iex-Jv-FEq"/>
-                            <constraint firstAttribute="centerX" secondItem="85x-mR-9R7" secondAttribute="centerX" id="Kic-ap-UBN"/>
                             <constraint firstItem="MJR-uq-oGz" firstAttribute="top" secondItem="m4h-To-O60" secondAttribute="bottom" constant="8" id="KsZ-MM-bRU"/>
+                            <constraint firstAttribute="bottom" secondItem="mCU-b8-sc4" secondAttribute="bottom" constant="8" id="O8P-Mu-Knl"/>
                             <constraint firstItem="cwh-gd-jDH" firstAttribute="top" secondItem="sWh-Xt-u8V" secondAttribute="bottom" constant="5" id="QIO-zB-SlQ"/>
                             <constraint firstItem="cwh-gd-jDH" firstAttribute="leading" secondItem="G0T-gu-gy7" secondAttribute="leading" id="QUm-mo-EFt"/>
                             <constraint firstAttribute="centerX" secondItem="m4h-To-O60" secondAttribute="centerX" id="SjT-Gj-Bk7"/>
                             <constraint firstItem="sWh-Xt-u8V" firstAttribute="top" secondItem="G0T-gu-gy7" secondAttribute="top" constant="5" id="Y3r-rA-07d"/>
                             <constraint firstItem="MJR-uq-oGz" firstAttribute="leading" secondItem="G0T-gu-gy7" secondAttribute="leading" id="YTB-9m-KP3"/>
                             <constraint firstAttribute="trailing" secondItem="MJR-uq-oGz" secondAttribute="trailing" id="afJ-J8-23y"/>
-                            <constraint firstItem="85x-mR-9R7" firstAttribute="top" secondItem="mCU-b8-sc4" secondAttribute="bottom" constant="3" id="qFx-Bv-Pjg"/>
                             <constraint firstAttribute="centerX" secondItem="mCU-b8-sc4" secondAttribute="centerX" id="qb6-gA-AnC"/>
                         </constraints>
                     </view>
@@ -133,11 +118,9 @@
                 <outlet property="averagePaymentView" destination="EJB-R7-Qhf" id="OcB-Av-reg"/>
                 <outlet property="netSalesLabel" destination="m4h-To-O60" id="UIe-Vt-5c8"/>
                 <outlet property="netSalesView" destination="G0T-gu-gy7" id="2b8-iw-FX7"/>
-                <outlet property="percentUpFromDayLabel" destination="mCU-b8-sc4" id="4iD-y5-DaO"/>
-                <outlet property="percentUpFromMonthLabel" destination="nxx-fW-xMy" id="fmM-Md-35w"/>
-                <outlet property="percentUpFromWeekLabel" destination="85x-mR-9R7" id="OM6-wq-UzT"/>
+                <outlet property="percentUpLabel" destination="mCU-b8-sc4" id="FxN-es-vOL"/>
             </connections>
-            <point key="canvasLocation" x="461" y="175"/>
+            <point key="canvasLocation" x="72" y="231"/>
         </collectionViewCell>
     </objects>
 </document>

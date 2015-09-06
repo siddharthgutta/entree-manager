@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="134" height="90"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zGQ-84-tmD" userLabel="Hairline">
-                                <rect key="frame" x="0.0" y="26.5" width="134" height="1"/>
+                                <rect key="frame" x="0.0" y="27" width="134" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="8XD-JP-Bdk"/>
@@ -29,8 +29,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft2-ie-8oT">
-                                <rect key="frame" x="31" y="27.5" width="72" height="62.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                <rect key="frame" x="41" y="28" width="52.5" height="61.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -58,15 +58,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1vL-XC-rux" userLabel="Hairline">
-                                <rect key="frame" x="0.0" y="26.5" width="134" height="1"/>
+                                <rect key="frame" x="0.0" y="27" width="134" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="bnM-Vq-cvB"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="999" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z22-K8-m5c">
-                                <rect key="frame" x="31" y="27.5" width="72" height="62.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                <rect key="frame" x="41" y="28" width="52.5" height="61.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -101,27 +101,36 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="100%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jM7-Q3-G76">
-                                <rect key="frame" x="20" y="27.5" width="111" height="62.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                <rect key="frame" x="20" y="28" width="84" height="61.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJo-br-RDg" userLabel="Hairline2">
-                                <rect key="frame" x="0.0" y="26.5" width="292" height="1"/>
+                                <rect key="frame" x="0.0" y="27" width="292" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="HjH-no-Jry"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="$2000.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mha-0K-dsM">
+                                <rect key="frame" x="20" y="91" width="130.5" height="75"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.2627450980392157" blue="0.7686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="x0G-Pk-z0c" secondAttribute="trailing" id="4Ss-K3-Q5D"/>
                             <constraint firstItem="QJo-br-RDg" firstAttribute="top" secondItem="iQ2-DE-oQy" secondAttribute="bottom" constant="5" id="4lD-RG-hTW"/>
                             <constraint firstItem="x0G-Pk-z0c" firstAttribute="top" secondItem="jM7-Q3-G76" secondAttribute="bottom" id="BRm-yb-EbQ"/>
+                            <constraint firstAttribute="bottom" secondItem="Mha-0K-dsM" secondAttribute="bottom" id="INQ-xx-j79"/>
+                            <constraint firstItem="Mha-0K-dsM" firstAttribute="top" secondItem="x0G-Pk-z0c" secondAttribute="bottom" id="OwD-MR-bsr"/>
                             <constraint firstItem="QJo-br-RDg" firstAttribute="leading" secondItem="Yid-bE-a0E" secondAttribute="leading" id="QKZ-ga-yEO"/>
                             <constraint firstItem="jM7-Q3-G76" firstAttribute="top" secondItem="QJo-br-RDg" secondAttribute="bottom" id="YYD-eQ-ef6"/>
                             <constraint firstItem="iQ2-DE-oQy" firstAttribute="leading" secondItem="Yid-bE-a0E" secondAttribute="leading" constant="8" id="ffA-LH-Xj4"/>
+                            <constraint firstItem="Mha-0K-dsM" firstAttribute="leading" secondItem="Yid-bE-a0E" secondAttribute="leading" constant="20" id="h6F-AQ-pNx"/>
                             <constraint firstItem="iQ2-DE-oQy" firstAttribute="top" secondItem="Yid-bE-a0E" secondAttribute="top" constant="5" id="jI8-V1-avk"/>
                             <constraint firstAttribute="trailing" secondItem="QJo-br-RDg" secondAttribute="trailing" id="lYn-6g-d5R"/>
                             <constraint firstItem="x0G-Pk-z0c" firstAttribute="top" secondItem="QJo-br-RDg" secondAttribute="bottom" constant="80" id="mKu-7b-JJd"/>
@@ -154,11 +163,12 @@
             </constraints>
             <size key="customSize" width="292" height="276"/>
             <connections>
-                <outlet property="guestCount" destination="ft2-ie-8oT" id="rvr-Zg-4JA"/>
+                <outlet property="guestCountLabel" destination="ft2-ie-8oT" id="FDm-z8-Vf2"/>
                 <outlet property="guestCountView" destination="PYL-Jk-61r" id="Gwg-QI-fIT"/>
-                <outlet property="laborCostPercentage" destination="jM7-Q3-G76" id="CfJ-2B-5C7"/>
+                <outlet property="laborCostLabel" destination="Mha-0K-dsM" id="MW3-CB-ypL"/>
+                <outlet property="laborCostPercentageLabel" destination="jM7-Q3-G76" id="mou-pJ-k88"/>
                 <outlet property="laborCostView" destination="Yid-bE-a0E" id="pIZ-kQ-Xw6"/>
-                <outlet property="transactionCount" destination="z22-K8-m5c" id="g8C-Pi-PE9"/>
+                <outlet property="transactionCountLabel" destination="z22-K8-m5c" id="pGN-i7-hrb"/>
                 <outlet property="transactionCountView" destination="ZCH-ki-wyp" id="p2s-pP-D0m"/>
             </connections>
             <point key="canvasLocation" x="17" y="397"/>

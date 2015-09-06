@@ -10,10 +10,15 @@
 
 @interface MenuItem : PFObject<PFSubclassing>
 
-@property (nonatomic) NSString *name;
-@property (nonatomic) CGFloat price;
-@property (nonatomic) id menuCategory;
-@property (nonatomic) BOOL alcoholic;
+@property (nonatomic) NSString  *name;
+@property (nonatomic) CGFloat   price;
+@property (nonatomic) id        menuCategory;
+@property (nonatomic) BOOL      alcoholic;
 @property (nonatomic) NSInteger colorIndex;
+
+/** Temporary assignable value */
+@property (nonatomic          ) NSInteger saleCount;
+/** saleCount x price */
+@property (nonatomic, readonly) CGFloat   netSales;
 
 @end

@@ -22,7 +22,7 @@
 
 #endif
 
-#define PARSE_REGISTER_CLASS + (void)initialize { \
+#define PARSE_REGISTER_CLASS + (void)load { \
     [self registerSubclass]; \
 }
 

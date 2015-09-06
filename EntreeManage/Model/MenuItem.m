@@ -19,4 +19,25 @@ PARSE_REGISTER_CLASS
 @dynamic alcoholic;
 @dynamic colorIndex;
 
+@synthesize saleCount = _saleCount;
+
+- (CGFloat)netSales {
+    return self.saleCount * self.price;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[MenuItem class]])
+        return [self isEqualToMenuItem:object];
+    
+    return [super isEqual:object];
+}
+
+- (BOOL)isEqualToMenuItem:(MenuItem *)item {
+    return [self.name isEqualToString:item.name];
+}
+
+- (NSUInteger)hash {
+    return self.name.hash;
+}
+
 @end

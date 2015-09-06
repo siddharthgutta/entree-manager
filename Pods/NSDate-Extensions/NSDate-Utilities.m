@@ -19,13 +19,13 @@
 
 #pragma mark Relative Dates
 
-+ (NSDate *)dateWithDaysFromNow:(NSUInteger)days {
++ (NSDate *)dateWithDaysFromNow:(NSInteger)days {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + D_DAY * days;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-+ (NSDate *)dateWithDaysBeforeNow:(NSUInteger)days {
++ (NSDate *)dateWithDaysBeforeNow:(NSInteger)days {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] - D_DAY * days;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
@@ -36,40 +36,40 @@
 }
 
 + (NSDate *)dateYesterday {
-    return [NSDate dateWithDaysBeforeNow:1].dateAtStartOfDay;
+    return [NSDate dateWithDaysBeforeNow:1];
 }
 
 + (NSDate *)date7DaysAgo {
-    return [self dateWithDaysBeforeNow:7].dateAtStartOfDay;
+    return [self dateWithDaysBeforeNow:7];
 }
 
 + (NSDate *)date30DaysAgo {
-    return [self dateWithDaysBeforeNow:30].dateAtStartOfDay;
+    return [self dateWithDaysBeforeNow:30];
 }
 
 + (NSDate *)dateYearAgo {
-    return [self dateWithDaysBeforeNow:365].dateAtStartOfDay;
+    return [self dateWithDaysBeforeNow:365];
 }
 
-+ (NSDate *)dateWithHoursFromNow:(NSUInteger)dHours {
++ (NSDate *)dateWithHoursFromNow:(NSInteger)dHours {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + D_HOUR * dHours;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-+ (NSDate *)dateWithHoursBeforeNow:(NSUInteger)dHours {
++ (NSDate *)dateWithHoursBeforeNow:(NSInteger)dHours {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] - D_HOUR * dHours;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-+ (NSDate *)dateWithMinutesFromNow:(NSUInteger)dMinutes {
++ (NSDate *)dateWithMinutesFromNow:(NSInteger)dMinutes {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + D_MINUTE * dMinutes;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
 }
 
-+ (NSDate *)dateWithMinutesBeforeNow:(NSUInteger)dMinutes {
++ (NSDate *)dateWithMinutesBeforeNow:(NSInteger)dMinutes {
     NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] - D_MINUTE * dMinutes;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return newDate;
@@ -160,33 +160,33 @@
 
 #pragma mark Adjusting Dates
 
-- (NSDate *)dateByAddingDays:(NSUInteger)dDays {
-    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + D_DAY * dDays;
-    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+- (NSDate *)dateByAddingDays:(NSInteger)dDays {
+    NSTimeInterval aTimeInterval = [self timeIntervalSince1970] + D_DAY * dDays;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateBySubtractingDays:(NSUInteger)dDays {
+- (NSDate *)dateBySubtractingDays:(NSInteger)dDays {
     return [self dateByAddingDays: (dDays * -1)];
 }
 
-- (NSDate *)dateByAddingHours:(NSUInteger)dHours {
-    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + D_HOUR * dHours;
-    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+- (NSDate *)dateByAddingHours:(NSInteger)dHours {
+    NSTimeInterval aTimeInterval = [self timeIntervalSince1970] + D_HOUR * dHours;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateBySubtractingHours:(NSUInteger)dHours {
+- (NSDate *)dateBySubtractingHours:(NSInteger)dHours {
     return [self dateByAddingHours: (dHours * -1)];
 }
 
-- (NSDate *)dateByAddingMinutes:(NSUInteger)dMinutes {
-    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + D_MINUTE * dMinutes;
-    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+- (NSDate *)dateByAddingMinutes:(NSInteger)dMinutes {
+    NSTimeInterval aTimeInterval = [self timeIntervalSince1970] + D_MINUTE * dMinutes;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:aTimeInterval];
     return newDate;
 }
 
-- (NSDate *)dateBySubtractingMinutes:(NSUInteger)dMinutes {
+- (NSDate *)dateBySubtractingMinutes:(NSInteger)dMinutes {
     return [self dateByAddingMinutes: (dMinutes * -1)];
 }
 
@@ -201,6 +201,30 @@
 - (NSDateComponents *)componentsWithOffsetFromDate:(NSDate *)aDate {
     NSDateComponents *dTime = [CURRENT_CALENDAR components:DATE_COMPONENTS fromDate:aDate toDate:self options:0];
     return dTime;
+}
+
+- (NSDate *)nextDay {
+    return [self dateByAddingDays:1];
+}
+
+- (NSDate *)previousDay {
+    return [self dateBySubtractingDays:1];
+}
+
+- (NSDate *)nextWeek {
+    return [self dateByAddingDays:7];
+}
+
+- (NSDate *)previousWeek {
+    return [self dateBySubtractingDays:7];
+}
+
+- (NSDate *)nextMonth {
+    return [self dateByAddingDays:30];
+}
+
+- (NSDate *)previousMonth {
+    return [self dateBySubtractingDays:30];
 }
 
 #pragma mark Retrieving Intervals

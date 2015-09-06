@@ -7,29 +7,48 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MostPopularTableCell" id="gTV-IL-0wX" customClass="MostPopularTableCell">
-            <rect key="frame" x="0.0" y="0.0" width="315" height="251"/>
+            <rect key="frame" x="0.0" y="0.0" width="315" height="293"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="315" height="251"/>
+                <rect key="frame" x="0.0" y="0.0" width="315" height="293"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="z49-la-vhk">
-                        <rect key="frame" x="0.0" y="0.0" width="315" height="251"/>
-                        <color key="backgroundColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="z49-la-vhk">
+                        <rect key="frame" x="0.0" y="28" width="315" height="265"/>
+                        <color key="backgroundColor" red="0.71175003051757812" green="0.71185159683227539" blue="0.71171802282333374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tableView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most Popular Items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQ6-hx-Heb">
+                        <rect key="frame" x="8" y="5" width="126" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.99991601705551147" green="1" blue="0.99987190961837769" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wm-mr-aHB" userLabel="Harline">
+                        <rect key="frame" x="0.0" y="27" width="315" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Z8i-KA-MsH"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" red="0.71175003051757812" green="0.71185159683227539" blue="0.71171802282333374" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="z49-la-vhk" firstAttribute="top" secondItem="1wm-mr-aHB" secondAttribute="bottom" id="2CL-NR-yvw"/>
+                <constraint firstItem="1wm-mr-aHB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GrX-t4-cBh"/>
+                <constraint firstItem="gQ6-hx-Heb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Le8-rp-Vco"/>
                 <constraint firstAttribute="trailing" secondItem="z49-la-vhk" secondAttribute="trailing" id="bZt-Q8-PmX"/>
+                <constraint firstAttribute="trailing" secondItem="1wm-mr-aHB" secondAttribute="trailing" id="dym-Hg-Nks"/>
+                <constraint firstItem="gQ6-hx-Heb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="e0E-Hh-SJ5"/>
+                <constraint firstItem="1wm-mr-aHB" firstAttribute="top" secondItem="gQ6-hx-Heb" secondAttribute="bottom" constant="5" id="eY9-VI-zQU"/>
                 <constraint firstAttribute="bottom" secondItem="z49-la-vhk" secondAttribute="bottom" id="hHv-1V-bGO"/>
-                <constraint firstItem="z49-la-vhk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="suh-4g-L3S"/>
                 <constraint firstItem="z49-la-vhk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uK0-Ie-wQb"/>
             </constraints>
-            <size key="customSize" width="315" height="251"/>
+            <size key="customSize" width="315" height="293"/>
             <connections>
                 <outlet property="tableView" destination="z49-la-vhk" id="YwG-p5-crd"/>
             </connections>
-            <point key="canvasLocation" x="190.5" y="474.5"/>
+            <point key="canvasLocation" x="18.5" y="454.5"/>
         </collectionViewCell>
     </objects>
 </document>

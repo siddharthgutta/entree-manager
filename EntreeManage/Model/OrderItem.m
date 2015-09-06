@@ -22,4 +22,9 @@ PARSE_REGISTER_CLASS
 @dynamic seatNumber;
 @dynamic timesPrinted;
 
+- (CGFloat)netProfit {
+    if (self.onTheHouse) return 0;
+    return self.menuItem.price;
+}
+
 @end

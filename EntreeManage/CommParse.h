@@ -9,6 +9,9 @@
 #import "ProgressHUD.h"
 #import "Mailgun.h"
 
+typedef void (^ParseObjectResponseBlock)(id object, NSError *error);
+typedef void (^ParseTwoObjectResponseBlock)(id object1, id object2, NSError *error);
+typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 
 @protocol CommsDelegate <NSObject>
 - (void)commsDidAction:(NSDictionary *)response;
@@ -16,6 +19,22 @@
 
 
 @interface CommParse : NSObject
+
+/** Callback takes an NSNumber object. */
++ (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an array of NSNumber objects. */
++ (void)getNetSalesForPastWeek:(NSDate *)day callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuItem objects. */
++ (void)getPopularItemsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuCategory objects. */
++ (void)getPopularCategoriesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getAveragePaymentForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseTwoObjectResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getGuestCountForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+
 
 
 + (void)emailLogin:(id<CommsDelegate>)delegate userInfo:(NSDictionary *)userInfo;

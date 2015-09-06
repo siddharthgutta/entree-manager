@@ -62,16 +62,25 @@
         if ([response[@"responseCode"] boolValue]) {
             [ProgressHUD dismiss];
             
-            UITabBarController    *tab       = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];
-            UINavigationController *summary  = [[UIStoryboard storyboardWithName:@"Summary" bundle:nil]  instantiateViewControllerWithIdentifier:@"NavigationController"];
-            UISplitViewController *business  = [[UIStoryboard storyboardWithName:@"Business" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitBusinessController"];
-            UISplitViewController *analytics = [[UIStoryboard storyboardWithName:@"Analytics" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitAnalyticsController"];
-            UIViewController      *settings  = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil]  instantiateViewControllerWithIdentifier:@"SettingsController"];
+            UITabBarController     *tab       = [[UIStoryboard storyboardWithName:@"Login" bundle:nil]  instantiateViewControllerWithIdentifier:@"startTabBar"];
+            UINavigationController *summary   = [[UIStoryboard storyboardWithName:@"Summary" bundle:nil]  instantiateViewControllerWithIdentifier:@"NavigationController"];
+            UISplitViewController  *business  = [[UIStoryboard storyboardWithName:@"Business" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitBusinessController"];
+            UISplitViewController  *analytics = [[UIStoryboard storyboardWithName:@"Analytics" bundle:nil]  instantiateViewControllerWithIdentifier:@"SplitAnalyticsController"];
+            UIViewController       *settings  = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil]  instantiateViewControllerWithIdentifier:@"SettingsController"];
             
             [summary pushViewController:[[SummaryViewController alloc] initWithCollectionViewLayout:[UICollectionViewFlowLayout new]] animated:NO];
             
             NSArray *controllers = @[summary, business, analytics, settings]; // navController,
             tab.viewControllers = controllers;
+            
+            NSArray *unfilledNames = @[@"Summary", @"Business", @"Analytics", @"Settings"];
+            NSArray *filledNames   = @[@"Summary-Fill", @"Business-Fill", @"Analytics-Fill", @"Settings-Fill"];
+            
+            NSInteger i = 0;
+            for (UITabBarItem *item in tab.tabBar.items) {
+                item.image = [UIImage imageNamed:unfilledNames[i]];
+                item.selectedImage = [UIImage imageNamed:filledNames[i++]];
+            }
             
             AppDelegate *del = (AppDelegate *)[UIApplication sharedApplication].delegate;
             del.window.rootViewController = tab;

@@ -14,9 +14,7 @@
 @interface NetSalesMeanPaymentCell ()
 
 @property (nonatomic, weak) IBOutlet UILabel *netSalesLabel;
-@property (nonatomic, weak) IBOutlet UILabel *percentUpFromDayLabel;
-@property (nonatomic, weak) IBOutlet UILabel *percentUpFromWeekLabel;
-@property (nonatomic, weak) IBOutlet UILabel *percentUpFromMonthLabel;
+@property (nonatomic, weak) IBOutlet UILabel *percentUpLabel;
 @property (nonatomic, weak) IBOutlet UILabel *averagePaymentLabel;
 
 @property (nonatomic, weak) IBOutlet UIView  *netSalesView;
@@ -32,11 +30,10 @@
     self.netSalesView.layer.cornerRadius       = kSummaryViewCornerRadius;
     self.averagePaymentView.layer.cornerRadius = kSummaryViewCornerRadius;
     
-    self.netSales           = 0;
-    self.percentUpFromDay   = 0;
-    self.percentUpFromWeek  = 0;
-    self.percentUpFromMonth = 0;
-    self.averagePayment     = 0;
+    self.netSales       = 0;
+    self.percentUp      = 0;
+    self.averagePayment = 0;
+    self.numberOfDays   = 1;
 }
 
 #pragma mark Setters
@@ -46,20 +43,22 @@
     self.netSalesLabel.text = [[NSNumberFormatter dollarFormatter] stringFromNumber:@(netSales)];
 }
 
-- (void)setPercentUpFromDay:(CGFloat)percentUpFromDay {
-    _percentUpFromDay = percentUpFromDay;
-    self.percentUpFromDayLabel.text = [NSString stringWithFormat:@"%f%% up from yesterday", percentUpFromDay];
+- (void)setPercentUp:(CGFloat)percentUp {
+    _percentUp = percentUp;
+    if (self.numberOfDays == 1)
+        self.percentUpLabel.text = [NSString stringWithFormat:@"%.02f%% up from yesterday", self.percentUp];
+    else
+        self.percentUpLabel.text = [NSString stringWithFormat:@"%.02f%% up from previous %ld days", self.percentUp, (long)self.numberOfDays];
 }
 
-- (void)setPercentUpFromWeek:(CGFloat)percentUpFromWeek {
-    _percentUpFromWeek = percentUpFromWeek;
-    self.percentUpFromWeekLabel.text = [NSString stringWithFormat:@"%f%% up from last week", percentUpFromWeek];
+- (void)setNumberOfDays:(NSInteger)numberOfDays {
+    _numberOfDays = numberOfDays;
+    if (self.numberOfDays == 1)
+        self.percentUpLabel.text = [NSString stringWithFormat:@"%.02f%% up from yesterday", self.percentUp];
+    else
+        self.percentUpLabel.text = [NSString stringWithFormat:@"%.02f%% up from previous %ld days", self.percentUp, (long)self.numberOfDays];
 }
 
-- (void)setPercentUpFromMonth:(CGFloat)percentUpFromMonth {
-    _percentUpFromMonth = percentUpFromMonth;
-    self.percentUpFromMonthLabel.text = [NSString stringWithFormat:@"%f%% up from last month", percentUpFromMonth];
-}
 
 - (void)setAveragePayment:(CGFloat)averagePayment {
     _averagePayment = averagePayment;

@@ -25,6 +25,9 @@
 
 - (void)awakeFromNib {
     self.backgroundColor = [UIColor clearColor];
+    self.separatorInset = UIEdgeInsetsZero;
+    self.preservesSuperviewLayoutMargins = NO;
+    self.layoutMargins = UIEdgeInsetsZero;
 }
 
 #pragma mark Setters

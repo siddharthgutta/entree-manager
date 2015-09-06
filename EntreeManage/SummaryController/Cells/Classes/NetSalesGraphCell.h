@@ -9,11 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ARLineGraph.h"
 
-@interface NetSalesGraphCell : UICollectionViewCell <ARLineGraphDataSource>
+@interface NetSalesGraphCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet ARLineGraph *graph;
-
-/** An array of ARGraphDataPoint objects. */
-@property (nonatomic      ) NSArray *graphPlotPoints;
 
 @end

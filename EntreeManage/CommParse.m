@@ -9,8 +9,154 @@
 #import "CommParse.h"
 #import "AppDelegate.h"
 #import <Parse/PFConstants.h>
+#import "KBCollectionExtensions.h"
 
 @implementation CommParse
+
++ (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback {
+    PFQuery *query = [Payment queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"order.orderItems", @"order.orderItems.menuItem"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
+        if (!error) {
+            NSArray *orderItems  = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
+            NSArray *discounted  = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]];
+            CGFloat allSubtotals = [[orderItems valueForKeyPath:@"@sum.menuItem.price"] floatValue];
+            CGFloat allDiscounts = [[discounted valueForKeyPath:@"@sum.menuItem.price"] floatValue];
+            callback(@(allSubtotals - allDiscounts), nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (void)getNetSalesForPastWeek:(NSDate *)day callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [Payment queryWithCreatedAtFrom:[day.dateAtStartOfDay dateBySubtractingDays:6] to:day.dateAtStartOfDay.nextDay includeKeys:@[@"order.orderItems", @"order.orderItems.menuItem"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
+        if (!error) {
+            NSArray *orderItems  = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
+            NSArray *discounted  = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]];
+            
+            NSMutableArray *numbers = [NSMutableArray array];
+            for (int i = 6; i >= 0; i--)
+                [numbers addObject:[self netSalesOnDay:[day dateBySubtractingDays:i] withOrders:orderItems discounts:discounted]];
+            
+            callback(numbers, nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (NSNumber *)netSalesOnDay:(NSDate *)date withOrders:(NSArray *)orderItems discounts:(NSArray *)discounted {
+    orderItems = [orderItems.mutableCopy objectsPassingTest:^BOOL(Payment *p, BOOL *stop) {
+        return [date isEqualToDateIgnoringTime:p.createdAt];
+    }].allObjects;
+    discounted = [discounted.mutableCopy objectsPassingTest:^BOOL(Payment *p, BOOL *stop) {
+        return [date isEqualToDateIgnoringTime:p.createdAt];
+    }].allObjects;
+    
+    CGFloat allSubtotals = [[orderItems valueForKeyPath:@"@sum.menuItem.price"] floatValue];
+    CGFloat allDiscounts = [[discounted valueForKeyPath:@"@sum.menuItem.price"] floatValue];
+    
+    return @(allSubtotals - allDiscounts);
+}
+
++ (void)getPopularItemsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [OrderItem queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"menuItem"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
+        if (!error) {
+            // Count the occurences of each menu item
+            NSArray *menuItemsWithDuplicates = [items valueForKeyPath:@"menuItem"];
+            NSCountedSet *menuItemsCounted   = [[NSCountedSet alloc] initWithArray:menuItemsWithDuplicates];
+            NSSet *menuItems                 = [NSSet setWithArray:menuItemsWithDuplicates];
+            
+            // Sort the menu items by their count and take the top 5
+            NSArray *sortedByPopularity = [[menuItems.allObjects sortedArrayUsingComparator:^NSComparisonResult(MenuItem *obj1, MenuItem *obj2) {
+                NSInteger c1 = [menuItemsCounted countForObject:obj1];
+                NSInteger c2 = [menuItemsCounted countForObject:obj2];
+                if (c1 > c2)
+                    return NSOrderedAscending;
+                if (c1 < c2)
+                    return NSOrderedDescending;
+                
+                return [obj1.name compare:obj2.name];
+            }] subarrayWithRange:NSMakeRange(0, 6)];
+            
+            // Set order count (used in summary view)
+            for (MenuItem *mi in sortedByPopularity)
+                mi.saleCount = [menuItemsCounted countForObject:mi];
+            
+            callback(sortedByPopularity, nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (void)getPopularCategoriesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [OrderItem queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"menuItem.menuCategory"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
+        if (!error) {
+            // Count the occurences of each category
+            NSArray *categoriesWithDuplicates = [items valueForKeyPath:@"menuItem.menuCategory"];
+            NSCountedSet *categoriesCounted   = [[NSCountedSet alloc] initWithArray:categoriesWithDuplicates];
+            NSSet *categories                 = [NSSet setWithArray:categoriesWithDuplicates];
+            
+            // Sort the categories by their count and take the top 5
+            NSArray *sortedByPopularity = [[categories.allObjects sortedArrayUsingComparator:^NSComparisonResult(MenuCategory *obj1, MenuCategory *obj2) {
+                NSInteger c1 = [categoriesCounted countForObject:obj1];
+                NSInteger c2 = [categoriesCounted countForObject:obj2];
+                if (c1 < c2)
+                    return NSOrderedAscending;
+                if (c1 > c2)
+                    return NSOrderedDescending;
+                
+                return [obj1.name compare:obj2.name];
+            }] subarrayWithRange:NSMakeRange(0, 4)];
+            
+            // Set order count (used in summary view)
+            for (MenuCategory *mc in sortedByPopularity)
+                mc.saleCount = [categoriesCounted countForObject:mc];
+            
+            callback(sortedByPopularity, nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (void)getAveragePaymentForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseTwoObjectResponseBlock)callback {
+    PFQuery *query = [Payment queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:nil];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
+        if (!error) {
+            callback(@([[payments valueForKeyPath:@"@sum.total"] floatValue]/payments.count), @(payments.count), nil);
+        } else {
+            callback(nil, nil, error);
+        }
+    }];
+}
+
++ (void)getGuestCountForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback {
+    PFQuery *query = [Party queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:nil];
+    [query whereKey:@"arrivedAt" greaterThanOrEqualTo:start];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *parties, NSError *error) {
+        if (!error) {
+            callback([parties valueForKeyPath:@"@sum.size"], nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback {
+    PFQuery *query = [Shift queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"employee"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *shifts, NSError *error) {
+        if (!error) {
+            callback([shifts valueForKeyPath:@"@sum.laborCost"], nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
 
 
 + (NSString *)parseErrorMsgFromError:(NSError *)error {
@@ -24,7 +170,6 @@
 }
 
 + (void)emailLogin:(id<CommsDelegate>)delegate userInfo:(NSDictionary *)userInfo {
-    NSLog(@"Comms emailLogin:");
     NSString *email = [userInfo valueForKey:@"email"];
     NSString *password = [userInfo valueForKey:@"pswd"];
     
@@ -129,28 +274,25 @@
 + (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate menuType:(NSString *)menuType MenuId:(NSString *)menuId {
     PFQuery *query = [PFQuery queryWithClassName:menuType];
     [query whereKey:@"objectID" equalTo:menuId];
-   
+    
 }
 
 // Get Analytics Datas
 + (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    __block CGFloat discountVal;
-    discountVal = 0;
+    __block CGFloat discountVal = 0;
     
-    PFQuery *orderQuery = [PFQuery queryWithClassName:@"OrderItem"];
-    [orderQuery whereKey:@"onTheHouse" equalTo:@YES];
-    [orderQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orderQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orderQuery includeKey:@"menuItem"];
+    PFQuery *query = [OrderItem query];
+    [query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
+    [query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+    [query includeKey:@"menuItem"];
     
-    [orderQuery findObjectsInBackgroundWithBlock:^(NSArray *orderObjects, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *orderObjects, NSError *error) {
         
         if (!error) {
             PFObject *itemObj;
-            for(PFObject *object in orderObjects){
+            for(PFObject *object in orderObjects) {
                 itemObj = object[@"menuItem"];
                 
                 discountVal += [itemObj[@"price"] floatValue];
@@ -180,8 +322,6 @@
             }];
         }
     }];
-    
-    
 }
 
 + (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
@@ -200,7 +340,7 @@
     __block Payment *payment;
     __block PFQuery *paymentQuery = [Payment query];
     __block PFQuery *categoryQuery = [PFQuery queryWithClassName:@"MenuCategory"];
-   
+    
     __block NSString *categoryIdentifier;
     
     [orditemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -309,7 +449,7 @@
             if ([delegate respondsToSelector:@selector(commsDidAction:)])
                 [delegate commsDidAction:response];
         }];
-         
+        
     }];
     
 }
@@ -323,8 +463,8 @@
     [shiftQuery includeKey:@"employee"];
     [shiftQuery orderByAscending:@"employee"];
     
-NSMutableDictionary *results = [NSMutableDictionary dictionary];
-
+    NSMutableDictionary *results = [NSMutableDictionary dictionary];
+    
     __block NSMutableArray *emps;
     __block PFObject *empObj;
     __block PFQuery *empQuery = [PFQuery queryWithClassName:@"Employee"];
@@ -365,7 +505,7 @@ NSMutableDictionary *results = [NSMutableDictionary dictionary];
             
             [results  setObject:emps forKey:empId];
         }
-         
+        
         // calculate tips
         PFQuery *payQuery = [Payment query];
         [payQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
@@ -433,7 +573,7 @@ NSMutableDictionary *results = [NSMutableDictionary dictionary];
     [orditemQuery includeKey:@"menuItem"];
     [orditemQuery includeKey:@"order"];
     
-NSMutableDictionary *results = [NSMutableDictionary dictionary];
+    NSMutableDictionary *results = [NSMutableDictionary dictionary];
     
     __block NSMutableArray *orders;
     __block PFObject *payObj;
@@ -491,7 +631,7 @@ NSMutableDictionary *results = [NSMutableDictionary dictionary];
             }
             [results  setObject:orders forKey:itemId];
         }
-
+        
         NSMutableDictionary *response = [NSMutableDictionary dictionary];
         response[@"action"] = @1;
         if ( !error ) {
@@ -506,7 +646,7 @@ NSMutableDictionary *results = [NSMutableDictionary dictionary];
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
             [delegate commsDidAction:response];
     }];
-   
+    
 }
 
 + (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
@@ -517,11 +657,11 @@ NSMutableDictionary *results = [NSMutableDictionary dictionary];
     [orditemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [orditemQuery includeKey:@"menuItem"];
     [orditemQuery includeKey:@"order"];
-//    [orditemQuery includeKey:@"menuItemModifiers"];
+    //    [orditemQuery includeKey:@"menuItemModifiers"];
     
-NSMutableDictionary *results = [NSMutableDictionary dictionary];
+    NSMutableDictionary *results = [NSMutableDictionary dictionary];
     
-NSMutableDictionary *timess = [NSMutableDictionary dictionary];
+    NSMutableDictionary *timess = [NSMutableDictionary dictionary];
     
     __block NSMutableArray *orders;
     __block PFObject *payObj;
@@ -608,7 +748,7 @@ NSMutableDictionary *timess = [NSMutableDictionary dictionary];
     NSString *csvName = @"analytics.csv";
     
     NSString *curUserEmail =  [[NSUserDefaults standardUserDefaults] objectForKey:@"curUserEmail"];
-
+    
     // send to current user's email
     if ([userEmail isEqualToString:@""]) {
         if ([curUserEmail isEqualToString:@""])

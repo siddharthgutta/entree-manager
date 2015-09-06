@@ -11,9 +11,7 @@
 @interface NetSalesMeanPaymentCell : UICollectionViewCell
 
 @property (nonatomic) CGFloat netSales;
-@property (nonatomic) CGFloat percentUpFromDay;
-@property (nonatomic) CGFloat percentUpFromWeek;
-@property (nonatomic) CGFloat percentUpFromMonth;
 @property (nonatomic) CGFloat averagePayment;
-
+@property (nonatomic) CGFloat percentUp;
+@property (nonatomic) NSInteger numberOfDays;
 @end

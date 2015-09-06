@@ -132,24 +132,18 @@
         if ([response[@"action"] intValue] == 9) {
             NSLog(@"Action was 9");
         } else {
-            NSArray *quotes = response[@"objects"];
+            NSArray *payments = response[@"objects"];
             
             // calculate sums
-            CGFloat grossSales = 0, tax = 0, tips = 0, cash = 0, card = 0;
-            for (Payment *payment in quotes) {
-                grossSales += payment.subtotal;
-                tax += payment.tax;
-                tips += payment.tip;
-                if ([payment.type isEqualToString:@"Cash"])
-                    cash += payment.subtotal;
-                else
-                    card += payment.subtotal;
-            }
-            
-            sumVal[0]  = @(grossSales);
-            sumVal[3]  = @(tax);
-            sumVal[4]  = @(tips);
-            sumVal[8]  = @(cash);
+            CGFloat grossSales = [[payments valueForKeyPath:@"@sum.subtotal"] floatValue];
+            CGFloat tax = [[payments valueForKeyPath:@"@sum.tax"] floatValue];
+            CGFloat tips = [[payments valueForKeyPath:@"@sum.tip"] floatValue];
+            CGFloat cash = [[[payments valueForKeyPath:@"[collect].{type like 'Cash'}.self"] valueForKeyPath:@"@sum.subtotal"] floatValue];
+            CGFloat card = [[[payments valueForKeyPath:@"[collect].{type like 'Card'}.self"] valueForKeyPath:@"@sum.subtotal"] floatValue];
+            sumVal[0] = @(grossSales);
+            sumVal[3] = @(tax);
+            sumVal[4] = @(tips);
+            sumVal[8] = @(cash);
             sumVal[9] = @(card);
             
             // Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)

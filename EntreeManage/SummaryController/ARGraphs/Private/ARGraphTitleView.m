@@ -81,7 +81,7 @@
         _subtitleLabel = [[UILabel alloc] init];
         _subtitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _subtitleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-        _subtitleLabel.text = @"bar";
+        _subtitleLabel.text = @"";
         _subtitleLabel.textColor = self.labelColor;
 
         [_subtitleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
