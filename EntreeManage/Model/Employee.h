@@ -7,6 +7,8 @@
 //
 
 #import <Parse/Parse.h>
+@class Shift;
+
 
 @interface Employee : PFObject<PFSubclassing>
 

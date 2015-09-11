@@ -12,13 +12,14 @@
 @interface BusinessEmployeeAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
+
 - (IBAction)onCancelClick:(id)sender;
 - (IBAction)onClickSave:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *txtName;
-@property (weak, nonatomic) IBOutlet UITextField *txtRole;
-@property (weak, nonatomic) IBOutlet UISwitch *switchManager;
-@property (weak, nonatomic) IBOutlet UITextField *txtPincode;
-@property (weak, nonatomic) IBOutlet UITextField *txtHourlyWage;
+@property (weak, nonatomic) IBOutlet UITextField  *txtName;
+@property (weak, nonatomic) IBOutlet UITextField  *txtRole;
+@property (weak, nonatomic) IBOutlet UISwitch     *switchManager;
+@property (weak, nonatomic) IBOutlet UITextField  *txtPincode;
+@property (weak, nonatomic) IBOutlet UITextField  *txtHourlyWage;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerColor;
 
 
@@ -30,20 +31,13 @@
     [super viewDidLoad];
     
     
-    if (_menuObj!=nil) {
-       _txtName.text = _menuObj[@"name"];
-       _txtRole.text = _menuObj[@"role"];
-        NSNumber *adminFlag = _menuObj[@"administrator"];
-        if ([adminFlag intValue]==1)  {
-            _switchManager.on = YES;
-        }
-        else {
-            _switchManager.on = NO;
-        }
-        _txtPincode.text = _menuObj[@"pinCode"];
-        NSNumber *hourlyWage = _menuObj[@"hourlyWage"];
-        
-        _txtHourlyWage.text = [NSString stringWithFormat:@"%f", [hourlyWage floatValue]];
+    if (_employee) {
+        _txtName.text       = _employee.name;
+        _txtRole.text       = _employee.role;
+        _switchManager.on   = _employee.administrator;
+        _txtPincode.text    = _employee.pinCode;
+
+        _txtHourlyWage.text = [NSString stringWithFormat:@"%.2f", _employee.hourlyWage];
     }
     
 }
@@ -73,26 +67,26 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    if (_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    if (!_employee) {
+        _employee = [Employee object];
     }
     
-    _menuObj[@"name"] = _txtName.text;
-    _menuObj[@"role"] = _txtRole.text;
+    _employee.name = _txtName.text;
+    _employee[@"role"] = _txtRole.text;
     
-    _menuObj[@"administrator"] = @(_switchManager.on);
-    _menuObj[@"pinCode"] = _txtPincode.text;
+    _employee[@"administrator"] = @(_switchManager.on);
+    _employee[@"pinCode"] = _txtPincode.text;
     
     NSNumber *hourlyWage = @([_txtHourlyWage.text floatValue]);
-
-    _menuObj[@"hourlyWage"] = hourlyWage;
+    
+    _employee[@"hourlyWage"] = hourlyWage;
     
     // Get Color Picker Value
     NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
-    _menuObj[@"colorIndex"] = @(colorIndex);
+    _employee[@"colorIndex"] = @(colorIndex);
     // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    [CommParse updateQuoteRequest:self Quote:_employee];
     
     
 }

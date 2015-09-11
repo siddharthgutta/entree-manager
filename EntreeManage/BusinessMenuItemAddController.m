@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerColor;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrice;
+@property (weak, nonatomic) IBOutlet UITextField *printerTextField;
 
 @end
 
@@ -25,11 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (_menuObj!=nil) {
-        _txtName.text = _menuObj[@"name"];
-        NSNumber *price = _menuObj[@"price"];
+    if (self.menuObj) {
+        self.txtName.text = self.menuObj[@"name"];
+        NSNumber *price = self.menuObj[@"price"];
         
-        _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
+        self.txtPrice.text = [NSString stringWithFormat:@"%.2f", [price floatValue]];
     }
 }
 
@@ -56,23 +57,21 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    // if not exist then add
-    if (_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    if (!self.menuObj) {
+        self.menuObj = [MenuItem object];
     }
     
-    _menuObj[@"name"] = _txtName.text;
+    self.menuObj.name = self.txtName.text;
     
-    NSNumber *price = @([_txtPrice.text floatValue]);
-    
-    _menuObj[@"price"] = price;
+    self.menuObj.price = [self.txtPrice.text floatValue];
+    self.menuObj.menuCategory = self.menuCategory;
     
     // Get Color Picker Value
-    NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
-    _menuObj[@"colorIndex"] = @(colorIndex);
+    NSInteger colorIndex = [self.pickerColor selectedRowInComponent:0];
+    self.menuObj.colorIndex = colorIndex;
     // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    [CommParse updateQuoteRequest:self Quote:self.menuObj];
 }
 
 - (void)commsDidAction:(NSDictionary *)response {
@@ -85,7 +84,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             // Menus Refresh
             
-            [_parentDelegate showBusinessMenus:_menuType];
+            [_parentDelegate showBusinessMenus:self.menuType];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];

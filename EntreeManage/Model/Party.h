@@ -7,16 +7,17 @@
 //
 
 #import <Parse/Parse.h>
+@class Restaurant, Table;
 
 @interface Party : PFObject<PFSubclassing>
 
-@property (nonatomic) NSString  *name;
-@property (nonatomic) NSInteger size;
-@property (nonatomic) NSDate    *arrivedAt;
-@property (nonatomic) NSDate    *seatedAt;
-@property (nonatomic) NSDate    *leftAt;
-@property (nonatomic) id        restaurant;
-@property (nonatomic) id        server;
-@property (nonatomic) id        table;
+@property (nonatomic) NSString   *name;
+@property (nonatomic) NSInteger  size;
+@property (nonatomic) NSDate     *arrivedAt;
+@property (nonatomic) NSDate     *seatedAt;
+@property (nonatomic) NSDate     *leftAt;
+@property (nonatomic) Restaurant *restaurant;
+@property (nonatomic) Employee   *server;
+@property (nonatomic) Table      *table;
 
 @end

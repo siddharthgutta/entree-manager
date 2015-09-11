@@ -13,12 +13,12 @@
 @property (nonatomic) NSString *cardFlightChargeToken;
 @property (nonatomic) NSString *cardLastFour;
 @property (nonatomic) NSString *cardName;
-@property (nonatomic) id order;
-@property (nonatomic) id party;
-@property (nonatomic) CGFloat subtotal;
-@property (nonatomic) CGFloat tax;
-@property (nonatomic) CGFloat tip;
-@property (nonatomic) CGFloat total;
+@property (nonatomic) Order    *order;
+@property (nonatomic) Party    *party;
+@property (nonatomic) CGFloat  subtotal;
+@property (nonatomic) CGFloat  tax;
+@property (nonatomic) CGFloat  tip;
+@property (nonatomic) CGFloat  total;
 @property (nonatomic) NSString *type;
 
 @end

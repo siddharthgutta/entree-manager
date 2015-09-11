@@ -32,7 +32,8 @@
     else if ([segue.identifier isEqualToString:@"segueBusinessMenuCategoryAdd"]) {
         
         BusinessMenuAddController *destController = segue.destinationViewController;
-        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuOrCategory = quotes[selectedIndexPath.row];
+        destController.menuForCategory = (id)self.topMenuObj;
         destController.menuType = @"MenuCategory";
         destController.parentDelegate = self;
     }

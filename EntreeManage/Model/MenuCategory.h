@@ -10,7 +10,7 @@
 
 @interface MenuCategory : PFObject<PFSubclassing>
 
-@property (nonatomic) id menu;
+@property (nonatomic) Menu *menu;
 @property (nonatomic) NSString *name;
 
 /** Temporary assignable value */

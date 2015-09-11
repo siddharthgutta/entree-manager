@@ -42,7 +42,7 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 // Get Business Menus
 + (void)getBusinessMenus:(id<CommsDelegate>)delegate menuType:(NSString *)menuType topKey:(NSString *)topKey topObject:(PFObject *)topObject;
 + (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate menuType:(NSString *)menuType MenuId:(NSString *)menuId;
-+ (void)getMenuItemsOfModifier:(id<CommsDelegate>)delegate ModifierObject:(PFObject *)modifierObject;
++ (void)getMenuItemsOfModifier:(id<CommsDelegate>)delegate modifierect:(PFObject *)modifierect;
 
 // Add, Update Business Menus
 + (void)updateQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;

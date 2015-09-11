@@ -54,7 +54,7 @@ const unsigned int kFLEXNumberOfImplicitArgs = 2;
 
 + (BOOL)isReadonlyProperty:(objc_property_t)property
 {
-    return [[self attributesDictionaryForProperty:property] objectForKey:kFLEXUtilityAttributeReadOnly] != nil;
+    return !![[self attributesDictionaryForProperty:property] objectForKey:kFLEXUtilityAttributeReadOnly];
 }
 
 + (SEL)setterSelectorForProperty:(objc_property_t)property

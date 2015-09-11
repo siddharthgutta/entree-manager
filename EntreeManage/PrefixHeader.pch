@@ -15,5 +15,7 @@
 #import "Entree-Constants.h"
 #import "NSDate-Utilities.h"
 #import "PFObject+QueryExtensions.h"
+#import "NSDateFormatter+Singleton.h"
+#import "PFRelation+Extensions.h"
 
 #endif

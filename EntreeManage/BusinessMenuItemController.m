@@ -22,16 +22,15 @@
 @implementation BusinessMenuItemController
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     //  go to add menu popup
     if ([segue.identifier isEqualToString:@"segueBusinessMenuItemAdd"]) {
         
         BusinessMenuItemAddController *destController = segue.destinationViewController;
         destController.menuType = @"MenuItem";
+        destController.menuCategory = self.topMenuObj;
         if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
-
 }
 
 
@@ -43,24 +42,18 @@
     
     self.title = @"Menu Items";
     [self showBusinessMenus:@"MenuItem"];
-    
 }
 
 // show business Menus func
 - (void)showBusinessMenus:(NSString *)MenuType {
-    
     [ProgressHUD show:@"" Interaction:NO];
-    
     [CommParse getBusinessMenus:self menuType:MenuType topKey:@"menuCategory" topObject:self.topMenuObj];
-    
 }
 
 - (void)addItemClicked {
     updateFlag = false;
     [self performSegueWithIdentifier:@"segueBusinessMenuItemAdd" sender:self];
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -80,12 +73,12 @@
     cell.delegate = self;
     cell.allowsMultipleSwipe = FALSE;
     
-    cell.leftSwipeSettings.transition = MGSwipeTransition3D;
+    cell.leftSwipeSettings.transition  = MGSwipeTransition3D;
     cell.rightSwipeSettings.transition = MGSwipeTransition3D;
-    cell.leftExpansion.buttonIndex = -1;
-    cell.leftExpansion.fillOnTrigger = NO;
+    cell.leftExpansion.buttonIndex     = -1;
+    cell.leftExpansion.fillOnTrigger   = NO;
     
-    cell.rightExpansion.buttonIndex = -1;
+    cell.rightExpansion.buttonIndex   = -1;
     cell.rightExpansion.fillOnTrigger = YES;
     cell.rightButtons = [self createRightButtons:2];
     
@@ -93,7 +86,7 @@
 }
 
 
--(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+- (NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
              swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
@@ -101,12 +94,12 @@
     expansionSettings.buttonIndex = -1;
     expansionSettings.fillOnTrigger = YES;
     int buttonNums = 1;
-    // if (selectedModifierObj!=nil) buttonNums = 2;
+    // if (selectedmodifier) buttonNums = 2;
     return [self createRightButtons:buttonNums];
     
 }
 
--(NSArray *)createRightButtons: (int) number {
+- (NSArray *)createRightButtons: (int) number {
     NSMutableArray *result = [NSMutableArray array];
     NSString *titles[2] = {@"Delete", @"Edit"};
     UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
@@ -146,6 +139,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    selectedIndexPath = indexPath;
     updateFlag = true;
     [self performSegueWithIdentifier:@"segueBusinessMenuItemAdd" sender:self];
 }

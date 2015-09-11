@@ -86,7 +86,7 @@ static CGFloat kPaddingBetweenLabels = 2.0;
     CGFloat width = 0;
     CGFloat widthOfTestString = [ARHelpers widthOfCaptionText:[NSString stringWithFormat:@"%li", (long)_yMax] inHeight:self.bounds.size.height];
 
-    if (_title != nil && _title.length) {
+    if (_title && _title.length) {
         width = [ARHelpers heightOfCaptionText:self.title inWidth:self.bounds.size.width] + widthOfTestString + 6;
     } else {
         width = widthOfTestString;

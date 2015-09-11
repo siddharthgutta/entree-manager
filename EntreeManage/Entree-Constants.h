@@ -11,13 +11,13 @@
 
 #pragma mark - Summary -
 extern CGFloat const kSummaryViewCornerRadius;
-extern NSString *const krSummaryNetSalesGraphCell;
-extern NSString *const krSummaryNetSalesMeanPaymentCell;
-extern NSString *const krSummaryMostPopularPieChartCell;
-extern NSString *const krSummaryMostPopularTableCell;
-extern NSString *const krSummaryGuestsTransactionLaborCell;
-extern NSString *const krSummaryPopularItemCell;
+extern NSString * const krSummaryNetSalesGraphCell;
+extern NSString * const krSummaryNetSalesMeanPaymentCell;
+extern NSString * const krSummaryMostPopularPieChartCell;
+extern NSString * const krSummaryMostPopularTableCell;
+extern NSString * const krSummaryGuestsTransactionLaborCell;
+extern NSString * const krSummaryPopularItemCell;
 
 #pragma mark - Parse -
-extern NSString *const kParseSetApplicationID;
-extern NSString *const kParseClientKey;
+extern NSString * const kParseSetApplicationID;
+extern NSString * const kParseClientKey;

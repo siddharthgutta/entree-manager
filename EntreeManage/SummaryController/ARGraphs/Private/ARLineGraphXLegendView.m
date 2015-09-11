@@ -72,7 +72,7 @@
     if (self.showXValues) {
         height += heightOfTestString;
     }
-    if (_title != nil && _title.length) {
+    if (_title && _title.length) {
         height += [ARHelpers heightOfCaptionText:_title inWidth:self.bounds.size.width];
         if (self.showXValues) {
             height += 2;

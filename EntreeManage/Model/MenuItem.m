@@ -33,11 +33,11 @@ PARSE_REGISTER_CLASS
 }
 
 - (BOOL)isEqualToMenuItem:(MenuItem *)item {
-    return [self.name isEqualToString:item.name];
+    return [self.objectId isEqualToString:item.objectId];
 }
 
 - (NSUInteger)hash {
-    return self.name.hash;
+    return self.objectId.hash;
 }
 
 @end

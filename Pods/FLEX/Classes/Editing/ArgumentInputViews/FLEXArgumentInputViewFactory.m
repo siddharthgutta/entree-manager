@@ -66,7 +66,7 @@
 
 + (BOOL)canEditFieldWithTypeEncoding:(const char *)typeEncoding currentValue:(id)currentValue
 {
-    return [self argumentInputViewSubclassForTypeEncoding:typeEncoding currentValue:currentValue] != nil;
+    return !![self argumentInputViewSubclassForTypeEncoding:typeEncoding currentValue:currentValue];
 }
 
 @end

@@ -218,7 +218,7 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     [super setTintColor:tintColor];
-    if (_background != nil) {
+    if (_background) {
         self.background.color = tintColor.CGColor;
         _background.frame = self.bounds;
     }

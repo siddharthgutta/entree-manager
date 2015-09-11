@@ -13,7 +13,7 @@
 @interface OrderItem : PFObject<PFSubclassing>
 
 @property (nonatomic) MenuItem  *menuItem;
-@property (nonatomic) NSArray   *menuModifiers;
+@property (nonatomic) NSArray   *menuItemModifiers;
 @property (nonatomic) NSString  *notes;
 @property (nonatomic) BOOL      onTheHouse;
 @property (nonatomic) Order     *order;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessEmployeeAddController : UIViewController
-    @property (nonatomic, weak) PFObject *menuObj;
+    @property (nonatomic, weak) Employee *employee;
     @property (nonatomic, weak) NSString *menuType;
 
     @property (nonatomic, assign) id parentDelegate;

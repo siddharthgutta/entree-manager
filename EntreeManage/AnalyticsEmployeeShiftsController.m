@@ -45,9 +45,8 @@
     // Previous month's data
     NSDate *startDate = [NSDate date30DaysAgo];
     NSDate *endDate   = [NSDate date];
-    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
-    _startDateText.text         = [dateFormat stringFromDate:startDate];
-    _endDateText.text           = [dateFormat stringFromDate:endDate];
+    _startDateText.text         = [[NSDateFormatter shared] stringFromDate:startDate];
+    _endDateText.text           = [[NSDateFormatter shared] stringFromDate:endDate];
     
     [CommParse getAnalyticsEmployeeShifts:self startDate:startDate endDate:endDate];
 }
@@ -56,34 +55,23 @@
     NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Category Sales", _startDateText.text, _endDateText.text];
     NSString *content = @"Employee,Date,Clocked In,Clocked Out,Hours Worked,Tips";
     
-    for(PFObject *shiftObj in results) {
-        PFObject *empObj = shiftObj[@"employee"];
-        NSString *empName = empObj[@"name"];
+    for(Shift *shift in results) {
+        Employee *employee = shift.employee;
+        NSString *empName = employee.name;
         
-        NSDate *startDate = shiftObj[@"startedAt"];
-        NSDate *endDate = shiftObj[@"endedAt"];
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setDateFormat:@"dd-MM-yy"];
+        NSDate *startDate = shift.startedAt;
+        NSDate *endDate = shift.endedAt;
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        [[NSDateFormatter shared] setDateFormat:@"hh:mm a"];
         
+        NSString *startText           = [dateFormatter stringFromDate: startDate];
+        NSString *endText             = [dateFormatter stringFromDate: endDate];
         
-        [dateFormat setDateFormat:@"hh:mm a"];
-        // Start Time
-        NSString *startText = [dateFormat stringFromDate: startDate];
-        
-        // End Time
-        NSString *endText = [dateFormat stringFromDate: endDate];
-        
-        // calculate Time
         NSTimeInterval timeDifference = [endDate timeIntervalSinceDate:startDate];
-        
-        // Hours worked
-        CGFloat hoursDiff =  timeDifference/3600;
-        
+        CGFloat hoursDiff             = timeDifference/3600;
         
         // Tips
-        CGFloat hourlyWage = [empObj[@"hourlyWage"] floatValue];
-        CGFloat tips = hourlyWage *hoursDiff;
-        
+        CGFloat tips = employee.hourlyWage *hoursDiff;
         
         content = [NSString stringWithFormat:@"%@ \n %@,%@,%@,%.02f,%.02f", content, empName, startText, endText, hoursDiff, tips];
     }
@@ -139,32 +127,30 @@
     // Configure the cell...
     UILabel *label;
     
-    PFObject *shiftObj = results[indexPath.row];
-    PFObject *empObj = shiftObj[@"employee"];
+    Shift *shift = results[indexPath.row];
+    Employee *employee = shift.employee;
     
-    NSString *empName = empObj[@"name"];
+    NSString *empName = employee.name;
     
     // employee name
     label = (UILabel *)[cell viewWithTag:6];
     label.text = empName;
     
-    NSDate *startDate = shiftObj[@"startedAt"];
-    NSDate *endDate = shiftObj[@"endedAt"];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yy"];
+    NSDate *startDate = shift.startedAt;
+    NSDate *endDate = shift.endedAt;
     
-    NSString *dateText = [dateFormat stringFromDate: startDate];
+    NSString *dateText = [[NSDateFormatter shared] stringFromDate: startDate];
     // Date
     label = (UILabel *)[cell viewWithTag:1];
     label.text = dateText;
     
-    [dateFormat setDateFormat:@"hh:mm a"];
-    dateText = [dateFormat stringFromDate: startDate];
+    [[NSDateFormatter shared] setDateFormat:@"hh:mm a"];
+    dateText = [[NSDateFormatter shared] stringFromDate: startDate];
     // Start Time
     label = (UILabel *)[cell viewWithTag:2];
     label.text = dateText;
     
-    dateText = [dateFormat stringFromDate: endDate];
+    dateText = [[NSDateFormatter shared] stringFromDate: endDate];
     // End Time
     label = (UILabel *)[cell viewWithTag:3];
     label.text = dateText;
@@ -178,7 +164,7 @@
     label.text = [NSString stringWithFormat:@"%.03f", hoursDiff];
     
     // Tips
-    CGFloat hourlyWage = [empObj[@"hourlyWage"] floatValue];
+    CGFloat hourlyWage = employee.hourlyWage;
     CGFloat tips = hourlyWage *hoursDiff;
     
     label = (UILabel *)[cell viewWithTag:5];
@@ -207,17 +193,15 @@
 - (IBAction)onChangedDate:(id)sender {
     NSDate *selDate = [_datePicker date];
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     
-    NSString *dateText = [dateFormat stringFromDate: selDate];
+    NSString *dateText = [[NSDateFormatter shared] stringFromDate: selDate];
     if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
-    NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
-    NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
+    NSDate *startDate = [[NSDateFormatter shared] dateFromString: _startDateText.text];
+    NSDate *endDate = [[NSDateFormatter shared] dateFromString: _endDateText.text];
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
     
@@ -228,11 +212,9 @@
 
 - (IBAction)onTouchTextStartDate:(id)sender {
     startDate_Flag = true;
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     
-    NSDate *date = [dateFormat dateFromString: _startDateText.text];
+    NSDate *date = [[NSDateFormatter shared] dateFromString: _startDateText.text];
     [_datePicker setDate:date];
     
     _pickDateView.hidden = false;
@@ -240,11 +222,9 @@
 
 - (IBAction)onTouchTextEndDate:(id)sender {
     startDate_Flag = false;
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
     
-    NSDate *date = [dateFormat dateFromString: _endDateText.text];
+    NSDate *date = [[NSDateFormatter shared] dateFromString: _endDateText.text];
     [_datePicker setDate:date];
     
     _pickDateView.hidden = false;

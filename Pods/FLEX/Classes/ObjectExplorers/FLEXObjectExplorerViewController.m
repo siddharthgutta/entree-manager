@@ -673,7 +673,7 @@ static const NSInteger kFLEXObjectExplorerScopeIncludeInheritanceIndex = 1;
                 objc_property_t property = propertyBox.property;
                 id currentValue = [self valueForPropertyAtIndex:row];
                 BOOL canEdit = [FLEXPropertyEditorViewController canEditProperty:property currentValue:currentValue];
-                BOOL canExplore = currentValue != nil;
+                BOOL canExplore = !!currentValue;
                 canDrillIn = canEdit || canExplore;
             }
         }   break;
@@ -684,7 +684,7 @@ static const NSInteger kFLEXObjectExplorerScopeIncludeInheritanceIndex = 1;
                 Ivar ivar = ivarBox.ivar;
                 id currentValue = [self valueForIvarAtIndex:row];
                 BOOL canEdit = [FLEXIvarEditorViewController canEditIvar:ivar currentValue:currentValue];
-                BOOL canExplore = currentValue != nil;
+                BOOL canExplore = !!currentValue;
                 canDrillIn = canEdit || canExplore;
             }
         }   break;

@@ -860,7 +860,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     }
     
     UIView *view = self.superview;
-    while(view != nil) {
+    while(view) {
         if ([view isKindOfClass:[UITableView class]]) {
             _cachedParentTable = (UITableView *)view;
         }

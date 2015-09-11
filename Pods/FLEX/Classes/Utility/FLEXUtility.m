@@ -259,7 +259,7 @@
                 }
             }
             
-            [queryDictionary setObject:value forKey:key];
+            queryDictionary[key] = value;
         }
     }
 

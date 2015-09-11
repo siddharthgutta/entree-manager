@@ -46,9 +46,8 @@
     // Previous month's data
     NSDate *startDate = [NSDate date30DaysAgo];
     NSDate *endDate   = [NSDate date];
-    NSDateFormatter *dateFormat = ({id d = [NSDateFormatter new]; [d setDateFormat:@"dd-MM-yyyy"]; d; });
-    _startDateText.text         = [dateFormat stringFromDate:startDate];
-    _endDateText.text           = [dateFormat stringFromDate:endDate];
+    _startDateText.text         = [[NSDateFormatter shared] stringFromDate:startDate];
+    _endDateText.text           = [[NSDateFormatter shared] stringFromDate:endDate];
     
     [ProgressHUD show:@"" Interaction:NO];
     [CommParse getAnalyticsOrderReport:self startDate:startDate endDate:endDate];
@@ -166,18 +165,14 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 
 - (IBAction)onChangedDate:(id)sender {
     NSDate *selDate = [_datePicker date];
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-    NSString *dateText = [dateFormat stringFromDate: selDate];
+    NSString *dateText = [[NSDateFormatter shared] stringFromDate: selDate];
     if (startDate_Flag)  _startDateText.text = dateText;
     else _endDateText.text = dateText;
     
     _pickDateView.hidden = true;
-    NSDate *startDate = [dateFormat dateFromString: _startDateText.text];
-    NSDate *endDate = [dateFormat dateFromString: _endDateText.text];
+    NSDate *startDate = [[NSDateFormatter shared] dateFromString: _startDateText.text];
+    NSDate *endDate = [[NSDateFormatter shared] dateFromString: _endDateText.text];
     // from start day 00:00 to end day 24:00
     endDate = [endDate dateByAddingTimeInterval:24*3600];
    
@@ -189,11 +184,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 
 - (IBAction)onTouchTextStartDate:(id)sender {
     startDate_Flag = true;
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-    NSDate *date = [dateFormat dateFromString: _startDateText.text];
+    NSDate *date = [[NSDateFormatter shared] dateFromString: _startDateText.text];
     [_datePicker setDate:date];
     
     _pickDateView.hidden = false;
@@ -201,11 +193,8 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 
 - (IBAction)onTouchTextEndDate:(id)sender {
     startDate_Flag = false;
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd-MM-yyyy"];
-    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-    NSDate *date = [dateFormat dateFromString: _endDateText.text];
+    NSDate *date = [[NSDateFormatter shared] dateFromString: _endDateText.text];
     [_datePicker setDate:date];
     
     _pickDateView.hidden = false;

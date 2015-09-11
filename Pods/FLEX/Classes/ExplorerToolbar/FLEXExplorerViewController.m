@@ -452,7 +452,7 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
 - (void)updateButtonStates
 {
     // Move and details only active when an object is selected.
-    BOOL hasSelectedObject = self.selectedView != nil;
+    BOOL hasSelectedObject = !!self.selectedView;
     self.explorerToolbar.moveItem.enabled = hasSelectedObject;
     self.explorerToolbar.selectItem.selected = self.currentMode == FLEXExplorerModeSelect;
     self.explorerToolbar.moveItem.selected = self.currentMode == FLEXExplorerModeMove;
@@ -570,7 +570,7 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
         UIView *outlineView = [self outlineViewForView:view];
         [self.view addSubview:outlineView];
         NSValue *key = [NSValue valueWithNonretainedObject:view];
-        [newOutlineViewsForVisibleViews setObject:outlineView forKey:key];
+        newOutlineViewsForVisibleViews[key] = outlineView;
     }
     self.outlineViewsForVisibleViews = newOutlineViewsForVisibleViews;
     self.selectedView = [self viewForSelectionAtPoint:selectionPointInWindow];
@@ -827,7 +827,7 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
 
 - (BOOL)wantsWindowToBecomeKey
 {
-    return self.previousKeyWindow != nil;
+    return !!self.previousKeyWindow;
 }
 
 @end

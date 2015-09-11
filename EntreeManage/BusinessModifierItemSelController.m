@@ -36,8 +36,8 @@
     
     // init key array
     selectedKey_s = [NSMutableArray array];
-    for(PFObject *itemObj in self.selectedItems){
-        [selectedKey_s addObject:itemObj.objectId];
+    for(PFObject *item in self.selectedItems){
+        [selectedKey_s addObject:item.objectId];
     }
     
 }
@@ -79,13 +79,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
 
-    PFObject *itemObj = cellS[indexPath.row];
+    PFObject *item = cellS[indexPath.row];
     
     // Item Table Multi select with Check Accessory Type
     if (tableView==_itemView) {
         
         // NSString *keyString = [NSString stringWithFormat:@"%ld-%ld-%ld", selectedIndex1, selectedIndex2, indexPath.row];
-        NSString *keyString = itemObj.objectId;
+        NSString *keyString = item.objectId;
         
         BOOL isContain = [selectedKey_s containsObject:keyString];
         if (isContain) {
@@ -94,7 +94,7 @@
         else cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
-    NSString *name = itemObj[@"name"];
+    NSString *name = item[@"name"];
     cell.textLabel.text = name;
     
     
@@ -111,18 +111,18 @@
     }
     else if (tableView == _itemView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        PFObject *itemObj = itemS[indexPath.row];
+        PFObject *item = itemS[indexPath.row];
         
         
-        NSString *keyString = itemObj.objectId;
+        NSString *keyString = item.objectId;
         
         if ([selectedKey_s containsObject:keyString]) {
             [selectedKey_s removeObject:keyString];
-            [self.selectedItems removeObject:itemObj];
+            [self.selectedItems removeObject:item];
         }
         else {
             [selectedKey_s addObject:keyString];
-            [self.selectedItems addObject:itemObj];
+            [self.selectedItems addObject:item];
         }
         [tableView reloadData];
     }

@@ -38,8 +38,7 @@
     
     PFObject *menuObj = quotes[indexPath.row];
     
-    NSString *name = menuObj[@"name"];
-    cell.textLabel.text = name;
+    cell.textLabel.text = menuObj[@"name"];
     
     return cell;
 }

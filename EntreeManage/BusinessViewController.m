@@ -33,7 +33,7 @@
         
         BusinessMenuAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
-        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.menuOrCategory = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
     //  go to add Menu Modifier popup
@@ -49,7 +49,7 @@
         
         BusinessEmployeeAddController *destController = segue.destinationViewController;
         destController.menuType = selectedMenuType;
-        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag==true) destController.employee = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
 }

@@ -71,6 +71,17 @@
 		92FFDA8A1B7E26D200B2D3A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA891B7E26D200B2D3A0 /* CoreLocation.framework */; };
 		92FFDA8C1B7E26DF00B2D3A0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */; };
 		92FFDA8E1B7E26E900B2D3A0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92FFDA8D1B7E26E900B2D3A0 /* Social.framework */; };
+		B4458E9E1BA23B7600522935 /* EMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458E9D1BA23B7600522935 /* EMUser.m */; };
+		B4458EA11BA23C5A00522935 /* PrintJob.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EA01BA23C5A00522935 /* PrintJob.m */; };
+		B4458EA41BA23CE200522935 /* StarPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EA31BA23CE200522935 /* StarPrinter.m */; };
+		B4458EA71BA23D2E00522935 /* Table.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EA61BA23D2E00522935 /* Table.m */; };
+		B4458EAA1BA23DE000522935 /* Refund.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EA91BA23DE000522935 /* Refund.m */; };
+		B4458EAD1BA23E3800522935 /* MenuItemModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EAC1BA23E3800522935 /* MenuItemModifier.m */; };
+		B4458EB01BA24E6D00522935 /* NSDateFormatter+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EAF1BA24E6D00522935 /* NSDateFormatter+Singleton.m */; };
+		B4458EB31BA2A71700522935 /* PFRelation+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EB21BA2A71700522935 /* PFRelation+Extensions.m */; };
+		B4A8273F1B9CC93900363AD6 /* Summary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A8273E1B9CC93900363AD6 /* Summary.storyboard */; };
+		B4A827421B9CD31100363AD6 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A827411B9CD31100363AD6 /* Menu.m */; };
+		B4A827451B9CD3F600363AD6 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A827441B9CD3F600363AD6 /* Restaurant.m */; };
 		B4D11B7F1B8FCF980012116A /* Payment.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D11B7E1B8FCF980012116A /* Payment.m */; };
 		B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22A1B923CAE00129F78 /* MenuItem.m */; };
 		B4E8F22E1B923DEE00129F78 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E8F22D1B923DEE00129F78 /* Order.m */; };
@@ -228,6 +239,27 @@
 		92FFDA8B1B7E26DF00B2D3A0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		92FFDA8D1B7E26E900B2D3A0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		9B7C2B71A79E7E36C8894553 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4458E9C1BA23B7600522935 /* EMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EMUser.h; path = Model/EMUser.h; sourceTree = "<group>"; };
+		B4458E9D1BA23B7600522935 /* EMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EMUser.m; path = Model/EMUser.m; sourceTree = "<group>"; };
+		B4458E9F1BA23C5A00522935 /* PrintJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintJob.h; path = Model/PrintJob.h; sourceTree = "<group>"; };
+		B4458EA01BA23C5A00522935 /* PrintJob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintJob.m; path = Model/PrintJob.m; sourceTree = "<group>"; };
+		B4458EA21BA23CE200522935 /* StarPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarPrinter.h; path = Model/StarPrinter.h; sourceTree = "<group>"; };
+		B4458EA31BA23CE200522935 /* StarPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarPrinter.m; path = Model/StarPrinter.m; sourceTree = "<group>"; };
+		B4458EA51BA23D2E00522935 /* Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Table.h; path = Model/Table.h; sourceTree = "<group>"; };
+		B4458EA61BA23D2E00522935 /* Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Table.m; path = Model/Table.m; sourceTree = "<group>"; };
+		B4458EA81BA23DE000522935 /* Refund.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Refund.h; path = Model/Refund.h; sourceTree = "<group>"; };
+		B4458EA91BA23DE000522935 /* Refund.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Refund.m; path = Model/Refund.m; sourceTree = "<group>"; };
+		B4458EAB1BA23E3800522935 /* MenuItemModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuItemModifier.h; path = Model/MenuItemModifier.h; sourceTree = "<group>"; };
+		B4458EAC1BA23E3800522935 /* MenuItemModifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuItemModifier.m; path = Model/MenuItemModifier.m; sourceTree = "<group>"; };
+		B4458EAE1BA24E6D00522935 /* NSDateFormatter+Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Singleton.h"; sourceTree = "<group>"; };
+		B4458EAF1BA24E6D00522935 /* NSDateFormatter+Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Singleton.m"; sourceTree = "<group>"; };
+		B4458EB11BA2A71700522935 /* PFRelation+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFRelation+Extensions.h"; sourceTree = "<group>"; };
+		B4458EB21BA2A71700522935 /* PFRelation+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFRelation+Extensions.m"; sourceTree = "<group>"; };
+		B4A8273E1B9CC93900363AD6 /* Summary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Summary.storyboard; sourceTree = "<group>"; };
+		B4A827401B9CD31100363AD6 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Model/Menu.h; sourceTree = "<group>"; };
+		B4A827411B9CD31100363AD6 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = Model/Menu.m; sourceTree = "<group>"; };
+		B4A827431B9CD3F600363AD6 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Restaurant.h; path = Model/Restaurant.h; sourceTree = "<group>"; };
+		B4A827441B9CD3F600363AD6 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Restaurant.m; path = Model/Restaurant.m; sourceTree = "<group>"; };
 		B4D11B7D1B8FCF980012116A /* Payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Payment.h; path = Model/Payment.h; sourceTree = "<group>"; };
 		B4D11B7E1B8FCF980012116A /* Payment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Payment.m; path = Model/Payment.m; sourceTree = "<group>"; };
 		B4E8F2291B923CAE00129F78 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuItem.h; path = Model/MenuItem.h; sourceTree = "<group>"; };
@@ -458,6 +490,7 @@
 				92C8F1161B60958B00ADF1D8 /* Business.storyboard */,
 				9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */,
 				9211F9AD1B72080F009CFEF8 /* Settings.storyboard */,
+				B4A8273E1B9CC93900363AD6 /* Summary.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -601,22 +634,38 @@
 		B4D11B7C1B8FCEB50012116A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B4D11B7D1B8FCF980012116A /* Payment.h */,
-				B4D11B7E1B8FCF980012116A /* Payment.m */,
-				B4E8F2291B923CAE00129F78 /* MenuItem.h */,
-				B4E8F22A1B923CAE00129F78 /* MenuItem.m */,
+				B4E8F2431B93A43700129F78 /* Employee.h */,
+				B4E8F2441B93A43700129F78 /* Employee.m */,
+				B4A827401B9CD31100363AD6 /* Menu.h */,
+				B4A827411B9CD31100363AD6 /* Menu.m */,
 				B4E8F23D1B939EBD00129F78 /* MenuCategory.h */,
 				B4E8F23E1B939EBD00129F78 /* MenuCategory.m */,
+				B4E8F2291B923CAE00129F78 /* MenuItem.h */,
+				B4E8F22A1B923CAE00129F78 /* MenuItem.m */,
+				B4458EAB1BA23E3800522935 /* MenuItemModifier.h */,
+				B4458EAC1BA23E3800522935 /* MenuItemModifier.m */,
 				B4E8F22C1B923DEE00129F78 /* Order.h */,
 				B4E8F22D1B923DEE00129F78 /* Order.m */,
 				B4E8F22F1B923E5D00129F78 /* OrderItem.h */,
 				B4E8F2301B923E5D00129F78 /* OrderItem.m */,
-				B4E8F2401B939FCC00129F78 /* Shift.h */,
-				B4E8F2411B939FCC00129F78 /* Shift.m */,
-				B4E8F2431B93A43700129F78 /* Employee.h */,
-				B4E8F2441B93A43700129F78 /* Employee.m */,
 				B4E8F2461B93A98000129F78 /* Party.h */,
 				B4E8F2471B93A98000129F78 /* Party.m */,
+				B4D11B7D1B8FCF980012116A /* Payment.h */,
+				B4D11B7E1B8FCF980012116A /* Payment.m */,
+				B4458E9F1BA23C5A00522935 /* PrintJob.h */,
+				B4458EA01BA23C5A00522935 /* PrintJob.m */,
+				B4458EA81BA23DE000522935 /* Refund.h */,
+				B4458EA91BA23DE000522935 /* Refund.m */,
+				B4A827431B9CD3F600363AD6 /* Restaurant.h */,
+				B4A827441B9CD3F600363AD6 /* Restaurant.m */,
+				B4E8F2401B939FCC00129F78 /* Shift.h */,
+				B4E8F2411B939FCC00129F78 /* Shift.m */,
+				B4458EA21BA23CE200522935 /* StarPrinter.h */,
+				B4458EA31BA23CE200522935 /* StarPrinter.m */,
+				B4458EA51BA23D2E00522935 /* Table.h */,
+				B4458EA61BA23D2E00522935 /* Table.m */,
+				B4458E9C1BA23B7600522935 /* EMUser.h */,
+				B4458E9D1BA23B7600522935 /* EMUser.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -626,6 +675,10 @@
 			children = (
 				B4E8F23A1B93794900129F78 /* PFObject+QueryExtensions.h */,
 				B4E8F23B1B93794900129F78 /* PFObject+QueryExtensions.m */,
+				B4458EB11BA2A71700522935 /* PFRelation+Extensions.h */,
+				B4458EB21BA2A71700522935 /* PFRelation+Extensions.m */,
+				B4458EAE1BA24E6D00522935 /* NSDateFormatter+Singleton.h */,
+				B4458EAF1BA24E6D00522935 /* NSDateFormatter+Singleton.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -789,6 +842,7 @@
 				TargetAttributes = {
 					92C8F1051B60958A00ADF1D8 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = S6N2F22V2Z;
 					};
 					92C8F1211B60958B00ADF1D8 = {
 						CreatedOnToolsVersion = 6.4;
@@ -829,6 +883,7 @@
 				92C8F14F1B62930900ADF1D8 /* login.png in Resources */,
 				92C8F11D1B60958B00ADF1D8 /* LaunchScreen.xib in Resources */,
 				928734761B6FA567005E112A /* checkbox_checked.png in Resources */,
+				B4A8273F1B9CC93900363AD6 /* Summary.storyboard in Resources */,
 				B4F583181B84413200DCF20C /* NetSalesGraphCell.xib in Resources */,
 				92C8F1691B64022700ADF1D8 /* ProgressHUD.bundle in Resources */,
 				92C8F11A1B60958B00ADF1D8 /* Images.xcassets in Resources */,
@@ -899,6 +954,7 @@
 				B4F5830C1B84413200DCF20C /* ARPieChartLayer.m in Sources */,
 				B4F583091B84413200DCF20C /* ARLineGraphYLegendView.m in Sources */,
 				92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */,
+				B4458EA11BA23C5A00522935 /* PrintJob.m in Sources */,
 				B4F583051B84413200DCF20C /* ARLineGraphDataPointUtility.m in Sources */,
 				B4E8F23F1B939EBD00129F78 /* MenuCategory.m in Sources */,
 				92C8F1421B61210800ADF1D8 /* BusinessLeftMenuViewController.m in Sources */,
@@ -906,9 +962,11 @@
 				B4E8F2451B93A43700129F78 /* Employee.m in Sources */,
 				9211F9B81B735FE4009CFEF8 /* AnalyticsCategorySalesController.m in Sources */,
 				928734331B69BD2D005E112A /* PFObject+copyShallow.m in Sources */,
+				B4458EAA1BA23DE000522935 /* Refund.m in Sources */,
 				B4E8F22E1B923DEE00129F78 /* Order.m in Sources */,
 				B4F5830D1B84413200DCF20C /* ARYMinMaxLayer.m in Sources */,
 				92C8F10C1B60958A00ADF1D8 /* main.m in Sources */,
+				B4A827421B9CD31100363AD6 /* Menu.m in Sources */,
 				928734431B6AA1E5005E112A /* BusinessMenuAddController.m in Sources */,
 				B4E8F2421B939FCC00129F78 /* Shift.m in Sources */,
 				B4F582FC1B84413200DCF20C /* ARGraphDataPoint.m in Sources */,
@@ -921,10 +979,14 @@
 				9287346A1B6E6CB2005E112A /* MGSwipeTableCell.m in Sources */,
 				928734491B6BD1F4005E112A /* BusinessEmployeeAddController.m in Sources */,
 				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
+				B4A827451B9CD3F600363AD6 /* Restaurant.m in Sources */,
 				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
 				B4E8F2481B93A98000129F78 /* Party.m in Sources */,
+				B4458EA41BA23CE200522935 /* StarPrinter.m in Sources */,
 				B4D11B7F1B8FCF980012116A /* Payment.m in Sources */,
 				92FFDA811B7D75C500B2D3A0 /* Mailgun.m in Sources */,
+				B4458EAD1BA23E3800522935 /* MenuItemModifier.m in Sources */,
+				B4458EB31BA2A71700522935 /* PFRelation+Extensions.m in Sources */,
 				B4F582FE1B84413200DCF20C /* ARPieChart.m in Sources */,
 				B4E8F22B1B923CAE00129F78 /* MenuItem.m in Sources */,
 				B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */,
@@ -934,6 +996,8 @@
 				9211F9BE1B736022009CFEF8 /* AnalyticsPayrollController.m in Sources */,
 				9253C5EF1B7395FB0078BA5F /* AnalyticsByPaymentTypeController.m in Sources */,
 				B4F583131B84413200DCF20C /* PopularItemCell.m in Sources */,
+				B4458EA71BA23D2E00522935 /* Table.m in Sources */,
+				B4458E9E1BA23B7600522935 /* EMUser.m in Sources */,
 				9287342E1B6914BE005E112A /* BusinessViewController.m in Sources */,
 				B4F5830A1B84413200DCF20C /* ARPieChartDataPointUtility.m in Sources */,
 				92F4FB031B6522CC00AFFE0E /* AnalyticsViewController.m in Sources */,
@@ -953,6 +1017,7 @@
 				B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */,
 				B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */,
 				92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */,
+				B4458EB01BA24E6D00522935 /* NSDateFormatter+Singleton.m in Sources */,
 				B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1082,6 +1147,7 @@
 			baseConfigurationReference = B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
@@ -1089,7 +1155,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "Entreé Manager";
@@ -1101,6 +1167,7 @@
 			baseConfigurationReference = FD055906CB18997372EE4470 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
@@ -1108,7 +1175,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = EntreeManage/PrefixHeader.pch;
 				INFOPLIST_FILE = EntreeManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "Entreé Manager";
@@ -1130,7 +1197,7 @@
 				INFOPLIST_FILE = EntreeManageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Entreé ManagerTests";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntreeManage.app/EntreeManage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entreé Manager.app/Entreé Manager";
 			};
 			name = Debug;
 		};
@@ -1145,7 +1212,7 @@
 				INFOPLIST_FILE = EntreeManageTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "Entreé ManagerTests";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntreeManage.app/EntreeManage";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entreé Manager.app/Entreé Manager";
 			};
 			name = Release;
 		};

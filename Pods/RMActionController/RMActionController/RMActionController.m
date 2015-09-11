@@ -475,7 +475,7 @@ typedef NS_ENUM(NSInteger, RMActionControllerAnimationStyle) {
 }
 
 - (void)viewDidLoad {
-    NSAssert(self.contentView != nil, @"Error: The view of an RMActionController has been loaded before a contentView has been set. You have to set the contentView before presenting a RMActionController.");
+    NSAssert(self.contentView, @"Error: The view of an RMActionController has been loaded before a contentView has been set. You have to set the contentView before presenting a RMActionController.");
     
     [super viewDidLoad];
     
@@ -848,7 +848,7 @@ typedef NS_ENUM(NSInteger, RMActionControllerAnimationStyle) {
         }
         
         if(1) {
-            if(controller.modalPresentationStyle == UIModalPresentationPopover || controller.yConstraint != nil) {
+            if(controller.modalPresentationStyle == UIModalPresentationPopover || controller.yConstraint) {
                 [controller dismissViewControllerAnimated:YES completion:nil];
             } else {
                 [controller dismissViewControllerAnimated:NO completion:nil];

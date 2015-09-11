@@ -24,8 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (_menuObj!=nil) {
-        _txtName.text = _menuObj[@"name"];
+    if (self.menuOrCategory) {
+        self.txtName.text = self.menuOrCategory[@"name"];
     }
 }
 
@@ -55,18 +55,19 @@
     [ProgressHUD show:@"" Interaction:NO];
     
     // if not exist then add
-    if (_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    if (!self.menuOrCategory) {
+        self.menuOrCategory = [PFObject objectWithClassName:self.menuType];
     }
     
-    _menuObj[@"name"] = _txtName.text;
+    self.menuOrCategory[@"name"] = self.txtName.text;
+    if (self.menuForCategory) self.menuOrCategory[@"menu"] = self.menuForCategory;
     
     // Get Color Picker Value
     NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
-    _menuObj[@"colorIndex"] = @(colorIndex);
+    self.menuOrCategory[@"colorIndex"] = @(colorIndex);
     // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    [CommParse updateQuoteRequest:self Quote:self.menuOrCategory];
 }
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
@@ -78,7 +79,7 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             // Menus Refresh
             
-            [_parentDelegate showBusinessMenus:_menuType];
+            [_parentDelegate showBusinessMenus:self.menuType];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];

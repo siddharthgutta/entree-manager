@@ -7,14 +7,13 @@
 //
 
 #import <Parse/Parse.h>
-@class Payment;
-
+@class Party, Payment;
 
 @interface Order : PFObject<PFSubclassing>
 
-@property (nonatomic) NSArray *orderItems;
-@property (nonatomic) Payment *payment;
-@property (nonatomic) id      party;
-@property (nonatomic) id      server;
+@property (nonatomic) NSArray  *orderItems;
+@property (nonatomic) Payment  *payment;
+@property (nonatomic) Party    *party;
+@property (nonatomic) Employee *server;
 
 @end

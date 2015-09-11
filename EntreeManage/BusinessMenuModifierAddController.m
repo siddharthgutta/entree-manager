@@ -20,6 +20,7 @@
 - (IBAction)onClickAddItems:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrice;
+@property (weak, nonatomic) IBOutlet UITextField *printerTextField;
 
 @property (weak, nonatomic) IBOutlet UITableView *menuView;
 
@@ -34,11 +35,9 @@
     //  go to add menuitems window popup
     if ([segue.identifier isEqualToString:@"segue_modifiertoitem"]) {
         
-       BusinessModifierItemSelController *destController = segue.destinationViewController;
+        BusinessModifierItemSelController *destController = segue.destinationViewController;
         
-        
-        destController.selectedItems = selectedItems;
-        
+        destController.selectedItems  = selectedItems;
         destController.parentDelegate = self;
     }
 }
@@ -51,17 +50,13 @@
     [super viewDidLoad];
     selectedItems = [NSMutableArray array];
     
-    if (_menuObj!=nil) {
-        _txtName.text = _menuObj[@"name"];
-        NSNumber *price = _menuObj[@"price"];
-        
-        _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
-        [CommParse getMenuItemsOfModifier:self ModifierObject:_menuObj];
-        
+    if (self.menuObj) {
+        self.txtName.text = self.menuObj.name;
+        self.txtPrice.text = [NSString stringWithFormat:@"%.2f", self.menuObj.price];
+        self.printerTextField.text = self.menuObj.printText;
+        [CommParse getMenuItemsOfModifier:self modifierect:self.menuObj];
     }
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -70,14 +65,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
     
+    PFObject *item = selectedItems[indexPath.row];
     
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
-    
-    PFObject *itemObj = selectedItems[indexPath.row];
-    
-    NSString *name = itemObj[@"name"];
-    cell.textLabel.text = name;
+    cell.textLabel.text = item[@"name"];
     
     
     return cell;
@@ -90,35 +82,37 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    // if not exist then add
-    if (_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    BOOL isNew = !self.menuObj;
+    if (!self.menuObj) {
+        self.menuObj = [MenuItemModifier object]; //[PFObject objectWithClassName:_menuType];
     }
     
-    _menuObj[@"name"] = _txtName.text;
-    
-    NSNumber *price = @([_txtPrice.text floatValue]);
+    self.menuObj.name = self.txtName.text;
+    self.menuObj.price = [self.txtPrice.text floatValue];
+    self.menuObj.printText = self.printerTextField.text;
     
     // save selected items with relation
-    relation = [_menuObj relationForKey:@"menuItems"];
-    for(PFObject *itemObj in selectedItems){
-        [relation addObject:itemObj];
-    }
-    
-    _menuObj[@"price"] = price;
-    
-    
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    relation = self.menuObj.menuItems;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Cannot remove objects on unsaved relation
+        if (!isNew) [relation removeAllObjectsBlocking];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for(PFObject *item in selectedItems)
+                [relation addObject:item];
+            
+            [CommParse updateQuoteRequest:self Quote:self.menuObj];
+        });
+    });
 }
 
 - (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     if ([response[@"action"] intValue] == 1) {
-        selectedItems = [NSMutableArray array];
         if ([response[@"responseCode"] boolValue]) {
             
             selectedItems = response[@"objects"];
         } else {
+            selectedItems = [NSMutableArray array];
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
         
@@ -141,7 +135,7 @@
 
 // Add Items to Modifier
 - (IBAction)onClickAddItems:(id)sender {
-
+    
     // show item add window
     [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
     

@@ -41,7 +41,7 @@
     if (supported) {
         if (value) {
             // If there's a current value, it must be serializable to JSON
-            supported = [FLEXRuntimeUtility editableJSONStringForObject:value] != nil;
+            supported = !![FLEXRuntimeUtility editableJSONStringForObject:value];
         } else {
             // Otherwise, see if we have more type information than just 'id'.
             // If we do, make sure the encoding is something serializable to JSON.

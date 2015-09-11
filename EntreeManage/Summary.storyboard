@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aPh-aW-Pbi">
+<dependencies>
+<plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+</dependencies>
+<scenes>
+<!--Summary-->
+<scene sceneID="a7w-pu-1oh">
+<objects>
+<navigationController storyboardIdentifier="NavigationController" id="aPh-aW-Pbi" sceneMemberID="viewController">
+<tabBarItem key="tabBarItem" title="Summary" image="first" id="Cyc-Ba-ga9"/>
+<simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+<navigationBar key="navigationBar" contentMode="scaleToFill" id="qtJ-Sc-o98">
+<rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+<autoresizingMask key="autoresizingMask"/>
+</navigationBar>
+</navigationController>
+<placeholder placeholderIdentifier="IBFirstResponder" id="xsJ-Wq-J92" userLabel="First Responder" sceneMemberID="firstResponder"/>
+</objects>
+<point key="canvasLocation" x="1253" y="-176"/>
+</scene>
+</scenes>
+<resources>
+<image name="first" width="30" height="30"/>
+</resources>
+</document>

@@ -14,7 +14,7 @@ PARSE_CLASS_NAME
 PARSE_REGISTER_CLASS
 
 @dynamic menuItem;
-@dynamic menuModifiers;
+@dynamic menuItemModifiers;
 @dynamic notes;
 @dynamic onTheHouse;
 @dynamic order;

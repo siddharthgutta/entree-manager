@@ -185,7 +185,7 @@
     CGRect labelRect = CGRectZero;
     CGFloat hudWidth = 100, hudHeight = 100;
     
-    if (label.text != nil) {
+    if (label.text) {
         NSDictionary *attributes = @{NSFontAttributeName:label.font};
         NSInteger options = NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin;
         labelRect = [label.text boundingRectWithSize:CGSizeMake(200, 300) options:options attributes:attributes context:NULL];
@@ -231,7 +231,7 @@
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     
-    if (notification != nil) {
+    if (notification) {
         NSDictionary *keyboardInfo = [notification userInfo];
         duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         CGRect keyboard = [[keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
