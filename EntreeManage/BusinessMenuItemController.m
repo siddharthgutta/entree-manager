@@ -28,7 +28,7 @@
         BusinessMenuItemAddController *destController = segue.destinationViewController;
         destController.menuType = @"MenuItem";
         destController.menuCategory = self.topMenuObj;
-        if (updateFlag==true) destController.menuObj = quotes[selectedIndexPath.row];
+        if (updateFlag) destController.menuObj = quotes[selectedIndexPath.row];
         destController.parentDelegate = self;
     }
 }

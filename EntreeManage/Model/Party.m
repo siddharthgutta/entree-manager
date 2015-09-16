@@ -22,4 +22,8 @@ PARSE_REGISTER_CLASS
 @dynamic table;
 @dynamic size;
 
++ (NSString *)restaurantRelationPath {
+    return @"restaurant";
+}
+
 @end

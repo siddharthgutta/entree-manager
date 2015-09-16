@@ -134,11 +134,11 @@
             NSArray *payments = response[@"objects"];
             
             // calculate sums
-            CGFloat grossSales = [[payments valueForKeyPath:@"@sum.subtotal"] floatValue];
-            CGFloat tax = [[payments valueForKeyPath:@"@sum.tax"] floatValue];
-            CGFloat tips = [[payments valueForKeyPath:@"@sum.tip"] floatValue];
-            CGFloat cash = [[[payments valueForKeyPath:@"[collect].{type like 'Cash'}.self"] valueForKeyPath:@"@sum.subtotal"] floatValue];
-            CGFloat card = [[[payments valueForKeyPath:@"[collect].{type like 'Card'}.self"] valueForKeyPath:@"@sum.subtotal"] floatValue];
+            CGFloat grossSales = [[payments valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            CGFloat tax = [[payments valueForKeyPath:@"order.@sum.tax"] floatValue];
+            CGFloat tips = [[payments valueForKeyPath:@"order.@sum.tip"] floatValue];
+            CGFloat cash = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Card'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            CGFloat card = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Card'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
             sumVal[0] = @(grossSales);
             sumVal[3] = @(tax);
             sumVal[4] = @(tips);

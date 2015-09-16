@@ -150,7 +150,7 @@
         keys = [categories allKeys];
         
         CGFloat sumNet = 0;
-        NSMutableArray *items;
+        NSArray *items;
         for(NSString *key in keys){
             items = categories[key];
             sumNet += [items[1] floatValue]-[items[2] floatValue];

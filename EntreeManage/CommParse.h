@@ -8,6 +8,7 @@
 
 #import "ProgressHUD.h"
 #import "Mailgun.h"
+@class Restaurant;
 
 typedef void (^ParseObjectResponseBlock)(id object, NSError *error);
 typedef void (^ParseTwoObjectResponseBlock)(id object1, id object2, NSError *error);
@@ -19,6 +20,8 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 
 
 @interface CommParse : NSObject
+
++ (Restaurant *)currentRestaurant;
 
 /** Callback takes an NSNumber object. */
 + (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;

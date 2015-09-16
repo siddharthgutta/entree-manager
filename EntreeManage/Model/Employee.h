@@ -7,20 +7,20 @@
 //
 
 #import <Parse/Parse.h>
-@class Shift;
+@class Shift, Restaurant;
 
 
-@interface Employee : PFObject<PFSubclassing>
+@interface Employee : PFObject<PFSubclassing, EMQuerying>
 
-@property (nonatomic) NSInteger activePartyCount;
-@property (nonatomic) BOOL      administrator;
-@property (nonatomic) id        avatarFile;
-@property (nonatomic) Shift     *currentShift;
-@property (nonatomic) CGFloat   hourlyWage;
-@property (nonatomic) NSString  *pinCode;
-@property (nonatomic) id        restaurant;
-@property (nonatomic) NSString  *role;
-@property (nonatomic) NSString  *name;
-@property (nonatomic) NSDate    *startDate;
+@property (nonatomic) NSInteger  activePartyCount;
+@property (nonatomic) BOOL       administrator;
+@property (nonatomic) id         avatarFile;
+@property (nonatomic) Shift      *currentShift;
+@property (nonatomic) CGFloat    hourlyWage;
+@property (nonatomic) NSString   *pinCode;
+@property (nonatomic) NSString   *role;
+@property (nonatomic) NSString   *name;
+@property (nonatomic) NSDate     *startDate;
+@property (nonatomic) Restaurant *restaurant;
 
 @end

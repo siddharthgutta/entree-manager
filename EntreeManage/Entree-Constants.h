@@ -21,3 +21,7 @@ extern NSString * const krSummaryPopularItemCell;
 #pragma mark - Parse -
 extern NSString * const kParseSetApplicationID;
 extern NSString * const kParseClientKey;
+
+#pragma mark - Misc -
+
+extern NSString * const kExportEmailPrefKey;

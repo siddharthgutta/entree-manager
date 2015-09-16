@@ -18,4 +18,8 @@ PARSE_REGISTER_CLASS
 @dynamic payment;
 @dynamic server;
 
++ (NSString *)restaurantRelationPath {
+    return @"server.restaurant";
+}
+
 @end

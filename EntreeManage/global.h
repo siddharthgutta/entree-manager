@@ -10,6 +10,14 @@
 #define EntreeManage_global_h
 
 #import <Parse/Parse.h>
+
+
+@protocol EMQuerying <NSObject>
+
++ (NSString *)restaurantRelationPath;
+
+@end
+
 #import "PFObject+copyShallow.h"
 #import "CommParse.h"
 #import "Entree-Model.h"

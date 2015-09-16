@@ -9,7 +9,7 @@
 #import <Parse/Parse.h>
 @class Restaurant, Table;
 
-@interface Party : PFObject<PFSubclassing>
+@interface Party : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) NSString   *name;
 @property (nonatomic) NSInteger  size;

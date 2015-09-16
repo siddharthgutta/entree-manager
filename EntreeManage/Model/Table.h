@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 
-@interface Table : PFObject<PFSubclassing>
+@interface Table : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) NSInteger  capacity;
 @property (nonatomic) Party      *currentParty;

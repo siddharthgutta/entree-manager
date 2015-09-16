@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 
-@interface StarPrinter : PFObject<PFSubclassing>
+@interface StarPrinter : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) NSString   *mac;
 @property (nonatomic) NSString   *nickname;

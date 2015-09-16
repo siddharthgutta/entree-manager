@@ -16,4 +16,8 @@ PARSE_REGISTER_CLASS
 @dynamic printer;
 @dynamic text;
 
++ (NSString *)restaurantRelationPath {
+    return @"printer.restaurant";
+}
+
 @end

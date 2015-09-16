@@ -7,9 +7,12 @@
 //
 
 #import <Parse/Parse.h>
+@class Restaurant;
 
 @interface Menu : PFObject <PFSubclassing>
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSInteger colorIndex;
+@property (nonatomic) Restaurant *restaurant;
 
 @end

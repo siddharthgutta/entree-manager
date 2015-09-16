@@ -22,4 +22,8 @@ PARSE_REGISTER_CLASS
 @dynamic x;
 @dynamic y;
 
++ (NSString *)restaurantRelationPath {
+    return @"restaurant";
+}
+
 @end

@@ -17,6 +17,10 @@ PARSE_REGISTER_CLASS
 @dynamic startedAt;
 @dynamic endedAt;
 
++ (NSString *)restaurantRelationPath {
+    return @"employee.restaurant";
+}
+
 - (CGFloat)laborCost {
     CGFloat hoursWorked = (CGFloat)[self.endedAt minutesAfterDate:self.startedAt] / 60.f;
     CGFloat wage = self.employee.hourlyWage;

@@ -24,4 +24,8 @@ PARSE_REGISTER_CLASS
 @dynamic name;
 @dynamic startDate;
 
++ (NSString *)restaurantRelationPath {
+    return @"restaurant";
+}
+
 @end

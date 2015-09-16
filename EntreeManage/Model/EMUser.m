@@ -14,7 +14,6 @@ PARSE_REGISTER_CLASS
 
 @dynamic name;
 @dynamic emailVerified;
-@dynamic defaultRestaurant;
 @dynamic restaurants;
 
 @end

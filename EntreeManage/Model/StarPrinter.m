@@ -17,4 +17,8 @@ PARSE_REGISTER_CLASS
 @dynamic nickname;
 @dynamic restaurant;
 
++ (NSString *)restaurantRelationPath {
+    return @"restaurant";
+}
+
 @end

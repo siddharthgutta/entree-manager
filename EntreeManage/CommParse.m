@@ -71,6 +71,7 @@ static Restaurant *currentRestaurant;
 
 + (void)getPopularItemsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
     PFQuery *query = [OrderItem queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"menuItem"]];
+    [query whereKeyExists:@"menuItem"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
             // Count the occurences of each menu item
@@ -103,6 +104,7 @@ static Restaurant *currentRestaurant;
 
 + (void)getPopularCategoriesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
     PFQuery *query = [OrderItem queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"menuItem.menuCategory"]];
+    [query whereKeyExists:@"menuItem.menuCategory"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
             // Count the occurences of each category
@@ -185,14 +187,13 @@ static Restaurant *currentRestaurant;
     NSString *password = [userInfo valueForKey:@"pswd"];
     
     [PFUser logInWithUsernameInBackground:email password:password block:^(PFUser *user, NSError *error) {
-        NSString *userEmail = user[@"email"];
+        EMUser *userr = (id)user;
         
         NSMutableDictionary *response = [NSMutableDictionary dictionary];
         response[@"action"] = @1;
         if ( !error ) {
             // save current user email address
-            [[NSUserDefaults standardUserDefaults] setObject:userEmail forKey:@"curUserEmail"];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:user.email forKey:@"curUserEmail"];
             
             response[@"responseCode"] = @YES;
         } else {
@@ -200,7 +201,7 @@ static Restaurant *currentRestaurant;
             response[@"errorMsg"] = [CommParse parseErrorMsgFromError:error];
         }
         
-        PFQuery *findRestaurant = [(PFRelation *)user[@"restaurants"] query];
+        PFQuery *findRestaurant = [userr.restaurants query];
         [findRestaurant findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error && objects.count) {
                 currentRestaurant = objects.firstObject;
@@ -220,7 +221,7 @@ static Restaurant *currentRestaurant;
     // Get class query if possible
     PFQuery *query;
     id cls = NSClassFromString(menuType);
-    query = cls ? [(Class)cls query] : [PFQuery queryWithClassName:menuType];
+    query = cls ? [(Class)cls queryForRestaurant] : [PFQuery queryWithClassName:menuType];
     
     if (topKey.length)
         [query whereKey:topKey equalTo:topObject];
@@ -313,29 +314,23 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    __block CGFloat discountVal = 0;
-    
-    PFQuery *query = [OrderItem query];
-    [query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [query includeKey:@"menuItem"];
-    
+    PFQuery *query = [OrderItem queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"menuItem"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *orderItems, NSError *error) {
         if (!error) {
-            for(OrderItem *order in orderItems)
+            CGFloat discountVal = 0;
+            for(OrderItem *order in [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]])
                 discountVal += order.menuItem.price;
             
             // Get Payments
-            PFQuery *query = [Payment query];
-            [query whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-            [query whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+            PFQuery *query = [Payment queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"order"]];
+            [query whereKeyExists:@"order"];
             
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
                 NSMutableDictionary *response = [NSMutableDictionary dictionary];
                 response[@"action"] = @1;
                 if ( !error ) {
                     response[@"responseCode"] = @YES;
-                    response[@"objects"] = objects;
+                    response[@"objects"] = payments;
                     response[@"discount"] = @(discountVal);
                 } else {
                     response[@"responseCode"] = @NO;
@@ -353,7 +348,7 @@ static Restaurant *currentRestaurant;
     [ProgressHUD show:@"" Interaction:NO];
     
     // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    PFQuery *orderItemQuery = [OrderItem query];
+    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
     [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [orderItemQuery includeKey:@"menuItem"];
@@ -425,7 +420,7 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shiftQuery = [Shift query];
+    PFQuery *shiftQuery = [Shift queryForRestaurant];
     [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [shiftQuery includeKey:@"employee"];
@@ -436,7 +431,7 @@ static Restaurant *currentRestaurant;
     [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         // calculate tips
-        PFQuery *paymentQuery = [Payment query];
+        PFQuery *paymentQuery = [Payment queryForRestaurant];
         [paymentQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
         [paymentQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
         [paymentQuery findObjectsInBackgroundWithBlock:^(NSArray *paymentects, NSError *error) {
@@ -463,7 +458,7 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsPayroll:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shiftQuery = [Shift query];
+    PFQuery *shiftQuery = [Shift queryForRestaurant];
     [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [shiftQuery includeKey:@"employee"];
@@ -506,7 +501,7 @@ static Restaurant *currentRestaurant;
         }
         
         // calculate tips
-        PFQuery *paymentQuery = [Payment query];
+        PFQuery *paymentQuery = [Payment queryForRestaurant];
         [paymentQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
         [paymentQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
         [paymentQuery includeKey:@"party"];
@@ -560,7 +555,7 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsOrderReport:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orderItemQuery = [OrderItem query];
+    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
     [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [orderItemQuery includeKey:@"menuItem"];
@@ -622,7 +617,7 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orderItemQuery = [OrderItem query];
+    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
     [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
     [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
     [orderItemQuery includeKey:@"menuItem"];
@@ -685,15 +680,9 @@ static Restaurant *currentRestaurant;
     
     NSString *csvName = @"analytics.csv";
     
-    NSString *curUserEmail =  [[NSUserDefaults standardUserDefaults] objectForKey:@"curUserEmail"];
-    
-    // send to current user's email
-    if (!userEmail.length) {
-        if (!curUserEmail.length)
-            userEmail = @"happywithyou86@gmail.com";
-        else
-            userEmail = curUserEmail;
-    }
+    NSString *curUserEmail = [[NSUserDefaults standardUserDefaults] objectForKey:kExportEmailPrefKey];
+    if (!curUserEmail)
+        return;
     
     // Mailgun API Key
     Mailgun *mailgun = [Mailgun clientWithDomain:@"sandboxd17cd83f7a424425b963d8ef54e5c218.mailgun.org" apiKey:@"key-1595ddf58f0a7d74c0042bdb34a9e75d"];
@@ -703,27 +692,22 @@ static Restaurant *currentRestaurant;
     response[@"action"] = @9;
     
     MGMessage *message = [MGMessage messageFrom:@"Entree Manager <manager@entree.org>"
-                                             to:userEmail
+                                             to:curUserEmail
                                         subject:emailSubject
                                            body:emailContent];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *docDir = paths[0];
+    NSArray *paths     = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docDir   = paths.firstObject;
     NSString *filename = [docDir stringByAppendingPathComponent:csvName];
-    NSError *error = NULL;
-    BOOL written = [emailContent writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    if (!written) NSLog(@"write failed, error = %@", error);
+    NSError *error     = NULL;
+    BOOL written       = [emailContent writeToFile:filename atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (!written)
+        NSLog(@"write failed, error = %@", error.localizedDescription);
     
     NSData *emailData = [NSData dataWithContentsOfFile:filename];
+    [message addAttachment:emailData withName:[emailSubject stringByAppendingString:@".csv"] type:@"csv"];
     
-    csvName = [NSString stringWithFormat:@"%@%@", emailSubject, @".csv"];
-    
-    [message addAttachment:emailData withName:csvName type:@"csv"];
-    
-    NSString *emailMsg = [NSString stringWithFormat:@"Sending email to %@...", userEmail];
-    
-    [ProgressHUD show:emailMsg];
-    
+    [ProgressHUD show:[NSString stringWithFormat:@"Sending email to %@...", userEmail]];
     [mailgun sendMessage:message success:^(NSString *messageId) {
         response[@"responseCode"] = @YES;
         
@@ -735,7 +719,7 @@ static Restaurant *currentRestaurant;
         NSLog(@"Message %@ sent successfully!", messageId);
     } failure:^(NSError *error) {
         response[@"responseCode"] = @NO;
-        NSLog(@"Error sending message. The error was: %@", [error userInfo]);
+        NSLog(@"Error sending message:%@", error.localizedDescription);
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
             [delegate commsDidAction:response];
     }];

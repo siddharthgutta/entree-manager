@@ -22,6 +22,10 @@ PARSE_REGISTER_CLASS
 @dynamic seatNumber;
 @dynamic timesPrinted;
 
++ (NSString *)restaurantRelationPath {
+    return @"order.server.restaurant";
+}
+
 - (CGFloat)netProfit {
     if (self.onTheHouse) return 0;
     return self.menuItem.price;

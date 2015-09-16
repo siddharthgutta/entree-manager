@@ -8,7 +8,7 @@
 
 #import "Mailgun.h"
 
-NSString *const kMailgunURL = @"https:// api.mailgun.net/v2";
+NSString *const kMailgunURL = @"https://api.mailgun.net/v2";
 
 @implementation Mailgun
 

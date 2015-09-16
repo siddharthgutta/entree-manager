@@ -10,11 +10,11 @@
 @class Employee;
 
 
-@interface Shift : PFObject<PFSubclassing>
+@interface Shift : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) Employee *employee;
-@property (nonatomic) NSDate *startedAt;
-@property (nonatomic) NSDate *endedAt;
+@property (nonatomic) NSDate   *startedAt;
+@property (nonatomic) NSDate   *endedAt;
 /** Defaults to using $2.15 / hour if employee's hourlyWage is inaccessible. */
 @property (nonatomic, readonly) CGFloat laborCost;
 

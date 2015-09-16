@@ -9,7 +9,7 @@
 #import <Parse/Parse.h>
 @class Party, Payment;
 
-@interface Order : PFObject<PFSubclassing>
+@interface Order : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) NSArray  *orderItems;
 @property (nonatomic) Payment  *payment;

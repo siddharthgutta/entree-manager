@@ -23,7 +23,7 @@
     [UINavigationBar appearance].tintColor           = [UIColor whiteColor];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
     
-//    [[FLEXManager sharedManager] showExplorer];
+    [[FLEXManager sharedManager] showExplorer];
     
     return YES;
 }

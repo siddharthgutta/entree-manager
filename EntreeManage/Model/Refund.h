@@ -8,7 +8,7 @@
 
 #import <Parse/Parse.h>
 
-@interface Refund : PFObject<PFSubclassing>
+@interface Refund : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) Payment *payment;
 

@@ -10,7 +10,7 @@
 @class MenuItem, Order;
 
 
-@interface OrderItem : PFObject<PFSubclassing>
+@interface OrderItem : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) MenuItem  *menuItem;
 @property (nonatomic) NSArray   *menuItemModifiers;

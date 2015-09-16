@@ -9,7 +9,7 @@
 #import <Parse/Parse.h>
 @class StarPrinter;
 
-@interface PrintJob : PFObject<PFSubclassing>
+@interface PrintJob : PFObject<PFSubclassing, EMQuerying>
 
 @property (nonatomic) StarPrinter *printer;
 @property (nonatomic) NSString    *text;

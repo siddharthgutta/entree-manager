@@ -8,17 +8,18 @@
 
 #import <Parse/PFObject+Subclass.h>
 
-@interface Payment : PFObject<PFSubclassing>
+@interface Payment : PFObject<PFSubclassing, EMQuerying>
 
-@property (nonatomic) NSString *cardFlightChargeToken;
-@property (nonatomic) NSString *cardLastFour;
-@property (nonatomic) NSString *cardName;
-@property (nonatomic) Order    *order;
-@property (nonatomic) Party    *party;
-@property (nonatomic) CGFloat  subtotal;
-@property (nonatomic) CGFloat  tax;
-@property (nonatomic) CGFloat  tip;
-@property (nonatomic) CGFloat  total;
-@property (nonatomic) NSString *type;
+@property (nonatomic) NSString   *cardFlightChargeToken;
+@property (nonatomic) NSString   *cardLastFour;
+@property (nonatomic) NSString   *cardName;
+@property (nonatomic) Order      *order;
+@property (nonatomic) Party      *party;
+@property (nonatomic) Restaurant *restaurant;
+@property (nonatomic) CGFloat    subtotal;
+@property (nonatomic) CGFloat    tax;
+@property (nonatomic) CGFloat    tip;
+@property (nonatomic) CGFloat    total;
+@property (nonatomic) NSString   *type;
 
 @end

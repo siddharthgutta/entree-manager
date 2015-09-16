@@ -12,7 +12,6 @@
 
 @property (nonatomic) NSString   *name;
 @property (nonatomic) BOOL       emailVerified;
-@property (nonatomic) Restaurant *defaultRestaurant;
-@property (nonatomic) PFRelation *restaurants;
+@property (nonatomic, readonly) PFRelation *restaurants;
 
 @end

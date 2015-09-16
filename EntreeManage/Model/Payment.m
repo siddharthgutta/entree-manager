@@ -18,10 +18,15 @@ PARSE_REGISTER_CLASS
 @dynamic cardName;
 @dynamic order;
 @dynamic party;
+@dynamic restaurant;
 @dynamic subtotal;
 @dynamic tax;
 @dynamic tip;
 @dynamic total;
 @dynamic type;
+
++ (NSString *)restaurantRelationPath {
+    return @"restaurant";
+}
 
 @end

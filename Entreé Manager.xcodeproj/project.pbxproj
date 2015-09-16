@@ -79,6 +79,7 @@
 		B4458EAD1BA23E3800522935 /* MenuItemModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EAC1BA23E3800522935 /* MenuItemModifier.m */; };
 		B4458EB01BA24E6D00522935 /* NSDateFormatter+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EAF1BA24E6D00522935 /* NSDateFormatter+Singleton.m */; };
 		B4458EB31BA2A71700522935 /* PFRelation+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B4458EB21BA2A71700522935 /* PFRelation+Extensions.m */; };
+		B48D1E351BA8E8EF0052DC07 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48D1E341BA8E8EF0052DC07 /* SettingsViewController.m */; };
 		B4A8273F1B9CC93900363AD6 /* Summary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4A8273E1B9CC93900363AD6 /* Summary.storyboard */; };
 		B4A827421B9CD31100363AD6 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A827411B9CD31100363AD6 /* Menu.m */; };
 		B4A827451B9CD3F600363AD6 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = B4A827441B9CD3F600363AD6 /* Restaurant.m */; };
@@ -255,6 +256,8 @@
 		B4458EAF1BA24E6D00522935 /* NSDateFormatter+Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Singleton.m"; sourceTree = "<group>"; };
 		B4458EB11BA2A71700522935 /* PFRelation+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFRelation+Extensions.h"; sourceTree = "<group>"; };
 		B4458EB21BA2A71700522935 /* PFRelation+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFRelation+Extensions.m"; sourceTree = "<group>"; };
+		B48D1E331BA8E8EF0052DC07 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B48D1E341BA8E8EF0052DC07 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		B4A8273E1B9CC93900363AD6 /* Summary.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Summary.storyboard; sourceTree = "<group>"; };
 		B4A827401B9CD31100363AD6 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Model/Menu.h; sourceTree = "<group>"; };
 		B4A827411B9CD31100363AD6 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = Model/Menu.m; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 		92C8F1331B60DFC000ADF1D8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B48D1E321BA8E8D50052DC07 /* SettingsController */,
 				B4F582B71B84413200DCF20C /* SummaryController */,
 				92C8F10D1B60958A00ADF1D8 /* AppDelegate.h */,
 				92C8F10E1B60958A00ADF1D8 /* AppDelegate.m */,
@@ -629,6 +633,15 @@
 				92C8F1511B629F5500ADF1D8 /* LoginViewController.m */,
 			);
 			name = UserController;
+			sourceTree = "<group>";
+		};
+		B48D1E321BA8E8D50052DC07 /* SettingsController */ = {
+			isa = PBXGroup;
+			children = (
+				B48D1E331BA8E8EF0052DC07 /* SettingsViewController.h */,
+				B48D1E341BA8E8EF0052DC07 /* SettingsViewController.m */,
+			);
+			name = SettingsController;
 			sourceTree = "<group>";
 		};
 		B4D11B7C1B8FCEB50012116A /* Model */ = {
@@ -1016,6 +1029,7 @@
 				92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */,
 				B4E8F23C1B93794900129F78 /* PFObject+QueryExtensions.m in Sources */,
 				B4F583081B84413200DCF20C /* ARLineGraphXLegendView.m in Sources */,
+				B48D1E351BA8E8EF0052DC07 /* SettingsViewController.m in Sources */,
 				92FFDA821B7D75C500B2D3A0 /* MGMessage.m in Sources */,
 				B4458EB01BA24E6D00522935 /* NSDateFormatter+Singleton.m in Sources */,
 				B4F583111B84413200DCF20C /* NetSalesGraphCell.m in Sources */,

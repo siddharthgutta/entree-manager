@@ -14,5 +14,7 @@ PARSE_CLASS_NAME
 PARSE_REGISTER_CLASS
 
 @dynamic name;
+@dynamic colorIndex;
+@dynamic restaurant;
 
 @end
