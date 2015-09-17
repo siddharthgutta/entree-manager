@@ -25,9 +25,11 @@ static Restaurant *currentRestaurant;
 + (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback {
     PFQuery *query = [Payment queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"order.orderItems", @"order.orderItems.menuItem"]];
     [query whereKeyExists:@"order"];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
         if (!error) {
             NSArray *orderItems  = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
+            orderItems = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self != nil"]];
             NSArray *discounted  = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]];
             CGFloat allSubtotals = [[orderItems valueForKeyPath:@"@sum.menuItem.price"] floatValue];
             CGFloat allDiscounts = [[discounted valueForKeyPath:@"@sum.menuItem.price"] floatValue];
@@ -59,9 +61,11 @@ static Restaurant *currentRestaurant;
 
 + (NSNumber *)netSalesOnDay:(NSDate *)date withOrders:(NSArray *)orderItems discounts:(NSArray *)discounted {
     orderItems = [orderItems.mutableCopy objectsPassingTest:^BOOL(Payment *p, BOOL *stop) {
+        if ((id)p == [NSNull null]) return NO;
         return [date isEqualToDateIgnoringTime:p.createdAt];
     }].allObjects;
     discounted = [discounted.mutableCopy objectsPassingTest:^BOOL(Payment *p, BOOL *stop) {
+        if ((id)p == [NSNull null]) return NO;
         return [date isEqualToDateIgnoringTime:p.createdAt];
     }].allObjects;
     
@@ -76,10 +80,12 @@ static Restaurant *currentRestaurant;
     [query whereKeyExists:@"menuItem"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
+            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"menuItem != nil"]];
             // Count the occurences of each menu item (counted set to count them, regular set to get a unique list)
             NSArray *menuItemsWithDuplicates = [items valueForKeyPath:@"menuItem"];
             NSCountedSet *menuItemsCounted   = [[NSCountedSet alloc] initWithArray:menuItemsWithDuplicates];
             NSSet *menuItems                 = [NSSet setWithArray:menuItemsWithDuplicates];
+            
             
             // Sort the menu items by their count and take the top 5
             NSArray *sortedByPopularity = [[menuItems.allObjects sortedArrayUsingComparator:^NSComparisonResult(MenuItem *obj1, MenuItem *obj2) {
@@ -109,6 +115,7 @@ static Restaurant *currentRestaurant;
     [query whereKeyExists:@"menuItem"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
+            items = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"menuItem != nil"]];
             // Count the occurences of each category
             NSArray *categoriesWithDuplicates = [items valueForKeyPath:@"menuItem.menuCategory"];
             NSCountedSet *categoriesCounted   = [[NSCountedSet alloc] initWithArray:categoriesWithDuplicates];

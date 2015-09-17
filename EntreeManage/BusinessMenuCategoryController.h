@@ -10,6 +10,8 @@
 #import "MGSwipeTableCell.h"
 
 @interface BusinessMenuCategoryController : UITableViewController
-    @property (nonatomic, weak) PFObject *topMenuObj;
-    - (void)showBusinessMenus:(NSString *)MenuType;
+
+@property (nonatomic) PFObject *topMenuObj;
+- (void)showBusinessMenus:(NSString *)MenuType;
+
 @end
