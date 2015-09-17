@@ -17,7 +17,7 @@
 @property (nonatomic) NSString  *notes;
 @property (nonatomic) BOOL      onTheHouse;
 @property (nonatomic) Order     *order;
-@property (nonatomic) id        party;
+@property (nonatomic) Party     *party;
 @property (nonatomic) NSInteger seatNumber;
 @property (nonatomic) NSInteger timesPrinted;
 

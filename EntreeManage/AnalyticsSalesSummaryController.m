@@ -138,7 +138,7 @@
             CGFloat tax = [[payments valueForKeyPath:@"order.@sum.tax"] floatValue];
             CGFloat tips = [[payments valueForKeyPath:@"order.@sum.tip"] floatValue];
             CGFloat cash = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Card'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
-            CGFloat card = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Card'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            CGFloat card = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Cash'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
             sumVal[0] = @(grossSales);
             sumVal[3] = @(tax);
             sumVal[4] = @(tips);

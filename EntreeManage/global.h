@@ -14,7 +14,12 @@
 
 @protocol EMQuerying <NSObject>
 
+/** ie, orderItem.order.server.restaurant
+    MUEST END WITH "restaurant" */
 + (NSString *)restaurantRelationPath;
+/** ie, OrderItem.Order.Employee.Restaurant 
+    MUST END WITH "Restaurant" */
++ (NSString *)restaurantRelationPathByClassNames;
 
 @end
 

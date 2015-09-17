@@ -53,6 +53,14 @@
     _endDateText.text           = [[NSDateFormatter shared] stringFromDate:endDate];
     
     [CommParse getAnalyticsCategorySales:self startDate:startDate endDate:endDate];
+    [CommParse getNetSalesForInterval:startDate end:endDate callback:^(NSNumber *num, NSError *error) {
+        if (!error) {
+            _lblNetSales.text = [NSString stringWithFormat:@"$%.02f", num.floatValue];
+            [_analTableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 - (void)exportItemClicked {
@@ -128,7 +136,7 @@
     
     // Net Sales =  Total - discount
     CGFloat netPro = ([items[1] floatValue] - [items[2] floatValue])/[items[1] floatValue]*100;
-    if (netPro != netPro) // nan
+    if (netPro != netPro || isinf(netPro)) // nan / inf
         netPro = 0;
     
     // Total
@@ -148,15 +156,6 @@
     if ([response[@"responseCode"] boolValue]) {
         categories = response[@"objects"];
         keys = [categories allKeys];
-        
-        CGFloat sumNet = 0;
-        NSArray *items;
-        for(NSString *key in keys){
-            items = categories[key];
-            sumNet += [items[1] floatValue]-[items[2] floatValue];
-        }
-        
-        _lblNetSales.text = [NSString stringWithFormat:@"$%.02f", sumNet];
         
         [_analTableView reloadData];
     }

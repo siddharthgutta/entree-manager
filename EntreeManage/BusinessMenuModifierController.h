@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessMenuModifierController : UITableViewController
-    @property (nonatomic, weak) PFObject *topMenuObj;
+@property (nonatomic, weak) PFObject *topMenuObj;
 @end

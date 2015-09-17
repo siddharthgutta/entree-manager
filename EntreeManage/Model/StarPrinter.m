@@ -21,4 +21,8 @@ PARSE_REGISTER_CLASS
     return @"restaurant";
 }
 
++ (NSString *)restaurantRelationPathByClassNames {
+    return @"Restaurant";
+}
+
 @end

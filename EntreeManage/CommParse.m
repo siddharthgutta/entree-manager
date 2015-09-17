@@ -24,6 +24,7 @@ static Restaurant *currentRestaurant;
 
 + (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback {
     PFQuery *query = [Payment queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"order.orderItems", @"order.orderItems.menuItem"]];
+    [query whereKeyExists:@"order"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
         if (!error) {
             NSArray *orderItems  = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
@@ -39,10 +40,11 @@ static Restaurant *currentRestaurant;
 
 + (void)getNetSalesForPastWeek:(NSDate *)day callback:(ParseArrayResponseBlock)callback {
     PFQuery *query = [Payment queryWithCreatedAtFrom:[day.dateAtStartOfDay dateBySubtractingDays:6] to:day.dateAtStartOfDay.nextDay includeKeys:@[@"order.orderItems", @"order.orderItems.menuItem"]];
+    [query whereKeyExists:@"order"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
         if (!error) {
-            NSArray *orderItems  = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
-            NSArray *discounted  = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]];
+            NSArray *orderItems = [[payments valueForKeyPath:@"order.orderItems"] valueForKeyPath:@"@unionOfArrays.self"];
+            NSArray *discounted = [orderItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"onTheHouse = YES"]];
             
             NSMutableArray *numbers = [NSMutableArray array];
             for (int i = 6; i >= 0; i--)
@@ -74,7 +76,7 @@ static Restaurant *currentRestaurant;
     [query whereKeyExists:@"menuItem"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
-            // Count the occurences of each menu item
+            // Count the occurences of each menu item (counted set to count them, regular set to get a unique list)
             NSArray *menuItemsWithDuplicates = [items valueForKeyPath:@"menuItem"];
             NSCountedSet *menuItemsCounted   = [[NSCountedSet alloc] initWithArray:menuItemsWithDuplicates];
             NSSet *menuItems                 = [NSSet setWithArray:menuItemsWithDuplicates];
@@ -104,7 +106,7 @@ static Restaurant *currentRestaurant;
 
 + (void)getPopularCategoriesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
     PFQuery *query = [OrderItem queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:@[@"menuItem.menuCategory"]];
-    [query whereKeyExists:@"menuItem.menuCategory"];
+    [query whereKeyExists:@"menuItem"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *items, NSError *error) {
         if (!error) {
             // Count the occurences of each category
@@ -136,10 +138,9 @@ static Restaurant *currentRestaurant;
 }
 
 + (void)getAveragePaymentForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseTwoObjectResponseBlock)callback {
-    PFQuery *query = [Payment queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:nil];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *payments, NSError *error) {
+    [self getTransactionsForInterval:start end:end callback:^(NSArray *orders, NSError *error) {
         if (!error) {
-            callback(@([[payments valueForKeyPath:@"@sum.total"] floatValue]/payments.count), @(payments.count), nil);
+            callback(@([[orders valueForKeyPath:@"@sum.total"] floatValue]/orders.count), @(orders.count), nil);
         } else {
             callback(nil, nil, error);
         }
@@ -170,6 +171,22 @@ static Restaurant *currentRestaurant;
         }
     }];
 }
+
++ (void)getTransactionsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [Order queryWithCreatedAtFrom:start.dateAtStartOfDay to:end.dateAtStartOfDay.nextDay includeKeys:nil];
+    [query whereKeyExists:@"payment"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *orders, NSError *error) {
+        if (!error) {
+            callback(orders, nil);
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
+
+
+
 
 
 + (NSString *)parseErrorMsgFromError:(NSError *)error {
@@ -348,13 +365,9 @@ static Restaurant *currentRestaurant;
     [ProgressHUD show:@"" Interaction:NO];
     
     // Get discounts(get menuitems price which orderitem's onthehouse is true)
-    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
-    [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orderItemQuery includeKey:@"menuItem"];
-    [orderItemQuery includeKey:@"menuItem.menuCategory"];
-    [orderItemQuery includeKey:@"order"];
-    [orderItemQuery includeKey:@"order.payment"];
+    PFQuery *orderItemQuery = [OrderItem queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"menuItem", @"menuItem.menuCategory", @"order", @"order.payment"]];
+    [orderItemQuery whereKeyExists:@"menuItem"];
+    [orderItemQuery whereKeyExists:@"order"];
     
     NSMutableDictionary *results = [NSMutableDictionary dictionary];
     
@@ -458,20 +471,33 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsPayroll:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shiftQuery = [Shift queryForRestaurant];
-    [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [shiftQuery includeKey:@"employee"];
+    PFQuery *shiftQuery = [Shift queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"employee"]];
     [shiftQuery orderByAscending:@"employee"];
     
     NSMutableDictionary *results = [NSMutableDictionary dictionary];
     
     // name, hours worked, tips, hourly wage
     
-    [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *shifts, NSError *error) {
         NSMutableArray *employees;
         NSString *employeeIdentifier;
-        for(Shift *shift in objects) {
+        
+        // This is how you'd get the labor cost by employee,                   //
+        // such that results[@"bob"] holds bob's wages for the given interval. //
+        // I've left it commented out as it looks like it's going to take a    //
+        // lot more work to ge the view to display this info properly because  //
+        // of the weird way the freelancer is packaging the data.              //
+        
+//        shifts = [shifts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"employee.restaurant.objectId = %@", currentRestaurant.objectId]];
+//        NSArray *employees = [shifts valueForKeyPath:@"@unionOfObjects.employee.objectId"];
+//        for (NSString *employeeIdentifier in employees) {
+//            NSArray *employeesShifts = [shifts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"employee.objectId = %@", employeeIdentifier]];
+//            results[employeeIdentifier] = [employeesShifts valueForKeyPath:@"@sum.laborCost"];
+//        }
+        
+        // The rest is the old, shitty code.
+        
+        for(Shift *shift in shifts) {
             employeeIdentifier = shift.employee.objectId;
             
             // calculate Time
@@ -555,21 +581,14 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsOrderReport:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
-    [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orderItemQuery includeKey:@"menuItem"];
-    [orderItemQuery includeKey:@"menuItem.menuCategory"];
-    [orderItemQuery includeKey:@"menuItem.menuCategory.menu"];
-    [orderItemQuery includeKey:@"order"];
-    [orderItemQuery includeKey:@"order.payment"];
-    
+    PFQuery *orderItemQuery = [OrderItem queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"menuItem", @"menuItem.menuCategory", @"menuItem.menuCategory.menu", @"order", @"order.payment"]];
+    [orderItemQuery whereKey:@"menuItem" matchesQuery:[[MenuItem query] whereKey:@"menuCategory" matchesQuery:[[MenuCategory query] whereKeyExists:@"menu"]]];
     NSMutableDictionary *results = [NSMutableDictionary dictionary];
     
-    [orderItemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [orderItemQuery findObjectsInBackgroundWithBlock:^(NSArray *orderItems, NSError *error) {
         NSMutableArray *orders;
         NSInteger timesOrdered;
-        for(OrderItem *orderItem in objects){
+        for(OrderItem *orderItem in orderItems){
             // Sales
             CGFloat totalSales = orderItem.order.payment.total;
             
@@ -617,18 +636,12 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *orderItemQuery = [OrderItem queryForRestaurant];
-    [orderItemQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [orderItemQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [orderItemQuery includeKey:@"menuItem"];
-    [orderItemQuery includeKey:@"menuItem.menuCategory"];
-    [orderItemQuery includeKey:@"menuItemModifiers"];
-    [orderItemQuery includeKey:@"order"];
-    [orderItemQuery includeKey:@"order.payment"];
-    //    [orderItemQuery includeKey:@"menuItemModifiers"];
+    PFQuery *orderItemQuery = [OrderItem queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"menuItem", @"menuItem.menuCategory", @"menuItemModifiers", @"order", @"order.payment"]];
+    [orderItemQuery whereKeyExists:@"menuItem"];
+    [orderItemQuery whereKeyExists:@"menuItemModifiers"];
+    [orderItemQuery whereKeyExists:@"order"];
     
     NSMutableDictionary *results = [NSMutableDictionary dictionary];
-    
     NSMutableDictionary *timess = [NSMutableDictionary dictionary];
     
     __block NSMutableArray *orders;
@@ -636,6 +649,8 @@ static Restaurant *currentRestaurant;
     [orderItemQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         for(OrderItem *orderItem in objects) {
             for(MenuItemModifier *modifier in orderItem.menuItemModifiers) {
+                if (![modifier isKindOfClass:[MenuItemModifier class]]) break; // <null> in the arrays from dead pointers
+                
                 NSString *menuItemID = orderItem.menuItem.objectId;
                 
                 // if not exist then init
@@ -649,7 +664,7 @@ static Restaurant *currentRestaurant;
                 [orders addObject:orderItem.menuItem.name];
                 [orders addObject:orderItem.menuItem.menuCategory.name];
                 [orders addObject:orderItem.menuItem.objectId];
-                [orders addObject:@(orderItem.order.payment.total)];
+                [orders addObject:@(modifier.price)];
                 
                 NSString *keyStr = [NSString stringWithFormat:@"%@_%@", modifier.objectId, menuItemID];
                 results[keyStr] = orders;

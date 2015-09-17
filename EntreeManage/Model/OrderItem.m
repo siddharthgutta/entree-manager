@@ -26,6 +26,10 @@ PARSE_REGISTER_CLASS
     return @"order.server.restaurant";
 }
 
++ (NSString *)restaurantRelationPathByClassNames {
+    return @"Order.Employee.Restaurant";
+}
+
 - (CGFloat)netProfit {
     if (self.onTheHouse) return 0;
     return self.menuItem.price;

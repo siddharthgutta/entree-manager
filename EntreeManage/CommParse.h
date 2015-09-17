@@ -37,7 +37,12 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 + (void)getGuestCountForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
 /** Callback takes an NSNumber object. */
 + (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an array of Order objects. */
++ (void)getTransactionsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
 
+
+
+// I wrote everything above this line, except CommsDelegate —Tanner //
 
 
 + (void)emailLogin:(id<CommsDelegate>)delegate userInfo:(NSDictionary *)userInfo;

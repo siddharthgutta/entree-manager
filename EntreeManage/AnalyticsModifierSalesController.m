@@ -78,7 +78,7 @@ NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Modifi
     static NSString *CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = @"Modifiers";
     
     label = (UILabel *)[cell viewWithTag:2];
@@ -108,23 +108,19 @@ UILabel *label = (UILabel *)[cell viewWithTag:1];
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     static NSString *CellIdentifier = @"AnalyticsTableCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    // Configure the cell...
     NSMutableArray *items;
     
     NSString *key = keys[indexPath.row];
     
     items = results[key];
     
-UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
     label.text = items[0];
     
     label = (UILabel *)[cell viewWithTag:2];

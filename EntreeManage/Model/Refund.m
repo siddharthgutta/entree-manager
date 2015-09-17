@@ -19,4 +19,8 @@ PARSE_REGISTER_CLASS
     return @"payment.restaurant";
 }
 
++ (NSString *)restaurantRelationPathByClassNames {
+    return @"Payment.Restaurant";
+}
+
 @end

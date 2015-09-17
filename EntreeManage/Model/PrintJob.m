@@ -20,4 +20,8 @@ PARSE_REGISTER_CLASS
     return @"printer.restaurant";
 }
 
++ (NSString *)restaurantRelationPathByClassNames {
+    return @"StarPrinter.Restaurant";
+}
+
 @end
