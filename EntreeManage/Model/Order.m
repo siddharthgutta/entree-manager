@@ -13,17 +13,21 @@
 PARSE_CLASS_NAME
 PARSE_REGISTER_CLASS
 
+@dynamic installation;
 @dynamic orderItems;
-@dynamic party;
 @dynamic payment;
+@dynamic party;
 @dynamic server;
+@dynamic restaurant;
+@dynamic amountDue;
+@dynamic subtotal;
+@dynamic tax;
+@dynamic tip;
+@dynamic total;
+@dynamic type;
 
-+ (NSString *)restaurantRelationPath {
-    return @"server.restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Employee.Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"restaurant" matchesQuery:[Restaurant queryUnderCurrentRestaurant]];
 }
 
 @end

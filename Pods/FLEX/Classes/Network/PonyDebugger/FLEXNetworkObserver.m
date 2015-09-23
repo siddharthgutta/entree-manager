@@ -464,6 +464,7 @@ didBecomeDownloadTask:(NSURLSessionDownloadTask *)downloadTask delegate:(id <NSU
         Class class = [NSURLSession class];
 
         // The method signatures here are close enough that we can use the same logic to inject into all of them.
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         const SEL selectors[] = {
             @selector(dataTaskWithHTTPGetRequest:completionHandler:),
             @selector(dataTaskWithRequest:completionHandler:),

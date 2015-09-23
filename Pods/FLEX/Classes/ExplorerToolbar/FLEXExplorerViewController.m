@@ -137,6 +137,7 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
     return viewController;
 }
 
+#pragma clang diagnostic ignored "-Wmismatched-return-types"
 - (NSUInteger)supportedInterfaceOrientations
 {
     UIViewController *viewControllerToAsk = [self viewControllerForRotationAndOrientation];

@@ -10,16 +10,15 @@
 
 @interface Payment : PFObject<PFSubclassing, EMQuerying>
 
+@property (nonatomic) Restaurant *restaurant;
 @property (nonatomic) NSString   *cardFlightChargeToken;
 @property (nonatomic) NSString   *cardLastFour;
 @property (nonatomic) NSString   *cardName;
 @property (nonatomic) Order      *order;
 @property (nonatomic) Party      *party;
-@property (nonatomic) Restaurant *restaurant;
-@property (nonatomic) CGFloat    subtotal;
-@property (nonatomic) CGFloat    tax;
-@property (nonatomic) CGFloat    tip;
-@property (nonatomic) CGFloat    total;
 @property (nonatomic) NSString   *type;
+@property (nonatomic) CGFloat    cashAmountPaid;
+@property (nonatomic) CGFloat    changeGiven;
+@property (nonatomic) BOOL       charged;
 
 @end

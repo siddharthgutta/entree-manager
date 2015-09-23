@@ -15,12 +15,8 @@ PARSE_REGISTER_CLASS
 
 @dynamic payment;
 
-+ (NSString *)restaurantRelationPath {
-    return @"payment.restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Payment.Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"payment" matchesQuery:[Payment queryCurrentRestaurant]];
 }
 
 @end

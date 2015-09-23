@@ -22,12 +22,8 @@ PARSE_REGISTER_CLASS
 @dynamic x;
 @dynamic y;
 
-+ (NSString *)restaurantRelationPath {
-    return @"restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"restaurant" matchesQuery:[Restaurant queryUnderCurrentRestaurant]];
 }
 
 @end

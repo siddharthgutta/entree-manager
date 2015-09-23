@@ -13,24 +13,19 @@
 PARSE_CLASS_NAME
 PARSE_REGISTER_CLASS
 
+@dynamic restaurant;
 @dynamic cardFlightChargeToken;
 @dynamic cardLastFour;
 @dynamic cardName;
 @dynamic order;
 @dynamic party;
-@dynamic restaurant;
-@dynamic subtotal;
-@dynamic tax;
-@dynamic tip;
-@dynamic total;
 @dynamic type;
+@dynamic cashAmountPaid;
+@dynamic changeGiven;
+@dynamic charged;
 
-+ (NSString *)restaurantRelationPath {
-    return @"restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"restaurant" matchesQuery:[Restaurant queryUnderCurrentRestaurant]];
 }
 
 @end

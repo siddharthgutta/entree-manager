@@ -17,12 +17,8 @@ PARSE_REGISTER_CLASS
 @dynamic startedAt;
 @dynamic endedAt;
 
-+ (NSString *)restaurantRelationPath {
-    return @"employee.restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Employee.Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"employee" matchesQuery:[Employee queryCurrentRestaurant]];
 }
 
 - (CGFloat)laborCost {

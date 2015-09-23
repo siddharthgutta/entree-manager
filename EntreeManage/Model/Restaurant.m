@@ -20,4 +20,8 @@ PARSE_REGISTER_CLASS
 @dynamic phone;
 @dynamic salesTaxRate;
 
++ (PFQuery *)queryUnderCurrentRestaurant {
+    return [[self query] whereKey:@"objectId" equalTo:[CommParse currentRestaurant].objectId];
+}
+
 @end

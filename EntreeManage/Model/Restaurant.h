@@ -17,4 +17,6 @@
 @property (nonatomic) NSString   *phone;
 @property (nonatomic) CGFloat    salesTaxRate;
 
++ (PFQuery *)queryUnderCurrentRestaurant;
+
 @end

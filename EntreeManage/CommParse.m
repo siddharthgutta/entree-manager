@@ -245,7 +245,7 @@ static Restaurant *currentRestaurant;
     // Get class query if possible
     PFQuery *query;
     id cls = NSClassFromString(menuType);
-    query = cls ? [(Class)cls queryForRestaurant] : [PFQuery queryWithClassName:menuType];
+    query = cls ? [(id)cls queryCurrentRestaurant] : [PFQuery queryWithClassName:menuType];
     
     if (topKey.length)
         [query whereKey:topKey equalTo:topObject];
@@ -392,7 +392,7 @@ static Restaurant *currentRestaurant;
                 }
                 
                 // Sales
-                CGFloat totalSales = orderItem.order.payment.total;
+                CGFloat totalSales = orderItem.order.total;
                 
                 // if exist same menu item
                 if (results[categoryIdentifier]) {
@@ -440,10 +440,7 @@ static Restaurant *currentRestaurant;
 + (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     [ProgressHUD show:@"" Interaction:NO];
     
-    PFQuery *shiftQuery = [Shift queryForRestaurant];
-    [shiftQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-    [shiftQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-    [shiftQuery includeKey:@"employee"];
+    PFQuery *shiftQuery = [Shift queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"employee"]];
     [shiftQuery orderByAscending:@"employee"];
     
     // emp name, date, start time, end time, calculate times, hours worked, tips
@@ -451,9 +448,7 @@ static Restaurant *currentRestaurant;
     [shiftQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         // calculate tips
-        PFQuery *paymentQuery = [Payment queryForRestaurant];
-        [paymentQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-        [paymentQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
+        PFQuery *paymentQuery = [Payment queryWithCreatedAtFrom:startDate to:endDate];
         [paymentQuery findObjectsInBackgroundWithBlock:^(NSArray *paymentects, NSError *error) {
             
             NSMutableDictionary *response = [NSMutableDictionary dictionary];
@@ -534,17 +529,11 @@ static Restaurant *currentRestaurant;
         }
         
         // calculate tips
-        PFQuery *paymentQuery = [Payment queryForRestaurant];
-        [paymentQuery whereKey:@"createdAt" greaterThanOrEqualTo:startDate];
-        [paymentQuery whereKey:@"createdAt" lessThanOrEqualTo:endDate];
-        [paymentQuery includeKey:@"party"];
-        [paymentQuery includeKey:@"party.server"];
+        PFQuery *paymentQuery = [Payment queryWithCreatedAtFrom:startDate to:endDate includeKeys:@[@"order", @"party", @"party.server"]];
         [paymentQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            
             if (!error) {
-                
                 for(Payment *payment in objects){
-                    CGFloat tips = payment.tip;
+                    CGFloat tips = payment.order.tip;
                     
                     // if exist same emp
                     if (results[employeeIdentifier]) {
@@ -597,7 +586,7 @@ static Restaurant *currentRestaurant;
         NSInteger timesOrdered;
         for(OrderItem *orderItem in orderItems){
             // Sales
-            CGFloat totalSales = orderItem.order.payment.total;
+            CGFloat totalSales = orderItem.order.total;
             
             // if exist same menu item
             if (results[orderItem.menuItem.objectId]) {

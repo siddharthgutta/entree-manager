@@ -134,7 +134,7 @@
         CGFloat percent = [self.percentages[x] doubleValue];
         CGFloat degrees = 360.0 *percent;
         CGFloat offsetDegreesToStart = -(lastAngle + degrees) ;
-        CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
+        CALayer *slice = [self.sublayers objectAtIndex:x];
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         animation.duration = self.animationDuration;
         animation.fromValue = @(DEGREES_TO_RADIANS(offsetDegreesToStart));
@@ -153,7 +153,7 @@
        
         [CATransaction begin];
 
-        CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
+        CALayer *slice = [self.sublayers objectAtIndex:x];
         slice.transform = CATransform3DMakeScale(0, 0, 0);
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
         animation.duration = self.animationDuration;
@@ -220,7 +220,7 @@
 
 - (void)updateSliceColors {
     for (NSInteger x = 0; x < self.numberOfSlices; x++) {
-        CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
+        CAShapeLayer *slice = (CAShapeLayer *)[self.sublayers objectAtIndex:x];
         if (self.colors.count > x) {
             CGColorRef fillColor = (__bridge CGColorRef)self.colors[x];
             CGColorRef stroke = [ARHelpers darkenColor:fillColor withPercent:0.2];
@@ -245,7 +245,7 @@
     for (NSInteger x = 0; x < self.numberOfSlices; x++) {
         CGFloat percent = [self.percentages[x] doubleValue];
         CGFloat degrees = 360.0 *percent;
-        CAShapeLayer *slice = [self.sublayers objectAtIndex:x];
+        CAShapeLayer *slice = (CAShapeLayer *)[self.sublayers objectAtIndex:x];
         slice.frame = self.bounds;
         CGMutablePathRef path = [self pathForSliceWithPercent:percent startAngle:lastAngle];
         slice.path = path;

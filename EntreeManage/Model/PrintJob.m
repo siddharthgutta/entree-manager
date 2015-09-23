@@ -16,12 +16,8 @@ PARSE_REGISTER_CLASS
 @dynamic printer;
 @dynamic text;
 
-+ (NSString *)restaurantRelationPath {
-    return @"printer.restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"StarPrinter.Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"printer" matchesQuery:[StarPrinter queryCurrentRestaurant]];
 }
 
 @end

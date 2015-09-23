@@ -24,12 +24,11 @@ PARSE_REGISTER_CLASS
 @dynamic name;
 @dynamic startDate;
 
-+ (NSString *)restaurantRelationPath {
-    return @"restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    PFQuery *query = [self query];
+    [query whereKey:@"restaurant" matchesQuery:[Restaurant queryUnderCurrentRestaurant]];
+    
+    return query;
 }
 
 @end

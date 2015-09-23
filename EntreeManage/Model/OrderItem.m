@@ -22,12 +22,8 @@ PARSE_REGISTER_CLASS
 @dynamic seatNumber;
 @dynamic timesPrinted;
 
-+ (NSString *)restaurantRelationPath {
-    return @"order.server.restaurant";
-}
-
-+ (NSString *)restaurantRelationPathByClassNames {
-    return @"Order.Employee.Restaurant";
++ (PFQuery *)queryCurrentRestaurant {
+    return [[self query] whereKey:@"order" matchesQuery:[Order queryCurrentRestaurant]];
 }
 
 - (CGFloat)netProfit {

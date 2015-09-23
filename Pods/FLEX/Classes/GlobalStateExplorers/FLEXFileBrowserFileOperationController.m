@@ -15,14 +15,10 @@
 
 @end
 
+
 @implementation FLEXFileBrowserFileDeleteOperationController
 
 @synthesize delegate = _delegate;
-
-- (instancetype)init
-{
-    return [self initWithPath:nil];
-}
 
 - (instancetype)initWithPath:(NSString *)path
 {
@@ -79,11 +75,6 @@
 @implementation FLEXFileBrowserFileRenameOperationController
 
 @synthesize delegate = _delegate;
-
-- (instancetype)init
-{
-    return [self initWithPath:nil];
-}
 
 - (instancetype)initWithPath:(NSString *)path
 {
