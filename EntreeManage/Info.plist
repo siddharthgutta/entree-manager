@@ -27,7 +27,7 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Analytics</string>
 	<key>UIMainStoryboardFile~ipad</key>
-	<string>Login</string>
+	<string>SignIn</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

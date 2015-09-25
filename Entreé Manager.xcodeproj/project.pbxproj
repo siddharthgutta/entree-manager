@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8148EFEBC7821D083D1714F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B7C2B71A79E7E36C8894553 /* libPods.a */; };
-		9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9A71B72077B009CFEF8 /* Login.storyboard */; };
+		88B585C21BB4F0280061D6BF /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88B585C11BB4F0280061D6BF /* SignIn.storyboard */; settings = {ASSET_TAGS = (); }; };
+		88B585C81BB4F7030061D6BF /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B585C71BB4F7030061D6BF /* SignInViewController.m */; settings = {ASSET_TAGS = (); }; };
+		88B585CB1BB4FF010061D6BF /* SignInSelectRestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B585CA1BB4FF010061D6BF /* SignInSelectRestaurantViewController.m */; settings = {ASSET_TAGS = (); }; };
 		9211F9AC1B7207F0009CFEF8 /* Analytics.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */; };
 		9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9211F9AD1B72080F009CFEF8 /* Settings.storyboard */; };
 		9211F9B21B72983E009CFEF8 /* AnalyticsLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211F9B11B72983E009CFEF8 /* AnalyticsLeftMenuController.m */; };
@@ -44,7 +46,6 @@
 		92C8F1481B61219000ADF1D8 /* DetailContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1471B61219000ADF1D8 /* DetailContentViewController.m */; };
 		92C8F14B1B62881400ADF1D8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F14A1B62881400ADF1D8 /* Parse.framework */; };
 		92C8F14F1B62930900ADF1D8 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 92C8F14E1B62930900ADF1D8 /* login.png */; };
-		92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C8F1511B629F5500ADF1D8 /* LoginViewController.m */; };
 		92C8F1541B6323DA00ADF1D8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F1531B6323DA00ADF1D8 /* QuartzCore.framework */; };
 		92C8F1561B6325CC00ADF1D8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F1551B6325CC00ADF1D8 /* CFNetwork.framework */; };
 		92C8F1581B6325ED00ADF1D8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92C8F1571B6325ED00ADF1D8 /* CoreGraphics.framework */; };
@@ -139,7 +140,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9211F9A71B72077B009CFEF8 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		88B585C11BB4F0280061D6BF /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		88B585C61BB4F7030061D6BF /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		88B585C71BB4F7030061D6BF /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		88B585C91BB4FF010061D6BF /* SignInSelectRestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInSelectRestaurantViewController.h; sourceTree = "<group>"; };
+		88B585CA1BB4FF010061D6BF /* SignInSelectRestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInSelectRestaurantViewController.m; sourceTree = "<group>"; };
 		9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Analytics.storyboard; sourceTree = "<group>"; };
 		9211F9AD1B72080F009CFEF8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		9211F9B01B72983E009CFEF8 /* AnalyticsLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsLeftMenuController.h; sourceTree = "<group>"; };
@@ -203,8 +208,6 @@
 		92C8F1471B61219000ADF1D8 /* DetailContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailContentViewController.m; sourceTree = "<group>"; };
 		92C8F14A1B62881400ADF1D8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		92C8F14E1B62930900ADF1D8 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
-		92C8F1501B629F5500ADF1D8 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		92C8F1511B629F5500ADF1D8 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LoginViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		92C8F1531B6323DA00ADF1D8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		92C8F1551B6325CC00ADF1D8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		92C8F1571B6325ED00ADF1D8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -489,11 +492,11 @@
 				928734721B6FA54A005E112A /* Images */,
 				92C8F11B1B60958B00ADF1D8 /* LaunchScreen.xib */,
 				92C8F1191B60958B00ADF1D8 /* Images.xcassets */,
-				9211F9A71B72077B009CFEF8 /* Login.storyboard */,
 				92C8F1161B60958B00ADF1D8 /* Business.storyboard */,
 				9211F9AB1B7207F0009CFEF8 /* Analytics.storyboard */,
 				9211F9AD1B72080F009CFEF8 /* Settings.storyboard */,
 				B4A8273E1B9CC93900363AD6 /* Summary.storyboard */,
+				88B585C11BB4F0280061D6BF /* SignIn.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -629,8 +632,10 @@
 		92F4FB0D1B65244100AFFE0E /* UserController */ = {
 			isa = PBXGroup;
 			children = (
-				92C8F1501B629F5500ADF1D8 /* LoginViewController.h */,
-				92C8F1511B629F5500ADF1D8 /* LoginViewController.m */,
+				88B585C61BB4F7030061D6BF /* SignInViewController.h */,
+				88B585C71BB4F7030061D6BF /* SignInViewController.m */,
+				88B585C91BB4FF010061D6BF /* SignInSelectRestaurantViewController.h */,
+				88B585CA1BB4FF010061D6BF /* SignInSelectRestaurantViewController.m */,
 			);
 			name = UserController;
 			sourceTree = "<group>";
@@ -888,9 +893,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4F5831A1B84413200DCF20C /* PopularItemCell.xib in Resources */,
-				9211F9A81B72077B009CFEF8 /* Login.storyboard in Resources */,
 				92C8F1181B60958B00ADF1D8 /* Business.storyboard in Resources */,
 				B4F583161B84413200DCF20C /* MostPopularPieChartCell.xib in Resources */,
+				88B585C21BB4F0280061D6BF /* SignIn.storyboard in Resources */,
 				9211F9AE1B72080F009CFEF8 /* Settings.storyboard in Resources */,
 				B4F583191B84413200DCF20C /* NetSalesMeanPaymentCell.xib in Resources */,
 				92C8F14F1B62930900ADF1D8 /* login.png in Resources */,
@@ -966,7 +971,6 @@
 				B4F583031B84413200DCF20C /* ARGraphTitleView.m in Sources */,
 				B4F5830C1B84413200DCF20C /* ARPieChartLayer.m in Sources */,
 				B4F583091B84413200DCF20C /* ARLineGraphYLegendView.m in Sources */,
-				92C8F1521B629F5500ADF1D8 /* LoginViewController.m in Sources */,
 				B4458EA11BA23C5A00522935 /* PrintJob.m in Sources */,
 				B4F583051B84413200DCF20C /* ARLineGraphDataPointUtility.m in Sources */,
 				B4E8F23F1B939EBD00129F78 /* MenuCategory.m in Sources */,
@@ -994,6 +998,7 @@
 				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
 				B4A827451B9CD3F600363AD6 /* Restaurant.m in Sources */,
 				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
+				88B585C81BB4F7030061D6BF /* SignInViewController.m in Sources */,
 				B4E8F2481B93A98000129F78 /* Party.m in Sources */,
 				B4458EA41BA23CE200522935 /* StarPrinter.m in Sources */,
 				B4D11B7F1B8FCF980012116A /* Payment.m in Sources */,
@@ -1019,6 +1024,7 @@
 				B4F5831B1B84413200DCF20C /* NSNumberFormatter+Dollars.m in Sources */,
 				928734711B6F682F005E112A /* BusinessMenuModifierAddController.m in Sources */,
 				B4F583071B84413200DCF20C /* ARLineGraphPointsLayer.m in Sources */,
+				88B585CB1BB4FF010061D6BF /* SignInSelectRestaurantViewController.m in Sources */,
 				B4F5830F1B84413200DCF20C /* MostPopularPieChartCell.m in Sources */,
 				B4F583011B84413200DCF20C /* ARCircleValueLabel.m in Sources */,
 				9211F9C11B736046009CFEF8 /* AnalyticsOrderReportController.m in Sources */,
