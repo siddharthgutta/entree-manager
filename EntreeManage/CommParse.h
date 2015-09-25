@@ -22,6 +22,7 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 @interface CommParse : NSObject
 
 + (Restaurant *)currentRestaurant;
++ (void)setCurrentRestaurant:(Restaurant *)restaurant;
 
 /** Callback takes an NSNumber object. */
 + (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
