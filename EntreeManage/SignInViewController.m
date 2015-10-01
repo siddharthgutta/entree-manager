@@ -10,6 +10,23 @@
 @implementation SignInViewController
 
 - (IBAction)signIn:(UIButton *)sender {
+    
+#if (TARGET_IPHONE_SIMULATOR)
+    [PFUser logInWithUsernameInBackground:@"siddharthgutta@gmail.com" password:@"pass1" block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+        if (user) {
+            [self performSegueWithIdentifier:@"SelectRestaurant" sender:nil];
+        } else {
+            UIAlertController *errorAlertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                          message:error.localizedDescription
+                                                                                   preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+            [errorAlertController addAction:okayAction];
+            
+            [self presentViewController:errorAlertController animated:YES completion:nil];
+        }
+    }];
+#else
     UIAlertController *signInAlertController = [UIAlertController alertControllerWithTitle:@"Sign In" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [signInAlertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -48,6 +65,7 @@
     [signInAlertController addAction:signInAction];
     
     [self presentViewController:signInAlertController animated:YES completion:nil];
+#endif
 }
 
 @end

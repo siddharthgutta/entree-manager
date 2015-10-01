@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** Animation easing function. Default value EaseOutBounce */
 @property (nonatomic, assign) MGSwipeEasingFunction easingFunction;
 /** Override this method to implement custom easing functions */
-- (CGFloat)value:(CGFloat) elapsed duration:(CGFloat) duration from:(CGFloat) from to:(CGFloat) to;
+- (CGFloat)value:(CGFloat)elapsed duration:(CGFloat)duration from:(CGFloat)from to:(CGFloat)to;
 
 @end
 
@@ -141,21 +141,21 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * Delegate method to enable/disable swipe gestures
  * @return YES if swipe is allowed
  **/
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection) direction fromPoint:(CGPoint) point;
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection) direction DEPRECATED_ATTRIBUTE; // backwards compatibility
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection)direction fromPoint:(CGPoint)point;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection)direction DEPRECATED_ATTRIBUTE; // backwards compatibility
 
 /**
  * Delegate method invoked when the current swipe state changes
  @param state the current Swipe State
  @param gestureIsActive YES if the user swipe gesture is active. No if the uses has already ended the gesture
  **/
-- (void)swipeTableCell:(MGSwipeTableCell *)cell didChangeSwipeState:(MGSwipeState) state gestureIsActive:(BOOL) gestureIsActive;
+- (void)swipeTableCell:(MGSwipeTableCell *)cell didChangeSwipeState:(MGSwipeState)state gestureIsActive:(BOOL)gestureIsActive;
 
 /**
  * Called when the user clicks a swipe button or when a expandable button is automatically triggered
  * @return YES to autohide the current swipe buttons
  **/
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger)index direction:(MGSwipeDirection)direction fromExpansion:(BOOL)fromExpansion;
 /**
  * Delegate method to setup the swipe buttons and swipe/expansion settings
  * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
@@ -166,14 +166,14 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * @param expansionSettings instance to configure button expansions (optional)
  * @return Buttons array
  **/
--(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+- (NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
              swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings;
 
 /**
  * Called when the user taps on a swiped cell
  * @return YES to autohide the current swipe buttons
  **/
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell shouldHideSwipeOnTap:(CGPoint) point;
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell shouldHideSwipeOnTap:(CGPoint)point;
 
 /**
  * Called when the cell will begin swiping
@@ -235,13 +235,13 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @property (nonatomic, assign) CGFloat swipeOffset;
 
 /** Utility methods to show or hide swipe buttons programmatically */
-- (void)hideSwipeAnimated: (BOOL) animated;
-- (void)hideSwipeAnimated: (BOOL) animated completion:(void(^)()) completion;
-- (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
-- (void)showSwipe: (MGSwipeDirection) direction animated: (BOOL) animated completion:(void(^)()) completion;
-- (void)setSwipeOffset:(CGFloat)offset animated: (BOOL) animated completion:(void(^)()) completion;
+- (void)hideSwipeAnimated:(BOOL)animated;
+- (void)hideSwipeAnimated:(BOOL)animated completion:(void(^)()) completion;
+- (void)showSwipe:(MGSwipeDirection)direction animated:(BOOL)animated;
+- (void)showSwipe:(MGSwipeDirection)direction animated:(BOOL)animated completion:(void(^)()) completion;
+- (void)setSwipeOffset:(CGFloat)offset animated:(BOOL)animated completion:(void(^)()) completion;
 - (void)setSwipeOffset:(CGFloat)offset animation: (MGSwipeAnimation *)animation completion:(void(^)()) completion;
-- (void)expandSwipe: (MGSwipeDirection) direction animated: (BOOL) animated;
+- (void)expandSwipe:(MGSwipeDirection)direction animated:(BOOL)animated;
 
 /** Refresh method to be used when you want to update the cell contents while the user is swiping */
 - (void)refreshContentView;
@@ -249,7 +249,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
  * If you only want to change the title or the backgroundColor of a button you can change it's properties (get the button instance from leftButtons or rightButtons arrays)
  * @param usingDelegate if YES new buttons will be fetched using the MGSwipeTableCellDelegate. Otherwise new buttons will be fetched from leftButtons/rightButtons properties.
  */
-- (void)refreshButtons: (BOOL) usingDelegate;
+- (void)refreshButtons:(BOOL)usingDelegate;
 
 @end
 

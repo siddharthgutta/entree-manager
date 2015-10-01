@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MGSwipeTableCell.h"
 
-@interface BusinessViewController : UIViewController < CommsDelegate, UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>
+@interface BusinessViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>
 
 @property (nonatomic) IBOutlet UITableView *menuView;
-- (void)showBusinessMenus:(NSString *)MenuType;
+- (void)reloadMenus;
 
 @end

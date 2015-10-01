@@ -8,6 +8,7 @@
 
 #import "BusinessMenuAddController.h"
 #import "BusinessViewController.h"
+#import "BusinessMenuItemController.h"
 
 @interface BusinessMenuAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
@@ -78,8 +79,7 @@
             // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
             // Menus Refresh
-            
-            [_parentDelegate showBusinessMenus:self.menuType];
+            [_parentDelegate reloadMenus];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];

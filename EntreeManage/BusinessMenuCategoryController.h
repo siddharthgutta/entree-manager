@@ -11,7 +11,7 @@
 
 @interface BusinessMenuCategoryController : UITableViewController
 
-@property (nonatomic) PFObject *topMenuObj;
-- (void)showBusinessMenus:(NSString *)MenuType;
+@property (nonatomic) Menu *topMenuObj;
+- (void)reloadMenuCategories;
 
 @end

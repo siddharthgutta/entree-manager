@@ -57,13 +57,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemClicked)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemClicked)];
     
     self.navigationItem.rightBarButtonItems = @[addButton];
     
     self.title = @"Menu";
-    [self showBusinessMenus:@"Menu"];
-    
+    selectedMenuType = @"Menu";
+    [self reloadMenus];
+}
+
+- (void)reloadMenus {
+    [ProgressHUD show:@"" Interaction:NO];
+    [CommParse getMenus:^(NSArray *objects, NSError *error) {
+        [ProgressHUD dismiss];
+        if (!error) {
+            quotes = objects.mutableCopy;
+        } else {
+            quotes = [NSMutableArray array];
+        }
+        
+        [menuView reloadData];
+        if (self.navigationController.visibleViewController != self)
+            [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+}
+
+- (void)reloadMenuModifiers {
+    [ProgressHUD show:@"" Interaction:NO];
+    [CommParse getMenus:^(NSArray *objects, NSError *error) {
+        [ProgressHUD dismiss];
+        if (!error) {
+            quotes = objects.mutableCopy;
+        } else {
+            quotes = [NSMutableArray array];
+        }
+        
+        [menuView reloadData];
+        if (self.navigationController.visibleViewController != self)
+            [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 - (void)addItemClicked {
@@ -92,17 +124,11 @@
     }
 }
 
-
-//==================================================
-// UITableView Methods
-//==================================================
 #pragma mark- UITableView DataSource Methods
-//==================================================
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return quotes.count;
 }
-
 
 // table cell update
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -131,7 +157,7 @@
     return cell;
 }
 
--(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+- (NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
              swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
@@ -143,7 +169,7 @@
     
 }
 
--(NSArray *)createRightButtons: (int) number {
+- (NSArray *)createRightButtons:(int)number {
     NSMutableArray *result = [NSMutableArray array];
     NSString *titles[2] = {@"Delete", @"Edit"};
     UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
@@ -158,14 +184,18 @@
     return result;
 }
 
-
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger)index direction:(MGSwipeDirection)direction fromExpansion:(BOOL)fromExpansion {
     
     // delete button
     NSIndexPath *path = [menuView indexPathForCell:cell];
     if (index == 0) {
         // delete button
-        [CommParse deleteQuoteRequest:self Quote:quotes[path.row]];
+        [quotes[path.row] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!succeeded) [ProgressHUD showError:error.localizedDescription];
+            [menuView reloadData];
+            if (self.navigationController.visibleViewController != self)
+                [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
         
         [quotes removeObjectAtIndex:path.row];
         [menuView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
@@ -197,42 +227,6 @@
     else if ([selectedMenuType isEqualToString:@"Employee"]) {
         updateFlag = true;
         [self performSegueWithIdentifier:@"segueBusinessMenuEmployeeAdd" sender:self];
-    }
-}
-
-
-// show business Menus func
-- (void)showBusinessMenus:(NSString *)MenuType {
-    
-    selectedMenuType = MenuType;
-    
-    [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"" topObject:nil];
-    
-}
-
-
-//==================================================
-// Comms Methods
-//==================================================
-#pragma mark- Comms Delegate Methods
-//==================================================
-- (void)commsDidAction:(NSDictionary *)response {
-    [ProgressHUD dismiss];
-    if ([response[@"action"] intValue] == 1) {
-        quotes = [NSMutableArray array];
-        if ([response[@"responseCode"] boolValue]) {
-            
-            quotes = response[@"objects"];
-        } else {
-            [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        }
-        
-        [menuView reloadData];
-        UINavigationController *nc = (UINavigationController *)self.navigationController;
-        if ([nc visibleViewController] != self) {
-            [nc popToRootViewControllerAnimated:YES];
-        }
     }
 }
 

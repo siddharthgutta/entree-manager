@@ -10,7 +10,7 @@
 
 @interface Restaurant : PFObject<PFSubclassing>
 
-@property (nonatomic) PFRelation *menus;
+@property (nonatomic, readonly) PFRelation *menus;
 @property (nonatomic) CGFloat    alcoholTaxRate;
 @property (nonatomic) NSString   *location;
 @property (nonatomic) NSString   *name;

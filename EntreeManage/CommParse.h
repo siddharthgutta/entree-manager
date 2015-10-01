@@ -8,7 +8,7 @@
 
 #import "ProgressHUD.h"
 #import "Mailgun.h"
-@class Restaurant;
+@class Restaurant, Menu, MenuCategory, MenuItem;
 
 typedef void (^ParseObjectResponseBlock)(id object, NSError *error);
 typedef void (^ParseTwoObjectResponseBlock)(id object1, id object2, NSError *error);
@@ -40,9 +40,12 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 + (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
 /** Callback takes an array of Order objects. */
 + (void)getTransactionsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
-
-
-
+/** Callback takes an array of Menu objects. */
++ (void)getMenus:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuCategory objects. */
++ (void)getMenuCategoriesOfMenu:(Menu *)menu callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuItem objects. */
++ (void)getMenuItemsOfMenuCategory:(MenuCategory *)category callback:(ParseArrayResponseBlock)callback;
 // I wrote everything above this line, except CommsDelegate —Tanner //
 
 

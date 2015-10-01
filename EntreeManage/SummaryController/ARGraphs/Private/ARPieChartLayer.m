@@ -133,7 +133,7 @@
     for (NSInteger x = 0; x < self.numberOfSlices; x++) {
         CGFloat percent = [self.percentages[x] doubleValue];
         CGFloat degrees = 360.0 *percent;
-        CGFloat offsetDegreesToStart = -(lastAngle + degrees) ;
+        CGFloat offsetDegreesToStart = - (lastAngle + degrees) ;
         CALayer *slice = [self.sublayers objectAtIndex:x];
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
         animation.duration = self.animationDuration;

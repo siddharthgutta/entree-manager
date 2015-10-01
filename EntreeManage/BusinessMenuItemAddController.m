@@ -8,6 +8,7 @@
 
 #import "BusinessMenuItemAddController.h"
 #import "BusinessViewController.h"
+#import "BusinessMenuItemController.h"
 
 @interface BusinessMenuItemAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
@@ -84,7 +85,10 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             // Menus Refresh
             
-            [_parentDelegate showBusinessMenus:self.menuType];
+            if ([_parentDelegate respondsToSelector:@selector(reloadMenus)])
+                [_parentDelegate reloadMenus];
+            else
+                [NSException raise:NSInternalInconsistencyException format:@"here"];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];

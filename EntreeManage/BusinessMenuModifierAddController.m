@@ -9,6 +9,7 @@
 #import "BusinessMenuModifierAddController.h"
 #import "BusinessViewController.h"
 #import "BusinessModifierItemSelController.h"
+#import "BusinessMenuItemController.h"
 
 @interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource> {
     PFRelation *relation;
@@ -125,7 +126,10 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             // Menus Refresh
             
-            [_parentDelegate showBusinessMenus:_menuType];
+            if ([_parentDelegate respondsToSelector:@selector(reloadMenus)])
+                [_parentDelegate reloadMenus];
+            else
+                [NSException raise:NSInternalInconsistencyException format:@"here"];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];

@@ -48,15 +48,20 @@
     self.navigationItem.rightBarButtonItems = @[addButton];
     
     self.title = @"Menu Categories";
-    [self showBusinessMenus:@"MenuCategory"];
+    [self reloadMenuCategories];
 }
 
-// show business Menus func
-- (void)showBusinessMenus:(NSString *)MenuType {
-    
+- (void)reloadMenuCategories {
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"menu" topObject:self.topMenuObj];
-    
+    [CommParse getMenuCategoriesOfMenu:self.topMenuObj callback:^(NSArray *objects, NSError *error) {
+        [ProgressHUD dismiss];
+        if (!error) {
+            quotes = objects.mutableCopy;
+            [self.tableView reloadData];
+        } else {
+            [ProgressHUD showError:error.localizedDescription];
+        }
+    }];
 }
 
 - (void)addItemClicked {
@@ -64,6 +69,7 @@
     [self performSegueWithIdentifier:@"segueBusinessMenuCategoryAdd" sender:self];
     
 }
+
 - (void)updateItemClicked {
     updateFlag = true;
     [self performSegueWithIdentifier:@"segueBusinessMenuCategoryAdd" sender:self];
@@ -102,7 +108,7 @@
     return cell;
 }
 
--(NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
+- (NSArray *)swipeTableCell:(MGSwipeTableCell *)cell swipeButtonsForDirection:(MGSwipeDirection)direction
              swipeSettings:(MGSwipeSettings *)swipeSettings expansionSettings:(MGSwipeExpansionSettings *)expansionSettings; {
     
     swipeSettings.transition = MGSwipeTransition3D;
@@ -113,7 +119,7 @@
     
 }
 
--(NSArray *)createRightButtons: (int) number {
+- (NSArray *)createRightButtons:(int)number {
     NSMutableArray *result = [NSMutableArray array];
     NSString *titles[2] = {@"Delete", @"Edit"};
     UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
@@ -129,7 +135,7 @@
 }
 
 
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger)index direction:(MGSwipeDirection)direction fromExpansion:(BOOL)fromExpansion {
     // delete button
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     if (index == 0) {

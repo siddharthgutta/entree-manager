@@ -11,7 +11,7 @@
 #import "BusinessMenuItemAddController.h"
 #import "MGSwipeButton.h"
 
-@interface BusinessMenuItemController ()<CommsDelegate, MGSwipeTableCellDelegate, UIActionSheetDelegate> {
+@interface BusinessMenuItemController ()<MGSwipeTableCellDelegate, UIActionSheetDelegate> {
     NSMutableArray *quotes;
     NSIndexPath *selectedIndexPath;
     BOOL updateFlag;
@@ -33,7 +33,6 @@
     }
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addItemClicked)];
@@ -41,13 +40,20 @@
     self.navigationItem.rightBarButtonItem = addButton;
     
     self.title = @"Menu Items";
-    [self showBusinessMenus:@"MenuItem"];
+    [self reloadMenuItems];
 }
 
-// show business Menus func
-- (void)showBusinessMenus:(NSString *)MenuType {
+- (void)reloadMenuItems {
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self menuType:MenuType topKey:@"menuCategory" topObject:self.topMenuObj];
+    [CommParse getMenuItemsOfMenuCategory:self.topMenuObj callback:^(NSArray *objects, NSError *error) {
+        [ProgressHUD dismiss];
+        if (!error) {
+            quotes = objects.mutableCopy;
+            [self.tableView reloadData];
+        } else {
+            [ProgressHUD showError:error.localizedDescription];
+        }
+    }];
 }
 
 - (void)addItemClicked {
@@ -99,7 +105,7 @@
     
 }
 
-- (NSArray *)createRightButtons: (int) number {
+- (NSArray *)createRightButtons:(int)number {
     NSMutableArray *result = [NSMutableArray array];
     NSString *titles[2] = {@"Delete", @"Edit"};
     UIColor *colors[2] = {[UIColor redColor], [UIColor lightGrayColor]};
@@ -115,7 +121,7 @@
 }
 
 
-- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger)index direction:(MGSwipeDirection)direction fromExpansion:(BOOL)fromExpansion {
     
     // delete button
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
@@ -142,26 +148,6 @@
     selectedIndexPath = indexPath;
     updateFlag = true;
     [self performSegueWithIdentifier:@"segueBusinessMenuItemAdd" sender:self];
-}
-
-//==================================================
-// Comms Methods
-//==================================================
-#pragma mark- Comms Delegate Methods
-//==================================================
-- (void)commsDidAction:(NSDictionary *)response {
-    [ProgressHUD dismiss];
-    if ([response[@"action"] intValue] == 1) {
-        
-        quotes = [NSMutableArray array];
-        if ([response[@"responseCode"] boolValue]) {
-            
-            quotes = response[@"objects"];
-        } else {
-            [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-        }
-        [self.tableView reloadData];
-    }
 }
 
 @end

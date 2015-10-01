@@ -91,12 +91,122 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EntreeManage/CommParse.m"
-            timestampString = "464214985.021376"
+            timestampString = "465258583.822312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "731"
-            endingLineNumber = "731"
+            startingLineNumber = "741"
+            endingLineNumber = "741"
             landmarkName = "+sendEmailwithMailGun:userEmail:emailSubject:emailContent:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[CommParse sendEmailwithMailGun:userEmail:emailSubject:emailContent:]"
+                  moduleName = "Entree&#x301; Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tantan/Dropbox/Repos/entree-manager/EntreeManage/CommParse.m"
+                  timestampString = "465258584.935664"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "741"
+                  endingLineNumber = "741"
+                  offsetFromSymbolStart = "1418">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__70+[CommParse sendEmailwithMailGun:userEmail:emailSubject:emailContent:]_block_invoke"
+                  moduleName = "Entree&#x301; Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tantan/Dropbox/Repos/entree-manager/EntreeManage/CommParse.m"
+                  timestampString = "465258584.935904"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "741"
+                  endingLineNumber = "741"
+                  offsetFromSymbolStart = "289">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_453"
+                  moduleName = "Entree&#x301; Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tantan/Dropbox/Repos/entree-manager/EntreeManage/CommParse.m"
+                  timestampString = "465258584.936308"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__70+[CommParse sendEmailwithMailGun:userEmail:emailSubject:emailContent:]_block_invoke456"
+                  moduleName = "Entree&#x301; Manager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tantan/Dropbox/Repos/entree-manager/EntreeManage/CommParse.m"
+                  timestampString = "465258584.936458"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "741"
+                  endingLineNumber = "741"
+                  offsetFromSymbolStart = "38">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EntreeManage/CommParse.m"
+            timestampString = "465258583.822312"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "+getBusinessMenus:menuType:topKey:topObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EntreeManage/BusinessLeftMenuViewController.m"
+            timestampString = "465258430.120852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-changeLeftMenuSel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EntreeManage/BusinessLeftMenuViewController.m"
+            timestampString = "465258442.007541"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-changeLeftMenuSel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

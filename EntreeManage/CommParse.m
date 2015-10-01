@@ -191,6 +191,30 @@ static Restaurant *currentRestaurant;
     }];
 }
 
++ (void)getMenus:(ParseArrayResponseBlock)callback {
+    [currentRestaurant.menus.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        callback(error ? nil : objects, error);
+    }];
+}
+
++ (void)getMenuCategoriesOfMenu:(Menu *)menu callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [[MenuCategory query] whereKey:@"menu" equalTo:menu];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        callback(error ? nil : objects, error);
+    }];
+}
+
++ (void)getMenuItemsOfMenuCategory:(MenuCategory *)category callback:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [[MenuItem query] whereKey:@"menuCategory" equalTo:category];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        callback(error ? nil : objects, error);
+    }];
+}
+
++ (void)getMenuItemModifiers:(ParseArrayResponseBlock)callback {
+    PFQuery *query = [MenuItemModifier query];
+}
+
 
 
 
@@ -264,16 +288,6 @@ static Restaurant *currentRestaurant;
         }
         if ([delegate respondsToSelector:@selector(commsDidAction:)])
             [delegate commsDidAction:response];
-    }];
-}
-
-+ (void)menus:(void(^)(NSArray *menus))callback {
-    [currentRestaurant.menus.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            callback(objects);
-        } else {
-            [ProgressHUD showError:error.localizedDescription];
-        }
     }];
 }
 
