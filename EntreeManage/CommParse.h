@@ -40,12 +40,25 @@ typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
 + (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
 /** Callback takes an array of Order objects. */
 + (void)getTransactionsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+
 /** Callback takes an array of Menu objects. */
 + (void)getMenus:(ParseArrayResponseBlock)callback;
 /** Callback takes an array of MenuCategory objects. */
+
 + (void)getMenuCategoriesOfMenu:(Menu *)menu callback:(ParseArrayResponseBlock)callback;
+/** Gets all menu categories under the current restaurant. */
++ (void)getAllMenuCategories:(ParseArrayResponseBlock)callback;
+
 /** Callback takes an array of MenuItem objects. */
 + (void)getMenuItemsOfMenuCategory:(MenuCategory *)category callback:(ParseArrayResponseBlock)callback;
+/** Gets all menu items under the current restaurant. */
++ (void)getAllMenuItems:(ParseArrayResponseBlock)callback;
+
+/** Gets all menu item modifiers under the current restaurant. Callback takes an array of MenuItem objects. */
++ (void)getAllMenuItemModifiers:(ParseArrayResponseBlock)callback;
+
+
+
 // I wrote everything above this line, except CommsDelegate —Tanner //
 
 

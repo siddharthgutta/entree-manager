@@ -147,7 +147,7 @@
         return NO; // Don't autohide to improve delete expansion animation
     }
     // edit button
-    else if (index==1){
+    else if (index == 1){
         selectedIndexPath = path;
         [self updateItemClicked];
     }

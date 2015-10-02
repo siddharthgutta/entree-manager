@@ -82,7 +82,7 @@
     PFObject *item = cellS[indexPath.row];
     
     // Item Table Multi select with Check Accessory Type
-    if (tableView==_itemView) {
+    if (tableView == _itemView) {
         
         // NSString *keyString = [NSString stringWithFormat:@"%ld-%ld-%ld", selectedIndex1, selectedIndex2, indexPath.row];
         NSString *keyString = item.objectId;

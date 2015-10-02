@@ -12,6 +12,7 @@
 #import "BusinessMenuModifierController.h"
 #import "BusinessViewController.h"
 #import "BusinessMenuItemController.h"
+#import "EmployeeMenuModifierViewController.h"
 
 @interface BusinessLeftMenuViewController (){
     NSMutableArray *menuItemss;
@@ -35,7 +36,6 @@
     return menuItemss.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"LeftMenuCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -50,40 +50,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //[self changeLeftMenuSel:self.tabBarController.tabBar.selectedItem.tag LeftMenuID:(NSInteger)indexPath.row];
-    [self changeLeftMenuSel:(NSInteger)indexPath.row];
-}
-
-/*
- descript:   change view content for tab, left menu
- param:      tab ID, left menu ID
- */
-- (void)changeLeftMenuSel:(NSInteger)leftMenuID {
-    // Summary
     
     NSString *menuType;
     UINavigationController *nc = (UINavigationController *)self.parentViewController;
     UISplitViewController *splitVC = (UISplitViewController *)nc.parentViewController;
     nc = (UINavigationController *)splitVC.viewControllers[1];
-    BusinessMenuItemController *viewInstance = (id)nc.childViewControllers[0];
+    BusinessViewController *viewInstance = (id)nc.childViewControllers[0];
     
-    if (leftMenuID==0)   {
+    if (indexPath.row == 0)   {
         viewInstance.title = @"Menus";
         menuType = @"Menu";
-        [(id)viewInstance reloadMenus];
-    }
-    else if (leftMenuID==1) {
-        menuType = @"MenuItemModifier";
-        viewInstance.title = @"Menu Modifiers";
-        [(id)viewInstance reloadMenus];
+        viewInstance->selectedMenuType = menuType;
+        [viewInstance reloadMenus];
     }
     else {
-        menuType = @"Employee";
-        viewInstance.title = @"Employees";
-        [(id)viewInstance reloadMenus];
+        if (indexPath.row == 1) {
+            menuType = @"MenuItemModifier";
+            viewInstance.title = @"Menu Modifiers";
+            viewInstance->selectedMenuType = menuType;
+            [viewInstance reloadMenuModifiers];
+        }
+        else {
+            menuType = @"Employee";
+            viewInstance.title = @"Employees";
+            viewInstance->selectedMenuType = menuType;
+            [viewInstance reloadEmployees];
+        }
     }
-    
-    
 }
 
 

@@ -15,7 +15,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedFormatter = [self new];
-        sharedFormatter.dateFormat = @"dd-MM-yyyy";
+        sharedFormatter.dateFormat = @"MM-dd-yyyy";
         sharedFormatter.timeZone   = [NSTimeZone timeZoneWithName:@"GMT"];
     });
     

@@ -204,6 +204,60 @@ static Restaurant *currentRestaurant;
     }];
 }
 
++ (void)getAllMenuCategories:(ParseArrayResponseBlock)callback {
+    [self getMenus:^(NSArray *menus, NSError *error) {
+        if (!error) {
+            
+            NSMutableArray *categories = [NSMutableArray array];
+            __block NSError *lastError = nil; // Shaky solution to error handling when making several requests like this. TODO: refactor
+            for (Menu *menu in menus) {
+                [self getMenuCategoriesOfMenu:menu callback:^(NSArray *someCategories, NSError *catError) {
+                    if (!catError) {
+                        [categories addObject:someCategories];
+                    } else {
+                        lastError = catError;
+                        [categories addObject:@[]];
+                    }
+                    
+                    // When we finally have every category...
+                    if (categories.count == menus.count) {
+                        callback([categories valueForKeyPath:@"@unionOfArrays.self"], lastError);
+                    }
+                }];
+            }
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
++ (void)getAllMenuItems:(ParseArrayResponseBlock)callback {
+    [self getAllMenuCategories:^(NSArray *categories, NSError *error) {
+        if (!error) {
+            
+            NSMutableArray *menuItems = [NSMutableArray array];
+            __block NSError *lastError = nil; // Shaky solution to error handling when making several requests like this. TODO: refactor
+            for (MenuCategory *cat in categories) {
+                [self getMenuItemsOfMenuCategory:cat callback:^(NSArray *someMenuItems, NSError *miError) {
+                    if (!miError) {
+                        [menuItems addObject:someMenuItems];
+                    } else {
+                        lastError = miError;
+                        [menuItems addObject:@[]];
+                    }
+                    
+                    // When we finally have every menu item...
+                    if (menuItems.count == categories.count) {
+                        callback([menuItems valueForKeyPath:@"@unionOfArrays.self"], lastError);
+                    }
+                }];
+            }
+        } else {
+            callback(nil, error);
+        }
+    }];
+}
+
 + (void)getMenuItemsOfMenuCategory:(MenuCategory *)category callback:(ParseArrayResponseBlock)callback {
     PFQuery *query = [[MenuItem query] whereKey:@"menuCategory" equalTo:category];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -211,8 +265,35 @@ static Restaurant *currentRestaurant;
     }];
 }
 
-+ (void)getMenuItemModifiers:(ParseArrayResponseBlock)callback {
-    PFQuery *query = [MenuItemModifier query];
++ (void)getAllMenuItemModifiers:(ParseArrayResponseBlock)callback {
+    [self getAllMenuItems:^(NSArray *menuItems, NSError *error) {
+        if (!error) {
+            
+            NSMutableArray *modifiers = [NSMutableArray array];
+            __block NSError *lastError = nil; // Shaky solution to error handling when making several requests like this. TODO: refactor
+            for (MenuItem *mi in menuItems) {
+                
+                PFQuery *query = [[MenuItemModifier query] whereKey:@"menuItems" equalTo:mi];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *someModifiers, NSError *modError) {
+                    if (!modError) {
+                        [modifiers addObject:someModifiers];
+                    } else {
+                        lastError = modError;
+                        [modifiers addObject:@[]];
+                    }
+                    
+                    // When we finally have every menu item modifier...
+                    if (modifiers.count == menuItems.count) {
+                        // There could be duplicates. There almost certainly will be.
+                        NSSet *allUniqueModifiers = [NSSet setWithArray:[modifiers valueForKeyPath:@"@unionOfArrays.self"]];
+                        callback(allUniqueModifiers.allObjects, lastError);
+                    }
+                }];
+            }
+        } else {
+            callback(nil, error);
+        }
+    }];
 }
 
 
@@ -266,6 +347,26 @@ static Restaurant *currentRestaurant;
 // 1: get, 2: add update, 3: delete
 
 + (void)getBusinessMenus:(id<CommsDelegate>)delegate menuType:(NSString *)menuType topKey:(NSString *)topKey topObject:(PFObject *)topObject {
+    if ([menuType isEqualToString:@"MenuItemModifier"]) {
+        [self getAllMenuItemModifiers:^(NSArray *objects, NSError *error) {
+            NSMutableDictionary *response = [NSMutableDictionary dictionary];
+            response[@"action"] = @1;
+            response[@"menu_type"] = menuType;
+            if ( !error ) {
+                response[@"responseCode"] = @YES;
+                response[@"objects"] = objects;
+            } else {
+                response[@"responseCode"] = @NO;
+                response[@"errorMsg"] = [CommParse parseErrorMsgFromError:error];
+            }
+            if ([delegate respondsToSelector:@selector(commsDidAction:)])
+                [delegate commsDidAction:response];
+        }];
+        return;
+    } else if ([menuType isEqualToString:@"Employee"]) {
+        
+    }
+    
     // Get class query if possible
     PFQuery *query;
     id cls = NSClassFromString(menuType);

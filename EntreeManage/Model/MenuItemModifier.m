@@ -18,4 +18,19 @@ PARSE_REGISTER_CLASS
 @dynamic printText;
 @dynamic price;
 
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[MenuItemModifier class]])
+        return [self isEqualToMenuItemModifier:object];
+    
+    return [super isEqual:object];
+}
+
+- (BOOL)isEqualToMenuItemModifier:(MenuItemModifier *)mim {
+    return [self.objectId isEqualToString:mim.objectId];
+}
+
+- (NSUInteger)hash {
+    return self.objectId.hash;
+}
+
 @end

@@ -127,6 +127,7 @@
 		B4F5831B1B84413200DCF20C /* NSNumberFormatter+Dollars.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582F81B84413200DCF20C /* NSNumberFormatter+Dollars.m */; };
 		B4F5831C1B84413200DCF20C /* SummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F582FA1B84413200DCF20C /* SummaryViewController.m */; };
 		B4F5831F1B84420400DCF20C /* Entree-Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F5831E1B84420400DCF20C /* Entree-Constants.m */; };
+		B4F87F891BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F87F881BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +349,8 @@
 		B4F582FA1B84413200DCF20C /* SummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryViewController.m; sourceTree = "<group>"; };
 		B4F5831D1B84420400DCF20C /* Entree-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entree-Constants.h"; sourceTree = "<group>"; };
 		B4F5831E1B84420400DCF20C /* Entree-Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Entree-Constants.m"; sourceTree = "<group>"; };
+		B4F87F871BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeMenuModifierViewController.h; sourceTree = "<group>"; };
+		B4F87F881BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeMenuModifierViewController.m; sourceTree = "<group>"; };
 		B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD055906CB18997372EE4470 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -589,6 +592,8 @@
 				928734701B6F682F005E112A /* BusinessMenuModifierAddController.m */,
 				928734771B6FAA65005E112A /* BusinessModifierItemSelController.h */,
 				928734781B6FAA65005E112A /* BusinessModifierItemSelController.m */,
+				B4F87F871BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.h */,
+				B4F87F881BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.m */,
 			);
 			name = BusinessController;
 			sourceTree = "<group>";
@@ -998,6 +1003,7 @@
 				B4F583041B84413200DCF20C /* ARHelpers.m in Sources */,
 				B4A827451B9CD3F600363AD6 /* Restaurant.m in Sources */,
 				B4F583021B84413200DCF20C /* ARGraphBackground.m in Sources */,
+				B4F87F891BBE8C5A0004FC46 /* EmployeeMenuModifierViewController.m in Sources */,
 				88B585C81BB4F7030061D6BF /* SignInViewController.m in Sources */,
 				B4E8F2481B93A98000129F78 /* Party.m in Sources */,
 				B4458EA41BA23CE200522935 /* StarPrinter.m in Sources */,
