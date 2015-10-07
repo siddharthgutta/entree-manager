@@ -16,7 +16,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Parse setApplicationId:ParseSetApplicationID clientKey:ParseClientKey];
-    [PFUser enableAutomaticUser];
+    // [PFUser enableAutomaticUser];
+    [PFUser logOut];
     
     [UINavigationBar appearance].translucent         = NO;
     [UINavigationBar appearance].barTintColor        = [UIColor colorWithRed:0.121 green:0.406 blue:0.872 alpha:1.000];
