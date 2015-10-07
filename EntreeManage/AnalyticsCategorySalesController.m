@@ -49,8 +49,12 @@
     // Previous month's data
     NSDate *startDate = [NSDate date30DaysAgo];
     NSDate *endDate   = [NSDate date];
-    _startDateText.text         = [[NSDateFormatter shared] stringFromDate:startDate];
-    _endDateText.text           = [[NSDateFormatter shared] stringFromDate:endDate];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
+    
+    self.startDateText.text = [dateFormatter stringFromDate:startDate];
+    self.endDateText.text = [dateFormatter stringFromDate:endDate];
     
     [CommParse getAnalyticsCategorySales:self startDate:startDate endDate:endDate];
     [CommParse getNetSalesForInterval:startDate end:endDate callback:^(NSNumber *num, NSError *error) {
@@ -165,42 +169,61 @@
 }
 
 - (IBAction)onChangedDate:(id)sender {
-    NSDate *selDate = [_datePicker date];
+    // Jesse rew-rote this.
+    NSDate *selectedDate = _datePicker.date;
     
-    NSString *dateText = [[NSDateFormatter shared] stringFromDate: selDate];
-    if (startDate_Flag)  _startDateText.text = dateText;
-    else _endDateText.text = dateText;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
     
-    _pickDateView.hidden = true;
+    NSString *dateString = [dateFormatter stringFromDate:selectedDate];
+    if (startDate_Flag) {
+        self.startDateText.text = dateString;
+    } else {
+        self.endDateText.text = dateString;
+    }
     
-    NSDate *startDate = [[NSDateFormatter shared] dateFromString: _startDateText.text];
-    NSDate *endDate = [[NSDateFormatter shared] dateFromString: _endDateText.text];
-    // from start day 00:00 to end day 24:00
-    endDate = [endDate dateByAddingTimeInterval:24*3600];
+    self.pickDateView.hidden = YES;
     
+    NSDate *startDate = [dateFormatter dateFromString: self.startDateText.text];
+    NSDate *endDate = [[dateFormatter dateFromString: self.endDateText.text] dateByAddingTimeInterval:86400];
     if (startDate && endDate) {
         [CommParse getAnalyticsCategorySales:self startDate:startDate endDate:endDate];
     }
 }
 
 - (IBAction)onTouchTextStartDate:(id)sender {
-    startDate_Flag = true;
+    // Jesse rew-rote this.
+    startDate_Flag = YES;
     
-    NSDate *date = [[NSDateFormatter shared] dateFromString: _startDateText.text];
-    [_datePicker setDate:date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
     
-    _pickDateView.hidden = false;
+    NSDate *date = [dateFormatter dateFromString: self.startDateText.text];
+    [self.datePicker setDate:date];
+    
+    self.pickDateView.frame = CGRectMake(200, 140, 390, 0);
+    self.pickDateView.hidden = false;
+    [UIView animateWithDuration:1.0  animations:^ {
+        self.pickDateView.frame = CGRectMake(200, 140, 390, 270);
+    }];
 }
 
 - (IBAction)onTouchTextEndDate:(id)sender {
-    startDate_Flag = false;
+    // Jesse rew-rote this.
+    startDate_Flag = NO;
     
-    NSDate *date = [[NSDateFormatter shared] dateFromString: _endDateText.text];
-    [_datePicker setDate:date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
     
-    _pickDateView.hidden = false;
+    NSDate *date = [[NSDateFormatter shared] dateFromString: self.endDateText.text];
+    [self.datePicker setDate:date];
+    
+    self.pickDateView.frame = CGRectMake(200, 140, 390, 0);
+    self.pickDateView.hidden = false;
+    [UIView animateWithDuration:1.0  animations:^ {
+        self.pickDateView.frame = CGRectMake(200,140,390,270);
+    }];
 }
-
 
 - (BOOL)textfield:(UITextField *)textField shouldchangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     return NO;

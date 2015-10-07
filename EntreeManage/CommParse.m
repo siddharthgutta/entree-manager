@@ -445,7 +445,7 @@ static Restaurant *currentRestaurant;
 
 + (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate menuType:(NSString *)menuType MenuId:(NSString *)menuId {
     PFQuery *query = [PFQuery queryWithClassName:menuType];
-    [query whereKey:@"objectID" equalTo:menuId];
+    [query whereKey:@"objectId" equalTo:menuId];
     
 }
 
@@ -662,7 +662,7 @@ static Restaurant *currentRestaurant;
                     else {
                         // if not exist then init
                         [employees removeAllObjects];
-                        NSParameterAssert(employees);
+                       // NSParameterAssert(employees);
                         [employees addObject:payment.party.server.name];
                         [employees addObject:@0.0];
                         [employees addObject:@(tips)];

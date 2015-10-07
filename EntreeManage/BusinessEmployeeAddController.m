@@ -72,6 +72,8 @@
         _employee = [Employee object];
     }
     
+    _employee.restaurant = [CommParse currentRestaurant];
+    
     _employee.name = _txtName.text;
     _employee[@"role"] = _txtRole.text;
     

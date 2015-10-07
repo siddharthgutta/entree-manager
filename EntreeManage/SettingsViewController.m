@@ -11,6 +11,14 @@
 
 @implementation SettingsViewController
 
+- (IBAction)logOut:(UIButton *)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        if (!error) {
+            [self presentViewController:[[UIStoryboard storyboardWithName:@"SignIn" bundle:[NSBundle mainBundle]] instantiateInitialViewController] animated:YES completion:nil];
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.emailTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:kExportEmailPrefKey];

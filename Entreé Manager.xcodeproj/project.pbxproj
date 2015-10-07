@@ -865,7 +865,7 @@
 				TargetAttributes = {
 					92C8F1051B60958A00ADF1D8 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = S6N2F22V2Z;
+						DevelopmentTeam = EDLTE65NWH;
 					};
 					92C8F1211B60958B00ADF1D8 = {
 						CreatedOnToolsVersion = 6.4;
@@ -1174,7 +1174,9 @@
 			baseConfigurationReference = B56C5B2705944A6A0409662F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
@@ -1187,6 +1189,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Entreé Manager";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1195,7 +1198,9 @@
 			baseConfigurationReference = FD055906CB18997372EE4470 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EntreeManage",
@@ -1208,6 +1213,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Entreé Manager";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

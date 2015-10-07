@@ -164,7 +164,7 @@ NSString *StringFromSummaryView(SummaryView sv) {
     
     [CommParse getPopularItemsForInterval:self.startDate end:self.endDate callback:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.popularItems = objects;
+            self.popularItems = objects.copy;
             [self.collectionView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -173,7 +173,7 @@ NSString *StringFromSummaryView(SummaryView sv) {
     
     [CommParse getPopularCategoriesForInterval:self.startDate end:self.endDate callback:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.popularCategories = objects;
+            self.popularCategories = objects.copy;
             NSMutableArray *points = [NSMutableArray array];
             [self.popularCategories enumerateObjectsUsingBlock:^(MenuCategory *category, NSUInteger idx, BOOL *stop) {
                 [points addObject:[[ARGraphDataPoint alloc] initWithX:idx y:category.saleCount]];
