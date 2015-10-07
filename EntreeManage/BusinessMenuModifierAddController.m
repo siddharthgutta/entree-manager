@@ -141,7 +141,7 @@
 - (IBAction)onClickAddItems:(id)sender {
     
     // show item add window
-    [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
+    // [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
     
     
 }
