@@ -102,6 +102,7 @@
                 [relation addObject:item];
             
             [CommParse updateQuoteRequest:self Quote:self.menuObj];
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         });
     });
 }
