@@ -51,8 +51,12 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
 
 + (instancetype)XMLParserRequestOperationWithRequest:(NSURLRequest *)urlRequest
 											 success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser))success
+<<<<<<< HEAD
 											 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser))failure
 {
+=======
+											 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser))failure {
+>>>>>>> origin/tanner
     AFXMLRequestOperation *requestOperation = [(AFXMLRequestOperation *)[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -70,8 +74,12 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
 #ifdef __MAC_OS_X_VERSION_MIN_REQUIRED
 + (instancetype)XMLDocumentRequestOperationWithRequest:(NSURLRequest *)urlRequest
 											   success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLDocument *document))success
+<<<<<<< HEAD
 											   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLDocument *document))failure
 {
+=======
+											   failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLDocument *document))failure {
+>>>>>>> origin/tanner
     AFXMLRequestOperation *requestOperation = [[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, __unused id responseObject) {
         if (success) {
@@ -137,8 +145,12 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"

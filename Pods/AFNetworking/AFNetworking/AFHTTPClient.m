@@ -40,8 +40,13 @@
 #endif
 
 #ifdef _SYSTEMCONFIGURATION_H
+<<<<<<< HEAD
 NSString * const AFNetworkingReachabilityDidChangeNotification = @"com.alamofire.networking.reachability.change";
 NSString * const AFNetworkingReachabilityNotificationStatusItem = @"AFNetworkingReachabilityNotificationStatusItem";
+=======
+NSString *const AFNetworkingReachabilityDidChangeNotification = @"com.alamofire.networking.reachability.change";
+NSString *const AFNetworkingReachabilityNotificationStatusItem = @"AFNetworkingReachabilityNotificationStatusItem";
+>>>>>>> origin/tanner
 
 typedef SCNetworkReachabilityRef AFNetworkReachabilityRef;
 typedef void (^AFNetworkReachabilityStatusBlock)(AFNetworkReachabilityStatus status);
@@ -51,7 +56,11 @@ typedef id AFNetworkReachabilityRef;
 
 typedef void (^AFCompletionBlock)(void);
 
+<<<<<<< HEAD
 static NSString * AFBase64EncodedStringFromString(NSString *string) {
+=======
+static NSString *AFBase64EncodedStringFromString(NSString *string) {
+>>>>>>> origin/tanner
     NSData *data = [NSData dataWithBytes:[string UTF8String] length:[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
     NSUInteger length = [data length];
     NSMutableData *mutableData = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
@@ -80,15 +89,26 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }
 
+<<<<<<< HEAD
 static NSString * const kAFCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
 
 static NSString * AFPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
     static NSString * const kAFCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
+=======
+static NSString *const kAFCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*";
+
+static NSString *AFPercentEscapedQueryStringKeyFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
+    static NSString *const kAFCharactersToLeaveUnescapedInQueryStringPairKey = @"[].";
+>>>>>>> origin/tanner
 
 	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, (__bridge CFStringRef)kAFCharactersToLeaveUnescapedInQueryStringPairKey, (__bridge CFStringRef)kAFCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
+<<<<<<< HEAD
 static NSString * AFPercentEscapedQueryStringValueFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
+=======
+static NSString *AFPercentEscapedQueryStringValueFromStringWithEncoding(NSString *string, NSStringEncoding encoding) {
+>>>>>>> origin/tanner
 	return (__bridge_transfer  NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (__bridge CFStringRef)string, NULL, (__bridge CFStringRef)kAFCharactersToBeEscapedInQueryString, CFStringConvertNSStringEncodingToEncoding(encoding));
 }
 
@@ -131,10 +151,17 @@ static NSString * AFPercentEscapedQueryStringValueFromStringWithEncoding(NSStrin
 
 #pragma mark -
 
+<<<<<<< HEAD
 extern NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
 extern NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
 NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding) {
+=======
+extern NSArray *AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
+extern NSArray *AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
+
+NSString *AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding stringEncoding) {
+>>>>>>> origin/tanner
     NSMutableArray *mutablePairs = [NSMutableArray array];
     for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
         [mutablePairs addObject:[pair URLEncodedStringValueWithEncoding:stringEncoding]];
@@ -143,11 +170,19 @@ NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSS
     return [mutablePairs componentsJoinedByString:@"&"];
 }
 
+<<<<<<< HEAD
 NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary) {
     return AFQueryStringPairsFromKeyAndValue(nil, dictionary);
 }
 
 NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
+=======
+NSArray *AFQueryStringPairsFromDictionary(NSDictionary *dictionary) {
+    return AFQueryStringPairsFromKeyAndValue(nil, dictionary);
+}
+
+NSArray *AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
+>>>>>>> origin/tanner
     NSMutableArray *mutableQueryStringComponents = [NSMutableArray array];
 
     if ([value isKindOfClass:[NSDictionary class]]) {
@@ -155,7 +190,11 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
         // Sort dictionary keys to ensure consistent ordering in query string, which is important when deserializing potentially ambiguous sequences, such as an array of dictionaries
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES selector:@selector(caseInsensitiveCompare:)];
         for (id nestedKey in [dictionary.allKeys sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
+<<<<<<< HEAD
             id nestedValue = [dictionary objectForKey:nestedKey];
+=======
+            id nestedValue = dictionary[nestedKey];
+>>>>>>> origin/tanner
             if (nestedValue) {
                 [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
             }
@@ -253,7 +292,11 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
     // Accept-Language HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
     NSMutableArray *acceptLanguagesComponents = [NSMutableArray array];
     [[NSLocale preferredLanguages] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+<<<<<<< HEAD
         float q = 1.0f - (idx * 0.1f);
+=======
+        CGFloat q = 1.0f - (idx *0.1f);
+>>>>>>> origin/tanner
         [acceptLanguagesComponents addObject:[NSString stringWithFormat:@"%@;q=%0.1g", obj, q]];
         *stop = q <= 0.5f;
     }];
@@ -346,11 +389,19 @@ static void AFNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 
     dispatch_async(dispatch_get_main_queue(), ^{
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+<<<<<<< HEAD
         [notificationCenter postNotificationName:AFNetworkingReachabilityDidChangeNotification object:nil userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:status] forKey:AFNetworkingReachabilityNotificationStatusItem]];
     });
 }
 
 static const void * AFNetworkReachabilityRetainCallback(const void *info) {
+=======
+        [notificationCenter postNotificationName:AFNetworkingReachabilityDidChangeNotification object:nil userInfo:[NSDictionary dictionaryWithObject:@(status) forKey:AFNetworkingReachabilityNotificationStatusItem]];
+    });
+}
+
+static const void *AFNetworkReachabilityRetainCallback(const void *info) {
+>>>>>>> origin/tanner
     return Block_copy(info);
 }
 
@@ -463,8 +514,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                       path:(NSString *)path
+<<<<<<< HEAD
                                 parameters:(NSDictionary *)parameters
 {
+=======
+                                parameters:(NSDictionary *)parameters {
+>>>>>>> origin/tanner
     NSParameterAssert(method);
 
     if (!path) {
@@ -511,8 +566,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                                    path:(NSString *)path
                                              parameters:(NSDictionary *)parameters
+<<<<<<< HEAD
                               constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 {
+=======
+                              constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block {
+>>>>>>> origin/tanner
     NSParameterAssert(method);
     NSParameterAssert(![method isEqualToString:@"GET"] && ![method isEqualToString:@"HEAD"]);
 
@@ -546,8 +605,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 - (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                                                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
     AFHTTPRequestOperation *operation = nil;
     
     for (NSString *className in self.registeredHTTPOperationClassNames) {
@@ -578,8 +641,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 }
 
 - (void)cancelAllHTTPOperationsWithMethod:(NSString *)method
+<<<<<<< HEAD
                                      path:(NSString *)path
 {
+=======
+                                     path:(NSString *)path {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
     NSString *pathToBeMatched = [[[self requestWithMethod:(method ?: @"GET") path:path parameters:nil] URL] path];
@@ -601,8 +668,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 - (void)enqueueBatchOfHTTPRequestOperationsWithRequests:(NSArray *)urlRequests
                                           progressBlock:(void (^)(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations))progressBlock
+<<<<<<< HEAD
                                         completionBlock:(void (^)(NSArray *operations))completionBlock
 {
+=======
+                                        completionBlock:(void (^)(NSArray *operations))completionBlock {
+>>>>>>> origin/tanner
     NSMutableArray *mutableOperations = [NSMutableArray array];
     for (NSURLRequest *request in urlRequests) {
         AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:nil failure:nil];
@@ -614,8 +685,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 - (void)enqueueBatchOfHTTPRequestOperations:(NSArray *)operations
                               progressBlock:(void (^)(NSUInteger numberOfFinishedOperations, NSUInteger totalNumberOfOperations))progressBlock
+<<<<<<< HEAD
                             completionBlock:(void (^)(NSArray *operations))completionBlock
 {
+=======
+                            completionBlock:(void (^)(NSArray *operations))completionBlock {
+>>>>>>> origin/tanner
     __block dispatch_group_t dispatchGroup = dispatch_group_create();
     NSBlockOperation *batchedOperation = [NSBlockOperation blockOperationWithBlock:^{
         dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^{
@@ -666,8 +741,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (void)getPath:(NSString *)path
      parameters:(NSDictionary *)parameters
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 	NSURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -676,8 +755,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (void)postPath:(NSString *)path
       parameters:(NSDictionary *)parameters
          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 	NSURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -686,8 +769,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (void)putPath:(NSString *)path
      parameters:(NSDictionary *)parameters
         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 	NSURLRequest *request = [self requestWithMethod:@"PUT" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -696,8 +783,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (void)deletePath:(NSString *)path
         parameters:(NSDictionary *)parameters
            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 	NSURLRequest *request = [self requestWithMethod:@"DELETE" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -706,8 +797,12 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 - (void)patchPath:(NSString *)path
        parameters:(NSDictionary *)parameters
           success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
     NSURLRequest *request = [self requestWithMethod:@"PATCH" path:path parameters:parameters];
 	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
     [self enqueueHTTPRequestOperation:operation];
@@ -758,6 +853,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
 
 #pragma mark -
 
+<<<<<<< HEAD
 static NSString * const kAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY";
 
 static NSString * const kAFMultipartFormCRLF = @"\r\n";
@@ -777,6 +873,27 @@ static inline NSString * AFMultipartFormFinalBoundary() {
 }
 
 static inline NSString * AFContentTypeForPathExtension(NSString *extension) {
+=======
+static NSString *const kAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY";
+
+static NSString *const kAFMultipartFormCRLF = @"\r\n";
+
+static NSInteger const kAFStreamToStreamBufferSize = 1024 *1024; //1 meg default
+
+static inline NSString *AFMultipartFormInitialBoundary() {
+    return [NSString stringWithFormat:@"--%@%@", kAFMultipartFormBoundary, kAFMultipartFormCRLF];
+}
+
+static inline NSString *AFMultipartFormEncapsulationBoundary() {
+    return [NSString stringWithFormat:@"%@--%@%@", kAFMultipartFormCRLF, kAFMultipartFormBoundary, kAFMultipartFormCRLF];
+}
+
+static inline NSString *AFMultipartFormFinalBoundary() {
+    return [NSString stringWithFormat:@"%@--%@--%@", kAFMultipartFormCRLF, kAFMultipartFormBoundary, kAFMultipartFormCRLF];
+}
+
+static inline NSString *AFContentTypeForPathExtension(NSString *extension) {
+>>>>>>> origin/tanner
 #ifdef __UTTYPE__
     NSString *UTI = (__bridge_transfer NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)extension, NULL);
     NSString *contentType = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)UTI, kUTTagClassMIMEType);
@@ -790,7 +907,11 @@ static inline NSString * AFContentTypeForPathExtension(NSString *extension) {
 #endif
 }
 
+<<<<<<< HEAD
 NSUInteger const kAFUploadStream3GSuggestedPacketSize = 1024 * 16;
+=======
+NSUInteger const kAFUploadStream3GSuggestedPacketSize = 1024 *16;
+>>>>>>> origin/tanner
 NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 
 @interface AFHTTPBodyPart : NSObject
@@ -836,8 +957,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 @synthesize stringEncoding = _stringEncoding;
 
 - (id)initWithURLRequest:(NSMutableURLRequest *)urlRequest
+<<<<<<< HEAD
           stringEncoding:(NSStringEncoding)encoding
 {
+=======
+          stringEncoding:(NSStringEncoding)encoding {
+>>>>>>> origin/tanner
     self = [super init];
     if (!self) {
         return nil;
@@ -852,8 +977,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 
 - (BOOL)appendPartWithFileURL:(NSURL *)fileURL
                          name:(NSString *)name
+<<<<<<< HEAD
                         error:(NSError * __autoreleasing *)error
 {
+=======
+                        error:(NSError *__autoreleasing *)error {
+>>>>>>> origin/tanner
     NSParameterAssert(fileURL);
     NSParameterAssert(name);
 
@@ -867,8 +996,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
                          name:(NSString *)name
                      fileName:(NSString *)fileName
                      mimeType:(NSString *)mimeType
+<<<<<<< HEAD
                         error:(NSError * __autoreleasing *)error
 {
+=======
+                        error:(NSError *__autoreleasing *)error {
+>>>>>>> origin/tanner
     NSParameterAssert(fileURL);
     NSParameterAssert(name);
     NSParameterAssert(fileName);
@@ -900,7 +1033,11 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
     bodyPart.body = fileURL;
 
     NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[fileURL path] error:nil];
+<<<<<<< HEAD
     bodyPart.bodyContentLength = [[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
+=======
+    bodyPart.bodyContentLength = [fileAttributes[NSFileSize] unsignedLongLongValue];
+>>>>>>> origin/tanner
 
     [self.bodyStream appendHTTPBodyPart:bodyPart];
 
@@ -912,8 +1049,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
                              name:(NSString *)name
                          fileName:(NSString *)fileName
                            length:(unsigned long long)length
+<<<<<<< HEAD
                          mimeType:(NSString *)mimeType
 {
+=======
+                         mimeType:(NSString *)mimeType {
+>>>>>>> origin/tanner
     NSParameterAssert(name);
     NSParameterAssert(fileName);
     NSParameterAssert(mimeType);
@@ -936,8 +1077,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 - (void)appendPartWithFileData:(NSData *)data
                           name:(NSString *)name
                       fileName:(NSString *)fileName
+<<<<<<< HEAD
                       mimeType:(NSString *)mimeType
 {
+=======
+                      mimeType:(NSString *)mimeType {
+>>>>>>> origin/tanner
     NSParameterAssert(name);
     NSParameterAssert(fileName);
     NSParameterAssert(mimeType);
@@ -950,8 +1095,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (void)appendPartWithFormData:(NSData *)data
+<<<<<<< HEAD
                           name:(NSString *)name
 {
+=======
+                          name:(NSString *)name {
+>>>>>>> origin/tanner
     NSParameterAssert(name);
 
     NSMutableDictionary *mutableHeaders = [NSMutableDictionary dictionary];
@@ -961,8 +1110,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (void)appendPartWithHeaders:(NSDictionary *)headers
+<<<<<<< HEAD
                          body:(NSData *)body
 {
+=======
+                         body:(NSData *)body {
+>>>>>>> origin/tanner
     NSParameterAssert(body);
 
     AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
@@ -975,8 +1128,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (void)throttleBandwidthWithPacketSize:(NSUInteger)numberOfBytes
+<<<<<<< HEAD
                                   delay:(NSTimeInterval)delay
 {
+=======
+                                  delay:(NSTimeInterval)delay {
+>>>>>>> origin/tanner
     self.bodyStream.numberOfBytesInPacket = numberOfBytes;
     self.bodyStream.delay = delay;
 }
@@ -1060,8 +1217,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 #pragma mark - NSInputStream
 
 - (NSInteger)read:(uint8_t *)buffer
+<<<<<<< HEAD
         maxLength:(NSUInteger)length
 {
+=======
+        maxLength:(NSUInteger)length {
+>>>>>>> origin/tanner
     if ([self streamStatus] == NSStreamStatusClosed) {
         return 0;
     }
@@ -1093,8 +1254,12 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (BOOL)getBuffer:(__unused uint8_t **)buffer
+<<<<<<< HEAD
            length:(__unused NSUInteger *)len
 {
+=======
+           length:(__unused NSUInteger *)len {
+>>>>>>> origin/tanner
     return NO;
 }
 
@@ -1124,18 +1289,29 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 }
 
 - (BOOL)setProperty:(__unused id)property
+<<<<<<< HEAD
              forKey:(__unused NSString *)key
 {
+=======
+             forKey:(__unused NSString *)key {
+>>>>>>> origin/tanner
     return NO;
 }
 
 - (void)scheduleInRunLoop:(__unused NSRunLoop *)aRunLoop
+<<<<<<< HEAD
                   forMode:(__unused NSString *)mode
 {}
 
 - (void)removeFromRunLoop:(__unused NSRunLoop *)aRunLoop
                   forMode:(__unused NSString *)mode
 {}
+=======
+                  forMode:(__unused NSString *)mode {}
+
+- (void)removeFromRunLoop:(__unused NSRunLoop *)aRunLoop
+                  forMode:(__unused NSString *)mode {}
+>>>>>>> origin/tanner
 
 - (unsigned long long)contentLength {
     unsigned long long length = 0;
@@ -1149,12 +1325,19 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 #pragma mark - Undocumented CFReadStream Bridged Methods
 
 - (void)_scheduleInCFRunLoop:(__unused CFRunLoopRef)aRunLoop
+<<<<<<< HEAD
                      forMode:(__unused CFStringRef)aMode
 {}
 
 - (void)_unscheduleFromCFRunLoop:(__unused CFRunLoopRef)aRunLoop
                          forMode:(__unused CFStringRef)aMode
 {}
+=======
+                     forMode:(__unused CFStringRef)aMode {}
+
+- (void)_unscheduleFromCFRunLoop:(__unused CFRunLoopRef)aRunLoop
+                         forMode:(__unused CFStringRef)aMode {}
+>>>>>>> origin/tanner
 
 - (BOOL)_setCFClientFlags:(__unused CFOptionFlags)inFlags
                  callback:(__unused CFReadStreamClientCallBack)inCallback
@@ -1164,7 +1347,11 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 
 #pragma mark - NSCopying
 
+<<<<<<< HEAD
 -(id)copyWithZone:(NSZone *)zone {
+=======
+- (id)copyWithZone:(NSZone *)zone {
+>>>>>>> origin/tanner
     AFMultipartBodyStream *bodyStreamCopy = [[[self class] allocWithZone:zone] initWithStringEncoding:self.stringEncoding];
 
     for (AFHTTPBodyPart *bodyPart in self.HTTPBodyParts) {
@@ -1292,8 +1479,12 @@ typedef enum {
 }
 
 - (NSInteger)read:(uint8_t *)buffer
+<<<<<<< HEAD
         maxLength:(NSUInteger)length
 {
+=======
+        maxLength:(NSUInteger)length {
+>>>>>>> origin/tanner
     NSUInteger totalNumberOfBytesRead = 0;
 
     if (_phase == AFEncapsulationBoundaryPhase) {
@@ -1331,8 +1522,12 @@ typedef enum {
 
 - (NSInteger)readData:(NSData *)data
            intoBuffer:(uint8_t *)buffer
+<<<<<<< HEAD
             maxLength:(NSUInteger)length
 {
+=======
+            maxLength:(NSUInteger)length {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
     NSRange range = NSMakeRange((NSUInteger)_phaseReadOffset, MIN([data length] - ((NSUInteger)_phaseReadOffset), length));

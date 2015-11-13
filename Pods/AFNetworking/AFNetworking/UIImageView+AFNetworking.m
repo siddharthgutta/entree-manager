@@ -84,8 +84,12 @@ static char kAFImageRequestOperationObjectKey;
 }
 
 - (void)setImageWithURL:(NSURL *)url
+<<<<<<< HEAD
        placeholderImage:(UIImage *)placeholderImage
 {
+=======
+       placeholderImage:(UIImage *)placeholderImage {
+>>>>>>> origin/tanner
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
 
@@ -95,8 +99,12 @@ static char kAFImageRequestOperationObjectKey;
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest
               placeholderImage:(UIImage *)placeholderImage
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
+<<<<<<< HEAD
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
+=======
+                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+>>>>>>> origin/tanner
     [self cancelImageRequestOperation];
 
     UIImage *cachedImage = [[[self class] af_sharedImageCache] cachedImageForRequest:urlRequest];
@@ -160,7 +168,11 @@ static char kAFImageRequestOperationObjectKey;
 
 #pragma mark -
 
+<<<<<<< HEAD
 static inline NSString * AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
+=======
+static inline NSString *AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
+>>>>>>> origin/tanner
     return [[request URL] absoluteString];
 }
 
@@ -179,8 +191,12 @@ static inline NSString * AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
 }
 
 - (void)cacheImage:(UIImage *)image
+<<<<<<< HEAD
         forRequest:(NSURLRequest *)request
 {
+=======
+        forRequest:(NSURLRequest *)request {
+>>>>>>> origin/tanner
     if (image && request) {
         [self setObject:image forKey:AFImageCacheKeyFromURLRequest(request)];
     }

@@ -46,8 +46,12 @@ static dispatch_queue_t json_request_operation_processing_queue() {
 
 + (instancetype)JSONRequestOperationWithRequest:(NSURLRequest *)urlRequest
 										success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))success
+<<<<<<< HEAD
 										failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))failure
 {
+=======
+										failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON))failure {
+>>>>>>> origin/tanner
     AFJSONRequestOperation *requestOperation = [(AFJSONRequestOperation *)[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -111,8 +115,12 @@ static dispatch_queue_t json_request_operation_processing_queue() {
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"

@@ -8,9 +8,9 @@
 
 #import "BusinessMenuItemAddController.h"
 #import "BusinessViewController.h"
+#import "BusinessMenuItemController.h"
 
-@interface BusinessMenuItemAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-{
+@interface BusinessMenuItemAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
 
@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerColor;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrice;
+@property (weak, nonatomic) IBOutlet UITextField *printerTextField;
 
 @end
 
@@ -26,38 +27,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-        NSNumber *price = [PFUtils getProperty:@"price" InObject:_menuObj];
+    if (self.menuObj) {
+        self.txtName.text = self.menuObj[@"name"];
+        NSNumber *price = self.menuObj[@"price"];
         
-        _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
-        
+        self.txtPrice.text = [NSString stringWithFormat:@"%.2f", [price floatValue]];
     }
 }
 
 // The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor {
     return 1;
 }
 
 // The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component
-{
-    return [COLOR_ARRAY count];
+- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component {
+    return COLOR_ARRAY.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString *)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return COLOR_ARRAY[row];
 }
 
+<<<<<<< HEAD
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+=======
+>>>>>>> origin/tanner
 
 - (IBAction)onClickCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -66,43 +65,41 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
-    if(_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    if (!self.menuObj) {
+        self.menuObj = [MenuItem object];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
+    self.menuObj.name = self.txtName.text;
     
-    NSNumber *price = [NSNumber numberWithFloat:[_txtPrice.text floatValue]];
+    self.menuObj.price = [self.txtPrice.text floatValue];
+    self.menuObj.menuCategory = self.menuCategory;
     
-    [_menuObj setObject:price forKey:@"price"];
+    // Get Color Picker Value
+    NSInteger colorIndex = [self.pickerColor selectedRowInComponent:0];
+    self.menuObj.colorIndex = colorIndex;
+    // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
-    //Get Color Picker Value
-    NSInteger color_index = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    //NSString *color_str = [COLOR_ARRAY objectAtIndex:color_index];
-    
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    [CommParse updateQuoteRequest:self Quote:self.menuObj];
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
-    if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
+            // Menus Refresh
             
-            [_parent_delegate showBusinessMenus:_menuType];
-            
+            if ([_parentDelegate respondsToSelector:@selector(reloadMenus)])
+                [_parentDelegate reloadMenus];
+            else
+                [NSException raise:NSInternalInconsistencyException format:@"here"];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 

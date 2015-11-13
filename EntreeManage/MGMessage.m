@@ -7,7 +7,11 @@
 
 #import "MGMessage.h"
 
+<<<<<<< HEAD
 NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
+=======
+NSString *const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
+>>>>>>> origin/tanner
 @interface NSDate (RFC2822)
 - (NSString *)rfc2822String;
 + (NSDate *)dateFromRFC2822String:(NSString *)string;
@@ -28,6 +32,7 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 @end
 
 @implementation MGMessage
+<<<<<<< HEAD
 + (instancetype)messageFrom:(NSString *)from
                          to:(NSString *)to
                     subject:(NSString *)subject
@@ -44,6 +49,14 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
     NSParameterAssert(to);
     NSParameterAssert(subject);
     NSParameterAssert(body);
+=======
++ (instancetype)messageFrom:(NSString *)from to:(NSString *)to subject:(NSString *)subject body:(NSString *)body {
+    return [[MGMessage alloc] initWithFrom:from to:to subject:subject body:body];
+}
+
+- (id)initWithFrom:(NSString *)from to:(NSString *)to subject:(NSString *)subject body:(NSString *)body {
+    NSParameterAssert(from); NSParameterAssert(to); NSParameterAssert(subject); NSParameterAssert(body);
+>>>>>>> origin/tanner
     self = [super init];
     if (self) {
         self.from = from;
@@ -62,7 +75,11 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 - (void)addCc:(NSString *)recipient {
     NSParameterAssert(recipient);
     if (!self.cc) {
+<<<<<<< HEAD
         self.cc = [NSArray arrayWithObject:recipient];
+=======
+        self.cc = @[recipient];
+>>>>>>> origin/tanner
     } else {
         self.cc = [self.cc arrayByAddingObject:recipient];
     }
@@ -71,7 +88,11 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 - (void)addBcc:(NSString *)recipient {
     NSParameterAssert(recipient);
     if (!self.bcc) {
+<<<<<<< HEAD
         self.bcc = [NSArray arrayWithObject:recipient];
+=======
+        self.bcc = @[recipient];
+>>>>>>> origin/tanner
     } else {
         self.bcc = [self.bcc arrayByAddingObject:recipient];
     }
@@ -84,8 +105,13 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
 
 - (void)addTags:(NSArray *)tags {
     NSParameterAssert(tags);
+<<<<<<< HEAD
     if (!_tags) {
         _tags = [NSArray arrayWithArray:tags];
+=======
+    if (!_tags.count) {
+        _tags = tags;
+>>>>>>> origin/tanner
     } else {
         _tags = [_tags arrayByAddingObjectsFromArray:tags];
     }
@@ -97,7 +123,11 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
     if (!_headers) {
         _headers = [@{header: value} mutableCopy];
     } else {
+<<<<<<< HEAD
         [_headers setObject:value forKey:header];
+=======
+        _headers[header] = value;
+>>>>>>> origin/tanner
     }
 }
 
@@ -108,7 +138,11 @@ NSString * const kRFC2822Template = @"EEE, dd MMM yyyy HH:mm:ss Z";
     if (!_variables) {
         _variables = [@{var: value} mutableCopy];
     } else {
+<<<<<<< HEAD
         [_variables setObject:value forKey:var];
+=======
+        _variables[var] = value;
+>>>>>>> origin/tanner
     }
 }
 

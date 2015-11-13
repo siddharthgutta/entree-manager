@@ -16,21 +16,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+<<<<<<< HEAD
     // Do any additional setup after loading the view.
+=======
+>>>>>>> origin/tanner
         
     [self showAnalyticsPage:@"segueAnalyticsSalesSummary"];
     self.navigationItem.hidesBackButton = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 
 // show Pages func when onclick Left Menu
+<<<<<<< HEAD
 -(void)showAnalyticsPage:(NSString*)segueId{
+=======
+- (void)showAnalyticsPage:(NSString *)segueId {
+>>>>>>> origin/tanner
     [self performSegueWithIdentifier:segueId sender:self];
 }
 

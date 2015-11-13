@@ -9,15 +9,14 @@
 #import "BusinessModifierItemSelController.h"
 #import "BusinessMenuModifierAddController.h"
 
-@interface BusinessModifierItemSelController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource>
-{
+@interface BusinessModifierItemSelController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource> {
     PFRelation *relation;
-    NSMutableArray *menu_array;
-    NSMutableArray *category_array;
-    NSMutableArray *item_array;
+    NSMutableArray *menuS;
+    NSMutableArray *categoryS;
+    NSMutableArray *itemS;
     
-    //tableviews' selected index key string save
-    NSMutableArray *selected_key_array;
+    // tableviews' selected index key string save
+    NSMutableArray *selectedKey_s;
     
 }
 
@@ -33,114 +32,97 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [CommParse getBusinessMenus:self MenuType:@"Menu" TopKey:@"" TopObject:nil];
+    [CommParse getBusinessMenus:self menuType:@"Menu" topKey:@"" topObject:nil];
     
-    //init key array
-    selected_key_array = [[NSMutableArray alloc] init];
-    for(PFObject *item_obj in self.selected_items){
-        [selected_key_array addObject:item_obj.objectId];
+    // init key array
+    selectedKey_s = [NSMutableArray array];
+    for(PFObject *item in self.selectedItems){
+        [selectedKey_s addObject:item.objectId];
     }
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     NSInteger nums;
-    if(tableView == _menuView) nums = [menu_array count];
-    else if(tableView == _categoryView) nums = [category_array count];
-    else if(tableView == _itemView) nums = [item_array count];
+    if (tableView == _menuView) nums = menuS.count;
+    else if (tableView == _categoryView) nums = categoryS.count;
+    else if (tableView == _itemView) nums = itemS.count;
     
     return nums;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *cell_id;
-    NSMutableArray *cell_array;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellId;
+    NSMutableArray *cellS;
     
-    if(tableView == _menuView) {
-        cell_id = @"cellMenuInModifier";
-        cell_array = menu_array;
+    if (tableView == _menuView) {
+        cellId = @"cellMenuInModifier";
+        cellS = menuS;
     }
-    else if(tableView == _categoryView) {
-        cell_id = @"cellCategoryInModifier";
-        cell_array = category_array;
+    else if (tableView == _categoryView) {
+        cellId = @"cellCategoryInModifier";
+        cellS = categoryS;
     }
-    else if(tableView == _itemView) {
-        cell_id = @"cellItemInModifier";
-        cell_array = item_array;
-        
+    else if (tableView == _itemView) {
+        cellId = @"cellItemInModifier";
+        cellS = itemS;
         
     }
     
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cell_id];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
 
-    if(cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_id];
-        
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
 
-    PFObject *item_obj = [cell_array objectAtIndex:indexPath.row];
+    PFObject *item = cellS[indexPath.row];
     
     // Item Table Multi select with Check Accessory Type
-    if(tableView==_itemView){
+    if (tableView == _itemView) {
         
-        //NSString *key_string = [NSString stringWithFormat:@"%ld-%ld-%ld", selected_index1, selected_index2, indexPath.row];
-        NSString *key_string = item_obj.objectId;
+        // NSString *keyString = [NSString stringWithFormat:@"%ld-%ld-%ld", selectedIndex1, selectedIndex2, indexPath.row];
+        NSString *keyString = item.objectId;
         
-        BOOL is_contain = [selected_key_array containsObject:key_string];
-        if(is_contain) {
+        BOOL isContain = [selectedKey_s containsObject:keyString];
+        if (isContain) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
         else cell.accessoryType = UITableViewCellAccessoryNone;
-        
     }
     
-    NSString *name = [PFUtils getProperty:@"name" InObject:item_obj];
+    NSString *name = item[@"name"];
     cell.textLabel.text = name;
     
     
     return cell;
 }
 // table cell tapping - click
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(tableView == _menuView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuCategory" TopKey:@"menu" TopObject:[menu_array objectAtIndex:indexPath.row]];
-        
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView == _menuView) {
+        [CommParse getBusinessMenus:self menuType:@"MenuCategory" topKey:@"menu" topObject:menuS[indexPath.row]];
     }
-    else if(tableView == _categoryView) {
-        [CommParse getBusinessMenus:self MenuType:@"MenuItem" TopKey:@"menuCategory" TopObject:[category_array objectAtIndex:indexPath.row]];
-        
+    else if (tableView == _categoryView) {
+        [CommParse getBusinessMenus:self menuType:@"MenuItem" topKey:@"menuCategory" topObject:categoryS[indexPath.row]];
     }
-    else if(tableView == _itemView) {
+    else if (tableView == _itemView) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        PFObject *item_obj = [item_array objectAtIndex:indexPath.row];
+        PFObject *item = itemS[indexPath.row];
         
         
-        NSString *key_string = item_obj.objectId;
+        NSString *keyString = item.objectId;
         
-        if([selected_key_array containsObject:key_string]){
-            [selected_key_array removeObject:key_string];
-            [self.selected_items removeObject:item_obj];
+        if ([selectedKey_s containsObject:keyString]) {
+            [selectedKey_s removeObject:keyString];
+            [self.selectedItems removeObject:item];
         }
-        else{
-            [selected_key_array addObject:key_string];
-            [self.selected_items addObject:item_obj];
+        else {
+            [selectedKey_s addObject:keyString];
+            [self.selectedItems addObject:item];
         }
         [tableView reloadData];
     }
@@ -154,43 +136,36 @@
 - (IBAction)onClickSave:(id)sender {
     //[ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
-    [_parent_delegate returnSelectedItems:self.selected_items];
+    // if not exist then add
+    [_parentDelegate returnSelectedItems:self.selectedItems];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         
        
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
-            if([[response objectForKey:@"menu_type"] isEqualToString:@"Menu"])
-            {
-                menu_array = [[NSMutableArray alloc] init];
-                menu_array = [response objectForKey:@"objects"];
+        if ([response[@"responseCode"] boolValue]) {
+            if ([response[@"menu_type"] isEqualToString:@"Menu"]) {
+                menuS = [NSMutableArray array];
+                menuS = response[@"objects"];
                 [_menuView reloadData];
             }
-            else if([[response objectForKey:@"menu_type"] isEqualToString:@"MenuCategory"])
-            {
-                category_array = [[NSMutableArray alloc] init];
-                category_array = [response objectForKey:@"objects"];
+            else if ([response[@"menu_type"] isEqualToString:@"MenuCategory"]) {
+                categoryS = [NSMutableArray array];
+                categoryS = response[@"objects"];
                 [_categoryView reloadData];
             }
-            else{
-                item_array = [[NSMutableArray alloc] init];
-                item_array = [response objectForKey:@"objects"];
+            else {
+                itemS = [NSMutableArray array];
+                itemS = response[@"objects"];
                 [_itemView reloadData];
             }
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
-        
-        
-        
     }
 
 }

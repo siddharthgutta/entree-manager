@@ -35,13 +35,21 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <CoreGraphics/CoreGraphics.h>
 
+<<<<<<< HEAD
 static UIImage * AFImageWithDataAtScale(NSData *data, CGFloat scale) {
+=======
+static UIImage *AFImageWithDataAtScale(NSData *data, CGFloat scale) {
+>>>>>>> origin/tanner
     UIImage *image = [[UIImage alloc] initWithData:data];
     
     return [[UIImage alloc] initWithCGImage:[image CGImage] scale:scale orientation:image.imageOrientation];
 }
 
+<<<<<<< HEAD
 static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *response, NSData *data, CGFloat scale) {
+=======
+static UIImage *AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *response, NSData *data, CGFloat scale) {
+>>>>>>> origin/tanner
     if (!data || [data length] == 0) {
         return nil;
     }
@@ -128,8 +136,12 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 + (instancetype)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
+<<<<<<< HEAD
 										 success:(void (^)(UIImage *image))success
 {
+=======
+										 success:(void (^)(UIImage *image))success {
+>>>>>>> origin/tanner
     return [self imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil success:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, UIImage *image) {
         if (success) {
             success(image);
@@ -138,8 +150,12 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 }
 #elif defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
 + (instancetype)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
+<<<<<<< HEAD
 										 success:(void (^)(NSImage *image))success
 {
+=======
+										 success:(void (^)(NSImage *image))success {
+>>>>>>> origin/tanner
     return [self imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil success:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, NSImage *image) {
         if (success) {
             success(image);
@@ -153,8 +169,12 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 + (instancetype)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
 							imageProcessingBlock:(UIImage *(^)(UIImage *))imageProcessingBlock
 										 success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
+<<<<<<< HEAD
 										 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
+=======
+										 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+>>>>>>> origin/tanner
     AFImageRequestOperation *requestOperation = [(AFImageRequestOperation *)[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -186,8 +206,12 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 + (instancetype)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
 							imageProcessingBlock:(NSImage *(^)(NSImage *))imageProcessingBlock
 										 success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSImage *image))success
+<<<<<<< HEAD
 										 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
+=======
+										 failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure {
+>>>>>>> origin/tanner
     AFImageRequestOperation *requestOperation = [(AFImageRequestOperation *)[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -274,7 +298,11 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 }
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
+<<<<<<< HEAD
     static NSSet * _acceptablePathExtension = nil;
+=======
+    static NSSet *_acceptablePathExtension = nil;
+>>>>>>> origin/tanner
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _acceptablePathExtension = [[NSSet alloc] initWithObjects:@"tif", @"tiff", @"jpg", @"jpeg", @"gif", @"png", @"ico", @"bmp", @"cur", nil];
@@ -284,8 +312,12 @@ static UIImage * AFInflatedImageFromResponseWithDataAtScale(NSHTTPURLResponse *r
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"

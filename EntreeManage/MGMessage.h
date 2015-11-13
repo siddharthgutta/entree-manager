@@ -1,6 +1,10 @@
 // MGMessage.h
 //
+<<<<<<< HEAD
 // Copyright (c) 2013 Rackspace Hosting (http://rackspace.com)
+=======
+// Copyright (c) 2013 Rackspace Hosting (http:// rackspace.com)
+>>>>>>> origin/tanner
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -46,9 +50,13 @@ typedef NS_ENUM(NSUInteger, ClickTrackingType) {
 /// @name Managing Message Setup
 ///-----------------------------
 
+<<<<<<< HEAD
 /**
  Email address for From header
 */
+=======
+/** Email address for From header */
+>>>>>>> origin/tanner
 @property (nonatomic, strong) NSString *from;
 
 /**
@@ -66,6 +74,7 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
  */
 @property (nonatomic, strong) NSArray *bcc;
 
+<<<<<<< HEAD
 /**
  Message subject
 */
@@ -79,12 +88,22 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
 /**
  Body of the message. HTML version
 */
+=======
+/** Message subject */
+@property (nonatomic, strong) NSString *subject;
+
+/** Body of the message, text version */
+@property (nonatomic, strong) NSString *text;
+
+/** Body of the message. HTML version */
+>>>>>>> origin/tanner
 @property (nonatomic, strong) NSString *html;
 
 ///------------------------------------
 /// @name Mailgun Message Configuration
 ///------------------------------------
 
+<<<<<<< HEAD
 /**
  ID of the campaign the message belongs to. See [Campaign Analytics](http://documentation.mailgun.net/user_manual.html#um-campaign-analytics) for details.
 */
@@ -108,6 +127,23 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
 /**
  `NSMutableDictionary` of attachments to the message.
 */
+=======
+/** ID of the campaign the message belongs to. See [Campaign Analytics](http:// documentation.mailgun.net/userManual.html#um-campaign-analytics) for details. */
+@property (nonatomic, strong) NSString *campaign;
+
+/** An `NSArray` of tag strings. See [Tagging](http:// documentation.mailgun.net/userManual.html#tagging) for more information. */
+@property (nonatomic, strong, readonly) NSArray *tags;
+
+/** `NSMutableDictionary` of custom MIME headers to the message. For example, `Reply-To` to specify a Reply-To address. */
+@property (nonatomic, strong, readonly) NSMutableDictionary *headers;
+
+/**
+ `NSMutableDictionary` for attaching custom JSON data to the message. See [Attaching Data to Messages](http:// documentation.mailgun.net/userManual.html#manual-customdata) for more information.
+ */
+@property (nonatomic, strong, readonly) NSMutableDictionary *variables;
+
+/** `NSMutableDictionary` of attachments to the message. */
+>>>>>>> origin/tanner
 @property (nonatomic, strong, readonly) NSMutableDictionary *attachments;
 
 /**
@@ -115,6 +151,7 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
  */
 @property (nonatomic, strong, readonly) NSMutableDictionary *inlineAttachments;
 
+<<<<<<< HEAD
 /**
  Enables/disables DKIM signatures on per-message basis.
 */
@@ -143,6 +180,24 @@ Email address of the recipient(s). Example: "Bob <bob@host.com>".
 /**
  Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting.
 */
+=======
+/** Enables/disables DKIM signatures on per-message basis. */
+@property (nonatomic) BOOL *dkim;
+
+/** Enables sending in test mode. See [Sending in Test Mode](http:// documentation.mailgun.net/userManual.html#manual-testmode) */
+@property (nonatomic) BOOL *testing;
+
+/** Toggles tracking on a per-message basis, see [Tracking Messages](http:// documentation.mailgun.net/userManual.html#tracking-messages) for details. */
+@property (nonatomic) BOOL *tracking;
+
+/** Toggles opens tracking on a per-message basis. Has higher priority than domain-level setting. */
+@property (nonatomic) BOOL *trackOpens;
+
+/** An `NSDate` representing the desired time of delivery. */
+@property (nonatomic, strong) NSDate *deliverAt;
+
+/** Toggles clicks tracking on a per-message basis. Has higher priority than domain-level setting. */
+>>>>>>> origin/tanner
 @property (nonatomic) ClickTrackingType trackClicks;
 
 ///--------------------------------------------------

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ogd-OG-CdA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ogd-OG-CdA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--Settings-->
         <scene sceneID="sB8-sS-oye">
             <objects>
-                <viewController storyboardIdentifier="SettingsController" id="Ogd-OG-CdA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsController" id="Ogd-OG-CdA" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cBk-9k-cVT"/>
                         <viewControllerLayoutGuide type="bottom" id="ZFp-gc-qgc"/>
@@ -15,17 +16,52 @@
                     <view key="view" contentMode="scaleToFill" id="s9B-9G-ghh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export to email address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vx-VP-YPe">
+                                <rect key="frame" x="20" y="20" width="180.5" height="20.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRA-zp-BTg">
+                                <rect key="frame" x="20" y="118" width="55" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="Ogd-OG-CdA" eventType="touchUpInside" id="KcW-x2-8QF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FpA-YQ-k9y">
+                                <rect key="frame" x="20" y="48" width="256" height="30"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="U5E-Xh-7RU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FRA-zp-BTg" firstAttribute="leading" secondItem="s9B-9G-ghh" secondAttribute="leading" constant="20" id="2nZ-RS-6GN"/>
+                            <constraint firstItem="6vx-VP-YPe" firstAttribute="top" secondItem="cBk-9k-cVT" secondAttribute="bottom" id="DDe-pG-XC7"/>
+                            <constraint firstItem="6vx-VP-YPe" firstAttribute="leading" secondItem="s9B-9G-ghh" secondAttribute="leading" constant="20" id="DsU-p4-fTp"/>
+                            <constraint firstItem="FpA-YQ-k9y" firstAttribute="top" secondItem="6vx-VP-YPe" secondAttribute="bottom" constant="8" id="KuQ-nS-TX3"/>
+                            <constraint firstItem="FpA-YQ-k9y" firstAttribute="leading" secondItem="s9B-9G-ghh" secondAttribute="leading" constant="20" id="p4Y-AS-6EO"/>
+                            <constraint firstItem="FRA-zp-BTg" firstAttribute="top" secondItem="FpA-YQ-k9y" secondAttribute="bottom" constant="40" id="vL4-MM-EKz"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="first" id="FNJ-9j-1d7"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="FNJ-9j-1d7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="FpA-YQ-k9y" id="Ty6-Lg-8t8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vh9-Xf-Vsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="385" y="486"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="first" width="30" height="30"/>
-    </resources>
 </document>

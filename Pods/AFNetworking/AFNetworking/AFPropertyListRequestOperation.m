@@ -46,8 +46,12 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
 
 + (instancetype)propertyListRequestOperationWithRequest:(NSURLRequest *)request
 												success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList))success
+<<<<<<< HEAD
 												failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList))failure
 {
+=======
+												failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList))failure {
+>>>>>>> origin/tanner
     AFPropertyListRequestOperation *requestOperation = [(AFPropertyListRequestOperation *)[self alloc] initWithRequest:request];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
@@ -105,8 +109,12 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 #pragma clang diagnostic ignored "-Wgnu"

@@ -2,7 +2,11 @@
 <Workspace
    version = "1.0">
    <FileRef
+<<<<<<< HEAD
       location = "group:EntreeManage.xcodeproj">
+=======
+      location = "group:Entree&#x301; Manager.xcodeproj">
+>>>>>>> origin/tanner
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

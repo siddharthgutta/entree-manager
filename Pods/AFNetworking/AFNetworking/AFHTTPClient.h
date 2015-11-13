@@ -520,7 +520,11 @@ typedef enum {
 
  @return A percent-escaped query string
  */
+<<<<<<< HEAD
 extern NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding encoding);
+=======
+extern NSString *AFQueryStringFromParametersWithEncoding(NSDictionary *parameters, NSStringEncoding encoding);
+>>>>>>> origin/tanner
 
 ///--------------------
 /// @name Notifications
@@ -533,8 +537,13 @@ extern NSString * AFQueryStringFromParametersWithEncoding(NSDictionary *paramete
  @warning In order for network reachability to be monitored, include the `SystemConfiguration` framework in the active target's "Link Binary With Library" build phase, and add `#import <SystemConfiguration/SystemConfiguration.h>` to the header prefix of the project (`Prefix.pch`).
  */
 #ifdef _SYSTEMCONFIGURATION_H
+<<<<<<< HEAD
 extern NSString * const AFNetworkingReachabilityDidChangeNotification;
 extern NSString * const AFNetworkingReachabilityNotificationStatusItem;
+=======
+extern NSString *const AFNetworkingReachabilityDidChangeNotification;
+extern NSString *const AFNetworkingReachabilityNotificationStatusItem;
+>>>>>>> origin/tanner
 #endif
 
 #pragma mark -
@@ -560,7 +569,11 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
  */
 - (BOOL)appendPartWithFileURL:(NSURL *)fileURL
                          name:(NSString *)name
+<<<<<<< HEAD
                         error:(NSError * __autoreleasing *)error;
+=======
+                        error:(NSError *__autoreleasing *)error;
+>>>>>>> origin/tanner
 
 /**
  Appends the HTTP header `Content-Disposition: file; filename=#{filename}; name=#{name}"` and `Content-Type: #{mimeType}`, followed by the encoded file data and the multipart form boundary.
@@ -577,7 +590,11 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
                          name:(NSString *)name
                      fileName:(NSString *)fileName
                      mimeType:(NSString *)mimeType
+<<<<<<< HEAD
                         error:(NSError * __autoreleasing *)error;
+=======
+                        error:(NSError *__autoreleasing *)error;
+>>>>>>> origin/tanner
 
 /**
  Appends the HTTP header `Content-Disposition: file; filename=#{filename}; name=#{name}"` and `Content-Type: #{mimeType}`, followed by the data from the input stream and the multipart form boundary.

@@ -10,7 +10,11 @@
 
 @interface AnalyticsSalesSummaryController ()<CommsDelegate, UITableViewDelegate, UITableViewDataSource>{
     
+<<<<<<< HEAD
     NSMutableArray *rowNameArray;
+=======
+    NSMutableArray *rowNames;
+>>>>>>> origin/tanner
     NSMutableArray *sumVal;
     
     BOOL startDate_Flag;
@@ -22,8 +26,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *startDateText;
 @property (weak, nonatomic) IBOutlet UITextField *endDateText;
 
+<<<<<<< HEAD
 - (IBAction)onChangedDate:(id)sender;
 @property (weak, nonatomic) IBOutlet UIView *pickDateView;
+=======
+@property (weak, nonatomic) IBOutlet UIView *pickDateView;
+
+- (IBAction)onChangedDate:(id)sender;
+>>>>>>> origin/tanner
 - (IBAction)onTouchTextStartDate:(id)sender;
 - (IBAction)onTouchTextEndDate:(id)sender;
 
@@ -33,6 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+<<<<<<< HEAD
 
     _pickDateView.hidden = true;
     
@@ -60,29 +71,69 @@
     _endDateText.text = dateText;
     
     [CommParse getAnalyticsSalesView:self StartDate:start_date EndDate:NSDate.date];
+=======
+    
+    _pickDateView.hidden = true;
+    
+    
+    rowNames = [[NSMutableArray alloc] initWithObjects:@"Gross Sales", @"Discounts", @"Net Sales", @"Tax", @"Tips", @"Refunds Given", @"Total Collected", @"Payments", @"Cash", @"Card", nil];
+    
+    UIBarButtonItem *exportButton = [[UIBarButtonItem alloc] initWithTitle:@"Export" style:UIBarButtonItemStylePlain target:self action:@selector(exportItemClicked)];
+    
+    self.navigationItem.rightBarButtonItems = @[exportButton];
+    
+    self.navigationItem.hidesBackButton = YES;
+    
+    // Previous month's data
+    NSDate *startDate = [NSDate date30DaysAgo];
+    NSDate *endDate   = [NSDate date];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
+    
+    self.startDateText.text = [dateFormatter stringFromDate:startDate];
+    self.endDateText.text = [dateFormatter stringFromDate:endDate];
+    
+    [CommParse getAnalyticsSalesView:self startDate:startDate endDate:endDate];
+>>>>>>> origin/tanner
     
     self.title = @"Sales Overview";
     
 }
 
+<<<<<<< HEAD
 // On Export
 -(void)exportItemClicked{
     
     NSString *title;
     title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
+=======
+- (void)exportItemClicked {
+    
+    NSString *title = [NSString stringWithFormat:@"%@ (%@ ~ %@)", @"Analytics Sales Overview", _startDateText.text, _endDateText.text];
+>>>>>>> origin/tanner
     
     NSString *content;;
     content = @"Type,Total";
     
+<<<<<<< HEAD
     //export with csv format
     for(int i=0; i< [rowNameArray count]; i++) {
         content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNameArray[i], sumVal[i] ];
     }
     [CommParse sendEmailwithMailGun:self userEmail:@"" EmailSubject:title EmailContent:content];
+=======
+    // export with csv format
+    for(int i = 0; i< rowNames.count; i++) {
+        content = [NSString stringWithFormat:@"%@ \n %@,%@", content, rowNames[i], sumVal[i] ];
+    }
+    [CommParse sendEmailwithMailGun:self userEmail:@"" emailSubject:title emailContent:content];
+>>>>>>> origin/tanner
     
 }
 
 
+<<<<<<< HEAD
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -92,6 +143,11 @@
 #pragma mark - Table view data source
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     static NSString * CellIdentifier = @"AnalyticsTableCell";
+=======
+#pragma mark - Table view data source
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
+>>>>>>> origin/tanner
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -100,6 +156,7 @@
     return cell;
 }
 
+<<<<<<< HEAD
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
 }
@@ -112,30 +169,53 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     return [rowNameArray count];
+=======
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return rowNames.count;
+>>>>>>> origin/tanner
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+<<<<<<< HEAD
     
     static NSString * CellIdentifier = @"AnalyticsTableCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if(cell == nil){
+=======
+    static NSString *CellIdentifier = @"AnalyticsTableCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+>>>>>>> origin/tanner
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
+<<<<<<< HEAD
     UILabel *label;
     label = (UILabel*) [cell viewWithTag:1];
     label.text =rowNameArray[indexPath.row];
     
     label = (UILabel*) [cell viewWithTag:2];
+=======
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
+    label.text = rowNames[indexPath.row];
+    
+    label = (UILabel *)[cell viewWithTag:2];
+>>>>>>> origin/tanner
     label.text = [NSString stringWithFormat:@"%.02f", [sumVal[indexPath.row]floatValue]];
     
     return cell;
 }
 
+<<<<<<< HEAD
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -200,10 +280,62 @@
         
     }
     
+=======
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (void)commsDidAction:(NSDictionary *)response {
+    [ProgressHUD dismiss];
+    
+    sumVal = [NSMutableArray array];
+    // why 16?
+    for(int i = 0;i <16;i++){
+        [sumVal addObject:@0];
+    }
+    
+    if ([response[@"responseCode"] boolValue]) {
+        
+        // export csv and send email
+        if ([response[@"action"] intValue] == 9) {
+            NSLog(@"Action was 9");
+        } else {
+            NSArray *payments = response[@"objects"];
+            
+            // calculate sums
+            CGFloat grossSales = [[payments valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            CGFloat tax = [[payments valueForKeyPath:@"order.@sum.tax"] floatValue];
+            CGFloat tips = [[payments valueForKeyPath:@"order.@sum.tip"] floatValue];
+            CGFloat cash = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Card'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            CGFloat card = [[[payments filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type = 'Cash'"]] valueForKeyPath:@"order.@sum.subtotal"] floatValue];
+            sumVal[0] = @(grossSales);
+            sumVal[3] = @(tax);
+            sumVal[4] = @(tips);
+            sumVal[8] = @(cash);
+            sumVal[9] = @(card);
+            
+            // Net Sales (Gross Sales - Discounts: OrderItem's onTheHouse boolean)
+            CGFloat temp = [response[@"discount"] floatValue];
+            sumVal[1]    = @(temp);
+            sumVal[2]    = @([sumVal[0] floatValue]-temp);
+            
+            // Total collected (Net sales + Tax + Tips)
+            temp = [sumVal[2] floatValue]+[sumVal[3] floatValue]+[sumVal[4] floatValue];
+            sumVal[6] = @(temp);
+            
+            sumVal[7] = sumVal[0];
+            
+            [_analTableView reloadData];
+        }
+    } else {
+        [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
+    }
+>>>>>>> origin/tanner
 }
 
 
 - (IBAction)onChangedDate:(id)sender {
+<<<<<<< HEAD
     NSDate *selDate = [_datePicker date];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -223,10 +355,32 @@
     
     if(startDate && endDate) {
         [CommParse getAnalyticsSalesView:self StartDate:startDate EndDate:endDate];
+=======
+    // Jesse rew-rote this.
+    NSDate *selectedDate = _datePicker.date;
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
+    
+    NSString *dateString = [dateFormatter stringFromDate:selectedDate];
+    if (startDate_Flag) {
+        self.startDateText.text = dateString;
+    } else {
+        self.endDateText.text = dateString;
+    }
+    
+    self.pickDateView.hidden = YES;
+    
+    NSDate *startDate = [dateFormatter dateFromString: self.startDateText.text];
+    NSDate *endDate = [[dateFormatter dateFromString: self.endDateText.text] dateByAddingTimeInterval:86400];
+    if (startDate && endDate) {
+        [CommParse getAnalyticsSalesView:self startDate:startDate endDate:endDate];
+>>>>>>> origin/tanner
     }
 }
 
 - (IBAction)onTouchTextStartDate:(id)sender {
+<<<<<<< HEAD
     startDate_Flag = true;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -257,6 +411,38 @@
     _pickDateView.hidden=false;
     [UIView animateWithDuration:1.0  animations:^ {
         _pickDateView.frame = CGRectMake(200,140,390,270);
+=======
+    // Jesse rew-rote this.
+    startDate_Flag = YES;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
+    
+    NSDate *date = [dateFormatter dateFromString: self.startDateText.text];
+    [self.datePicker setDate:date];
+    
+    self.pickDateView.frame = CGRectMake(200, 140, 390, 0);
+    self.pickDateView.hidden = false;
+    [UIView animateWithDuration:1.0  animations:^ {
+        self.pickDateView.frame = CGRectMake(200, 140, 390, 270);
+    }];
+}
+
+- (IBAction)onTouchTextEndDate:(id)sender {
+    // Jesse rew-rote this.
+    startDate_Flag = NO;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy";
+    
+    NSDate *date = [[NSDateFormatter shared] dateFromString: self.endDateText.text];
+    [self.datePicker setDate:date];
+    
+    self.pickDateView.frame = CGRectMake(200, 140, 390, 0);
+    self.pickDateView.hidden = false;
+    [UIView animateWithDuration:1.0  animations:^ {
+        self.pickDateView.frame = CGRectMake(200,140,390,270);
+>>>>>>> origin/tanner
     }];
 }
 

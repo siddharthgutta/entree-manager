@@ -9,8 +9,21 @@
 #ifndef EntreeManage_PrefixHeader_pch
 #define EntreeManage_PrefixHeader_pch
 
+<<<<<<< HEAD
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import "global.h"
+=======
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "global.h"
+#import "Entree-Constants.h"
+#import "NSDate-Utilities.h"
+#import "PFObject+QueryExtensions.h"
+#import "NSDateFormatter+Singleton.h"
+#import "PFRelation+Extensions.h"
+
+>>>>>>> origin/tanner
 
 #endif

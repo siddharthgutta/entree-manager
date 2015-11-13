@@ -33,7 +33,11 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-selector-match"
 
+<<<<<<< HEAD
 NSSet * AFContentTypesFromHTTPHeader(NSString *string) {
+=======
+NSSet *AFContentTypesFromHTTPHeader(NSString *string) {
+>>>>>>> origin/tanner
     if (!string) {
         return nil;
     }
@@ -69,7 +73,11 @@ static void AFGetMediaTypeAndSubtypeWithString(NSString *string, NSString **type
     [scanner scanUpToString:@";" intoString:subtype];
 }
 
+<<<<<<< HEAD
 static NSString * AFStringFromIndexSet(NSIndexSet *indexSet) {
+=======
+static NSString *AFStringFromIndexSet(NSIndexSet *indexSet) {
+>>>>>>> origin/tanner
     NSMutableString *string = [NSMutableString string];
 
     NSRange range = NSMakeRange([indexSet firstIndex], 1);
@@ -264,8 +272,12 @@ static void AFSwizzleClassMethodWithClassAndSelectorUsingBlock(Class klass, SEL 
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+<<<<<<< HEAD
                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+=======
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+>>>>>>> origin/tanner
     // completionBlock is manually nilled out in AFURLConnectionOperation to break the retain cycle.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"

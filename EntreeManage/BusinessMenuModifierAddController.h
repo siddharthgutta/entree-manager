@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessMenuModifierAddController : UIViewController
-    @property (nonatomic, weak) PFObject *menuObj;
-    @property (nonatomic, weak) NSString *menuType;
-    @property (nonatomic, assign) id parent_delegate;
+    @property (nonatomic) MenuItemModifier *menuObj;
+    @property (nonatomic) NSString *menuType;
+    @property (nonatomic) id parentDelegate;
 
--(void)returnSelectedItems:(NSMutableArray*)returnArray;
+- (void)returnSelectedItems:(NSMutableArray *)returns;
 @end

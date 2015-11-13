@@ -8,10 +8,17 @@
 
 #import "ProgressHUD.h"
 #import "Mailgun.h"
+<<<<<<< HEAD
 
+=======
+@class Restaurant, Menu, MenuCategory, MenuItem;
+
+typedef void (^ParseObjectResponseBlock)(id object, NSError *error);
+typedef void (^ParseTwoObjectResponseBlock)(id object1, id object2, NSError *error);
+typedef void (^ParseArrayResponseBlock)(NSArray *objects, NSError *error);
+>>>>>>> origin/tanner
 
 @protocol CommsDelegate <NSObject>
-@optional
 - (void)commsDidAction:(NSDictionary *)response;
 
 @end
@@ -19,13 +26,58 @@
 
 @interface CommParse : NSObject
 
+<<<<<<< HEAD
 
 + (void)emailLogin:(id<CommsDelegate>)delegate UserInfo:(NSDictionary *)userInfo;
+=======
++ (Restaurant *)currentRestaurant;
++ (void)setCurrentRestaurant:(Restaurant *)restaurant;
+
+/** Callback takes an NSNumber object. */
++ (void)getNetSalesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an array of NSNumber objects. */
++ (void)getNetSalesForPastWeek:(NSDate *)day callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuItem objects. */
++ (void)getPopularItemsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuCategory objects. */
++ (void)getPopularCategoriesForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getAveragePaymentForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseTwoObjectResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getGuestCountForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an NSNumber object. */
++ (void)getLaborCostForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseObjectResponseBlock)callback;
+/** Callback takes an array of Order objects. */
++ (void)getTransactionsForInterval:(NSDate *)start end:(NSDate *)end callback:(ParseArrayResponseBlock)callback;
+
+/** Callback takes an array of Menu objects. */
++ (void)getMenus:(ParseArrayResponseBlock)callback;
+/** Callback takes an array of MenuCategory objects. */
+
++ (void)getMenuCategoriesOfMenu:(Menu *)menu callback:(ParseArrayResponseBlock)callback;
+/** Gets all menu categories under the current restaurant. */
++ (void)getAllMenuCategories:(ParseArrayResponseBlock)callback;
+
+/** Callback takes an array of MenuItem objects. */
++ (void)getMenuItemsOfMenuCategory:(MenuCategory *)category callback:(ParseArrayResponseBlock)callback;
+/** Gets all menu items under the current restaurant. */
++ (void)getAllMenuItems:(ParseArrayResponseBlock)callback;
+
+/** Gets all menu item modifiers under the current restaurant. Callback takes an array of MenuItem objects. */
++ (void)getAllMenuItemModifiers:(ParseArrayResponseBlock)callback;
+
+
+
+// I wrote everything above this line, except CommsDelegate —Tanner //
+
+
++ (void)emailLogin:(id<CommsDelegate>)delegate userInfo:(NSDictionary *)userInfo;
+>>>>>>> origin/tanner
 
 // Get Business Menus
-+ (void)getBusinessMenus:(id<CommsDelegate>) delegate MenuType:(NSString*) menu_type TopKey:(NSString*)topKey TopObject:(PFObject*)topObject;
-+ (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate MenuType:(NSString*) menu_type MenuId:(NSString*) menu_id;
-+ (void)getMenuItemsOfModifier:(id<CommsDelegate>) delegate ModifierObject:(PFObject*)modifierObject;
++ (void)getBusinessMenus:(id<CommsDelegate>)delegate menuType:(NSString *)menuType topKey:(NSString *)topKey topObject:(PFObject *)topObject;
++ (void)getBusinessMenuInfo:(id<CommsDelegate>)delegate menuType:(NSString *)menuType MenuId:(NSString *)menuId;
++ (void)getMenuItemsOfModifier:(id<CommsDelegate>)delegate modifierect:(PFObject *)modifierect;
 
 // Add, Update Business Menus
 + (void)updateQuoteRequest:(id<CommsDelegate>)delegate Quote:(PFObject *)quote;
@@ -35,6 +87,7 @@
 
 // Get Analytics
 
+<<<<<<< HEAD
 + (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
 
 + (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
@@ -48,5 +101,20 @@
 + (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate StartDate:(NSDate*) startDate EndDate:(NSDate*) endDate;
 
 + (void)sendEmailwithMailGun:(id<CommsDelegate>)delegate userEmail:(NSString*) userEmail EmailSubject:(NSString*) emailSubject EmailContent:(NSString*) emailContent;
+=======
++ (void)getAnalyticsSalesView:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)getAnalyticsCategorySales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)getAnalyticsEmployeeShifts:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)getAnalyticsPayroll:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)getAnalyticsOrderReport:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)getAnalyticsModifierSales:(id<CommsDelegate>)delegate startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
++ (void)sendEmailwithMailGun:(id<CommsDelegate>)delegate userEmail:(NSString *)userEmail emailSubject:(NSString *)emailSubject emailContent:(NSString *)emailContent;
+>>>>>>> origin/tanner
 
 @end

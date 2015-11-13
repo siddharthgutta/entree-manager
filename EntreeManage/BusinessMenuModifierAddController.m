@@ -9,11 +9,11 @@
 #import "BusinessMenuModifierAddController.h"
 #import "BusinessViewController.h"
 #import "BusinessModifierItemSelController.h"
+#import "BusinessMenuItemController.h"
 
-@interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource>
-{
+@interface BusinessMenuModifierAddController ()<CommsDelegate,UITableViewDelegate, UITableViewDataSource> {
     PFRelation *relation;
-    NSMutableArray *selected_items;
+    NSMutableArray *selectedItems;
 }
 
 - (IBAction)onClickCancel:(id)sender;
@@ -21,6 +21,7 @@
 - (IBAction)onClickAddItems:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *txtName;
 @property (weak, nonatomic) IBOutlet UITextField *txtPrice;
+@property (weak, nonatomic) IBOutlet UITextField *printerTextField;
 
 @property (weak, nonatomic) IBOutlet UITableView *menuView;
 
@@ -33,65 +34,43 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     //  go to add menuitems window popup
-    if([segue.identifier isEqualToString:@"segue_modifiertoitem"]){
+    if ([segue.identifier isEqualToString:@"segue_modifiertoitem"]) {
         
-       BusinessModifierItemSelController *destController = segue.destinationViewController;
+        BusinessModifierItemSelController *destController = segue.destinationViewController;
         
-        
-        destController.selected_items = selected_items;
-        
-        destController.parent_delegate = self;
+        destController.selectedItems  = selectedItems;
+        destController.parentDelegate = self;
     }
 }
--(void)returnSelectedItems:(NSMutableArray*)returnArray{
-    selected_items = returnArray;
+- (void)returnSelectedItems:(NSMutableArray *)returns {
+    selectedItems = returns;
     [_menuView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    selected_items = [[NSMutableArray alloc] init];
+    selectedItems = [NSMutableArray array];
     
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-        NSNumber *price = [PFUtils getProperty:@"price" InObject:_menuObj];
-        
-        _txtPrice.text = [NSString stringWithFormat:@"%f", [price floatValue]];
-        [CommParse getMenuItemsOfModifier:self ModifierObject:_menuObj];
-        
-        
+    if (self.menuObj) {
+        self.txtName.text = self.menuObj.name;
+        self.txtPrice.text = [NSString stringWithFormat:@"%.2f", self.menuObj.price];
+        self.printerTextField.text = self.menuObj.printText;
+        [CommParse getMenuItemsOfModifier:self modifierect:self.menuObj];
     }
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [selected_items count];
+    return selectedItems.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
     
+    PFObject *item = selectedItems[indexPath.row];
     
-     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellMenuItemsOfModfier"];
-    
-    PFObject *item_obj = [selected_items objectAtIndex:indexPath.row];
-    
-    NSString *name = [PFUtils getProperty:@"name" InObject:item_obj];
-    cell.textLabel.text = name;
+    cell.textLabel.text = item[@"name"];
     
     
     return cell;
@@ -104,65 +83,66 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
-    if(_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    BOOL isNew = !self.menuObj;
+    if (!self.menuObj) {
+        self.menuObj = [MenuItemModifier object]; //[PFObject objectWithClassName:_menuType];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
-    
-    NSNumber *price = [NSNumber numberWithFloat:[_txtPrice.text floatValue]];
+    self.menuObj.name = self.txtName.text;
+    self.menuObj.price = [self.txtPrice.text floatValue];
+    self.menuObj.printText = self.printerTextField.text;
     
     // save selected items with relation
-    relation = [_menuObj relationForKey:@"menuItems"];
-    for(PFObject *item_obj in selected_items){
-        [relation addObject:item_obj];
-    }
-    
-    [_menuObj setObject:price forKey:@"price"];
-    
-    
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    relation = self.menuObj.menuItems;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Cannot remove objects on unsaved relation
+        if (!isNew) [relation removeAllObjectsBlocking];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            for(PFObject *item in selectedItems)
+                [relation addObject:item];
+            
+            [CommParse updateQuoteRequest:self Quote:self.menuObj];
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        });
+    });
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
-        selected_items = [[NSMutableArray alloc] init];
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 1) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            selected_items = [response objectForKey:@"objects"];
+            selectedItems = response[@"objects"];
         } else {
+            selectedItems = [NSMutableArray array];
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         
         [_menuView reloadData];
-        
     }
-    else if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    else if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
+            // Menus Refresh
             
-            [_parent_delegate showBusinessMenus:_menuType];
-            
+            if ([_parentDelegate respondsToSelector:@selector(reloadMenus)])
+                [_parentDelegate reloadMenus];
+            else
+                [NSException raise:NSInternalInconsistencyException format:@"here"];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 
-//Add Items to Modifier
+// Add Items to Modifier
 - (IBAction)onClickAddItems:(id)sender {
-
-    //show item add window
-    [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
+    
+    // show item add window
+    // [self performSegueWithIdentifier:@"segue_modifiertoitem" sender:self];
     
     
 }

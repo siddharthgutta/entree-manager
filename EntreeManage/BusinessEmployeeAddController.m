@@ -8,18 +8,19 @@
 
 #import "BusinessEmployeeAddController.h"
 #import "BusinessViewController.h"
+#import "BusinessMenuItemController.h"
 
-@interface BusinessEmployeeAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-{
+@interface BusinessEmployeeAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
+
 - (IBAction)onCancelClick:(id)sender;
 - (IBAction)onClickSave:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *txtName;
-@property (weak, nonatomic) IBOutlet UITextField *txtRole;
-@property (weak, nonatomic) IBOutlet UISwitch *switchManager;
-@property (weak, nonatomic) IBOutlet UITextField *txtPincode;
-@property (weak, nonatomic) IBOutlet UITextField *txtHourlyWage;
+@property (weak, nonatomic) IBOutlet UITextField  *txtName;
+@property (weak, nonatomic) IBOutlet UITextField  *txtRole;
+@property (weak, nonatomic) IBOutlet UISwitch     *switchManager;
+@property (weak, nonatomic) IBOutlet UITextField  *txtPincode;
+@property (weak, nonatomic) IBOutlet UITextField  *txtHourlyWage;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerColor;
 
 
@@ -31,47 +32,32 @@
     [super viewDidLoad];
     
     
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-       _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-       _txtRole.text = [PFUtils getProperty:@"role" InObject:_menuObj];
-        NSNumber *admin_flag = [PFUtils getProperty:@"administrator" InObject:_menuObj];
-        if([admin_flag intValue]==1)  {
-            _switchManager.on =YES;
-        }
-        else {
-            _switchManager.on = NO;
-        }
-        _txtPincode.text = [PFUtils getProperty:@"pinCode" InObject:_menuObj];
-        NSNumber *hourlyWage = [PFUtils getProperty:@"hourlyWage" InObject:_menuObj];
-        
-        _txtHourlyWage.text = [NSString stringWithFormat:@"%f", [hourlyWage floatValue]];
+    if (_employee) {
+        _txtName.text       = _employee.name;
+        _txtRole.text       = _employee.role;
+        _switchManager.on   = _employee.administrator;
+        _txtPincode.text    = _employee.pinCode;
+
+        _txtHourlyWage.text = [NSString stringWithFormat:@"%.2f", _employee.hourlyWage];
     }
     
 }
 
 // The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor {
     return 1;
 }
 
 // The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component
-{
-    return [COLOR_ARRAY count];
+- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component {
+    return COLOR_ARRAY.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString *)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return COLOR_ARRAY[row];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (IBAction)onCancelClick:(id)sender {
@@ -81,49 +67,51 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
-    if(_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    // if not exist then add
+    if (!_employee) {
+        _employee = [Employee object];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
-    [_menuObj setObject:_txtRole.text forKey:@"role"];
+    _employee.restaurant = [CommParse currentRestaurant];
     
-    [_menuObj setObject:[NSNumber numberWithBool:_switchManager.on] forKey:@"administrator"];
-    [_menuObj setObject:_txtPincode.text forKey:@"pinCode"];
+    _employee.name = _txtName.text;
+    _employee[@"role"] = _txtRole.text;
     
-    NSNumber *hourlyWage = [NSNumber numberWithFloat:[_txtHourlyWage.text floatValue]];
-
-    [_menuObj setObject:hourlyWage forKey:@"hourlyWage"];
+    _employee[@"administrator"] = @(_switchManager.on);
+    _employee[@"pinCode"] = _txtPincode.text;
     
-    //Get Color Picker Value
-    NSInteger color_index = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    //NSString *color_str = [COLOR_ARRAY objectAtIndex:color_index];
+    NSNumber *hourlyWage = @([_txtHourlyWage.text floatValue]);
     
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    _employee[@"hourlyWage"] = hourlyWage;
+    
+    // Get Color Picker Value
+    NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
+    _employee[@"colorIndex"] = @(colorIndex);
+    // NSString *colorStr = COLOR_ARRAY[colorIndex];
+    
+    [CommParse updateQuoteRequest:self Quote:_employee];
     
     
 }
 
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
-    if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
+            // Menus Refresh
             
-            [_parent_delegate showBusinessMenus:_menuType];
-            
+            if ([_parentDelegate respondsToSelector:@selector(reloadMenus)])
+                [_parentDelegate reloadMenus];
+            else
+                [NSException raise:NSInternalInconsistencyException format:@"here"];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 

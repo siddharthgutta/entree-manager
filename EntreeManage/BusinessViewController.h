@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MGSwipeTableCell.h"
+#import "EmployeeMenuModifierViewController.h"
 
-@interface BusinessViewController : UIViewController<CommsDelegate, UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>{
-   
+@interface BusinessViewController : EmployeeMenuModifierViewController <UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate, UIActionSheetDelegate>
 
-}
-@property (strong, nonatomic) IBOutlet UITableView *menuView;
-
--(void)showBusinessMenus:(NSString*)MenuType;
+- (void)reloadMenus;
+- (void)reloadMenuModifiers;
+- (void)reloadEmployees;
 
 @end

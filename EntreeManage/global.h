@@ -10,9 +10,20 @@
 #define EntreeManage_global_h
 
 #import <Parse/Parse.h>
-#import "PFUtils.h"
+
+
+@protocol EMQuerying <NSObject>
+
++ (PFQuery *)queryCurrentRestaurant;
+
+@end
+
 #import "PFObject+copyShallow.h"
 #import "CommParse.h"
+<<<<<<< HEAD
+=======
+#import "Entree-Model.h"
+>>>>>>> origin/tanner
 
 #define ParseSetApplicationID  @"siTMH1dC5Qk84JvfZ3U5xfRfKwqb5jQv4CnCQGZn"
 #define ParseClientKey         @"rKr1TeMyRNFNhx4zI4guhzk39Uap7MoHYfxdHvQo"
@@ -22,3 +33,10 @@
 
 #endif
 
+#define PARSE_REGISTER_CLASS + (void)load { \
+    [self registerSubclass]; \
+}
+
+#define PARSE_CLASS_NAME + (NSString *)parseClassName { \
+    return NSStringFromClass([self class]); \
+}

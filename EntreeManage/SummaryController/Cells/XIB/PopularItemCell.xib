@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="PopularItemCell" id="kSx-tP-xfp" customClass="PopularItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kSx-tP-xfp" id="SHh-OX-UuQ">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKg-7E-d36">
+                        <rect key="frame" x="8" y="14" width="11.5" height="14.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
+                            <rect key="frame" x="32" y="189" width="42" height="21"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWi-r5-MsG">
+                        <rect key="frame" x="28" y="14" width="59" height="14.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="119" id="lqk-Yu-jlG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lqk-Yu-jlG"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
+                            <rect key="frame" x="118" y="189" width="42" height="21"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="#" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noU-bv-FOf">
+                        <rect key="frame" x="314" y="14" width="7" height="14.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
+                            <rect key="frame" x="237" y="189" width="42" height="21"/>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfS-Fb-JZB">
+                        <rect key="frame" x="338" y="14" width="45" height="14.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="XfS-Fb-JZB" secondAttribute="centerY" id="4y1-Jf-OrG"/>
+                    <constraint firstItem="mWi-r5-MsG" firstAttribute="leading" secondItem="SHh-OX-UuQ" secondAttribute="leading" constant="28" id="Fl7-Gd-hdJ"/>
+                    <constraint firstItem="jKg-7E-d36" firstAttribute="leading" secondItem="SHh-OX-UuQ" secondAttribute="leadingMargin" id="TWI-kb-heZ"/>
+                    <constraint firstAttribute="trailing" secondItem="XfS-Fb-JZB" secondAttribute="trailing" constant="8" id="Vc6-A0-8of"/>
+                    <constraint firstAttribute="centerY" secondItem="noU-bv-FOf" secondAttribute="centerY" id="Xhc-7Y-3CN"/>
+                    <constraint firstAttribute="centerY" secondItem="jKg-7E-d36" secondAttribute="centerY" id="bCC-AY-iFC"/>
+                    <constraint firstAttribute="centerY" secondItem="mWi-r5-MsG" secondAttribute="centerY" id="een-5e-72S"/>
+                    <constraint firstItem="noU-bv-FOf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mWi-r5-MsG" secondAttribute="trailing" constant="8" id="pDe-wd-vd4"/>
+                    <constraint firstAttribute="trailing" secondItem="noU-bv-FOf" secondAttribute="trailing" constant="70" id="vK1-E7-gRG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.14964666962623596" green="0.80907928943634033" blue="0.69656461477279663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="indexLabel" destination="jKg-7E-d36" id="WNP-89-dqk"/>
+                <outlet property="saleCountLabel" destination="noU-bv-FOf" id="jKt-H2-AJv"/>
+                <outlet property="saleRevenueLabel" destination="XfS-Fb-JZB" id="Q3N-VG-eWO"/>
+                <outlet property="titleLabel" destination="mWi-r5-MsG" id="fAJ-W6-QgH"/>
+            </connections>
+            <point key="canvasLocation" x="289.5" y="301"/>
+        </tableViewCell>
+    </objects>
+</document>

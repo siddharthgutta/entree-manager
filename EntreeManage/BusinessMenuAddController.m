@@ -8,9 +8,9 @@
 
 #import "BusinessMenuAddController.h"
 #import "BusinessViewController.h"
+#import "BusinessMenuItemController.h"
 
-@interface BusinessMenuAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-{
+@interface BusinessMenuAddController ()<CommsDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
     
 }
 
@@ -25,36 +25,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    if(_menuObj!=nil){
-        _txtName.text = [PFUtils getProperty:@"name" InObject:_menuObj];
-        
+    if (self.menuOrCategory) {
+        self.txtName.text = self.menuOrCategory[@"name"];
     }
 }
 
 // The number of columns of data
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerColor {
     return 1;
 }
 
 // The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component
-{
-    return [COLOR_ARRAY count];
+- (NSInteger)pickerView:(UIPickerView *)pickerColor numberOfRowsInComponent:(NSInteger)component {
+    return COLOR_ARRAY.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (NSString *)pickerView:(UIPickerView *)pickerColor titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return COLOR_ARRAY[row];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 - (IBAction)onClickCancel:(id)sender {
@@ -64,38 +55,35 @@
 - (IBAction)onClickSave:(id)sender {
     [ProgressHUD show:@"" Interaction:NO];
     
-    //if not exist then add
-    if(_menuObj==nil) {
-        _menuObj = [PFObject objectWithClassName:_menuType];
+    // if not exist then add
+    if (!self.menuOrCategory) {
+        self.menuOrCategory = [PFObject objectWithClassName:self.menuType];
     }
     
-    [_menuObj setObject:_txtName.text forKey:@"name"];
+    self.menuOrCategory[@"name"] = self.txtName.text;
+    if (self.menuForCategory) self.menuOrCategory[@"menu"] = self.menuForCategory;
     
-    //Get Color Picker Value
-    NSInteger color_index = [_pickerColor selectedRowInComponent:0];
-    [_menuObj setObject:@(color_index) forKey:@"colorIndex"];
-    //NSString *color_str = [COLOR_ARRAY objectAtIndex:color_index];
+    // Get Color Picker Value
+    NSInteger colorIndex = [_pickerColor selectedRowInComponent:0];
+    self.menuOrCategory[@"colorIndex"] = @(colorIndex);
+    // NSString *colorStr = COLOR_ARRAY[colorIndex];
     
-    [CommParse updateQuoteRequest:self Quote:_menuObj];
+    [CommParse updateQuoteRequest:self Quote:self.menuOrCategory];
 }
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
     
-    if ([[response objectForKey:@"action"] intValue] == 2) {
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+    if ([response[@"action"] intValue] == 2) {
+        if ([response[@"responseCode"] boolValue]) {
             
-            //Dismiss modal window
+            // Dismiss modal window
             [self dismissViewControllerAnimated:YES completion:nil];
-            //Menus Refresh
-            
-            [_parent_delegate showBusinessMenus:_menuType];
-            
+            // Menus Refresh
+            [_parentDelegate reloadMenus];
             
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
         }
-        
     }
 }
 

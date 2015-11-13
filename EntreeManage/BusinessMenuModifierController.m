@@ -8,8 +8,7 @@
 
 #import "BusinessMenuModifierController.h"
 
-@interface BusinessMenuModifierController ()<CommsDelegate>
-{
+@interface BusinessMenuModifierController ()<CommsDelegate> {
     NSArray *quotes;
     NSIndexPath *selectedIndexPath;
 }
@@ -23,44 +22,38 @@
     [super viewDidLoad];
      self.title = @"Menu Modifiers";
     [ProgressHUD show:@"" Interaction:NO];
-    [CommParse getBusinessMenus:self MenuType:@"MenuItemModifier" TopKey:@"" TopObject:nil];
+    [CommParse getBusinessMenus:self menuType:@"MenuItemModifier" topKey:@"" topObject:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [quotes count];
+    return quotes.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"modifierMenuCell"];
     
+<<<<<<< HEAD
     PFObject *menu_obj = [quotes objectAtIndex:indexPath.row];
     
     NSString *name = [PFUtils getProperty:@"name" InObject:menu_obj];
     cell.textLabel.text = name;
+=======
+    PFObject *menuObj = quotes[indexPath.row];
+    
+    cell.textLabel.text = menuObj[@"name"];
+>>>>>>> origin/tanner
     
     return cell;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     selectedIndexPath = indexPath;
-    
 }
 
 //==================================================
@@ -68,18 +61,16 @@
 //==================================================
 #pragma mark- Comms Delegate Methods
 //==================================================
-- (void)commsDidAction:(NSDictionary *)response
-{
+- (void)commsDidAction:(NSDictionary *)response {
     [ProgressHUD dismiss];
-    if ([[response objectForKey:@"action"] intValue] == 1) {
+    if ([response[@"action"] intValue] == 1) {
         
-        quotes = [[NSArray alloc] init];
-        if ([[response objectForKey:@"responseCode"] boolValue]) {
+        quotes = @[];
+        if ([response[@"responseCode"] boolValue]) {
             
-            quotes = [response objectForKey:@"objects"];
+            quotes = response[@"objects"];
         } else {
             [ProgressHUD showError:[response valueForKey:@"errorMsg"]];
-            
         }
         [self.tableView reloadData];
     }

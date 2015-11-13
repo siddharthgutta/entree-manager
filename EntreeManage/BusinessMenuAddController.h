@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessMenuAddController : UIViewController
-    @property (nonatomic, weak) PFObject *menuObj;
-    @property (nonatomic, weak) NSString *menuType;
+@property (nonatomic) PFObject *menuOrCategory;
+@property (nonatomic) Menu *menuForCategory;
+@property (nonatomic) NSString *menuType;
 
-    @property (nonatomic, assign) id parent_delegate;
+@property (nonatomic, assign) id parentDelegate;
 @end

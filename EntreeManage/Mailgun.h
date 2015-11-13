@@ -1,6 +1,10 @@
 // MailGun.h
 //
+<<<<<<< HEAD
 // Copyright (c) 2013 Rackspace Hosting (http://rackspace.com)
+=======
+// Copyright (c) 2013 Rackspace Hosting (http:// rackspace.com)
+>>>>>>> origin/tanner
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,9 +44,15 @@
 #import "MGMessage.h"
 
 /**
+<<<<<<< HEAD
  The Mailgun SDK allows your Mac OS X or iOS application to connect with the [Mailgun](http://www.mailgun.com) programmable email platform. Send and manage mailing list subscriptions from your desktop or mobile applications and connect with your users directly in your application.
  
  *Requirements* The AFNetworking library is required for the `Mailgun` client library.
+=======
+ The Mailgun SDK allows your Mac OS X or iOS application to connect with the [Mailgun](http:// www.mailgun.com) programmable email platform. Send and manage mailing list subscriptions from your desktop or mobile applications and connect with your users directly in your application.
+ 
+ *Requirements *The AFNetworking library is required for the `Mailgun` client library.
+>>>>>>> origin/tanner
  
  ## Easy Image Attaching
  
@@ -52,7 +62,11 @@
  
  At this time the full Mailgun REST API is not supported. Currently support is only provided to send messages, subscribe/unsubscribe from mailing lists and to check mailing lists subscriptions.
  
+<<<<<<< HEAD
  *Note* These features may be implemented at a later date.
+=======
+ *Note *These features may be implemented at a later date.
+>>>>>>> origin/tanner
  
  ## Sending Example
  

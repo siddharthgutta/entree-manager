@@ -46,6 +46,7 @@ typedef UIBackgroundTaskIdentifier AFBackgroundTaskIdentifier;
 typedef id AFBackgroundTaskIdentifier;
 #endif
 
+<<<<<<< HEAD
 static NSString * const kAFNetworkingLockName = @"com.alamofire.networking.operation.lock";
 
 NSString * const AFNetworkingErrorDomain = @"AFNetworkingErrorDomain";
@@ -61,6 +62,23 @@ typedef NSCachedURLResponse * (^AFURLConnectionOperationCacheResponseBlock)(NSUR
 typedef NSURLRequest * (^AFURLConnectionOperationRedirectResponseBlock)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse);
 
 static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
+=======
+static NSString *const kAFNetworkingLockName = @"com.alamofire.networking.operation.lock";
+
+NSString *const AFNetworkingErrorDomain = @"AFNetworkingErrorDomain";
+NSString *const AFNetworkingOperationFailingURLRequestErrorKey = @"AFNetworkingOperationFailingURLRequestErrorKey";
+NSString *const AFNetworkingOperationFailingURLResponseErrorKey = @"AFNetworkingOperationFailingURLResponseErrorKey";
+
+NSString *const AFNetworkingOperationDidStartNotification = @"com.alamofire.networking.operation.start";
+NSString *const AFNetworkingOperationDidFinishNotification = @"com.alamofire.networking.operation.finish";
+
+typedef void (^AFURLConnectionOperationProgressBlock)(NSUInteger bytes, long long totalBytes, long long totalBytesExpected);
+typedef void (^AFURLConnectionOperationAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge);
+typedef NSCachedURLResponse *(^AFURLConnectionOperationCacheResponseBlock)(NSURLConnection *connection, NSCachedURLResponse *cachedResponse);
+typedef NSURLRequest *(^AFURLConnectionOperationRedirectResponseBlock)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse);
+
+static inline NSString *AFKeyPathFromOperationState(AFOperationState state) {
+>>>>>>> origin/tanner
     switch (state) {
         case AFOperationReadyState:
             return @"isReady";
@@ -390,11 +408,19 @@ static BOOL AFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
     self.authenticationChallenge = block;
 }
 
+<<<<<<< HEAD
 - (void)setCacheResponseBlock:(NSCachedURLResponse * (^)(NSURLConnection *connection, NSCachedURLResponse *cachedResponse))block {
     self.cacheResponse = block;
 }
 
 - (void)setRedirectResponseBlock:(NSURLRequest * (^)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse))block {
+=======
+- (void)setCacheResponseBlock:(NSCachedURLResponse *(^)(NSURLConnection *connection, NSCachedURLResponse *cachedResponse))block {
+    self.cacheResponse = block;
+}
+
+- (void)setRedirectResponseBlock:(NSURLRequest *(^)(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse))block {
+>>>>>>> origin/tanner
     self.redirectResponse = block;
 }
 
@@ -576,8 +602,12 @@ static BOOL AFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
 #pragma mark - NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection
+<<<<<<< HEAD
 willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
+=======
+willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+>>>>>>> origin/tanner
     if (self.authenticationChallenge) {
         self.authenticationChallenge(connection, challenge);
         return;
@@ -687,8 +717,12 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection
              willSendRequest:(NSURLRequest *)request
+<<<<<<< HEAD
             redirectResponse:(NSURLResponse *)redirectResponse
 {
+=======
+            redirectResponse:(NSURLResponse *)redirectResponse {
+>>>>>>> origin/tanner
     if (self.redirectResponse) {
         return self.redirectResponse(connection, request, redirectResponse);
     } else {
@@ -699,8 +733,12 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 - (void)connection:(NSURLConnection __unused *)connection
    didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten
+<<<<<<< HEAD
 totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
+=======
+totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
+>>>>>>> origin/tanner
     if (self.uploadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.uploadProgress((NSUInteger)bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
@@ -709,16 +747,24 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 }
 
 - (void)connection:(NSURLConnection __unused *)connection
+<<<<<<< HEAD
 didReceiveResponse:(NSURLResponse *)response
 {
+=======
+didReceiveResponse:(NSURLResponse *)response {
+>>>>>>> origin/tanner
     self.response = response;
     
     [self.outputStream open];
 }
 
 - (void)connection:(NSURLConnection __unused *)connection
+<<<<<<< HEAD
     didReceiveData:(NSData *)data
 {
+=======
+    didReceiveData:(NSData *)data {
+>>>>>>> origin/tanner
     NSUInteger length = [data length];
     while (YES) {
         NSUInteger totalNumberOfBytesWritten = 0;
@@ -761,8 +807,12 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 - (void)connection:(NSURLConnection __unused *)connection
+<<<<<<< HEAD
   didFailWithError:(NSError *)error
 {
+=======
+  didFailWithError:(NSError *)error {
+>>>>>>> origin/tanner
     self.error = error;
     
     [self.outputStream close];
@@ -773,8 +823,12 @@ didReceiveResponse:(NSURLResponse *)response
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+<<<<<<< HEAD
                   willCacheResponse:(NSCachedURLResponse *)cachedResponse
 {
+=======
+                  willCacheResponse:(NSCachedURLResponse *)cachedResponse {
+>>>>>>> origin/tanner
     if (self.cacheResponse) {
         return self.cacheResponse(connection, cachedResponse);
     } else {

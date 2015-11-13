@@ -10,6 +10,10 @@
 
 @interface AnalyticsViewController : UIViewController
 
+<<<<<<< HEAD
 -(void)showAnalyticsPage:(NSString*)segueId;
+=======
+- (void)showAnalyticsPage:(NSString *)segueId;
+>>>>>>> origin/tanner
 
 @end

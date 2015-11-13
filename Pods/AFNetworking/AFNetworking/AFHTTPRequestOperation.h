@@ -129,5 +129,9 @@
 /**
  Returns a set of MIME types detected in an HTTP `Accept` or `Content-Type` header.
  */
+<<<<<<< HEAD
 extern NSSet * AFContentTypesFromHTTPHeader(NSString *string);
+=======
+extern NSSet *AFContentTypesFromHTTPHeader(NSString *string);
+>>>>>>> origin/tanner
 
